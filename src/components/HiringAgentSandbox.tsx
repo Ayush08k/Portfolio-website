@@ -384,7 +384,7 @@ export default function HiringAgentSandbox() {
             </div>
 
             {/* Quick suggested chips */}
-            {messages.length > 0 && (
+            {messages.length > 0 && inputValue.trim() === "" && (
               <div
                 style={{
                   padding: "0 20px 10px 20px",
