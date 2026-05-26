@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Cursor from "@/components/Cursor";
+import HiringAgentSandbox from "@/components/HiringAgentSandbox";
 
 export const metadata: Metadata = {
   title: "Freelancer Ayush | Web Developer & Designer",
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body>
         <Cursor />
         {children}
+        <HiringAgentSandbox />
       </body>
     </html>
   );
