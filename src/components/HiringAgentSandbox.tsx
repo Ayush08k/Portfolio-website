@@ -114,54 +114,40 @@ export default function HiringAgentSandbox() {
   return (
     <>
       {/* Floating Logo Trigger Button (Bottom Right Corner) */}
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        style={{
-          position: "fixed",
-          bottom: "30px",
-          right: "30px",
-          width: "60px",
-          height: "60px",
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, #112240 0%, #0a192f 100%)",
-          border: "2px solid #64ffda",
-          boxShadow: "0 0 20px rgba(100, 255, 218, 0.3)",
-          color: "#64ffda",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 999,
-          cursor: "pointer",
-          outline: "none",
-        }}
-        whileHover={{ scale: 1.1, boxShadow: "0 0 30px rgba(100, 255, 218, 0.6)" }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.div
-              key="close-icon"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <X size={26} />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="bot-icon"
-              initial={{ rotate: 90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: -90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-            >
-              <Bot size={28} className="animate-pulse" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.button>
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            key="chat-trigger-button"
+            onClick={() => setIsOpen(true)}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              position: "fixed",
+              bottom: "30px",
+              right: "30px",
+              width: "60px",
+              height: "60px",
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #112240 0%, #0a192f 100%)",
+              border: "2px solid #64ffda",
+              boxShadow: "0 0 20px rgba(100, 255, 218, 0.3)",
+              color: "#64ffda",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 999,
+              cursor: "pointer",
+              outline: "none",
+            }}
+            whileHover={{ scale: 1.1, boxShadow: "0 0 30px rgba(100, 255, 218, 0.6)" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Bot size={28} className="animate-pulse" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Responsive Chat Interface */}
       <AnimatePresence>
@@ -202,7 +188,7 @@ export default function HiringAgentSandbox() {
                     borderRadius: 0,
                   }
                 : {
-                    bottom: "105px",
+                    bottom: "30px",
                     right: "30px",
                     width: "380px",
                     height: "580px",
@@ -282,24 +268,22 @@ export default function HiringAgentSandbox() {
                 </div>
               </div>
               
-              {!isMobile && (
-                <button
-                  onClick={() => setIsOpen(false)}
-                  style={{
-                    color: "#8892b0",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    borderRadius: "4px",
-                    padding: "4px",
-                    transition: "var(--transition)",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#64ffda")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#8892b0")}
-                >
-                  <X size={20} />
-                </button>
-              )}
+              <button
+                onClick={() => setIsOpen(false)}
+                style={{
+                  color: "#8892b0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "4px",
+                  padding: "4px",
+                  transition: "var(--transition)",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#64ffda")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#8892b0")}
+              >
+                <X size={20} />
+              </button>
             </div>
 
             {/* Conversation Messages */}
