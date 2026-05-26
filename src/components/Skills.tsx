@@ -2,15 +2,22 @@
 
 import { motion } from "framer-motion";
 import { Globe, Layout, Smartphone, Brain, ShoppingBag, Terminal } from "lucide-react";
+import { PORTFOLIO_DATA } from "@/data/portfolio";
 
-const skills = [
-  { name: "Web Development", icon: Globe, description: "Crafting high-performance, responsive websites with modern frameworks like Next.js, React, and sophisticated CSS architectures." },
-  { name: "App Development", icon: Smartphone, description: "Building seamless, cross-platform mobile applications using React Native and Expo for a native-like experience on iOS and Android." },
-  { name: "Full Stack Development", icon: Terminal, description: "Designing end-to-end solutions, from scalable backend architectures and databases to polished, user-centric frontend interfaces." },
-  { name: "WordPress Development", icon: Layout, description: "Developing custom, high-converting WordPress themes and plugins with a focus on speed, SEO, and user-friendly content management." },
-  { name: "AI Integration (Meta AI)", icon: Brain, description: "Integrating cutting-edge AI capabilities and automation workflows into digital products to enhance user engagement and efficiency." },
-  { name: "E-Commerce (Shopify)", icon: ShoppingBag, description: "Creating premium, high-converting Shopify stores with custom liquid development and deep integration of third-party apps." },
-];
+const ICON_MAP: Record<string, any> = {
+  "Web Development": Globe,
+  "App Development": Smartphone,
+  "Full Stack Development": Terminal,
+  "WordPress Development": Layout,
+  "AI Integration (Meta AI)": Brain,
+  "E-Commerce (Shopify)": ShoppingBag,
+};
+
+const skills = PORTFOLIO_DATA.services.map(service => ({
+  name: service.name,
+  icon: ICON_MAP[service.name] || Globe,
+  description: service.description
+}));
 
 export default function Skills() {
   return (
@@ -91,9 +98,4 @@ export default function Skills() {
   );
 }
 
-const techSkills = [
-  "React", "Next.js", "TypeScript", "Node.js", "React Native", "Expo", "Java",
-  "REST API", "Vanilla CSS", "MongoDB", "Firebase", "WordPress", "Shopify",
-  "Tailwind", "Framer Motion", "GSAP", "Prisma", "PostgreSQL", "Meta AI",
-  "MySQL", "Supabase", "NoSQL", "Bootstrap", "SpringBoot", "Rust", "Go"
-];
+const techSkills = PORTFOLIO_DATA.skills.marquee;
