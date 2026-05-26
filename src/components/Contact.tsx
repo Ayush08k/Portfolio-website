@@ -45,7 +45,7 @@ export default function Contact() {
         </motion.div>
       ) : (
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem", textAlign: "left" }}>
-          <div style={{ display: "flex", gap: "1rem" }}>
+          <div className="contact-form-row">
             <input 
               name="name" 
               type="text" 
@@ -61,7 +61,7 @@ export default function Contact() {
               style={{ flex: 1, padding: "1rem", backgroundColor: "var(--bg-secondary)", border: "1px solid var(--bg-tertiary)", color: "var(--text-white)", borderRadius: "4px" }}
             />
           </div>
-          <div style={{ display: "flex", gap: "1rem" }}>
+          <div className="contact-form-row">
             <input 
               name="location" 
               type="text" 

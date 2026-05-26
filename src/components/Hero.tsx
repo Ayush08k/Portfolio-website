@@ -20,22 +20,9 @@ export default function Hero() {
   }, []);
 
   return (
-    <section
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        padding: "0 10vw",
-      }}
-    >
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "minmax(0, 1.2fr) 400px",
-        gap: "40px",
-        alignItems: "center",
-        width: "100%"
-      }}>
-        <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+    <section className="hero-container">
+      <div className="hero-grid">
+        <div className="hero-text-content">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -104,60 +91,36 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Hero Image Section - Fixed Size */}
+        {/* Hero Image Section - Fully Responsive CSS */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          style={{
-            position: "relative",
-            width: "400px",
-            height: "400px",
-            aspectRatio: "1",
-            justifySelf: "center",
-            flexShrink: 0
-          }}
+          className="hero-image-wrapper"
         >
-          <div style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "50%",
-            border: "2px dashed var(--accent)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "15px"
-          }}>
-            <div style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "50%",
-              backgroundColor: "var(--bg-secondary)",
-              backgroundImage: `url('/ayush_profile_placeholder.png')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              boxShadow: "0 0 50px rgba(100, 255, 218, 0.2)"
-            }}></div>
+          <div className="hero-dashed-ring">
+            <div className="hero-profile-pic"></div>
           </div>
+          
           {/* Decorative floating elements */}
           <motion.div
             animate={{ y: [0, -15, 0] }}
             transition={{ repeat: Infinity, duration: 4 }}
-            style={{ position: "absolute", top: "10%", right: "0", background: "var(--bg-tertiary)", padding: "10px 20px", borderRadius: "20px", fontSize: "12px", border: "1px solid var(--accent)", zIndex: 10 }}
+            className="floating-tag tag-top-right"
           >
             Mobile Expert
           </motion.div>
           <motion.div
             animate={{ y: [0, 15, 0] }}
             transition={{ repeat: Infinity, duration: 5 }}
-            style={{ position: "absolute", bottom: "15%", left: "-10%", background: "var(--bg-tertiary)", padding: "10px 20px", borderRadius: "20px", fontSize: "12px", border: "1px solid var(--accent)", zIndex: 10 }}
+            className="floating-tag tag-bottom-left"
           >
             Full Stack Pro
           </motion.div>
           <motion.div
             animate={{ scale: [1, 1.1, 1] }}
             transition={{ repeat: Infinity, duration: 3 }}
-            style={{ position: "absolute", top: "50%", right: "-15%", background: "var(--accent)", color: "var(--bg-primary)", padding: "10px 20px", borderRadius: "20px", fontSize: "12px", fontWeight: "700", zIndex: 10, boxShadow: "0 0 20px var(--accent)" }}
+            className="floating-tag tag-middle-right"
           >
             Open for Full-Time
           </motion.div>

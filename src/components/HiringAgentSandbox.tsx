@@ -18,6 +18,21 @@ const SUGGESTED_PROMPTS = [
   { text: "📝 How do we start a project?", query: "how to start" },
 ];
 
+const renderMessageText = (text: string) => {
+  const boldRegex = /\*\*(.*?)\*\*/g;
+  const linkRegex = /\[(.*?)\]\((.*?)\)/g;
+
+  let html = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  html = html.replace(boldRegex, '<strong style="color: #e6f1ff; font-weight: 600;">$1</strong>');
+  html = html.replace(linkRegex, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: #64ffda; text-decoration: underline; font-weight: 500;">$1</a>');
+
+  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+};
+
 export default function HiringAgentSandbox() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -61,7 +76,7 @@ export default function HiringAgentSandbox() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  const handleSendMessage = (textToSend: string) => {
+  const handleSendMessage = async (textToSend: string) => {
     if (!textToSend.trim()) return;
 
     const newUserMessage: Message = {
@@ -71,38 +86,52 @@ export default function HiringAgentSandbox() {
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, newUserMessage]);
+    const updatedMessages = [...messages, newUserMessage];
+    setMessages(updatedMessages);
     setInputValue("");
     setIsTyping(true);
 
-    // Dynamic mock response generation based on keyword mapping
-    setTimeout(() => {
-      const lowerText = textToSend.toLowerCase();
-      let reply = "";
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ messages: updatedMessages }),
+      });
 
-      if (lowerText.includes("availab") || lowerText.includes("free") || lowerText.includes("open") || lowerText.includes("schedule")) {
-        reply = "Ayush is currently open for select high-end freelance contracts starting next month! He has the bandwidth for 1 large-scale application (or SaaS portal) and 1 custom marketing/landing page. You can lock in a discovery slot using the main Contact section below!";
-      } else if (lowerText.includes("stack") || lowerText.includes("tech") || lowerText.includes("language") || lowerText.includes("skill") || lowerText.includes("react") || lowerText.includes("next")) {
-        reply = "Ayush possesses an elite, comprehensive technical skill set that covers end-to-end digital product design and development:\n\n• Frontend & Animation: React, Next.js, TypeScript, Tailwind, Vanilla CSS, Bootstrap, Framer Motion, GSAP\n• Mobile Development: React Native, Expo\n• Backend Engineering: Node.js, Java, SpringBoot, Rust, Go, REST APIs, Prisma\n• Cloud & Databases: PostgreSQL, Supabase, MongoDB, MySQL, Firebase, NoSQL\n• CMS & E-Commerce: WordPress (Custom Themes & Plugins), Shopify (Liquid & Custom App integration)\n• AI & Automation: AI Integration (Meta AI integration, prompt engineering, and LLM automation workflows)";
-      } else if (lowerText.includes("rate") || lowerText.includes("cost") || lowerText.includes("price") || lowerText.includes("budget") || lowerText.includes("money")) {
-        reply = "Ayush provides highly value-driven, fixed-scope project rates rather than unpredictable hourly billing. Here are typical guides:\n\n• Premium Interactive Landing Page: $1,500 – $3,000 (Built for Conversion)\n• Custom Full-Stack Web Application: $5,000+\n• Development Retainers: Available upon discussion. \n\nEach project includes rigorous testing, speed audits, and a 30-day warranty.";
-      } else if (lowerText.includes("start") || lowerText.includes("process") || lowerText.includes("hire") || lowerText.includes("work")) {
-        reply = "Here is the seamless roadmap to launch your project with Ayush:\n\n1. Discovery: Drop a message in the Contact form below with your goals.\n2. Strategy & Mockups: Ayush designs a custom Figma mockup and dynamic proposal.\n3. Development: Clean, performant code written with interactive demos shared every few days.\n4. Deployment & Support: Live deployment to Vercel/AWS with a 30-day bug warranty.";
-      } else {
-        reply = "That is an excellent question! Ayush focuses on bringing premium visual design and solid, bulletproof engineering to every project. To get concrete answers regarding your specific project ideas, I highly recommend filling out the Contact form at the bottom of the page, and Ayush will get back to you directly within a few hours!";
+      if (response.ok) {
+        const data = await response.json();
+        if (data.reply) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `reply-${Date.now()}`,
+              sender: "bot",
+              text: data.reply,
+              timestamp: new Date(),
+            },
+          ]);
+          setIsTyping(false);
+          return;
+        }
       }
-
+      throw new Error("Chat API route returned non-OK response");
+    } catch (error) {
+      console.error("Chat API error, using static fallback:", error);
+      
+      // Secondary fallback in case endpoint crashes completely
       setMessages((prev) => [
         ...prev,
         {
           id: `reply-${Date.now()}`,
           sender: "bot",
-          text: reply,
+          text: "I apologize, but I encountered a connection issue. Rest assured that Ayush is extremely prompt and professional. I highly recommend leaving your message, email, and goals in the **Contact form** just below this chat window, and Ayush will get back to you personally within a couple of hours!",
           timestamp: new Date(),
         },
       ]);
       setIsTyping(false);
-    }, 1200);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -352,7 +381,7 @@ export default function HiringAgentSandbox() {
                           }),
                     }}
                   >
-                    {msg.text}
+                    {renderMessageText(msg.text)}
                   </div>
                 </div>
               ))}

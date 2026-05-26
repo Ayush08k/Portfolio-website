@@ -206,3 +206,590 @@ button {
   border-color: var(--accent);
   background: var(--accent-glow);
 }
+
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT SYSTEMS (MEDIA QUERIES)
+   ========================================================================== */
+
+/* 1. Navigation Styles */
+.nav {
+  padding: 0 50px;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0 24px;
+  }
+}
+
+.nav.scrolled {
+  background-color: rgba(10, 25, 47, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
+.nav-toggle {
+  display: none;
+  color: var(--accent);
+  z-index: 101;
+  transition: var(--transition);
+}
+
+.nav-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile Menu Drawer */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: min(300px, 75vw);
+    background-color: var(--bg-secondary);
+    box-shadow: -10px 0px 30px -15px rgba(2, 12, 27, 0.7);
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    z-index: 100;
+    transition: right 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+}
+
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(2, 12, 27, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 99;
+  transition: var(--transition);
+}
+
+
+/* 2. Hero Component Styles */
+.hero-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 10vw 0 10vw;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) 400px;
+  gap: 60px;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-text-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hero-image-wrapper {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  aspect-ratio: 1;
+  justify-self: center;
+  flex-shrink: 0;
+}
+
+.hero-dashed-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px dashed var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.hero-profile-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--bg-secondary);
+  background-image: url('/ayush_profile_placeholder.png');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 50px rgba(100, 255, 218, 0.2);
+}
+
+.floating-tag {
+  position: absolute;
+  background: var(--bg-tertiary);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  border: 1px solid var(--accent);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.tag-top-right {
+  top: 10%;
+  right: 0;
+}
+
+.tag-bottom-left {
+  bottom: 15%;
+  left: -10%;
+}
+
+.tag-middle-right {
+  top: 50%;
+  right: -15%;
+  background: var(--accent);
+  color: var(--bg-primary);
+  font-weight: 700;
+  box-shadow: 0 0 20px var(--accent);
+}
+
+/* Hero Media Queries */
+@media (max-width: 1200px) {
+  .hero-grid {
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+  }
+  .hero-image-wrapper {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-container {
+    padding: 120px 5vw 40px 5vw;
+    min-height: auto;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    text-align: center;
+  }
+  .hero-text-content {
+    align-items: center;
+  }
+  .hero-text-content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-image-wrapper {
+    grid-row: 1; /* Place image above text on smaller viewports */
+    width: 320px;
+    height: 320px;
+  }
+  .tag-bottom-left {
+    left: -5%;
+  }
+  .tag-middle-right {
+    right: -10%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-container {
+    padding-top: 140px;
+  }
+  .hero-image-wrapper {
+    width: 250px;
+    height: 250px;
+  }
+  .floating-tag {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+  .tag-top-right {
+    top: 5%;
+  }
+  .tag-bottom-left {
+    bottom: 5%;
+    left: -10%;
+  }
+  .tag-middle-right {
+    right: -15%;
+  }
+}
+
+
+/* 3. About Component Styles */
+.about-grid {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.about-image-wrapper {
+  position: relative;
+  max-width: 300px;
+  width: 100%;
+  justify-self: center;
+}
+
+.about-image-ring {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background-color: var(--accent);
+  z-index: 2;
+}
+
+.about-profile-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+  background-image: url('/ayush_profile_placeholder.png');
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: multiply;
+  filter: grayscale(100%) contrast(1);
+  transition: var(--transition);
+}
+
+.about-image-wrapper:hover .about-profile-pic {
+  filter: none;
+  mix-blend-mode: normal;
+}
+
+.about-image-border {
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.about-image-wrapper:hover .about-image-border {
+  top: 15px;
+  left: -15px;
+}
+
+.about-text-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-skills-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 15px;
+  padding: 0;
+  margin: 20px 0 0 0;
+  list-style: none;
+}
+
+.about-skill-item {
+  position: relative;
+  padding-left: 15px;
+  font-size: 13px;
+  font-family: monospace;
+}
+
+.about-skill-bullet {
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+}
+
+.about-disclaimer {
+  margin-top: 30px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-style: italic;
+  border-left: 2px solid var(--accent);
+  padding-left: 15px;
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .about-image-wrapper {
+    margin-bottom: 20px;
+    max-width: 250px;
+  }
+  .about-skills-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .about-skills-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* 4. Projects Component Styles */
+.projects-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.project-row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  position: relative;
+}
+
+.project-content {
+  grid-column: 1 / 8;
+  grid-row: 1;
+  z-index: 5;
+  text-align: left;
+}
+
+.project-row.reversed .project-content {
+  grid-column: 6 / -1;
+  text-align: right;
+}
+
+.project-overline {
+  color: var(--accent);
+  font-family: monospace;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.project-title {
+  font-size: clamp(20px, 3vw, 26px);
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.project-card-desc {
+  padding: 25px;
+  margin-bottom: 20px;
+  max-width: 550px;
+  box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+}
+
+.project-row.reversed .project-card-desc {
+  margin-left: auto;
+}
+
+.project-tech-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-family: monospace;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.project-row.reversed .project-tech-list {
+  justify-content: flex-end;
+}
+
+.project-tech-item {
+  color: var(--text-secondary);
+}
+
+.project-links {
+  display: flex;
+  gap: 20px;
+}
+
+.project-row.reversed .project-links {
+  justify-content: flex-end;
+}
+
+.project-link-icon {
+  color: var(--text-white);
+  transition: var(--transition);
+}
+
+.project-link-icon:hover {
+  color: var(--accent);
+}
+
+.project-image-wrapper {
+  grid-column: 6 / -1;
+  grid-row: 1;
+  height: 380px;
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  z-index: 1;
+  box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+  transition: var(--transition);
+}
+
+.project-row.reversed .project-image-wrapper {
+  grid-column: 1 / 8;
+}
+
+.project-image-bg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: left;
+  opacity: 0.25;
+  transition: var(--transition);
+  filter: grayscale(100%) contrast(1.2);
+}
+
+.project-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: var(--transition);
+}
+
+/* Image Hovers */
+.project-image-wrapper:hover .project-image-bg {
+  opacity: 0.8;
+  filter: none;
+}
+
+.project-image-wrapper:hover .project-image-overlay {
+  opacity: 0;
+}
+
+/* Responsive Overlapping Cards */
+@media (max-width: 992px) {
+  .projects-list-container {
+    gap: 60px;
+  }
+
+  .project-row {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .project-content {
+    grid-column: 1 / -1 !important;
+    grid-row: 1;
+    z-index: 5;
+    padding: 30px 24px;
+    text-align: left !important;
+    background: rgba(17, 34, 64, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.5);
+  }
+
+  .project-card-desc {
+    background: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    margin-bottom: 25px;
+    max-width: 100%;
+  }
+
+  .project-tech-list {
+    justify-content: flex-start !important;
+  }
+
+  .project-links {
+    justify-content: flex-start !important;
+  }
+
+  /* Make image become background for the overlay card */
+  .project-image-wrapper {
+    grid-column: 1 / -1 !important;
+    grid-row: 1;
+    height: 100%;
+    min-height: 380px;
+    opacity: 0.15;
+    z-index: 1;
+    border: none;
+  }
+  
+  .project-image-bg {
+    opacity: 0.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-image-wrapper {
+    min-height: 440px;
+  }
+}
+
+
+/* 5. Contact Component Form Styles */
+.contact-form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .contact-form-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+
+/* 6. Global Responsive Containers */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+  .container {
+    padding: 0 1.5rem;
+  }
+  .section-title::after {
+    width: 80px;
+  }
+}
