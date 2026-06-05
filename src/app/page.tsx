@@ -142,7 +142,7 @@ function Hero() {
               
               {/* Image Frame with gradient blending masks */}
               <div className="split-glow-frame">
-                <img src="/profile.jpeg" alt="Ayush Kumar" className="split-glow-img" />
+                <img src="/profile.jpeg" alt="Ayush Kumar — Expert Freelance Full Stack, Mobile App & AI Developer from India" className="split-glow-img" width="400" height="480" />
                 <div className="split-glow-overlay" />
               </div>
             </div>
@@ -460,6 +460,16 @@ function Contact() {
                   <input name="email" type="email" required placeholder="elon@x.com" className="input" />
                 </div>
               </div>
+              <div className="form-row">
+                <div>
+                  <label>YOUR COUNTRY</label>
+                  <input name="country" type="text" required placeholder="United States" className="input" />
+                </div>
+                <div>
+                  <label>BEST TIME TO CONTACT</label>
+                  <input name="bestTime" type="text" required placeholder="Evening (5 PM - 8 PM EST)" className="input" />
+                </div>
+              </div>
               <div>
                 <label>YOUR MESSAGE</label>
                 <textarea name="message" required rows={5} placeholder="Describe your project, budget, and timeline..." className="textarea" />
@@ -643,25 +653,66 @@ function ClientReviews() {
   );
 }
 
+/* ─── SEO TEXT BLOCK (visually hidden, crawler-visible) ─── */
+function SeoBlock() {
+  return (
+    <section aria-label="About Ayush Kumar Services" style={{ position: "absolute", width: "1px", height: "1px", overflow: "hidden", opacity: 0, pointerEvents: "none" }}>
+      <h2>Ayush Kumar — Expert Freelance Developer</h2>
+      <p>
+        Ayush Kumar is a highly skilled freelance full stack developer, mobile app developer, and AI/ML engineer based in India.
+        Specializing in React, Next.js, React Native, Expo, Node.js, TypeScript, and Express.js, Ayush delivers premium
+        web applications, cross-platform iOS and Android mobile apps, AI-powered solutions, and custom software products.
+      </p>
+      <h3>Services Offered</h3>
+      <ul>
+        <li>Freelance Full Stack Web Development — React, Next.js, Node.js, TypeScript, REST APIs</li>
+        <li>Freelance Mobile App Development — React Native, Expo, iOS, Android</li>
+        <li>AI & Machine Learning Integration — LLM, ChatGPT, OpenAI API, intelligent automation</li>
+        <li>UI/UX Design & Frontend Development — pixel-perfect, responsive, premium interfaces</li>
+        <li>Performance Optimization — Core Web Vitals, SEO, Lighthouse auditing, page speed</li>
+        <li>E-Commerce Development — custom online stores, payment integration, product management</li>
+        <li>App Testing & Quality Assurance — unit testing, E2E testing, QA engineering</li>
+        <li>API Design & Backend Engineering — REST, GraphQL, microservices, database design</li>
+        <li>SaaS Application Development — scalable software-as-a-service products</li>
+        <li>Startup & MVP Development — rapid prototyping and product launch</li>
+      </ul>
+      <h3>Technologies & Expertise</h3>
+      <p>
+        Expert coder proficient in JavaScript, TypeScript, React.js, Next.js, React Native, Expo, Node.js, Express.js,
+        MongoDB, PostgreSQL, Firebase, Tailwind CSS, Framer Motion, Redux, Zustand, Git, Docker, AWS, Vercel, and more.
+        Deep knowledge in AI/ML engineering, machine learning model integration, natural language processing (NLP),
+        computer vision, and building AI-driven web and mobile applications.
+      </p>
+      <h3>Why Hire Ayush Kumar?</h3>
+      <p>
+        With 3+ years of professional freelance experience and 50+ deployed products, Ayush Kumar is trusted by clients
+        worldwide for expert-level software development. Whether you need a web developer, app developer, AI engineer,
+        performance optimizer, tester, designer, or full-product engineer — Ayush Kumar delivers with precision, speed,
+        and exceptional quality. Available for freelance contracts, remote work, and full-time roles globally.
+      </p>
+    </section>
+  );
+}
+
 /* ─── FOOTER ─────────────────────────────────────────────── */
 function Footer() {
   return (
-    <footer>
+    <footer aria-label="Site footer">
       <div className="container">
         <div className="footer-links">
           {[
-            { label: "GitHub", href: "https://github.com/Ayush08k" },
-            { label: "LinkedIn", href: "#" },
-            { label: "Instagram", href: "#" },
-            { label: "Twitter / X", href: "#" },
+            { label: "GitHub", href: "https://github.com/Ayush08k", rel: "noopener noreferrer me" },
+            { label: "LinkedIn", href: "#", rel: "noopener noreferrer me" },
+            { label: "Instagram", href: "#", rel: "noopener noreferrer" },
+            { label: "Twitter / X", href: "#", rel: "noopener noreferrer me" },
           ].map(l => (
-            <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="footer-link" data-hover>
+            <a key={l.label} href={l.href} target="_blank" rel={l.rel} className="footer-link" data-hover aria-label={`Ayush Kumar on ${l.label}`}>
               {l.label}
             </a>
           ))}
         </div>
         <p className="footer-copy">
-          © {new Date().getFullYear()} Ayush Kumar — Designed & Built with ♥ and TypeScript
+          © {new Date().getFullYear()} Ayush Kumar — Freelance Full Stack & Mobile App Developer. Designed & Built with ♥ and TypeScript.
         </p>
       </div>
     </footer>
@@ -686,7 +737,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content" role="main">
         <Hero />
         <SectionDivider />
         <About />
@@ -699,6 +750,7 @@ export default function Home() {
         <SectionDivider />
         <Contact />
       </main>
+      <SeoBlock />
       <Footer />
     </>
   );
