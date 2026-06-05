@@ -704,3 +704,159 @@ footer {
     display: none;
   }
 }
+
+/* ─── SECTION DIVIDER ────────────────────────────────────── */
+.section-divider {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+.divider-line {
+  width: 100%;
+  max-width: 1000px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-border), rgba(124, 58, 237, 0.4), var(--glass-border), transparent);
+  opacity: 0.6;
+}
+.divider-glow {
+  position: absolute;
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--violet), transparent);
+  filter: blur(4px);
+}
+.section-divider::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--violet);
+  box-shadow: 0 0 10px var(--violet), 0 0 20px var(--violet);
+}
+
+/* ─── SUCCESS SCREEN ANIMATION ──────────────────────────── */
+.contact-success-card {
+  padding: 48px;
+  margin-top: 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+.success-pop-in {
+  animation: successPopIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes successPopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.success-icon-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 24px;
+}
+.checkmark-svg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 3;
+  stroke: var(--emerald);
+  stroke-miterlimit: 10;
+  box-shadow: inset 0 0 0 var(--emerald);
+  animation: fillSuccess 0.4s ease-in-out 0.4s forwards, scaleSuccess 0.3s ease-in-out forwards;
+}
+.checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 3;
+  stroke-miterlimit: 10;
+  stroke: var(--emerald);
+  fill: none;
+  animation: strokeSuccess 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.checkmark-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke: var(--emerald);
+  animation: strokeSuccess 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+}
+@keyframes strokeSuccess {
+  100% { stroke-dashoffset: 0; }
+}
+@keyframes scaleSuccess {
+  0%, 100% { transform: none; }
+  50% { transform: scale3d(1.1, 1.1, 1); }
+}
+@keyframes fillSuccess {
+  100% { box-shadow: inset 0 0 0 50px rgba(16, 185, 129, 0.08); }
+}
+
+/* 60fps Sparks Pop */
+.success-sparks {
+  position: absolute;
+  inset: -150px;
+  pointer-events: none;
+  z-index: 1;
+}
+.spark {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: sparkPop 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sparkPop {
+  0% {
+    transform: translate(-50%, -50%) scale(1.4);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0.1);
+    opacity: 0;
+  }
+}
+
+.success-title {
+  color: var(--white);
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.success-text {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 440px;
+  margin-bottom: 24px;
+}
+.success-reset-btn {
+  padding: 10px 24px !important;
+  font-size: 13.5px !important;
+}

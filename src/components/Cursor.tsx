@@ -32,21 +32,22 @@ export default function Cursor() {
       }
       raf.current = requestAnimationFrame(loop);
     };
-
-    const onEnter = () => document.body.classList.add("cursor-hover");
-    const onLeave = () => document.body.classList.remove("cursor-hover");
-
     window.addEventListener("mousemove", move);
     raf.current = requestAnimationFrame(loop);
 
-    const interactives = document.querySelectorAll("a, button, [data-hover]");
-    interactives.forEach(el => {
-      el.addEventListener("mouseenter", onEnter);
-      el.addEventListener("mouseleave", onLeave);
-    });
+    const onOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target && target.closest("a, button, [data-hover]")) {
+        document.body.classList.add("cursor-hover");
+      } else {
+        document.body.classList.remove("cursor-hover");
+      }
+    };
+    window.addEventListener("mouseover", onOver);
 
     return () => {
       window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseover", onOver);
       cancelAnimationFrame(raf.current);
     };
   }, []);

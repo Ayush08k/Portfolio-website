@@ -67,9 +67,9 @@ export const PORTFOLIO_DATA = {
       image: "/super.png"
     },
     {
-      title: "Aura Creative Studio",
-      description: "A minimalist portfolio for a creative agency featuring smooth page transitions, high-quality media handling, and dynamic content delivery.",
-      tech: ["React", "GSAP", "Framer Motion", "Sanity.io"],
+      title: "Feedo",
+      description: "A comprehensive feedback collection and customer satisfaction platform. It allows businesses to deploy customizable feedback surveys, gather real-time responses, perform automated sentiment analysis, and visualize user analytics via a dynamic dashboard.",
+      tech: ["React", "Next.js", "Node.js", "Express.js", "MongoDB", "TypeScript", "Tailwind CSS"],
       link: "#",
       github: "#",
       image: "/aura.png"
@@ -83,17 +83,17 @@ export const PORTFOLIO_DATA = {
       image: "/jlm.png"
     },
     {
-      title: "Vanguard Fitness App",
-      description: "A premium fitness tracking application with personalized workout plans, social features, and deep integration with wearable health devices.",
-      tech: ["React Native", "Expo", "Node.js", "PostgreSQL"],
+      title: "Music Player App",
+      description: "A sleek cross-platform music streaming and media player application featuring offline playback, custom playlist queue management, interactive audio visualization, synchronized lyrics rendering, and dynamic background theme colors.",
+      tech: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "Node.js", "Express.js"],
       link: "#",
       github: "#",
       image: "/vanguard.png"
     },
     {
-      title: "Lumina Art Gallery",
-      description: "An immersive virtual art gallery experience featuring high-resolution artwork previews, artist profiles, and secure NFT purchasing.",
-      tech: ["Three.js", "React", "Web3.js", "Solidity"],
+      title: "E-Commerce Platform",
+      description: "A high-performance e-commerce platform featuring lightning-fast product filtering, a secure checkout funnel integrated with Stripe, automated inventory tracking, real-time transaction reporting, and a responsive customer dashboard.",
+      tech: ["Next.js", "React", "Node.js", "PostgreSQL", "Supabase", "Stripe API", "Tailwind CSS"],
       link: "#",
       github: "#",
       image: "/lumina.png"

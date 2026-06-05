@@ -60,29 +60,36 @@ function useSkillBars() {
 /* ─── 3D card tilt hook ─────────────────────────────────── */
 function useTilt(selector: string) {
   useEffect(() => {
-    const cards = document.querySelectorAll<HTMLElement>(selector);
-    const handlers: Array<[HTMLElement, (e: MouseEvent) => void, () => void]> = [];
+    const handleMove = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const card = target.closest<HTMLElement>(selector);
+      if (!card) return;
 
-    cards.forEach(card => {
-      const onMove = (e: MouseEvent) => {
-        const r = card.getBoundingClientRect();
-        const x = ((e.clientY - r.top)  / r.height - 0.5) * 14;
-        const y = ((e.clientX - r.left) / r.width  - 0.5) * -14;
-        card.style.transform = `perspective(800px) rotateX(${x}deg) rotateY(${y}deg) translateZ(6px)`;
-      };
-      const onLeave = () => { card.style.transform = ""; };
-      card.addEventListener("mousemove", onMove);
-      card.addEventListener("mouseleave", onLeave);
-      handlers.push([card, onMove, onLeave]);
-    });
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientY - r.top)  / r.height - 0.5) * 14;
+      const y = ((e.clientX - r.left) / r.width  - 0.5) * -14;
+      card.style.transform = `perspective(800px) rotateX(${x}deg) rotateY(${y}deg) translateZ(6px)`;
+    };
+
+    const handleOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const card = target.closest<HTMLElement>(selector);
+      if (!card) return;
+
+      const related = e.relatedTarget as HTMLElement;
+      if (!related || !card.contains(related)) {
+        card.style.transform = "";
+      }
+    };
+
+    window.addEventListener("mousemove", handleMove);
+    window.addEventListener("mouseout", handleOut);
 
     return () => {
-      handlers.forEach(([card, onMove, onLeave]) => {
-        card.removeEventListener("mousemove", onMove);
-        card.removeEventListener("mouseleave", onLeave);
-      });
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mouseout", handleOut);
     };
-  }, []);
+  }, [selector]);
 }
 
 /* ─── Navbar ────────────────────────────────────────────── */
@@ -363,15 +370,21 @@ function Contact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     setStatus("loading");
     try {
-      const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+      const data = Object.fromEntries(new FormData(form).entries());
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      setStatus(res.ok ? "success" : "error");
+      if (res.ok) {
+        form.reset();
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }
@@ -392,10 +405,48 @@ function Contact() {
           </div>
 
           {status === "success" ? (
-            <div className="glass reveal" style={{ padding: "48px", marginTop: "48px", textAlign: "center" }}>
-              <CheckCircle size={48} color="var(--emerald)" style={{ margin: "0 auto 16px" }} />
-              <h3 style={{ color: "var(--emerald)", marginBottom: "10px" }}>Message Sent!</h3>
-              <p style={{ color: "var(--muted)" }}>Ayush will get back to you shortly. Stay awesome! 🚀</p>
+            <div className="contact-success-card glass success-pop-in">
+              <div className="success-icon-wrap">
+                <svg className="checkmark-svg" viewBox="0 0 52 52">
+                  <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                  <path className="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+                 <div className="success-sparks">
+                  {[...Array(24)].map((_, i) => {
+                    const angle = (i * 360) / 24;
+                    const rad = (angle * Math.PI) / 180;
+                    const distance = 140 + Math.random() * 160;
+                    const tx = `${(Math.cos(rad) * distance).toFixed(1)}px`;
+                    const ty = `${(Math.sin(rad) * distance).toFixed(1)}px`;
+                    const colors = ["var(--violet)", "var(--blue)", "var(--emerald)", "var(--gold)"];
+                    const color = colors[i % colors.length];
+                    const delay = `${(0.4 + Math.random() * 0.15).toFixed(2)}s`;
+                    const size = `${(6 + Math.random() * 5).toFixed(1)}px`;
+                    return (
+                      <div
+                        key={i}
+                        className="spark"
+                        style={{
+                          "--tx": tx,
+                          "--ty": ty,
+                          "background": color,
+                          "boxShadow": `0 0 12px ${color}, 0 0 24px ${color}`,
+                          "animationDelay": delay,
+                          "width": size,
+                          "height": size,
+                        } as React.CSSProperties}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+              <h3 className="success-title">Message Sent Successfully!</h3>
+              <p className="success-text">
+                Ayush will contact you soon. Stay tuned! 🚀
+              </p>
+              <button onClick={() => setStatus("idle")} className="btn-outline success-reset-btn" data-hover>
+                Send Another Message
+              </button>
             </div>
           ) : (
             <form className="contact-form reveal" style={{ transitionDelay: "0.1s" }} onSubmit={handleSubmit}>
@@ -617,23 +668,35 @@ function Footer() {
   );
 }
 
+function SectionDivider() {
+  return (
+    <div className="section-divider reveal">
+      <div className="divider-line" />
+      <div className="divider-glow" />
+    </div>
+  );
+}
+
 /* ─── PAGE ───────────────────────────────────────────────── */
 export default function Home() {
   useScrollReveal();
   useSkillBars();
-  useTilt(".bento-card");
-  useTilt(".project-card");
-  useTilt(".reviews-card");
+  useTilt(".bento-card, .project-card, .reviews-card");
 
   return (
     <>
       <Navbar />
       <main>
         <Hero />
+        <SectionDivider />
         <About />
+        <SectionDivider />
         <Skills />
+        <SectionDivider />
         <Projects />
+        <SectionDivider />
         <ClientReviews />
+        <SectionDivider />
         <Contact />
       </main>
       <Footer />
