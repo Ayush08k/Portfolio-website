@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Terminal, ArrowRight, Code2, Cpu, Smartphone } from "lucide-react";
 
 const roles = [
-  "Mobile Application Developer",
-  "Web Developer",
-  "Full Stack Developer"
+  "Full Stack Web Developer",
+  "iOS & Android App Developer",
+  "Hiring Agent Copilot Integrator"
 ];
 
 export default function Hero() {
@@ -15,7 +16,7 @@ export default function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
+    }, 3500);
     return () => clearInterval(timer);
   }, []);
 
@@ -23,106 +24,168 @@ export default function Hero() {
     <section className="hero-container">
       <div className="hero-grid">
         <div className="hero-text-content">
+          {/* Status Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "6px 14px",
+              borderRadius: "100px",
+              background: "rgba(6, 182, 212, 0.06)",
+              border: "1px solid rgba(6, 182, 212, 0.15)",
+              marginBottom: "24px",
+            }}
+          >
+            <span style={{ 
+              width: "6px", 
+              height: "6px", 
+              borderRadius: "50%", 
+              backgroundColor: "var(--accent-cyan)",
+              boxShadow: "0 0 8px var(--accent-cyan)",
+              display: "inline-block"
+            }} />
+            <span style={{ 
+              fontSize: "12px", 
+              fontWeight: 600, 
+              color: "var(--accent-cyan)", 
+              fontFamily: "'Fira Code', monospace" 
+            }}>
+              AVAILABLE FOR HIRE
+            </span>
+          </motion.div>
+
+          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            style={{ color: "var(--accent)", fontFamily: "monospace", fontSize: "clamp(14px, 5vw, 16px)", marginBottom: "20px" }}
-          >
-            Hello,
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            style={{
-              fontSize: "clamp(30px, 5vw, 50px)",
-              color: "var(--text-white)",
-              lineHeight: 1.1,
-              marginBottom: "10px"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            style={{ 
+              color: "var(--text-secondary)", 
+              fontFamily: "'Fira Code', monospace", 
+              fontSize: "14px", 
+              marginBottom: "16px",
+              letterSpacing: "0.05em"
             }}
           >
-            I am Ayush Kumar, a
+            ~ hello_world
+          </motion.p>
+
+          {/* Main Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{
+              fontSize: "clamp(36px, 6vw, 64px)",
+              color: "var(--text-white)",
+              lineHeight: 1.1,
+              marginBottom: "15px",
+              fontWeight: 800,
+              letterSpacing: "-0.03em"
+            }}
+          >
+            I am <span className="gradient-text">Ayush Kumar</span>
           </motion.h1>
 
-          <div style={{ height: "clamp(25px, 5vw, 55px)", overflow: "hidden", marginBottom: "30px" }}>
+          {/* Dynamic Role Switcher */}
+          <div style={{ height: "clamp(30px, 5vw, 60px)", overflow: "hidden", marginBottom: "35px" }}>
             <AnimatePresence mode="wait">
               <motion.h2
                 key={roles[roleIndex]}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                exit={{ opacity: 0, y: -25 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 style={{
-                  fontSize: "clamp(20px, 4vw, 38px)",
-                  color: "var(--accent)",
-                  lineHeight: 1,
-                  whiteSpace: "nowrap"
+                  fontSize: "clamp(20px, 4vw, 36px)",
+                  color: "var(--text-primary)",
+                  lineHeight: 1.2,
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                  letterSpacing: "-0.02em"
                 }}
               >
-                {roles[roleIndex]}
+                Specialized in <span style={{ color: "var(--accent-cyan)" }}>{roles[roleIndex]}</span>
               </motion.h2>
             </AnimatePresence>
           </div>
 
+          {/* Short Intro Bio */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             style={{
-              maxWidth: "540px",
+              maxWidth: "560px",
               color: "var(--text-secondary)",
-              fontSize: "18px",
-              marginBottom: "50px"
+              fontSize: "clamp(15px, 2vw, 17px)",
+              lineHeight: "1.7",
+              marginBottom: "45px"
             }}
           >
-            I’m a versatile engineer specializing in App Development, Web Development, and Full Stack Development. I focus on building high-end, human-centered products that scale.
+            I build responsive, high-performance, and beautifully interactive digital architectures that scale. Combining modern web frameworks with native app environments to deliver absolute quality.
           </motion.p>
 
+          {/* Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}
           >
-            <a href="#projects" className="btn-primary" style={{ fontSize: "16px", padding: "1.25rem 2rem" }}>
-              Check out my work!
+            <a href="#projects" className="btn-primary">
+              Explore Projects
+              <ArrowRight size={16} style={{ marginLeft: "8px" }} />
+            </a>
+            <a href="#contact" className="btn-secondary">
+              Get in Touch
             </a>
           </motion.div>
         </div>
 
-        {/* Hero Image Section - Fully Responsive CSS */}
+        {/* Cyber Holographic Avatar / Profile Display */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           className="hero-image-wrapper"
         >
           <div className="hero-dashed-ring">
             <div className="hero-profile-pic"></div>
           </div>
           
-          {/* Decorative floating elements */}
+          {/* Glass floating 3D elements */}
           <motion.div
-            animate={{ y: [0, -15, 0] }}
-            transition={{ repeat: Infinity, duration: 4 }}
-            className="floating-tag tag-top-right"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+            className="floating-tag tag-top-right floating-tag-cyan"
           >
-            Mobile Expert
+            <Smartphone size={15} style={{ color: "var(--accent-cyan)" }} />
+            <span>Mobile Expert</span>
+            <span className="floating-tag-dot" />
           </motion.div>
+
           <motion.div
-            animate={{ y: [0, 15, 0] }}
-            transition={{ repeat: Infinity, duration: 5 }}
-            className="floating-tag tag-bottom-left"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+            className="floating-tag tag-bottom-left floating-tag-purple"
           >
-            Full Stack Pro
+            <Terminal size={15} style={{ color: "var(--accent-purple)" }} />
+            <span>Full Stack Pro</span>
+            <span className="floating-tag-dot" />
           </motion.div>
+
           <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ repeat: Infinity, duration: 3 }}
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             className="floating-tag tag-middle-right"
           >
-            Open for Full-Time
+            <Cpu size={15} style={{ color: "#10b981" }} />
+            <span style={{ color: "#10b981" }}>Active Coding</span>
           </motion.div>
         </motion.div>
       </div>

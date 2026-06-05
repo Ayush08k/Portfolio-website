@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -31,17 +32,53 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section container" style={{ textAlign: "center", maxWidth: "600px" }}>
-      <p style={{ color: "var(--accent)", fontFamily: "monospace", marginBottom: "20px" }}>What’s Next?</p>
-      <h2 style={{ fontSize: "clamp(40px, 5vw, 60px)", marginBottom: "20px" }}>Get In Touch</h2>
-      <p style={{ marginBottom: "50px" }}>
-        Although I’m not currently looking for any new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I’ll try my best to get back to you!
+    <section id="contact" className="section container" style={{ textAlign: "center", maxWidth: "680px" }}>
+      <p style={{ 
+        color: "var(--accent-cyan)", 
+        fontFamily: "'Fira Code', monospace", 
+        fontSize: "14px",
+        marginBottom: "16px",
+        letterSpacing: "0.05em"
+      }}>
+        ~ contact_me
+      </p>
+      
+      <h2 style={{ 
+        fontSize: "clamp(36px, 5vw, 56px)", 
+        marginBottom: "20px",
+        fontWeight: 800,
+        letterSpacing: "-0.03em"
+      }}>
+        Get In Touch
+      </h2>
+      
+      <p style={{ 
+        marginBottom: "45px", 
+        color: "var(--text-secondary)", 
+        fontSize: "16px", 
+        lineHeight: "1.7" 
+      }}>
+        Ready to take your digital product to the next level? Drop your project specs below. My inbox is always active for select high-end freelance opportunities and team roles. Let's build something brilliant together!
       </p>
 
       {status === "success" ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass-card">
-          <h3 style={{ color: "var(--accent)" }}>Message Sent!</h3>
-          <p>Thank you for reaching out. I'll get back to you soon.</p>
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }} 
+          animate={{ opacity: 1, scale: 1 }} 
+          className="glass-card"
+          style={{
+            border: "1px solid rgba(16, 185, 129, 0.3)",
+            background: "rgba(9, 13, 22, 0.8)",
+            padding: "40px"
+          }}
+        >
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: "15px", color: "#10b981" }}>
+            <CheckCircle2 size={44} />
+          </div>
+          <h3 style={{ color: "#10b981", fontSize: "20px", marginBottom: "10px" }}>Message Transmitted!</h3>
+          <p style={{ color: "var(--text-secondary)", fontSize: "14.5px" }}>
+            Thank you for reaching out. Ayush's mail server has successfully queued your message. You will receive a direct reply within a few hours.
+          </p>
         </motion.div>
       ) : (
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem", textAlign: "left" }}>
@@ -49,48 +86,80 @@ export default function Contact() {
             <input 
               name="name" 
               type="text" 
-              placeholder="Name" 
+              placeholder="Your Name" 
               required 
-              style={{ flex: 1, padding: "1rem", backgroundColor: "var(--bg-secondary)", border: "1px solid var(--bg-tertiary)", color: "var(--text-white)", borderRadius: "4px" }}
+              className="contact-input"
             />
             <input 
               name="email" 
               type="email" 
-              placeholder="Email" 
+              placeholder="Your Email Address" 
               required 
-              style={{ flex: 1, padding: "1rem", backgroundColor: "var(--bg-secondary)", border: "1px solid var(--bg-tertiary)", color: "var(--text-white)", borderRadius: "4px" }}
+              className="contact-input"
             />
           </div>
           <div className="contact-form-row">
             <input 
               name="location" 
               type="text" 
-              placeholder="Where are you from?" 
-              style={{ flex: 1, padding: "1rem", backgroundColor: "var(--bg-secondary)", border: "1px solid var(--bg-tertiary)", color: "var(--text-white)", borderRadius: "4px" }}
+              placeholder="Your Location (e.g. SF, CA)" 
+              className="contact-input"
             />
             <input 
               name="bestTime" 
               type="text" 
-              placeholder="Best time to contact?" 
-              style={{ flex: 1, padding: "1rem", backgroundColor: "var(--bg-secondary)", border: "1px solid var(--bg-tertiary)", color: "var(--text-white)", borderRadius: "4px" }}
+              placeholder="Best Time to Contact" 
+              className="contact-input"
             />
           </div>
           <textarea 
             name="message" 
-            placeholder="Your Message" 
+            placeholder="Outline your project goals, timelines, and budget..." 
             rows={5} 
             required 
-            style={{ padding: "1rem", backgroundColor: "var(--bg-secondary)", border: "1px solid var(--bg-tertiary)", color: "var(--text-white)", borderRadius: "4px", resize: "none" }}
+            className="contact-input contact-textarea"
           ></textarea>
+          
           <button 
             type="submit" 
             disabled={status === "loading"}
             className="btn-primary" 
-            style={{ alignSelf: "center", marginTop: "20px" }}
+            style={{ 
+              alignSelf: "center", 
+              marginTop: "20px", 
+              padding: "1rem 2.5rem",
+              gap: "8px"
+            }}
           >
-            {status === "loading" ? "Sending..." : "Say Hello"}
+            {status === "loading" ? (
+              "Transmitting..."
+            ) : (
+              <>
+                Say Hello
+                <Send size={15} />
+              </>
+            )}
           </button>
-          {status === "error" && <p style={{ color: "#ff4d4d", textAlign: "center" }}>Something went wrong. Please try again.</p>}
+          
+          {status === "error" && (
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              style={{ 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center", 
+                gap: "8px", 
+                color: "#f87171", 
+                fontSize: "14px", 
+                marginTop: "15px",
+                width: "100%"
+              }}
+            >
+              <AlertCircle size={16} />
+              <span>Network error occurred. Please try again or reach out directly.</span>
+            </motion.div>
+          )}
         </form>
       )}
     </section>

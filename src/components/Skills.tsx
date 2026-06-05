@@ -19,83 +19,163 @@ const skills = PORTFOLIO_DATA.services.map(service => ({
   description: service.description
 }));
 
+const techSkills = PORTFOLIO_DATA.skills.marquee;
+
 export default function Skills() {
   return (
     <section id="skills" className="section container">
-      <h2 className="section-title">Expertise & Skills</h2>
+      <h2 className="section-title">
+        <span className="gradient-text-cyan">Expertise & Services</span>
+      </h2>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "20px", marginBottom: "60px" }}>
-        {skills.map((skill, i) => (
-          <motion.div
-            key={skill.name}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="glass-card"
-            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-          >
-            <skill.icon size={40} style={{ color: "var(--accent)" }} />
-            <h3>{skill.name}</h3>
-            <p style={{ fontSize: "14px" }}>{skill.description}</p>
-          </motion.div>
-        ))}
+      {/* Grid of core expertise services */}
+      <div style={{ 
+        display: "grid", 
+        gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", 
+        gap: "24px", 
+        marginBottom: "80px" 
+      }}>
+        {skills.map((skill, i) => {
+          const Icon = skill.icon;
+          return (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="glass-card"
+              style={{ 
+                display: "flex", 
+                flexDirection: "column", 
+                gap: "1.2rem",
+                border: "1px solid rgba(255, 255, 255, 0.05)"
+              }}
+            >
+              {/* Icon Container with glowing background */}
+              <div style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "12px",
+                background: "rgba(6, 182, 212, 0.05)",
+                border: "1px solid rgba(6, 182, 212, 0.15)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "var(--accent-cyan)",
+                boxShadow: "0 0 20px rgba(6, 182, 212, 0.05)"
+              }}>
+                <Icon size={26} />
+              </div>
+              
+              <h3 style={{ fontSize: "19px", color: "var(--text-white)", fontWeight: 700 }}>
+                {skill.name}
+              </h3>
+              
+              <p style={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: "1.6" }}>
+                {skill.description}
+              </p>
+            </motion.div>
+          );
+        })}
       </div>
 
-      {/* Infinite Scrolling Skills Marquee */}
+      {/* Infinite Scrolling Skills Marquee Section */}
+      <div style={{ 
+        textAlign: "center", 
+        marginBottom: "30px" 
+      }}>
+        <p style={{ 
+          fontSize: "13px", 
+          fontFamily: "'Fira Code', monospace", 
+          color: "var(--text-secondary)",
+          letterSpacing: "0.05em",
+          marginBottom: "15px"
+        }}>
+          // FULL_TECH_STACK_INVENTORY
+        </p>
+      </div>
+
       <div
         style={{
           width: "100%",
           overflow: "hidden",
           position: "relative",
-          padding: "20px 0"
+          padding: "24px 0",
+          background: "rgba(9, 13, 22, 0.3)",
+          borderTop: "1px solid rgba(255,255,255,0.03)",
+          borderBottom: "1px solid rgba(255,255,255,0.03)",
+          borderRadius: "16px",
+          display: "flex",
+          alignItems: "center"
         }}
       >
+        {/* Left & Right ambient fade elements */}
+        <div style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100px",
+          height: "100%",
+          background: "linear-gradient(90deg, var(--bg-primary) 0%, transparent 100%)",
+          zIndex: 10,
+          pointerEvents: "none"
+        }} />
+        <div style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "100px",
+          height: "100%",
+          background: "linear-gradient(270deg, var(--bg-primary) 0%, transparent 100%)",
+          zIndex: 10,
+          pointerEvents: "none"
+        }} />
+
         <motion.div
-          initial={{ x: 0 }}
-          animate={{ x: "-50%" }}
+          animate={{ x: [0, -2000] }}
           transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "linear"
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 35,
+              ease: "linear"
+            }
           }}
-          whileHover={{ animationPlayState: "paused" }} // Note: This doesn't work directly on motion.div animate prop easily without a ref or specific setup, but I'll use a more robust way.
           style={{
             display: "flex",
-            gap: "30px",
+            gap: "24px",
             width: "max-content",
             whiteSpace: "nowrap"
           }}
         >
-          {[...techSkills, ...techSkills].map((skill, i) => (
-            <motion.div
+          {/* Duplicate the array to ensure seamless infinite looping */}
+          {[...techSkills, ...techSkills, ...techSkills].map((skill, i) => (
+            <div
               key={i}
-              whileHover={{ scale: 1.05, borderColor: "var(--accent)", color: "var(--accent)" }}
               style={{
                 padding: "10px 24px",
-                background: "rgba(255, 255, 255, 0.03)",
-                border: "1px solid rgba(100, 255, 218, 0.1)",
+                background: "rgba(9, 13, 22, 0.6)",
+                border: "1px solid rgba(255, 255, 255, 0.05)",
                 borderRadius: "100px",
-                color: "var(--text-secondary)",
+                color: "var(--text-primary)",
                 fontSize: "14px",
                 fontWeight: "500",
                 fontFamily: "Inter, sans-serif",
                 display: "flex",
                 alignItems: "center",
-                whiteSpace: "nowrap",
+                gap: "8px",
                 cursor: "default",
-                backdropFilter: "blur(4px)",
-                transition: "border-color 0.3s ease, color 0.3s ease"
+                backdropFilter: "blur(8px)",
+                transition: "all 0.3s ease"
               }}
             >
-              <span style={{ marginRight: "8px", color: "var(--accent)", opacity: 0.5 }}>#</span>
+              <span style={{ color: "var(--accent-cyan)", opacity: 0.7, fontWeight: 600 }}>#</span>
               {skill}
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>
     </section>
   );
 }
-
-const techSkills = PORTFOLIO_DATA.skills.marquee;

@@ -1,25 +1,19 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Cursor from "@/components/Cursor";
-import HiringAgentSandbox from "@/components/HiringAgentSandbox";
 
 export const metadata: Metadata = {
-  title: "Freelancer Ayush | Web Developer & Designer",
-  description: "Portfolio of Ayush, a freelance web developer specializing in high-end, high-performance web experiences.",
-  keywords: ["Freelancer", "Ayush", "Web Developer", "Designer", "Portfolio", "Next.js", "React"],
+  title: "Ayush Kumar | Full Stack & Mobile Developer",
+  description: "Portfolio of Ayush Kumar — Full Stack & Mobile App Developer. 3+ years of experience, 50+ apps shipped.",
+  keywords: ["Ayush Kumar", "Full Stack Developer", "Mobile Developer", "React", "Next.js", "Portfolio"],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
         <Cursor />
         {children}
-        <HiringAgentSandbox />
       </body>
     </html>
   );
