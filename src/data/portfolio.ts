@@ -69,10 +69,10 @@ export const PORTFOLIO_DATA = {
     {
       title: "Feedo",
       description: "A comprehensive feedback collection and customer satisfaction platform. It allows businesses to deploy customizable feedback surveys, gather real-time responses, perform automated sentiment analysis, and visualize user analytics via a dynamic dashboard.",
-      tech: ["React", "Next.js", "Node.js", "Express.js", "MongoDB", "TypeScript", "Tailwind CSS"],
+      tech: ["React Native", "Expo SDK 54", "TypeScript", "NativeWind", "NestJS", "MongoDB", "Socket.IO", "Jest"],
       link: "#",
       github: "#",
-      image: "/aura.png"
+      image: "/feedo.png"
     },
     {
       title: "JLM Tournaments: An Online Tournament\n Organisation Platform",
@@ -88,7 +88,7 @@ export const PORTFOLIO_DATA = {
       tech: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "Node.js", "Express.js"],
       link: "#",
       github: "#",
-      image: "/vanguard.png"
+      image: "/music.png"
     },
     {
       title: "E-Commerce Platform",
@@ -96,7 +96,7 @@ export const PORTFOLIO_DATA = {
       tech: ["Next.js", "React", "Node.js", "PostgreSQL", "Supabase", "Stripe API", "Tailwind CSS"],
       link: "#",
       github: "#",
-      image: "/lumina.png"
+      image: "/e-commerce.png"
     }
   ] as Project[],
   businessGuides: {

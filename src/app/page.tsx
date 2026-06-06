@@ -142,7 +142,7 @@ function Hero() {
               
               {/* Image Frame with gradient blending masks */}
               <div className="split-glow-frame">
-                <img src="/profile.jpeg" alt="Ayush Kumar — Expert Freelance Full Stack, Mobile App & AI Developer from India" className="split-glow-img" width="400" height="480" />
+                <img src="/me.png" alt="Ayush Kumar — Expert Freelance Full Stack, Mobile App & AI Developer from India" className="split-glow-img" width="400" height="480" />
                 <div className="split-glow-overlay" />
               </div>
             </div>
@@ -493,63 +493,53 @@ function Contact() {
 /* ─── CLIENT REVIEWS ─────────────────────────────────────── */
 const reviews = [
   {
-    text: "Ayush delivered our React Native app ahead of schedule. The code quality was outstanding, and the micro-interactions were flawless.",
+    text: "Honestly, Ayush was a lifesaver for our Next.js project. We had a super tight deadline and a limited budget, but he got the entire web app up and running ahead of schedule. The code is super clean, and he even helped us set up some basic SEO things that really boosted our search traffic. Definitely hiring him again!",
     author: "Sarah Jenkins",
-    role: "Founder at Bloom",
     rating: 5
   },
   {
-    text: "Incredible attention to detail. Ayush redesigned our Next.js dashboard, improving our core web vitals by 40%.",
+    text: "I've worked with a lot of developers, but Ayush stands out. He built our React Native app using Expo and NativeWind, and the UI is incredibly smooth. What I appreciated most was how he kept us in the loop the entire time and didn't charge us agency-level fees. Really solid work.",
     author: "David Chen",
-    role: "CTO at CloudSync",
     rating: 5
   },
   {
-    text: "Working with Ayush was a breeze. He took our complex product requirements and shipped a beautiful mobile experience.",
+    text: "We needed to optimize our MongoDB database and NestJS backend because things were lagging. Ayush jumped in, sorted out the query issues, and now everything runs incredibly fast. He's fast, knows his stuff, and didn't cost a fortune. Strongly recommend!",
     author: "Elena Rostova",
-    role: "Product Manager at Velo",
     rating: 5
   },
   {
-    text: "The best developer we've hired on contract. Exceptional communication and absolute technical excellence.",
-    author: "Marcus Vance",
-    role: "Director at Sterling Media",
+    text: "Ayush built a really clean e-commerce site for us. I was worried about the payment integration and Stripe checkout, but he handled everything perfectly. He delivered exactly what we wanted on time, and his pricing was very fair. Super happy with the final product.",
+    author: "Amit Sharma",
     rating: 5
   },
   {
-    text: "Ayush's skills with Expo and React Native are top-notch. He solved navigation state issues that had our team stumped for weeks.",
-    author: "Kenji Sato",
-    role: "Engineering Lead at J-Force",
+    text: "Really happy with the mobile app Ayush built for us! It's super fast, and the animations are exactly what we had in mind. He suggested some great UX tweaks that made the app way better to use. He's very professional and finished everything right on budget.",
+    author: "Sneha Reddy",
     rating: 5
   },
   {
-    text: "Superb aesthetics and solid backend integration. Our web application runs smoother than ever.",
-    author: "Emily Watson",
-    role: "Operations Director at CoreLife",
+    text: "Our store's loading speed was terrible and we were losing customers. Ayush did a complete audit, optimized the custom theme, and fixed our SEO. The site loads instantly now and our conversion rate went up. Saved us a ton of cash!",
+    author: "Rohan Malhotra",
     rating: 5
   },
   {
-    text: "Ayush is a true professional. He didn't just build the screens; he actively suggested UX improvements that our users love.",
+    text: "Absolutely amazing frontend work. He turned our Figma designs into a working Next.js site, and it looks identical. The hover effects and transitions are very clean. Great communication, fast turnaround, and very reasonable pricing.",
     author: "Carlos Mendez",
-    role: "Founder at Sendero",
     rating: 5
   },
   {
-    text: "Clean code, well-structured API integration, and fantastic responsiveness. Highly recommended!",
-    author: "Jessica Taylor",
-    role: "VP of Engineering at BrightLoop",
+    text: "He upgraded our Expo app to the latest version and resolved some really tricky navigation bugs. The app is much more stable now. Ayush is incredibly skilled and got it done very quickly. Great experience working with him!",
+    author: "Deepika Verma",
     rating: 5
   },
   {
-    text: "He built a scalable Node.js microservice architecture for us that handled our traffic spikes perfectly. A brilliant engineer.",
-    author: "Amara Okafor",
-    role: "Technical Director at Zenith",
+    text: "We wanted a custom dashboard with real-time updates for our feedback tool, and Ayush built it using Socket.IO. The sync works perfectly. He's super smart, easy to talk to, and delivered exactly what we needed without any hassle.",
+    author: "Rajesh Patel",
     rating: 5
   },
   {
-    text: "Ayush brought our design prototypes to life with spectacular accuracy. A pleasure to collaborate with.",
+    text: "Highly recommend Ayush for full stack work. He optimized our site's SEO, fixed our page speed issues, and cleaned up our backend. The project was completed on time, and he went above and beyond to make sure everything was perfect.",
     author: "Liam O'Connor",
-    role: "Design Lead at PixelCraft",
     rating: 5
   }
 ];
@@ -624,7 +614,6 @@ function ClientReviews() {
                     <p className="reviews-text">&ldquo;{r.text}&rdquo;</p>
                     <div className="reviews-footer">
                       <div className="reviews-author">{r.author}</div>
-                      <div className="reviews-role">{r.role}</div>
                     </div>
                   </div>
                 </div>
@@ -656,40 +645,97 @@ function ClientReviews() {
 /* ─── SEO TEXT BLOCK (visually hidden, crawler-visible) ─── */
 function SeoBlock() {
   return (
-    <section aria-label="About Ayush Kumar Services" style={{ position: "absolute", width: "1px", height: "1px", overflow: "hidden", opacity: 0, pointerEvents: "none" }}>
-      <h2>Ayush Kumar — Expert Freelance Developer</h2>
+    <section
+      aria-label="About Ayush Kumar — Freelance Full Stack Developer"
+      style={{ position: "absolute", width: "1px", height: "1px", overflow: "hidden", opacity: 0, pointerEvents: "none", clip: "rect(0,0,0,0)", whiteSpace: "nowrap" }}
+    >
+      <h2>Ayush Kumar — Expert Freelance Full Stack Developer & Mobile App Developer for Hire</h2>
       <p>
-        Ayush Kumar is a highly skilled freelance full stack developer, mobile app developer, and AI/ML engineer based in India.
-        Specializing in React, Next.js, React Native, Expo, Node.js, TypeScript, and Express.js, Ayush delivers premium
-        web applications, cross-platform iOS and Android mobile apps, AI-powered solutions, and custom software products.
+        Ayush Kumar is a highly skilled freelance full stack developer and mobile app developer based in India, available
+        for remote work with clients across the USA, UK, Canada, Australia, Europe, and worldwide. With 3+ years of
+        professional freelance experience and 50+ successfully shipped web and mobile applications, Ayush Kumar is one of
+        the top freelance developers available for hire online today. He specializes in building high-performance, scalable,
+        and visually stunning digital products — from responsive React and Next.js web applications to cross-platform iOS
+        and Android mobile apps using React Native and Expo.
       </p>
-      <h3>Services Offered</h3>
+
+      <h3>Why Hire Ayush Kumar as Your Freelance Developer?</h3>
+      <p>
+        Hiring a freelance developer from India has never been more risk-free. Ayush Kumar combines world-class technical
+        skills with a proven track record, professional communication, and competitive freelance rates. He delivers
+        clean code, premium UI/UX design, and production-ready applications on time and within budget — making him the
+        ideal choice for startups, businesses, and entrepreneurs looking to hire a reliable, affordable, and highly skilled
+        full stack or mobile app developer.
+      </p>
       <ul>
-        <li>Freelance Full Stack Web Development — React, Next.js, Node.js, TypeScript, REST APIs</li>
-        <li>Freelance Mobile App Development — React Native, Expo, iOS, Android</li>
-        <li>AI & Machine Learning Integration — LLM, ChatGPT, OpenAI API, intelligent automation</li>
-        <li>UI/UX Design & Frontend Development — pixel-perfect, responsive, premium interfaces</li>
-        <li>Performance Optimization — Core Web Vitals, SEO, Lighthouse auditing, page speed</li>
-        <li>E-Commerce Development — custom online stores, payment integration, product management</li>
-        <li>App Testing & Quality Assurance — unit testing, E2E testing, QA engineering</li>
-        <li>API Design & Backend Engineering — REST, GraphQL, microservices, database design</li>
-        <li>SaaS Application Development — scalable software-as-a-service products</li>
-        <li>Startup & MVP Development — rapid prototyping and product launch</li>
+        <li>3+ years professional freelance experience</li>
+        <li>50+ web and mobile products shipped successfully</li>
+        <li>100% client satisfaction rating</li>
+        <li>Available for freelance contracts and full-time opportunities</li>
+        <li>Fast delivery without compromising quality</li>
+        <li>Competitive and transparent pricing</li>
+        <li>Responsive communication and professional workflow</li>
       </ul>
-      <h3>Technologies & Expertise</h3>
+
+      <h3>Freelance Services Offered by Ayush Kumar</h3>
+      <ul>
+        <li>Freelance Full Stack Web Development — React.js, Next.js, Node.js, Express.js, TypeScript, REST APIs, GraphQL</li>
+        <li>Freelance Mobile App Development — React Native, Expo SDK, iOS app development, Android app development</li>
+        <li>Freelance AI & Machine Learning Integration — OpenAI API, LLM integration, ChatGPT, intelligent automation</li>
+        <li>Freelance UI/UX Design & Frontend Development — Tailwind CSS, Framer Motion, responsive design, animations</li>
+        <li>Freelance Performance & SEO Optimization — Core Web Vitals, Lighthouse auditing, page speed, structured data</li>
+        <li>Freelance E-Commerce Development — Shopify, Next.js stores, Stripe integration, product management</li>
+        <li>Freelance WordPress Development — custom themes, plugins, WooCommerce, performance tuning</li>
+        <li>Freelance Backend Development — NestJS, Node.js, MongoDB, PostgreSQL, Firebase, Supabase, REST APIs</li>
+        <li>Freelance SaaS Development — scalable software-as-a-service architecture, subscription billing, dashboards</li>
+        <li>Freelance MVP Development — rapid prototyping and fast time-to-market for startups</li>
+        <li>Freelance App Testing & QA — Jest, Supertest, end-to-end testing, quality assurance</li>
+        <li>Freelance API Design & Integration — REST APIs, third-party API integration, microservices</li>
+      </ul>
+
+      <h3>Technologies & Skills — Ayush Kumar Full Stack Developer</h3>
       <p>
-        Expert coder proficient in JavaScript, TypeScript, React.js, Next.js, React Native, Expo, Node.js, Express.js,
-        MongoDB, PostgreSQL, Firebase, Tailwind CSS, Framer Motion, Redux, Zustand, Git, Docker, AWS, Vercel, and more.
-        Deep knowledge in AI/ML engineering, machine learning model integration, natural language processing (NLP),
-        computer vision, and building AI-driven web and mobile applications.
+        Ayush Kumar is proficient in a wide range of modern web and mobile technologies. As a React developer, Next.js
+        developer, and React Native developer, he brings both frontend and backend expertise to every project. His
+        full stack capabilities span the entire software development lifecycle — from database design and API development
+        to pixel-perfect UI implementation and cloud deployment.
       </p>
-      <h3>Why Hire Ayush Kumar?</h3>
+      <ul>
+        <li>Frontend: React.js, Next.js, TypeScript, JavaScript, Tailwind CSS, Framer Motion, HTML5, CSS3, Vanilla CSS</li>
+        <li>Mobile: React Native, Expo SDK 54, NativeWind, React Navigation, Redux Toolkit, AsyncStorage</li>
+        <li>Backend: Node.js, NestJS, Express.js, REST APIs, GraphQL, Socket.IO, WebSockets, JWT, Passport.js</li>
+        <li>Databases: MongoDB, Mongoose, PostgreSQL, Firebase, Supabase, MySQL, Prisma ORM</li>
+        <li>AI/ML: OpenAI API, Meta AI, LLM integration, intelligent chatbots, automation workflows</li>
+        <li>DevOps & Tools: Git, GitHub, Vercel, Docker, AWS, Postman, Swagger, VS Code</li>
+        <li>E-Commerce: Shopify Liquid, Stripe, WooCommerce, payment gateway integration</li>
+        <li>Testing: Jest, Supertest, unit testing, integration testing, E2E testing</li>
+      </ul>
+
+      <h3>Ayush Kumar — Freelance Developer India</h3>
       <p>
-        With 3+ years of professional freelance experience and 50+ deployed products, Ayush Kumar is trusted by clients
-        worldwide for expert-level software development. Whether you need a web developer, app developer, AI engineer,
-        performance optimizer, tester, designer, or full-product engineer — Ayush Kumar delivers with precision, speed,
-        and exceptional quality. Available for freelance contracts, remote work, and full-time roles globally.
+        Based in India and serving clients globally, Ayush Kumar is one of the best freelance developers available for
+        hire from India. He offers premium software development services at competitive Indian freelance rates, making
+        it affordable for businesses of all sizes to access world-class technical talent. Whether you are a startup
+        looking for an MVP developer, a business needing a Shopify or WordPress site, or an enterprise requiring a
+        custom SaaS application, Ayush Kumar has the skills and experience to deliver outstanding results.
       </p>
+
+      <h3>Hire Ayush Kumar — Contact Information</h3>
+      <p>
+        Ready to hire Ayush Kumar as your freelance developer? Contact him through the contact form on this portfolio
+        website. He is available for freelance projects starting immediately and typically responds to all inquiries
+        within a few hours. You can also connect with him on GitHub at github.com/Ayush08k or on LinkedIn at
+        linkedin.com/in/ayush08k to review his work, open source contributions, and professional background.
+      </p>
+
+      <h3>Featured Projects by Ayush Kumar</h3>
+      <ul>
+        <li>Feedo — Customer feedback and satisfaction platform built with React Native, Expo SDK 54, NestJS, and MongoDB</li>
+        <li>Music Player App — Cross-platform music streaming app with React Native, Expo, and real-time audio visualization</li>
+        <li>E-Commerce Platform — Full-featured Next.js online store with Stripe, inventory management, and SEO optimization</li>
+        <li>JLM Tournaments — Online gaming tournament platform with React, Vite, and Supabase real-time features</li>
+        <li>Gurugram University Attendance Management System — Full stack attendance tracking with React, Node.js, and MongoDB</li>
+      </ul>
     </section>
   );
 }
@@ -702,9 +748,8 @@ function Footer() {
         <div className="footer-links">
           {[
             { label: "GitHub", href: "https://github.com/Ayush08k", rel: "noopener noreferrer me" },
-            { label: "LinkedIn", href: "#", rel: "noopener noreferrer me" },
-            { label: "Instagram", href: "#", rel: "noopener noreferrer" },
-            { label: "Twitter / X", href: "#", rel: "noopener noreferrer me" },
+            { label: "LinkedIn", href: "https://www.linkedin.com/in/ayush08k/", rel: "noopener noreferrer me" },
+            { label: "Instagram", href: "https://www.instagram.com/ayush08.k/", rel: "noopener noreferrer" },
           ].map(l => (
             <a key={l.label} href={l.href} target="_blank" rel={l.rel} className="footer-link" data-hover aria-label={`Ayush Kumar on ${l.label}`}>
               {l.label}
