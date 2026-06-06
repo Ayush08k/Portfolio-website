@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Cursor from "@/components/Cursor";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ayushkumar.dev";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
 const siteName = "Ayush Kumar — Portfolio";
 
 export const metadata: Metadata = {
@@ -407,7 +407,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         name: "How do I hire Ayush Kumar as a freelance developer?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "You can hire Ayush Kumar by visiting his portfolio at ayushkumar.dev and using the Contact form to describe your project, budget, and timeline. He typically responds within a few hours.",
+          text: `You can hire Ayush Kumar by visiting his portfolio at ${siteUrl.replace(/^https?:\/\//, "")} and using the Contact form to describe your project, budget, and timeline. He typically responds within a few hours.`,
         },
       },
       {
