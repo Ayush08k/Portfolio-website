@@ -151,7 +151,7 @@ export const metadata: Metadata = {
     site: "@Ayush08k",
   },
   verification: {
-    google: "google-site-verification=yFXfme7eC5RElLEdHcNtNoqG_ri6kOrMcTvrSX5yD40", // ← Replace this with the code from Google Search Console → HTML Tag method
+    google: "yFXfme7eC5RElLEdHcNtNoqG_ri6kOrMcTvrSX5yD40",
   },
 };
 
