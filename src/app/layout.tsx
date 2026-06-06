@@ -151,7 +151,7 @@ export const metadata: Metadata = {
     site: "@Ayush08k",
   },
   verification: {
-    google: "yFXfme7eC5RElLEdHcNtNoqG_ri6kOrMcTvrSX5yD40",
+    google: "ie5C0Pvhl5RFbLloNTI7fXPBaxOEwiQBB5rfFBw_qlM",
   },
 };
 
