@@ -66,8 +66,8 @@ function useTilt(selector: string) {
       if (!card) return;
 
       const r = card.getBoundingClientRect();
-      const x = ((e.clientY - r.top)  / r.height - 0.5) * 14;
-      const y = ((e.clientX - r.left) / r.width  - 0.5) * -14;
+      const x = ((e.clientY - r.top) / r.height - 0.5) * 14;
+      const y = ((e.clientX - r.left) / r.width - 0.5) * -14;
       card.style.transform = `perspective(800px) rotateX(${x}deg) rotateY(${y}deg) translateZ(6px)`;
     };
 
@@ -139,7 +139,7 @@ function Hero() {
             <div className="split-glow-container">
               {/* Pulsing Backglow */}
               <div className="split-glow-backlight" />
-              
+
               {/* Image Frame with gradient blending masks */}
               <div className="split-glow-frame">
                 <img src="/me.png" alt="Ayush Kumar — Expert Freelance Full Stack, Mobile App & AI Developer from India" className="split-glow-img" width="400" height="480" />
@@ -366,7 +366,7 @@ function Projects() {
 
 /* ─── CONTACT ────────────────────────────────────────────── */
 function Contact() {
-  const [status, setStatus] = useState<"idle"|"loading"|"success"|"error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -411,7 +411,7 @@ function Contact() {
                   <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
                   <path className="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
                 </svg>
-                 <div className="success-sparks">
+                <div className="success-sparks">
                   {[...Array(24)].map((_, i) => {
                     const angle = (i * 360) / 24;
                     const rad = (angle * Math.PI) / 180;
@@ -469,6 +469,10 @@ function Contact() {
                   <label>BEST TIME TO CONTACT</label>
                   <input name="bestTime" type="text" required placeholder="Evening (5 PM - 8 PM EST)" className="input" />
                 </div>
+              </div>
+              <div>
+                <label>WHATSAPP CONTACT NUMBER (WITH COUNTRY CODE)</label>
+                <input name="whatsapp" type="tel" required placeholder="+1 (555) 000-0000" className="input" />
               </div>
               <div>
                 <label>YOUR MESSAGE</label>
@@ -593,15 +597,15 @@ function ClientReviews() {
           <button onClick={prevSlide} className="slider-btn prev" aria-label="Previous review" data-hover>
             <ChevronLeft size={24} />
           </button>
-          
+
           <div className="slider-container">
-            <div 
-              className="slider-track" 
+            <div
+              className="slider-track"
               style={{ transform: `translate3d(-${currentIndex * (100 / visibleCards)}%, 0, 0)` }}
             >
               {reviews.map((r, i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className="slider-slide"
                   style={{ flex: `0 0 ${100 / visibleCards}%` }}
                 >

@@ -10,7 +10,7 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
-    
+
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
@@ -33,38 +33,38 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section container" style={{ textAlign: "center", maxWidth: "680px" }}>
-      <p style={{ 
-        color: "var(--accent-cyan)", 
-        fontFamily: "'Fira Code', monospace", 
+      <p style={{
+        color: "var(--accent-cyan)",
+        fontFamily: "'Fira Code', monospace",
         fontSize: "14px",
         marginBottom: "16px",
         letterSpacing: "0.05em"
       }}>
         ~ contact_me
       </p>
-      
-      <h2 style={{ 
-        fontSize: "clamp(36px, 5vw, 56px)", 
+
+      <h2 style={{
+        fontSize: "clamp(36px, 5vw, 56px)",
         marginBottom: "20px",
         fontWeight: 800,
         letterSpacing: "-0.03em"
       }}>
         Get In Touch
       </h2>
-      
-      <p style={{ 
-        marginBottom: "45px", 
-        color: "var(--text-secondary)", 
-        fontSize: "16px", 
-        lineHeight: "1.7" 
+
+      <p style={{
+        marginBottom: "45px",
+        color: "var(--text-secondary)",
+        fontSize: "16px",
+        lineHeight: "1.7"
       }}>
         Ready to take your digital product to the next level? Drop your project specs below. My inbox is always active for select high-end freelance opportunities and team roles. Let's build something brilliant together!
       </p>
 
       {status === "success" ? (
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }} 
-          animate={{ opacity: 1, scale: 1 }} 
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           className="glass-card"
           style={{
             border: "1px solid rgba(16, 185, 129, 0.3)",
@@ -83,50 +83,50 @@ export default function Contact() {
       ) : (
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem", textAlign: "left" }}>
           <div className="contact-form-row">
-            <input 
-              name="name" 
-              type="text" 
-              placeholder="Your Name" 
-              required 
+            <input
+              name="name"
+              type="text"
+              placeholder="Your Name"
+              required
               className="contact-input"
             />
-            <input 
-              name="email" 
-              type="email" 
-              placeholder="Your Email Address" 
-              required 
+            <input
+              name="email"
+              type="email"
+              placeholder="Your Email Address"
+              required
               className="contact-input"
             />
           </div>
           <div className="contact-form-row">
-            <input 
-              name="location" 
-              type="text" 
-              placeholder="Your Location (e.g. SF, CA)" 
+            <input
+              name="location"
+              type="text"
+              placeholder="Your Location (e.g. SF, CA)"
               className="contact-input"
             />
-            <input 
-              name="bestTime" 
-              type="text" 
-              placeholder="Best Time to Contact" 
+            <input
+              name="bestTime"
+              type="text"
+              placeholder="Best Time to Contact"
               className="contact-input"
             />
           </div>
-          <textarea 
-            name="message" 
-            placeholder="Outline your project goals, timelines, and budget..." 
-            rows={5} 
-            required 
+          <textarea
+            name="message"
+            placeholder="Outline your project goals, timelines, and budget..."
+            rows={5}
+            required
             className="contact-input contact-textarea"
           ></textarea>
-          
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             disabled={status === "loading"}
-            className="btn-primary" 
-            style={{ 
-              alignSelf: "center", 
-              marginTop: "20px", 
+            className="btn-primary"
+            style={{
+              alignSelf: "center",
+              marginTop: "20px",
               padding: "1rem 2.5rem",
               gap: "8px"
             }}
@@ -140,18 +140,18 @@ export default function Contact() {
               </>
             )}
           </button>
-          
+
           {status === "error" && (
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              style={{ 
-                display: "flex", 
-                alignItems: "center", 
-                justifyContent: "center", 
-                gap: "8px", 
-                color: "#f87171", 
-                fontSize: "14px", 
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                color: "#f87171",
+                fontSize: "14px",
                 marginTop: "15px",
                 width: "100%"
               }}
