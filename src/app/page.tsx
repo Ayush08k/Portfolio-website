@@ -471,8 +471,8 @@ function Contact() {
                 </div>
               </div>
               <div>
-                <label>WHATSAPP CONTACT NUMBER (WITH COUNTRY CODE)</label>
-                <input name="whatsapp" type="tel" required placeholder="+1 (555) 000-0000" className="input" />
+                <label>WHATSAPP NUMBER</label>
+                <input name="whatsapp" type="tel" required placeholder="Enter WhatsApp Number" className="input" />
               </div>
               <div>
                 <label>YOUR MESSAGE</label>
@@ -653,7 +653,10 @@ function SeoBlock() {
       aria-label="About Ayush Kumar — Freelance Full Stack Developer"
       style={{ position: "absolute", width: "1px", height: "1px", overflow: "hidden", opacity: 0, pointerEvents: "none", clip: "rect(0,0,0,0)", whiteSpace: "nowrap" }}
     >
-      <h2>Ayush Kumar — Expert Freelance Full Stack Developer & Mobile App Developer for Hire</h2>
+      <h2>Ayush Kumar — Best Freelancer, Freelance Full Stack Dev & Mobile App Developer Near Me</h2>
+      <p>
+        Welcome to the ultimate freelancer site of Ayush Kumar. If you are searching online to hire a freelance developer near me, or looking to hire the best full stack dev for your business, Ayush is your go-to expert. As one of the best freelancer resources online, Ayush has 3+ years of experience delivering high-end custom web and mobile solutions worldwide. Hire freelance developer services today for fast delivery, top-tier quality, and affordable rates.
+      </p>
       <p>
         Ayush Kumar is a highly skilled freelance full stack developer and mobile app developer based in India, available
         for remote work with clients across the USA, UK, Canada, Australia, Europe, and worldwide. With 3+ years of

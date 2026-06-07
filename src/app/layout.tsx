@@ -8,13 +8,22 @@ const siteName = "Ayush Kumar — Portfolio";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Ayush Kumar | Freelance Full Stack & Mobile App Developer — Hire Expert React & Next.js Dev",
-    template: "%s | Ayush Kumar — Full Stack Developer",
+    default: "Ayush Kumar | Best Freelance Full Stack Dev & Mobile App Developer for Hire",
+    template: "%s | Ayush Kumar — Best Freelance Full Stack Dev",
   },
   description:
-    "Hire Ayush Kumar — expert freelance Full Stack Developer, React Native Mobile App Developer & AI integration specialist from India. 3+ years, 50+ products shipped. Available for web apps, mobile apps, SaaS, e-commerce, and AI-powered projects. Fast delivery, competitive rates.",
+    "Looking to hire the best freelance full stack dev? Ayush Kumar is a top-rated remote freelancer specializing in high-performance web apps, React Native mobile apps, and AI integrations. Over 3 years of experience shipping 50+ products. Hire a top freelance developer near me today for competitive rates and fast delivery.",
   keywords: [
     // High-intent hire queries (most valuable for conversions)
+    "freelance near me",
+    "hire freelance",
+    "freelancer site",
+    "best freelancer",
+    "best full stack dev",
+    "best full stack developer",
+    "best full satack dev",
+    "hire ayush",
+    "ayush freelancer",
     "hire freelance developer India",
     "hire full stack developer",
     "hire react developer",
@@ -29,6 +38,7 @@ export const metadata: Metadata = {
     "affordable freelance developer",
     "remote developer for hire",
     // Name-based brand queries
+    "Ayush",
     "Ayush Kumar",
     "Ayush Kumar developer",
     "Ayush Kumar portfolio",
@@ -120,9 +130,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Ayush Kumar | Hire Expert Freelance Full Stack & Mobile App Developer",
+    title: "Ayush Kumar | Best Freelance Full Stack Dev & Mobile App Developer for Hire",
     description:
-      "Need a reliable developer? Ayush Kumar is an expert freelance Full Stack & React Native developer from India. React, Next.js, Node.js, TypeScript, AI integrations. 3+ years, 50+ apps shipped. Fast, affordable, and professional.",
+      "Looking to hire the best freelance full stack dev? Ayush Kumar is a top-rated remote freelancer specializing in high-performance web apps, React Native mobile apps, and AI integrations. 3+ years, 50+ apps shipped.",
     url: siteUrl,
     siteName,
     images: [
@@ -130,7 +140,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/me.png`,
         width: 1200,
         height: 630,
-        alt: "Ayush Kumar — Expert Freelance Full Stack & Mobile App Developer from India",
+        alt: "Ayush Kumar — Best Freelance Full Stack Dev & Mobile App Developer for Hire",
         type: "image/png",
       },
     ],
@@ -143,9 +153,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ayush Kumar | Freelance Full Stack & Mobile App Developer",
+    title: "Ayush Kumar | Best Freelance Full Stack Dev & Mobile App Developer for Hire",
     description:
-      "Expert freelance developer from India — React, Next.js, React Native, NestJS, Node.js, TypeScript. 3+ years, 50+ apps shipped. Available for hire!",
+      "Looking to hire the best freelance full stack dev? Ayush Kumar is a top-rated remote freelancer specializing in high-performance web apps, React Native mobile apps, and AI integrations. 3+ years, 50+ apps shipped.",
     images: [`${siteUrl}/me.png`],
     creator: "@Ayush08k",
     site: "@Ayush08k",

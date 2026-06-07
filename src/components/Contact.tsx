@@ -99,19 +99,28 @@ export default function Contact() {
             />
           </div>
           <div className="contact-form-row">
-            <input
-              name="location"
-              type="text"
-              placeholder="Your Location (e.g. SF, CA)"
+            <input 
+              name="country" 
+              type="text" 
+              placeholder="Your Country" 
+              required 
               className="contact-input"
             />
-            <input
-              name="bestTime"
-              type="text"
-              placeholder="Best Time to Contact"
+            <input 
+              name="bestTime" 
+              type="text" 
+              placeholder="Best Time to Contact" 
+              required 
               className="contact-input"
             />
           </div>
+          <input 
+            name="whatsapp" 
+            type="tel" 
+            placeholder="WhatsApp Number" 
+            required 
+            className="contact-input"
+          />
           <textarea
             name="message"
             placeholder="Outline your project goals, timelines, and budget..."
