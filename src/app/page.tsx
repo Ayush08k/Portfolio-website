@@ -142,7 +142,7 @@ function Hero() {
 
               {/* Image Frame with gradient blending masks */}
               <div className="split-glow-frame">
-                <img src="/me.png" alt="Ayush Kumar — Expert Freelance Full Stack, Mobile App & AI Developer from India" className="split-glow-img" width="400" height="480" />
+                <img src="/myprofile.png" alt="Ayush Kumar — Expert Freelance Full Stack, Mobile App & AI Developer from India" className="split-glow-img" width="400" height="480" />
                 <div className="split-glow-overlay" />
               </div>
             </div>
