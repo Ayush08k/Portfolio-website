@@ -860,3 +860,519 @@ footer {
   padding: 10px 24px !important;
   font-size: 13.5px !important;
 }
+
+/* ─── SCOPE & PRICING ESTIMATOR ──────────────────────────── */
+.estimator-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 40px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.estimator-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.estimator-step {
+  padding: 32px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+}
+
+.step-header {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--violet);
+  background: rgba(124, 58, 237, 0.08);
+  border: 1.5px solid rgba(124, 58, 237, 0.25);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.step-desc {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Project Types cards */
+.type-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.type-card {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  cursor: none;
+  text-align: left;
+  transition: var(--transition);
+  outline: none;
+  overflow: hidden;
+}
+
+.type-card-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--violet), var(--blue));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.type-card.active .type-card-accent {
+  transform: scaleX(1);
+}
+
+.type-card.active {
+  background: rgba(124, 58, 237, 0.04);
+  border-color: rgba(124, 58, 237, 0.4);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.08);
+}
+
+.type-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.type-card.active .type-icon-wrap {
+  background: rgba(124, 58, 237, 0.15);
+  color: var(--white);
+}
+
+.type-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+
+.type-cost {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+
+.type-info {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Slider Box */
+.slider-box {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.slider-counter {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.estimator-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+  cursor: none;
+}
+
+.estimator-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--violet);
+  border: 2px solid var(--white);
+  box-shadow: 0 0 10px var(--violet);
+  cursor: none;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.estimator-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.slider-helper {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Addons */
+.addons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.addon-card {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  cursor: none;
+  transition: var(--transition);
+  outline: none;
+}
+
+.addon-card.active {
+  background: rgba(16, 185, 129, 0.03);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.05);
+}
+
+.addon-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: var(--transition);
+}
+
+.addon-card.active .addon-check {
+  border-color: var(--emerald);
+}
+
+.addon-check-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--emerald);
+  transform: scale(0);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.addon-check-inner.checked {
+  transform: scale(1);
+}
+
+.addon-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.addon-card.active .addon-icon-wrap {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--white);
+}
+
+.addon-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.addon-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.addon-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--emerald);
+}
+
+.addon-desc {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Summary Sticky Card */
+.estimator-summary-wrap {
+  position: sticky;
+  top: 96px;
+  z-index: 10;
+}
+
+.summary-sticky-card {
+  padding: 32px;
+  background: rgba(124, 58, 237, 0.02);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(124, 58, 237, 0.05);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.summary-calc-icon {
+  color: var(--violet);
+}
+
+.summary-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.summary-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+  margin: 0 -32px 20px;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.summary-line.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.summary-line.sub-line {
+  padding-left: 12px;
+  font-size: 11.5px;
+  color: rgba(148, 163, 184, 0.7);
+  margin-top: -4px;
+}
+
+.result-price-box {
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px dashed rgba(124, 58, 237, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  margin: 10px 0 20px;
+}
+
+.result-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--violet);
+  margin-bottom: 4px;
+}
+
+.result-value {
+  font-size: 26px;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.result-currency {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.result-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.result-meta-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--glass-border);
+}
+
+.result-meta-card svg {
+  flex-shrink: 0;
+}
+
+.text-violet {
+  color: var(--violet);
+}
+
+.text-emerald {
+  color: var(--emerald);
+}
+
+.meta-lbl {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.meta-val {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.start-project-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 20px;
+  cursor: none;
+}
+
+.pricing-disclaimer {
+  font-size: 10px;
+  color: rgba(148, 163, 184, 0.5);
+  line-height: 1.4;
+  margin-top: 16px;
+  text-align: center;
+}
+
+@media (max-width: 992px) {
+  .estimator-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .estimator-summary-wrap {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .type-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .addons-grid {
+    grid-template-columns: 1fr;
+  }
+  .estimator-step {
+    padding: 20px;
+  }
+  .summary-sticky-card {
+    padding: 20px;
+  }
+  .summary-divider {
+    margin: 0 -20px 20px;
+  }
+}
+
+/* Locked summary inside contact form */
+.estimator-locked-summary {
+  padding: 24px;
+  background: rgba(124, 58, 237, 0.03);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 18px;
+  margin-bottom: 24px;
+}
+
+.locked-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.locked-field-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.locked-field-value {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+@media (max-width: 576px) {
+  .locked-fields-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+

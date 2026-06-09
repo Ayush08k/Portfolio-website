@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { ArrowRight, Code2, ExternalLink, Send, CheckCircle, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import PricingEstimator, { EstimatorData } from "@/components/PricingEstimator";
 
 /* ─── Typewriter hook ───────────────────────────────────── */
 function useTypewriter(words: string[], speed = 70, pause = 1800) {
@@ -365,8 +366,9 @@ function Projects() {
 }
 
 /* ─── CONTACT ────────────────────────────────────────────── */
-function Contact() {
+function Contact({ estimatorData }: { estimatorData: EstimatorData }) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -381,6 +383,7 @@ function Contact() {
       });
       if (res.ok) {
         form.reset();
+        setMessage("");
         setStatus("success");
       } else {
         setStatus("error");
@@ -474,9 +477,60 @@ function Contact() {
                 <label>WHATSAPP NUMBER</label>
                 <input name="whatsapp" type="tel" required placeholder="Enter WhatsApp Number" className="input" />
               </div>
+              
+              {estimatorData && estimatorData.hasEstimate && (
+                <div className="estimator-locked-summary glass">
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+                    <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "var(--violet)", boxShadow: "0 0 8px var(--violet)" }} />
+                    <span style={{ fontSize: "11px", fontFamily: "JetBrains Mono", fontWeight: "700", color: "var(--violet)", letterSpacing: "0.05em" }}>ESTIMATOR DETAILS (LOCKED)</span>
+                  </div>
+                  
+                  <div className="locked-fields-grid">
+                    <div>
+                      <span className="locked-field-label">PROJECT TYPE</span>
+                      <span className="locked-field-value">{estimatorData.projectType}</span>
+                    </div>
+                    <div>
+                      <span className="locked-field-label">TOTAL PAGES / SCREENS</span>
+                      <span className="locked-field-value">{estimatorData.screens} screens</span>
+                    </div>
+                    <div>
+                      <span className="locked-field-label">ESTIMATED TIMELINE</span>
+                      <span className="locked-field-value">{estimatorData.timeline}</span>
+                    </div>
+                    <div>
+                      <span className="locked-field-label">ESTIMATED BUDGET</span>
+                      <span className="locked-field-value gradient-text" style={{ fontWeight: "800" }}>{estimatorData.budget}</span>
+                    </div>
+                  </div>
+
+                  {estimatorData.addOns !== "None" && (
+                    <div style={{ marginTop: "16px", borderTop: "1px solid var(--glass-border)", paddingTop: "12px" }}>
+                      <span className="locked-field-label">SELECTED ADD-ONS</span>
+                      <span className="locked-field-value" style={{ fontSize: "13px" }}>{estimatorData.addOns}</span>
+                    </div>
+                  )}
+
+                  {/* Hidden inputs to pass data via formData on submit */}
+                  <input type="hidden" name="estimatorProjectType" value={estimatorData.projectType} />
+                  <input type="hidden" name="estimatorScreens" value={estimatorData.screens} />
+                  <input type="hidden" name="estimatorAddOns" value={estimatorData.addOns} />
+                  <input type="hidden" name="estimatorBudget" value={estimatorData.budget} />
+                  <input type="hidden" name="estimatorTimeline" value={estimatorData.timeline} />
+                </div>
+              )}
+
               <div>
                 <label>YOUR MESSAGE</label>
-                <textarea name="message" required rows={5} placeholder="Describe your project, budget, and timeline..." className="textarea" />
+                <textarea 
+                  name="message" 
+                  required 
+                  rows={5} 
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Describe your project, budget, and timeline..." 
+                  className="textarea" 
+                />
               </div>
               <button type="submit" className="btn-primary" data-hover disabled={status === "loading"}
                 style={{ alignSelf: "flex-start" }}>
@@ -786,6 +840,23 @@ export default function Home() {
   useSkillBars();
   useTilt(".bento-card, .project-card, .reviews-card");
 
+  const [estimatorData, setEstimatorData] = useState<EstimatorData>({
+    hasEstimate: false,
+    projectType: "",
+    screens: 0,
+    addOns: "",
+    budget: "",
+    timeline: "",
+  });
+
+  const handleProceedEstimate = (data: EstimatorData) => {
+    setEstimatorData(data);
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -800,7 +871,9 @@ export default function Home() {
         <SectionDivider />
         <ClientReviews />
         <SectionDivider />
-        <Contact />
+        <PricingEstimator onProceed={handleProceedEstimate} />
+        <SectionDivider />
+        <Contact estimatorData={estimatorData} />
       </main>
       <SeoBlock />
       <Footer />
