@@ -837,11 +837,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       skills:
         "React, Next.js, React Native, Node.js, TypeScript, NestJS, MongoDB, PostgreSQL, AI/ML, UI/UX, Tailwind CSS, Framer Motion",
     },
-    alumniOf: {
-      "@type": "EducationalOrganization",
-      name: "Gurugram University",
-      address: { "@type": "PostalAddress", addressCountry: "IN" },
-    },
+    alumniOf: [
+      {
+        "@type": "EducationalOrganization",
+        name: "Maharshi Dayanand University",
+        address: { "@type": "PostalAddress", addressCountry: "IN" },
+      },
+      {
+        "@type": "EducationalOrganization",
+        name: "Gurugram University",
+        address: { "@type": "PostalAddress", addressCountry: "IN" },
+      },
+    ],
     worksFor: {
       "@type": "Organization",
       name: "Self-Employed / Freelance",

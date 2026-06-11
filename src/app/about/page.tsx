@@ -9,37 +9,36 @@ export default function AboutPage() {
   const timelineData = [
     {
       year: "2024 - Present",
-      title: "High-End Full-Stack Freelancer",
-      institution: "Remote / Global",
-      description: "Shipped over 50+ bespoke web applications, mobile platforms, and AI-driven client dashboards. Specialized in Next.js speed optimizations, offline React Native systems, and clean MongoDB/PostgreSQL integrations.",
+      title: "MCA Pursuing & Freelancing",
+      institution: "Gurugram University",
+      description: "Pursuing a Master of Computer Applications (MCA) at Gurugram University while running a freelance practice, designing and developing custom web applications and mobile platforms for international clients.",
       icon: <Briefcase size={18} />,
       color: "var(--accent-cyan)",
     },
     {
-      year: "2022 - 2024",
-      title: "Academic Focus & Open Source",
-      institution: "Gurugram University",
-      description: "Completed B.Tech studies at Gurugram University. Maintained local dev structures, launched 10+ open-source components, and started freelancing for agencies in web customization.",
-      icon: <BookOpen size={18} />,
+      year: "2023",
+      title: "Skills Development",
+      institution: "Self-Guided / Projects",
+      description: "Dedicated to mastering advanced web development, expanding technical capabilities, learning modern framework architectures, and diving deeper into full-stack technologies.",
+      icon: <Code2 size={18} />,
       color: "#A855F7",
     },
     {
-      year: "2020 - 2022",
-      title: "Self-Taught Full Stack Foundations",
-      institution: "Personal Lab",
-      description: "Mastered fundamental concepts in JavaScript, system architecture, database optimization, and responsive design systems. Built initial client sites for local commerce.",
-      icon: <Code2 size={18} />,
+      year: "2020 - 2023",
+      title: "BCA from Maharshi Dayanand University",
+      institution: "Maharshi Dayanand University",
+      description: "Completed Bachelor of Computer Applications (BCA) degree with a focus on core software development principles, databases, data structures, and programming paradigms.",
+      icon: <BookOpen size={18} />,
       color: "#3B82F6",
     },
   ];
 
-  // Developer Setup Data
   const setupData = {
     hardware: [
-      { label: "Processor", value: "AMD Ryzen 7 5800H (8 Cores, 16 Threads)" },
-      { label: "Memory", value: "32GB DDR4 Dual Channel RAM" },
-      { label: "Storage", value: "1TB NVMe PCIe M.2 SSD" },
-      { label: "Displays", value: "Dual Monitor Setup (27\" 144Hz + 24\" Vertical IPS)" },
+      { label: "Processor", value: "AMD Ryzen 5 5500U (6 Cores, 12 Threads)" },
+      { label: "Memory", value: "16GB DDR4 RAM" },
+      { label: "Storage", value: "512GB NVMe PCIe M.2 SSD" },
+      { label: "Display", value: "Single 24\" FHD IPS Monitor (75Hz)" },
     ],
     software: [
       { label: "Operating System", value: "Windows 11 Home + WSL 2 (Ubuntu 22.04 LTS)" },
@@ -121,7 +120,7 @@ export default function AboutPage() {
         </div>
 
         <p className="about-subtitle">
-          An engineering journey combining formal computer science education at Gurugram University with a passionate freelance history of shipping 50+ custom applications.
+          A dedicated software development journey bridging rigorous academic foundations at Gurugram University (MCA) and Maharshi Dayanand University (BCA) with over 3 years of active, hands-on freelance experience. Passionate about architecting scalable systems, building clean user interfaces, and optimizing application performance, I have successfully shipped over 50+ web and mobile solutions to clients globally.
         </p>
       </motion.header>
 
