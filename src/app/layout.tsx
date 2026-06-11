@@ -1,18 +1,24 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Cursor from "@/components/Cursor";
+import Navbar from "@/components/Navbar";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
 const siteName = "Ayush Kumar — Portfolio";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
   title: {
     default: "Ayush Kumar | Best Freelance Full Stack Dev & Mobile App Developer for Hire",
     template: "%s | Ayush Kumar — Best Freelance Full Stack Dev",
   },
   description:
-    "Looking to hire the best freelance full stack dev? Ayush Kumar is a top-rated remote freelancer specializing in high-performance web apps, React Native mobile apps, and AI integrations. Over 3 years of experience shipping 50+ products. Hire a top freelance developer near me today for competitive rates and fast delivery.",
+    "Ayush Kumar — Top Freelance Full Stack & Mobile App Developer. Specializing in high-performance web applications, React Native mobile apps, and AI integrations. Hire me today for custom, scalable software.",
   keywords: [
     // High-intent hire queries (most valuable for conversions)
     "freelance near me",
@@ -436,7 +442,261 @@ export const metadata: Metadata = {
     "express app development freelance price",
     "remote developer rates estimator",
     "estimate project timeline and price",
-    "project cost estimator for startups"
+    "project cost estimator for startups",
+
+    // --- Cheap & Budget-Friendly Developer Keywords ---
+    "cheap web developer",
+    "cheap app developer",
+    "cheap freelance coder",
+    "cheap full stack developer",
+    "cheap nextjs developer",
+    "cheap react native developer",
+    "cheap mobile app development",
+    "cheap website builder developer",
+    "cheap software engineer freelance",
+    "low cost web developer",
+    "low cost app developer",
+    "low cost freelance programmer",
+    "low cost full stack dev",
+    "low cost mobile app development",
+    "affordable web developer near me",
+    "affordable app developer near me",
+    "affordable freelance coder",
+    "affordable custom software development",
+    "budget friendly web developer",
+    "budget friendly app developer",
+    "budget web development services",
+    "budget mobile app development",
+    "value for money web developer",
+    "value for money app developer",
+    "cheap remote developer",
+    "cheap developer india",
+    "cheap full stack developer india",
+    "cheap web developer for startups",
+    "cheap app developer for startups",
+    "cheap mvp developer",
+    "cheap software development company",
+    "cheap freelance software engineer",
+    "cheap nodejs developer",
+    "cheap react developer",
+    "affordable nextjs developer freelance",
+    "affordable react native developer freelance",
+    "low price website developer",
+    "low price mobile app developer",
+    "inexpensive web developer",
+    "inexpensive app developer",
+    "best cheap web developer",
+    "best cheap app developer",
+    "cheap frontend developer",
+    "cheap backend developer",
+    "cheap e-commerce developer",
+    "cheap shopify developer",
+    "affordable startup mvp builder",
+    "hire cheap programmer online",
+    "hire cheap web dev remote",
+    "hire cheap mobile app coder",
+    "cheap freelance programmer rates",
+    "affordable remote full stack developer",
+
+    // --- Short & General Freelance Search Tags ---
+    "freelance",
+    "freelancer",
+    "freelancing",
+    "best freelance",
+    "best freelancer",
+    "cheap freelance",
+    "cheap freelancer",
+    "hire freelance",
+    "hire freelancer",
+    "find freelance",
+    "find freelancer",
+    "top freelance",
+    "top freelancer",
+    "pro freelance",
+    "pro freelancer",
+    "remote freelance",
+    "remote freelancer",
+    "independent freelance",
+    "independent freelancer",
+    "freelance dev",
+    "freelance coder",
+    "freelance programmer",
+    "freelancer dev",
+    "freelancer coder",
+    "freelancer programmer",
+    "best freelance dev",
+    "best freelance coder",
+    "best freelance programmer",
+    "cheap freelance dev",
+    "cheap freelance coder",
+    "cheap freelance programmer",
+    "affordable freelance",
+    "affordable freelancer",
+    "affordable freelance dev",
+    "affordable freelance coder",
+    "affordable freelance programmer",
+    "hire freelance dev",
+    "hire freelance coder",
+    "hire freelance programmer",
+    "hire remote freelance",
+    "hire remote freelancer",
+    "freelancer for hire",
+    "freelancer site",
+    "freelancer website",
+    "freelancer online",
+    "local freelancer",
+    "freelance developer near me",
+    "hire top freelancer",
+    "freelance software dev",
+    "freelancer app developer",
+    "freelancer web developer",
+    "best freelance service",
+
+    // --- Services Page Specific Keywords ---
+    "full stack development services",
+    "web development services india",
+    "mobile app development services",
+    "custom software development services",
+    "react development services",
+    "next.js development services",
+    "ui ux design and development services",
+    "api development and integration services",
+    "saas application development services",
+    "ai powered web development services",
+    "e-commerce development services india",
+    "startup web development services",
+    "freelance development services for businesses",
+    "enterprise software development freelancer",
+    "website redesign services",
+    "website speed optimization services",
+    "landing page design and development services",
+    "web app development company alternative",
+    "best development services for small business",
+    "full service freelance web developer",
+
+    // --- Blog & Technical Content Keywords ---
+    "react native development blog",
+    "next.js tutorials for beginners",
+    "full stack developer blog 2025",
+    "web development tips india",
+    "javascript best practices blog",
+    "typescript developer blog",
+    "nodejs rest api tutorial",
+    "freelance developer journey blog",
+    "how to build a saas app tutorial",
+    "react native vs flutter comparison",
+    "nextjs vs gatsby comparison",
+    "mern stack tutorial 2025",
+    "expo react native tutorial 2025",
+    "ai integration tutorial openai",
+    "build a portfolio site nextjs tutorial",
+    "best tech stack for startups 2025",
+    "freelance tips for developers india",
+    "how to hire a freelance developer guide",
+    "web performance optimization tutorial",
+    "build fullstack app with nextjs nodejs",
+
+    // --- Case Study & Portfolio Keywords ---
+    "freelance developer case study",
+    "react native app case study",
+    "nextjs web app case study",
+    "saas dashboard case study portfolio",
+    "e-commerce project case study",
+    "ai chatbot project showcase",
+    "mobile app portfolio case study",
+    "real world projects developer portfolio",
+    "startup app development case study",
+    "full stack developer project examples",
+    "live web app project showcase",
+    "developer case study portfolio 2025",
+    "ayush kumar project case study",
+    "react native project portfolio 2025",
+    "nextjs project showcase portfolio",
+    "custom ai integration project example",
+    "stripe payment integration case study",
+    "cms dashboard development case study",
+    "portfolio with live project demos",
+    "full stack web app case study india",
+
+    // --- Pricing Estimator & Indian Market Keywords ---
+    "web development cost in india 2025",
+    "how much does a freelance developer charge in india",
+    "mobile app development cost india rupees",
+    "freelance developer rates india inr",
+    "affordable app development for indian startups",
+    "web development budget calculator india",
+    "software project cost estimator india",
+    "negotiate freelance developer price india",
+    "indian startup app development cost",
+    "best affordable freelance developer for india",
+    "development cost calculator for indian businesses",
+    "custom web app price india",
+    "hire developer at inr rates",
+    "freelance developer price negotiation india",
+    "low cost app development india 2025",
+
+    // --- About / Personal Brand Keywords ---
+    "who is ayush kumar developer",
+    "ayush kumar freelance web developer india",
+    "ayush kumar react native developer",
+    "ayush kumar next.js expert",
+    "best indian freelance developer 2025",
+    "top rated freelance developer india portfolio",
+    "experienced full stack developer freelance",
+    "reliable freelance developer india",
+    "passionate software engineer portfolio",
+    "professional freelance developer about page",
+    "hire experienced react developer india",
+    "hire professional mobile app developer india",
+
+    // --- 2025 Trending Tech & Niche Keywords ---
+    "vercel deployment nextjs developer",
+    "supabase postgres freelance developer",
+    "pocketbase developer freelance",
+    "trpc nextjs developer for hire",
+    "bun runtime developer freelance",
+    "shadcn ui developer for hire",
+    "framer motion animation developer",
+    "threejs 3d web developer freelance",
+    "webrtc developer freelance india",
+    "websocket real time app developer",
+    "rag pipeline developer freelance",
+    "langchain developer for hire",
+    "pinecone vector database developer",
+    "clerk auth integration developer",
+    "next-auth developer freelance india",
+
+    // --- Personal Brand Name Variations (High-Intent Identity Searches) ---
+    "ayush",
+    "ayush freelance",
+    "freelance ayush",
+    "ayush dev",
+    "ayush developer",
+    "ayush coder",
+    "ayush programmer",
+    "ayush web developer",
+    "ayush app developer",
+    "ayush full stack",
+    "ayush kumar dev",
+    "ayush kumar coder",
+    "ayush kumar portfolio 2025",
+    "ayush kumar web dev",
+    "ayush kumar app dev",
+    "ayush kumar mobile dev",
+    "ayush kumar software engineer",
+    "ayush kumar react",
+    "ayush kumar nextjs",
+    "ayush kumar node",
+    "ayush kumar typescript",
+    "ayush kumar expo",
+    "ayush kumar mern",
+    "ayush08k github",
+    "ayush08k portfolio",
+    "freelance ayush kumar",
+    "hire ayush kumar",
+    "hire ayush",
+    "ayush freelance developer",
+    "ayush freelancer india"
   ],
   alternates: {
     canonical: "/",
@@ -462,7 +722,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ayush Kumar | Best Freelance Full Stack Dev & Mobile App Developer for Hire",
     description:
-      "Looking to hire the best freelance full stack dev? Ayush Kumar is a top-rated remote freelancer specializing in high-performance web apps, React Native mobile apps, and AI integrations. 3+ years, 50+ apps shipped.",
+      "Ayush Kumar — Top Freelance Full Stack & Mobile App Developer. Specializing in high-performance web applications, React Native mobile apps, and AI integrations. Hire me today for custom, scalable software.",
     url: siteUrl,
     siteName,
     images: [
@@ -485,7 +745,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Ayush Kumar | Best Freelance Full Stack Dev & Mobile App Developer for Hire",
     description:
-      "Looking to hire the best freelance full stack dev? Ayush Kumar is a top-rated remote freelancer specializing in high-performance web apps, React Native mobile apps, and AI integrations. 3+ years, 50+ apps shipped.",
+      "Ayush Kumar — Top Freelance Full Stack & Mobile App Developer. Specializing in high-performance web applications, React Native mobile apps, and AI integrations. Hire me today for custom, scalable software.",
     images: [`${siteUrl}/myprofile.png`],
     creator: "@Ayush08k",
     site: "@Ayush08k",
@@ -527,6 +787,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "https://github.com/Ayush08k",
       "https://www.linkedin.com/in/ayush08k/",
       "https://www.instagram.com/ayush08.k/",
+      "https://x.com/aayush08k",
     ],
     knowsAbout: [
       "Full Stack Web Development",
@@ -600,7 +861,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "Expert freelance development services by Ayush Kumar — Full Stack Web Development, Mobile App Development (iOS & Android via React Native), AI/ML Integration, UI/UX Design, SEO Optimization, Performance Tuning, E-Commerce (Shopify/Next.js), WordPress, and SaaS Development. Competitive pricing and fast delivery worldwide.",
     url: siteUrl,
     image: `${siteUrl}/myprofile.png`,
-    logo: `${siteUrl}/logofinal.png`,
+    logo: `${siteUrl}/logo.png`,
     founder: { "@id": `${siteUrl}/#person` },
     areaServed: "Worldwide",
     availableLanguage: ["English", "Hindi"],
@@ -687,16 +948,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     },
   };
 
-  // ─── Schema: WebSite (sitelinks search box) ───────────────────────────
+  // ─── Schema: Organization (site logo structured data) ──────────────────
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
+    name: "Ayush Kumar",
+    alternateName: "Ayush Kumar Portfolio",
+    url: siteUrl,
+    logo: `${siteUrl}/logo.png`,
+    image: `${siteUrl}/logo.png`,
+    description: "Ayush Kumar — Top Freelance Full Stack & Mobile App Developer. Building custom, high-performance web and mobile apps.",
+    sameAs: [
+      "https://github.com/Ayush08k",
+      "https://www.linkedin.com/in/ayush08k/",
+      "https://www.instagram.com/ayush08.k/",
+      "https://x.com/aayush08k"
+    ]
+  };
+
+  // ─── Schema: WebSite (sitelinks search box & site name) ──────────────────
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${siteUrl}/#website`,
     url: siteUrl,
-    name: siteName,
-    alternateName: "Ayush Kumar Portfolio",
+    name: "Ayush Kumar",
+    alternateName: ["Ayush Kumar Portfolio", "Freelance Ayush"],
     description:
-      "Official portfolio of Ayush Kumar — Expert Freelance Full Stack & Mobile App Developer from India. Available for hire.",
+      "Ayush Kumar — Top Freelance Full Stack & Mobile App Developer. Specializing in high-performance web applications, React Native mobile apps, and AI integrations. Hire me today for custom, scalable software.",
     author: { "@id": `${siteUrl}/#person` },
     inLanguage: "en-US",
     copyrightYear: new Date().getFullYear(),
@@ -771,7 +1051,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         name: "How much does Ayush Kumar charge for freelance development?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Ayush Kumar offers competitive freelance rates starting from $20/hr, with project-based pricing also available. Landing pages start at $1,000, full stack web apps from $2,500, mobile apps from $4,000, e-commerce from $3,000, and AI integrations from $4,000. Try our new interactive Project Pricing & Scope Estimator on the site for a dynamic quote.",
+          text: "Ayush Kumar offers competitive freelance rates starting from $20/hr, with project-based pricing also available. Landing pages start at $600, full stack web apps from $1,000, mobile apps from $2,000, e-commerce from $1,500, and AI integrations from $1,600. Try our new interactive Project Pricing & Scope Estimator on the site for a dynamic quote.",
         },
       },
       {
@@ -900,6 +1180,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <script
           type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
         />
         <script
@@ -921,6 +1205,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <Cursor />
+        <Navbar />
         {children}
       </body>
     </html>

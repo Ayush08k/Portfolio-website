@@ -5,11 +5,10 @@ export default function Footer() {
         Designed & Built by Freelancer Ayush
       </p>
       <div style={{ display: "flex", gap: "20px", justifyContent: "center", marginBottom: "20px" }}>
-        {/* Social Icons Placeholder */}
-        <span>GitHub</span>
-        <span>Instagram</span>
-        <span>Twitter</span>
-        <span>LinkedIn</span>
+        <a href="https://github.com/Ayush08k" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>GitHub</a>
+        <a href="https://www.instagram.com/ayush08.k/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Instagram</a>
+        <a href="https://x.com/aayush08k" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>X</a>
+        <a href="https://www.linkedin.com/in/ayush08k/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>LinkedIn</a>
       </div>
       <p>© {new Date().getFullYear()} Ayush. All Rights Reserved.</p>
     </footer>

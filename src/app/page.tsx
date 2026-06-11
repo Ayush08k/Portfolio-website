@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { ArrowRight, Code2, ExternalLink, Send, CheckCircle, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import PricingEstimator, { EstimatorData } from "@/components/PricingEstimator";
+import Link from "next/link";
 
 /* ─── Typewriter hook ───────────────────────────────────── */
 function useTypewriter(words: string[], speed = 70, pause = 1800) {
@@ -91,36 +92,6 @@ function useTilt(selector: string) {
       window.removeEventListener("mouseout", handleOut);
     };
   }, [selector]);
-}
-
-/* ─── Navbar ────────────────────────────────────────────── */
-function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
-  const links = [
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
-    { label: "Projects", href: "#projects" },
-    { label: "Reviews", href: "#reviews" },
-    { label: "Contact", href: "#contact" },
-  ];
-  return (
-    <nav className={`nav${scrolled ? " scrolled" : ""}`}>
-      <a href="/" data-hover><img src="/logofinal.png" alt="Ayush Logo" className="nav-logo" /></a>
-      <ul className="nav-links">
-        {links.map(l => (
-          <li key={l.label}>
-            <a href={l.href} className="nav-link" data-hover>{l.label}</a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
 }
 
 /* ─── HERO ──────────────────────────────────────────────── */
@@ -345,12 +316,15 @@ function Projects() {
                   {p.tech.map(t => <span className="project-tech-tag" key={t}>{t}</span>)}
                 </div>
                 <div className="project-links">
-                  {p.github && p.github !== "#" && (
+                  <Link href={`/projects/${p.slug}`} className="project-link-btn" style={{ borderColor: "var(--accent-cyan)", color: "var(--accent-cyan)" }} data-hover>
+                    Case Study
+                  </Link>
+                  {p.github && p.github !== "#" && p.slug !== "jlm-tournaments" && (
                     <a href={p.github} target="_blank" rel="noopener noreferrer" className="project-link-btn" data-hover>
                       <Code2 size={14} /> Source
                     </a>
                   )}
-                  {p.link && p.link !== "#" && (
+                  {p.link && p.link !== "#" && p.slug !== "jlm-tournaments" && (
                     <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" data-hover>
                       <ExternalLink size={14} /> Live Demo
                     </a>
@@ -811,6 +785,7 @@ function Footer() {
             { label: "GitHub", href: "https://github.com/Ayush08k", rel: "noopener noreferrer me" },
             { label: "LinkedIn", href: "https://www.linkedin.com/in/ayush08k/", rel: "noopener noreferrer me" },
             { label: "Instagram", href: "https://www.instagram.com/ayush08.k/", rel: "noopener noreferrer" },
+            { label: "X", href: "https://x.com/aayush08k", rel: "noopener noreferrer" },
           ].map(l => (
             <a key={l.label} href={l.href} target="_blank" rel={l.rel} className="footer-link" data-hover aria-label={`Ayush Kumar on ${l.label}`}>
               {l.label}
@@ -859,7 +834,6 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
       <main id="main-content" role="main">
         <Hero />
         <SectionDivider />

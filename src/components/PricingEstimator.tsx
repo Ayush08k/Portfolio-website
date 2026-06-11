@@ -40,7 +40,7 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "landing",
     name: "Landing Page",
-    basePrice: 1000,
+    basePrice: 600,
     description: "High-conversion single-page marketing or campaign website.",
     baseScreens: 1,
     baseWeeks: 1,
@@ -49,7 +49,7 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "webapp",
     name: "SaaS / Full Stack App",
-    basePrice: 2500,
+    basePrice: 1000,
     description: "Scalable, end-to-end full stack web application with user dashboard.",
     baseScreens: 6,
     baseWeeks: 4,
@@ -58,7 +58,7 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "mobile",
     name: "Mobile App (iOS/Android)",
-    basePrice: 4000,
+    basePrice: 2000,
     description: "Cross-platform mobile application built with React Native & Expo.",
     baseScreens: 8,
     baseWeeks: 7,
@@ -67,7 +67,7 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "ecommerce",
     name: "E-Commerce Store",
-    basePrice: 3000,
+    basePrice: 1500,
     description: "Shopify Custom Liquid or Next.js store with checkout integration.",
     baseScreens: 5,
     baseWeeks: 5,
@@ -76,7 +76,7 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "ai",
     name: "AI Integration & Agents",
-    basePrice: 4000,
+    basePrice: 1600,
     description: "Intelligent web agents, LLM automation flows, or AI chatbot helpers.",
     baseScreens: 4,
     baseWeeks: 5,
@@ -428,6 +428,10 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                 <span>Proceed with Estimate</span>
                 <ArrowRight size={16} />
               </button>
+
+              <p className="pricing-disclaimer-india">
+                🇮🇳 <strong>For Indian Clients & Startups:</strong> Special localized rates are available. We can discuss and negotiate the final price to fit your budget!
+              </p>
 
               <p className="pricing-disclaimer">
                 *Estimate calculations are based on standard design and development specifications. Final proposal pricing is fixed-cost upon scoping.

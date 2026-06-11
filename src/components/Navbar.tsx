@@ -5,23 +5,39 @@ import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+  { name: "Case Study", href: "/projects" },
+  { name: "Blog", href: "/blog" },
+  { name: "Reviews", href: "/#reviews" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 40);
+
+      // If mobile nav is open, do not hide navbar
+      if (isOpen) return;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY, isOpen]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -40,20 +56,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav 
-        className={scrolled ? "nav scrolled" : "nav"}
-        style={{
-          position: "fixed",
-          top: 0,
-          width: "100%",
-          height: "var(--nav-height)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          zIndex: 100,
-          transition: "var(--transition)",
-        }}
-      >
+      <nav className={`${scrolled ? "nav scrolled" : "nav"} ${isVisible ? "" : "hidden"}`}>
         {/* Dynamic Logo Block */}
         <Link 
           href="/" 
@@ -78,7 +81,7 @@ export default function Navbar() {
         </Link>
 
         {/* Dynamic Menu items */}
-        <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
+        <ul className={isOpen ? "nav-links active" : "nav-links"}>
           {navLinks.map((link, i) => (
             <li 
               key={link.name} 
@@ -95,50 +98,18 @@ export default function Navbar() {
           ))}
           {/* CTA Link to Contact */}
           <li onClick={closeMenu}>
-            <a 
-              href="#contact" 
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
-                padding: "8px 16px",
-                background: "rgba(6, 182, 212, 0.08)",
-                border: "1px solid rgba(6, 182, 212, 0.25)",
-                borderRadius: "8px",
-                color: "var(--accent-cyan)",
-                fontSize: "13px",
-                fontWeight: 600,
-                fontFamily: "'Fira Code', monospace",
-                transition: "var(--transition)"
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "var(--accent-cyan)";
-                e.currentTarget.style.color = "var(--bg-primary)";
-                e.currentTarget.style.boxShadow = "0 0 15px rgba(6, 182, 212, 0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(6, 182, 212, 0.08)";
-                e.currentTarget.style.color = "var(--accent-cyan)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-            >
+            <Link href="/#contact" className="nav-cta-btn">
               Consultation
               <ArrowUpRight size={14} />
-            </a>
+            </Link>
           </li>
         </ul>
 
         {/* Mobile Toggle Button */}
         <button 
-          className="nav-toggle" 
+          className="nav-mobile-toggle" 
           onClick={toggleMenu} 
           aria-label="Toggle Navigation Drawer Menu"
-          style={{
-            display: "none",
-            color: "var(--text-white)",
-            cursor: "pointer",
-            transition: "var(--transition)"
-          }}
         >
           {isOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
