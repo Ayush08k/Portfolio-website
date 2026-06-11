@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { headers } from "next/headers";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
+import { BLOG_POSTS } from "@/data/blog";
 
 export const dynamic = "force-dynamic";
 
@@ -50,5 +51,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...projectRoutes];
+  const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...projectRoutes, ...blogRoutes];
 }
