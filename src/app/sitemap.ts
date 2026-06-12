@@ -1,15 +1,9 @@
 import { MetadataRoute } from "next";
-import { headers } from "next/headers";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { BLOG_POSTS } from "@/data/blog";
 
-export const dynamic = "force-dynamic";
-
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const headersList = await headers();
-  const host = headersList.get("host") || "freelance-ayush.vercel.app";
-  const protocol = headersList.get("x-forwarded-proto") || "https";
-  const baseUrl = `${protocol}://${host}`;
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
 
   // ── Static Core Routes ─────────────────────────────────────────────────────
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -51,7 +45,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // ── Individual Project Case Study Pages ────────────────────────────────────
-  // Slugs: attendance-system, feedo, jlm-tournaments, music-player, ecommerce-platform
   const projectRoutes: MetadataRoute.Sitemap = PORTFOLIO_DATA.projects.map((project) => ({
     url: `${baseUrl}/projects/${project.slug}`,
     lastModified: new Date("2026-06-12"),
@@ -60,8 +53,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // ── Individual Blog Post Pages ─────────────────────────────────────────────
-  // Slugs: tuning-nextjs-server-components, optimize-nestjs-mongodb-queries,
-  //         offline-syncing-react-native-expo
   const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
