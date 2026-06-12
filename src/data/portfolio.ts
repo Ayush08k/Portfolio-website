@@ -28,6 +28,11 @@ export interface Project {
     hosting: string;
   };
   gallery: string[];
+  challenge?: {
+    problem: string;
+    solution: string;
+  };
+  seoTags?: string[];
 }
 
 export interface Service {
@@ -225,6 +230,61 @@ export const PORTFOLIO_DATA = {
         hosting: "Vercel & Supabase Cloud"
       },
       gallery: ["/e-commerce.png"]
+    },
+    {
+      title: "Starbucks 3D Website",
+      description: "An immersive e-commerce experience featuring interactive 3D cup customizations, physics-based fluid animations, and high-performance asset compression.",
+      tech: ["React", "Three.js", "React Three Fiber", "GSAP", "Tailwind CSS", "Vite"],
+      link: "#",
+      github: "#",
+      image: "/project images/starbucks.png",
+      slug: "starbucks-3d",
+      category: "E-Commerce",
+      longDescription: "This project was built when I was learning how to make 3D websites, serving as a comprehensive hands-on study of WebGL, shaders, camera movements, and 3D coordinate space on the web. It is an interactive 3D landing page and e-commerce experience celebrating the craft of Starbucks coffee. Built with React Three Fiber, users can manipulate a high-fidelity 3D cup model in real-time, customizing cup sizes, fluid fills, sleeve designs, and ingredient layers. The application orchestrates camera movements using GSAP ScrollTrigger to guide users through a sensory narrative, driving user engagement and product conversions.",
+      lighthouseMetrics: {
+        performance: 98,
+        accessibility: 97,
+        bestPractices: 99,
+        seo: 100
+      },
+      features: [
+        "Real-time 3D product rendering with custom materials, lighting, and shadow casting",
+        "Interactive customizers for cup sizes (tall, grande, venti), liquid textures, and toppings",
+        "Performance-optimized GLTF models compressed to under 900KB using Draco compression",
+        "Responsive layout dynamically adjusting camera targets and viewport FOV for mobile users"
+      ],
+      architecture: {
+        description: "A modular frontend SPA structured around a React Three Fiber canvas viewport. The 3D scene loads optimized meshes compressed via the Draco pipeline and stores user configurations in local state, triggering synchronized UI updates.",
+        database: "LocalStorage",
+        hosting: "Vercel & Cloudinary CDN"
+      },
+      gallery: ["/project images/starbucks.png"],
+      challenge: {
+        problem: "Rendering complex 3D meshes and high-res textures caused low frame rates (~15 FPS) and memory leaks on mobile browsers, making the page laggy and causing crashes.",
+        solution: "Compressed textures to 1K WebP, applied Draco compression reducing model file size by 94%, and built an adaptive performance scaler that dynamically decreases anti-aliasing and pixel ratio on lower-spec mobile devices."
+      },
+      seoTags: [
+        "Starbucks 3D Website",
+        "React Three Fiber Starbucks",
+        "Three.js E-Commerce Customizer",
+        "Draco Mesh Compression WebGL",
+        "3D Web Development Learning Project",
+        "React Three Fiber Tutorial Example",
+        "WebGL Mobile Optimization Guide",
+        "GSAP ScrollTrigger 3D Animation",
+        "Interactive 3D Product Configurator",
+        "How to build 3D websites",
+        "Vite React Three Fiber Starter",
+        "Blender texture baking WebGL",
+        "Nextjs 3D landing page design",
+        "Performance optimization WebGL mobile",
+        "3D cup customizer React",
+        "Starbucks 3D design case study",
+        "3D web development portfolio Ayush",
+        "Three.js mobile frame rate fix",
+        "VRAM optimization web 3D",
+        "Creative frontend developer portfolio 3D"
+      ]
     }
   ] as Project[],
   businessGuides: {

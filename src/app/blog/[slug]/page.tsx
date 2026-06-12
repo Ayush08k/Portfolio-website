@@ -199,6 +199,19 @@ export default function BlogDetail({ params }: BlogDetailProps) {
                   </span>
                 ))}
               </div>
+
+              {post.seoTags && post.seoTags.length > 0 && (
+                <div style={{ marginTop: "24px" }}>
+                  <div className="article-tags-title">SEO Search Tags:</div>
+                  <div className="blog-article-tags" style={{ marginTop: "8px" }}>
+                    {post.seoTags.map((tag) => (
+                      <span key={tag} className="blog-detail-tag" style={{ color: "var(--text-secondary)", borderColor: "rgba(255, 255, 255, 0.08)" }}>
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </article>
 

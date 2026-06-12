@@ -57,8 +57,11 @@ export default function ProjectsArchive() {
           </div>
         </div>
         
-        <p className="archive-subtitle">
-          An in-depth collection of custom web portals, cross-platform mobile apps, and e-commerce stores engineered for scale and speed.
+        <p className="archive-subtitle" style={{ maxWidth: "900px" }}>
+          An in-depth collection of custom web portals, cross-platform mobile apps, and e-commerce stores engineered for scale and speed. 
+          <span style={{ display: "block", marginTop: "12px", fontSize: "14px", color: "var(--text-secondary)", opacity: 0.85, lineHeight: "1.6" }}>
+            <strong>Privacy Note:</strong> These case studies are featured for showcase purposes. Due to client privacy concerns and non-disclosure agreements (NDAs), we cannot share the live demos or source code for all projects. The displaying projects are shown with prior permission. Additionally, for privacy reasons, we cannot display every project in our registry here. These studies serve as technical walk-throughs to showcase our architectural design and execution capabilities.
+          </span>
         </p>
 
         {/* Filters and Search Bar Container */}

@@ -87,7 +87,7 @@ export default function Projects() {
                 <div 
                   className="project-image-bg" 
                   style={{ 
-                    backgroundImage: `url(${project.image})`,
+                    backgroundImage: `url("${encodeURI(project.image)}")`,
                     backgroundPosition: "center"
                   }}
                 ></div>

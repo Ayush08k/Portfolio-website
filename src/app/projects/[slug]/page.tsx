@@ -2,7 +2,7 @@
 
 import { useParams, notFound } from "next/navigation";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
-import { ArrowLeft, Cpu, CheckCircle2, ShieldCheck, Zap, Database, Server, Smartphone, BarChart3 } from "lucide-react";
+import { ArrowLeft, Cpu, CheckCircle2, ShieldCheck, Zap, Database, Server, Smartphone, BarChart3, AlertTriangle, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -121,7 +121,7 @@ export default function ProjectCaseStudy() {
       >
         <div 
           className="case-hero-image"
-          style={{ backgroundImage: `url(${project.image})` }}
+          style={{ backgroundImage: `url("${encodeURI(project.image)}")` }}
         />
         <div className="case-hero-image-glow" />
       </motion.div>
@@ -191,6 +191,22 @@ export default function ProjectCaseStudy() {
               </div>
             </div>
           </motion.section>
+
+          {project.challenge && (
+            <motion.section variants={itemVariants} className="case-section">
+              <h2 className="case-section-heading">Biggest Challenge & Resolution</h2>
+              <div className="challenge-card glass-card" style={{ padding: "24px", borderRadius: "20px", background: "rgba(239, 68, 68, 0.02)", borderColor: "rgba(239, 68, 68, 0.15)" }}>
+                <h4 style={{ color: "#ef4444", display: "flex", alignItems: "center", gap: "8px", fontSize: "16px", fontWeight: "700", marginBottom: "12px" }}>
+                  <AlertTriangle size={18} /> The Challenge
+                </h4>
+                <p className="case-paragraph" style={{ marginBottom: "20px", fontSize: "14.5px" }}>{project.challenge.problem}</p>
+                <h4 style={{ color: "#10b981", display: "flex", alignItems: "center", gap: "8px", fontSize: "16px", fontWeight: "700", marginBottom: "12px" }}>
+                  <CheckCircle2 size={18} /> The Resolution
+                </h4>
+                <p className="case-paragraph" style={{ marginBottom: 0, fontSize: "14.5px" }}>{project.challenge.solution}</p>
+              </div>
+            </motion.section>
+          )}
         </div>
 
         {/* Right Side: Performance Metrics & Tech Stack */}
@@ -249,6 +265,25 @@ export default function ProjectCaseStudy() {
               ))}
             </div>
           </motion.section>
+
+          {/* SEO Search Tags */}
+          {project.seoTags && project.seoTags.length > 0 && (
+            <motion.section variants={itemVariants} className="case-section glass-card seo-tags-card">
+              <h3 className="sidebar-heading" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Globe size={18} style={{ color: 'var(--accent-cyan)' }} /> SEO Search Tags
+              </h3>
+              <p className="cta-sidebar-desc" style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '12px' }}>
+                Keywords and concepts covered in this project case study:
+              </p>
+              <div className="tech-pills-list" style={{ gap: '6px' }}>
+                {project.seoTags.map((tag) => (
+                  <span key={tag} className="tech-pill-tag" style={{ fontSize: '11px', padding: '4px 8px', borderColor: 'rgba(0, 242, 254, 0.15)', color: 'var(--text-secondary)' }}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.section>
+          )}
 
           {/* Hire Me CTA sidebar */}
           <motion.section variants={itemVariants} className="case-section glass-card cta-sidebar-card">
