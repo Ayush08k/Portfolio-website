@@ -633,7 +633,6 @@ export default function ProjectCaseStudy() {
           text-align: center;
           white-space: nowrap;
         }
-        }
 
         .mobile-metrics-list {
           display: flex;

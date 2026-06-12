@@ -71,7 +71,7 @@ export default function Navbar() {
         >
           <img 
             src="/logofinal.png" 
-            alt="Ayush Kumar Logo" 
+            alt="Ayush Kumar — Freelance Full Stack & Mobile App Developer Logo" 
             style={{ 
               height: "44px", 
               width: "auto",

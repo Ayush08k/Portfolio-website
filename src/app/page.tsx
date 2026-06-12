@@ -303,7 +303,7 @@ function Projects() {
             >
               {/* Image */}
               <div className="project-img-wrap">
-                <img src={p.image} alt={p.title} />
+                <img src={p.image} alt={`${p.title} — Ayush Kumar Full Stack Developer Project Case Study`} />
                 <div className="project-overlay" />
               </div>
 

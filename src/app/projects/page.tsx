@@ -111,7 +111,7 @@ export default function ProjectsArchive() {
                   data-hover
                 >
                   <div className="archive-card-image-wrap">
-                    <img src={project.image} alt={project.title} className="archive-card-img" />
+                    <img src={project.image} alt={`${project.title} — Ayush Kumar Developer Case Study Project Preview`} className="archive-card-img" />
                     <span className="archive-card-category">
                       {getCategoryIcon(project.category)} {project.category}
                     </span>
