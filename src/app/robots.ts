@@ -1,14 +1,16 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
+  // Ensure no trailing slash to prevent double-slash in sitemap URL
+  const rawBase = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
+  const baseUrl = rawBase.replace(/\/+$/, "");
 
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/", "/static/"],
+        disallow: ["/api/", "/_next/"],
       },
       {
         userAgent: "Googlebot",

@@ -1065,13 +1065,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         "@type": "ListItem",
         position: 2,
         name: "Projects",
-        item: `${siteUrl}/#projects`,
+        item: `${siteUrl}/projects`,
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: "Contact",
-        item: `${siteUrl}/#contact`,
+        name: "Blog",
+        item: `${siteUrl}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "Services",
+        item: `${siteUrl}/services`,
+      },
+      {
+        "@type": "ListItem",
+        position: 5,
+        name: "About",
+        item: `${siteUrl}/about`,
       },
     ],
   };
@@ -1225,8 +1237,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* ─── Canonical & Alternate ───────────────────────── */}
-        <link rel="canonical" href={siteUrl} />
+        {/* Canonical is handled per-page via Next.js metadata alternates */}
 
         {/* ─── Social Profiles (rel=me helps E-E-A-T) ─────── */}
         <link rel="me" href="https://github.com/Ayush08k" />

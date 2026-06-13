@@ -849,7 +849,6 @@ export default function Home() {
         <SectionDivider />
         <Contact estimatorData={estimatorData} />
       </main>
-      <SeoBlock />
       <Footer />
     </>
   );
