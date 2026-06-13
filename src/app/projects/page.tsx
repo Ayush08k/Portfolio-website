@@ -100,16 +100,15 @@ export default function ProjectsArchive() {
             <p>Try refining your search terms or checking a different category.</p>
           </div>
         ) : (
-          <motion.div layout className="archive-grid">
-            <AnimatePresence mode="popLayout">
+          <motion.div className="archive-grid">
+            <AnimatePresence mode="sync">
               {filteredProjects.map((project) => (
                 <motion.div
                   key={project.slug}
-                  layout
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35 }}
                   className="archive-card glass-card"
                   data-hover
                 >

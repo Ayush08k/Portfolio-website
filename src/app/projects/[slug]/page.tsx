@@ -68,26 +68,27 @@ export default function ProjectCaseStudy() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants: any = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
+      transition: { duration: 0.35, ease: "easeOut" },
     },
   };
 
   return (
     <div className="case-study-page">
-      {/* Background gradients */}
-      <div className="orb orb-1" style={{ top: "-10%", left: "10%", opacity: 0.15 }} />
-      <div className="orb orb-2" style={{ top: "30%", right: "5%", opacity: 0.1 }} />
-      <div className="orb orb-3" style={{ bottom: "10%", left: "20%", opacity: 0.12 }} />
+      {/* Background gradients - hidden on mobile via CSS for performance */}
+      <div className="case-orb orb orb-1" style={{ top: "-10%", left: "10%", opacity: 0.15 }} />
+      <div className="case-orb orb orb-2" style={{ top: "30%", right: "5%", opacity: 0.1 }} />
+      <div className="case-orb orb orb-3" style={{ bottom: "10%", left: "20%", opacity: 0.12 }} />
 
       <motion.header
         initial={{ opacity: 0, y: -20 }}
@@ -309,6 +310,12 @@ export default function ProjectCaseStudy() {
           overflow: hidden;
         }
 
+        @media (max-width: 768px) {
+          .case-study-page {
+            padding: 80px 0 80px;
+          }
+        }
+
         .case-header {
           margin-bottom: 40px;
         }
@@ -378,12 +385,24 @@ export default function ProjectCaseStudy() {
           line-height: 1.2;
         }
 
+        @media (max-width: 768px) {
+          .case-title {
+            font-size: 28px;
+          }
+        }
+
         .case-summary {
           font-size: 18px;
           color: var(--text-secondary);
           line-height: 1.6;
           max-width: 800px;
           margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+          .case-summary {
+            font-size: 15px;
+          }
         }
 
         .case-hero-image-wrap {
@@ -631,6 +650,13 @@ export default function ProjectCaseStudy() {
           gap: 12px;
           justify-items: center;
           margin-bottom: 20px;
+        }
+
+        @media (max-width: 480px) {
+          .metrics-rings-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+          }
         }
 
         .metric-ring-wrapper {
