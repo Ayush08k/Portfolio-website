@@ -1,8 +1,19 @@
 import { MetadataRoute } from "next";
 
+/**
+ * robots.txt Generator
+ * ────────────────────────────────────────────────────────
+ * Follows: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+ *
+ * Key rules:
+ *  1. Allow all crawlers to access all public content
+ *  2. Block internal API routes and Next.js internals
+ *  3. Reference both dynamic and static sitemaps
+ *  4. Declare canonical host
+ */
 export default function robots(): MetadataRoute.Robots {
-  // Ensure no trailing slash to prevent double-slash in sitemap URL
-  const rawBase = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
+  const rawBase =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
   const baseUrl = rawBase.replace(/\/+$/, "");
 
   return {
@@ -10,7 +21,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: ["/api/", "/_next/", "/static-sitemap.xml"],
       },
       {
         userAgent: "Googlebot",
@@ -23,7 +34,10 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: [
+      `${baseUrl}/sitemap.xml`,
+      `${baseUrl}/static-sitemap.xml`,
+    ],
     host: baseUrl,
   };
 }
