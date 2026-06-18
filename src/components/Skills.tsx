@@ -52,10 +52,10 @@ export default function Skills() {
           return (
             <motion.div
               key={skill.name}
-              initial={isMobile ? undefined : { opacity: 0, y: 30 }}
-              whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={isMobile ? undefined : { once: true }}
-              transition={isMobile ? undefined : { duration: 0.5, delay: i * 0.08 }}
+              transition={isMobile ? { duration: 0 } : { duration: 0.5, delay: i * 0.08 }}
               className="glass-card"
               style={{ 
                 display: "flex", 
@@ -156,8 +156,8 @@ export default function Skills() {
         }} />
 
         <motion.div
-          animate={isMobile ? undefined : { x: [0, -2000] }}
-          transition={isMobile ? undefined : {
+          animate={isMobile ? {} : { x: [0, -2000] }}
+          transition={isMobile ? { duration: 0 } : {
             x: {
               repeat: Infinity,
               repeatType: "loop",

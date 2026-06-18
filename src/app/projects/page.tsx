@@ -116,10 +116,10 @@ export default function ProjectsArchive() {
               {filteredProjects.map((project) => (
                 <motion.div
                   key={project.slug}
-                  initial={isMobile ? undefined : { opacity: 0, y: 20 }}
-                  animate={isMobile ? undefined : { opacity: 1, y: 0 }}
-                  exit={isMobile ? undefined : { opacity: 0 }}
-                  transition={isMobile ? undefined : { duration: 0.35 }}
+                  initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={isMobile ? { opacity: 0 } : { opacity: 0 }}
+                  transition={isMobile ? { duration: 0 } : { duration: 0.35 }}
                   className="archive-card glass-card"
                   data-hover
                 >

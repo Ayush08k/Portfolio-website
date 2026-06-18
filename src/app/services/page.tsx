@@ -149,9 +149,9 @@ export default function ServicesPage() {
           {servicesData.map((svc, i) => (
             <motion.div
               key={svc.name}
-              initial={isMobile ? undefined : { opacity: 0, y: 25 }}
-              animate={isMobile ? undefined : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={isMobile ? { duration: 0 } : { duration: 0.5, delay: i * 0.1 }}
               className="svc-card glass-card"
               style={{ borderColor: `rgba(255, 255, 255, 0.05)` }}
             >

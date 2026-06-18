@@ -26,10 +26,10 @@ export default function About() {
       <div className="about-grid">
         {/* Left Column - Cyber System Matrix card */}
         <motion.div 
-          initial={isMobile ? undefined : { opacity: 0, x: -30 }}
-          whileInView={isMobile ? undefined : { opacity: 1, x: 0 }}
+          initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={isMobile ? undefined : { once: true }}
-          transition={{ duration: 0.6 }}
+          transition={isMobile ? { duration: 0 } : { duration: 0.6 }}
           className="about-image-wrapper"
         >
           <div className="glass-card" style={{ padding: "30px", border: "1px solid rgba(6, 182, 212, 0.15)", background: "rgba(9, 13, 22, 0.7)" }}>
@@ -86,10 +86,10 @@ export default function About() {
 
         {/* Right Column - Narrative Bio */}
         <motion.div 
-          initial={isMobile ? undefined : { opacity: 0, x: 30 }}
-          whileInView={isMobile ? undefined : { opacity: 1, x: 0 }}
+          initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={isMobile ? undefined : { once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
           className="about-text-content"
         >
           <p style={{ marginBottom: "18px", fontSize: "16px", lineHeight: "1.7", color: "var(--text-primary)" }}>
@@ -110,7 +110,7 @@ export default function About() {
           <ul className="about-skills-list">
             {PORTFOLIO_DATA.skills.recent.map(skill => (
               <motion.li 
-                whileHover={isMobile ? undefined : { x: 5, color: "var(--accent-cyan)" }}
+                whileHover={isMobile ? { x: 0 } : { x: 5, color: "var(--accent-cyan)" }}
                 key={skill} 
                 className="about-skill-item"
               >

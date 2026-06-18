@@ -31,10 +31,10 @@ export default function Projects() {
           return (
             <motion.div
               key={project.title}
-              initial={isMobile ? undefined : { opacity: 0, y: 60 }}
-              whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={isMobile ? undefined : { once: true, margin: "-100px" }}
-              transition={isMobile ? undefined : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              transition={isMobile ? { duration: 0 } : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className={isEven ? "project-row" : "project-row reversed"}
             >
               {/* Project Content */}
@@ -93,7 +93,7 @@ export default function Projects() {
 
               {/* Project Visual Canvas Overlay */}
               <motion.div 
-                whileHover={isMobile ? undefined : { scale: 1.01 }}
+                whileHover={isMobile ? { scale: 1 } : { scale: 1.01 }}
                 className="project-image-wrapper"
               >
                 <div 
