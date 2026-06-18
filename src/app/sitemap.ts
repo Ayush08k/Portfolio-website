@@ -48,6 +48,7 @@ const STATIC_PAGE_DATES = {
   projects: "2026-06-12",
   blog: "2026-06-12",
   about: "2026-06-11",
+  estimator: "2026-06-18",
 } as const;
 
 // ── Sitemap Generator ──────────────────────────────────────────────────────────
@@ -80,6 +81,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(STATIC_PAGE_DATES.blog),
       changeFrequency: "weekly",
       priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/estimator`,
+      lastModified: new Date(STATIC_PAGE_DATES.estimator),
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/about`,

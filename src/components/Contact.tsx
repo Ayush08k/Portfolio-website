@@ -4,8 +4,31 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 
-export default function Contact() {
+export interface EstimatorData {
+  hasEstimate: boolean;
+  projectType: string;
+  screens: number;
+  addOns: string;
+  budget: string;
+  timeline: string;
+}
+
+interface ContactProps {
+  estimatorData?: EstimatorData;
+}
+
+export default function Contact({ estimatorData }: ContactProps = {}) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const defaultMessage = estimatorData?.hasEstimate
+    ? `Hey Ayush, I just estimated a project using your calculator! Here is the scope I designed:\n\n` +
+      `- Base Platform: ${estimatorData.projectType}\n` +
+      `- Screens/Pages: ${estimatorData.screens}\n` +
+      `- Custom Add-Ons: ${estimatorData.addOns}\n` +
+      `- Est. Price Range: ${estimatorData.budget}\n` +
+      `- Est. Timeline: ${estimatorData.timeline}\n\n` +
+      `Let's discuss this project!`
+    : "";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -127,6 +150,7 @@ export default function Contact() {
             rows={5}
             required
             className="contact-input contact-textarea"
+            defaultValue={defaultMessage}
           ></textarea>
 
           <button
