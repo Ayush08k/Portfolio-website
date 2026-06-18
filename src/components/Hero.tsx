@@ -12,6 +12,16 @@ const roles = [
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -26,9 +36,9 @@ export default function Hero() {
         <div className="hero-text-content">
           {/* Status Badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            initial={isMobile ? undefined : { opacity: 0, scale: 0.9 }}
+            animate={isMobile ? undefined : { opacity: 1, scale: 1 }}
+            transition={isMobile ? undefined : { duration: 0.5 }}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -60,9 +70,9 @@ export default function Hero() {
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            initial={isMobile ? undefined : { opacity: 0, y: 20 }}
+            animate={isMobile ? undefined : { opacity: 1, y: 0 }}
+            transition={isMobile ? undefined : { duration: 0.6, delay: 0.1 }}
             style={{ 
               color: "var(--text-secondary)", 
               fontFamily: "'Fira Code', monospace", 
@@ -76,9 +86,9 @@ export default function Hero() {
 
           {/* Main Title */}
           <motion.h1
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={isMobile ? undefined : { opacity: 0, y: 25 }}
+            animate={isMobile ? undefined : { opacity: 1, y: 0 }}
+            transition={isMobile ? undefined : { duration: 0.6, delay: 0.2 }}
             style={{
               fontSize: "clamp(36px, 6vw, 64px)",
               color: "var(--text-white)",
@@ -96,10 +106,10 @@ export default function Hero() {
             <AnimatePresence mode="wait">
               <motion.h2
                 key={roles[roleIndex]}
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -25 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                initial={isMobile ? undefined : { opacity: 0, y: 25 }}
+                animate={isMobile ? undefined : { opacity: 1, y: 0 }}
+                exit={isMobile ? undefined : { opacity: 0, y: -25 }}
+                transition={isMobile ? undefined : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                   fontSize: "clamp(20px, 4vw, 36px)",
                   color: "var(--text-primary)",
@@ -116,9 +126,9 @@ export default function Hero() {
 
           {/* Short Intro Bio */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial={isMobile ? undefined : { opacity: 0, y: 20 }}
+            animate={isMobile ? undefined : { opacity: 1, y: 0 }}
+            transition={isMobile ? undefined : { duration: 0.6, delay: 0.4 }}
             style={{
               maxWidth: "560px",
               color: "var(--text-secondary)",
@@ -132,9 +142,9 @@ export default function Hero() {
 
           {/* Action Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            initial={isMobile ? undefined : { opacity: 0, y: 20 }}
+            animate={isMobile ? undefined : { opacity: 1, y: 0 }}
+            transition={isMobile ? undefined : { duration: 0.6, delay: 0.5 }}
             style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}
           >
             <a href="#projects" className="btn-primary">
@@ -149,9 +159,9 @@ export default function Hero() {
 
         {/* Cyber Holographic Avatar / Profile Display */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          initial={isMobile ? undefined : { opacity: 0, scale: 0.95 }}
+          animate={isMobile ? undefined : { opacity: 1, scale: 1 }}
+          transition={isMobile ? undefined : { duration: 0.8, delay: 0.4 }}
           className="hero-image-wrapper"
         >
           <div className="hero-dashed-ring">
@@ -160,8 +170,8 @@ export default function Hero() {
           
           {/* Glass floating 3D elements */}
           <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+            animate={isMobile ? undefined : { y: [0, -10, 0] }}
+            transition={isMobile ? undefined : { repeat: Infinity, duration: 5, ease: "easeInOut" }}
             className="floating-tag tag-top-right floating-tag-cyan"
           >
             <Smartphone size={15} style={{ color: "var(--accent-cyan)" }} />
@@ -170,8 +180,8 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+            animate={isMobile ? undefined : { y: [0, 12, 0] }}
+            transition={isMobile ? undefined : { repeat: Infinity, duration: 6, ease: "easeInOut" }}
             className="floating-tag tag-bottom-left floating-tag-purple"
           >
             <Terminal size={15} style={{ color: "var(--accent-purple)" }} />
@@ -180,8 +190,8 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            animate={isMobile ? undefined : { scale: [1, 1.05, 1] }}
+            transition={isMobile ? undefined : { repeat: Infinity, duration: 4, ease: "easeInOut" }}
             className="floating-tag tag-middle-right"
           >
             <Cpu size={15} style={{ color: "#10b981" }} />

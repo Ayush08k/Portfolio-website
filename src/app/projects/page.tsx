@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { PORTFOLIO_DATA, Project } from "@/data/portfolio";
 import { ArrowLeft, Search, ExternalLink, Code2, Cpu, Smartphone, Globe, ShoppingBag, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,6 +9,17 @@ import Link from "next/link";
 export default function ProjectsArchive() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const categories = ["All", "Web", "Mobile", "E-Commerce"];
 
@@ -105,10 +116,10 @@ export default function ProjectsArchive() {
               {filteredProjects.map((project) => (
                 <motion.div
                   key={project.slug}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.35 }}
+                  initial={isMobile ? undefined : { opacity: 0, y: 20 }}
+                  animate={isMobile ? undefined : { opacity: 1, y: 0 }}
+                  exit={isMobile ? undefined : { opacity: 0 }}
+                  transition={isMobile ? undefined : { duration: 0.35 }}
                   className="archive-card glass-card"
                   data-hover
                 >
@@ -166,7 +177,7 @@ export default function ProjectsArchive() {
           color: #f8fafc;
           padding: 120px 0 120px;
           position: relative;
-          overflow: hidden;
+          overflow-x: hidden;
         }
 
         .archive-header {
@@ -345,6 +356,23 @@ export default function ProjectsArchive() {
         @media (min-width: 1024px) {
           .archive-grid {
             grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .archive-card:hover {
+            transform: none !important;
+            box-shadow: none !important;
+          }
+          .archive-card:hover .archive-card-img {
+            transform: none !important;
+          }
+          .back-btn-logo:hover {
+            transform: none !important;
+            box-shadow: none !important;
+            background: rgba(255, 255, 255, 0.03) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            color: var(--text-secondary) !important;
           }
         }
 

@@ -1,10 +1,22 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { Terminal, Cpu, Award, Zap } from "lucide-react";
 
 export default function About() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section id="about" className="section container">
       <h2 className="section-title">
@@ -14,9 +26,9 @@ export default function About() {
       <div className="about-grid">
         {/* Left Column - Cyber System Matrix card */}
         <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          initial={isMobile ? undefined : { opacity: 0, x: -30 }}
+          whileInView={isMobile ? undefined : { opacity: 1, x: 0 }}
+          viewport={isMobile ? undefined : { once: true }}
           transition={{ duration: 0.6 }}
           className="about-image-wrapper"
         >
@@ -74,9 +86,9 @@ export default function About() {
 
         {/* Right Column - Narrative Bio */}
         <motion.div 
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          initial={isMobile ? undefined : { opacity: 0, x: 30 }}
+          whileInView={isMobile ? undefined : { opacity: 1, x: 0 }}
+          viewport={isMobile ? undefined : { once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="about-text-content"
         >
@@ -98,7 +110,7 @@ export default function About() {
           <ul className="about-skills-list">
             {PORTFOLIO_DATA.skills.recent.map(skill => (
               <motion.li 
-                whileHover={{ x: 5, color: "var(--accent-cyan)" }}
+                whileHover={isMobile ? undefined : { x: 5, color: "var(--accent-cyan)" }}
                 key={skill} 
                 className="about-skill-item"
               >

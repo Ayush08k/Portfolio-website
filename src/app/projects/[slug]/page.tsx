@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useParams, notFound } from "next/navigation";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { ArrowLeft, Cpu, CheckCircle2, ShieldCheck, Zap, Database, Server, Smartphone, BarChart3, AlertTriangle, Globe } from "lucide-react";
@@ -11,6 +12,17 @@ export default function ProjectCaseStudy() {
   const slug = params?.slug as string;
 
   const project = PORTFOLIO_DATA.projects.find((p) => p.slug === slug);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   if (!project) {
     notFound();
@@ -43,14 +55,12 @@ export default function ProjectCaseStudy() {
               strokeWidth="6"
               fill="transparent"
               strokeDasharray={circumference}
-              initial={{ strokeDashoffset: circumference }}
-              animate={{ strokeDashoffset: strokeDashoffset }}
-              transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
+              strokeDashoffset={isMobile ? strokeDashoffset : undefined}
+              initial={isMobile ? undefined : { strokeDashoffset: circumference }}
+              animate={isMobile ? undefined : { strokeDashoffset: strokeDashoffset }}
+              transition={isMobile ? undefined : { duration: 1.5, ease: "easeOut", delay: 0.3 }}
               strokeLinecap="round"
-              style={{
-                transform: "rotate(-90deg)",
-                transformOrigin: "50% 50%",
-              }}
+              transform="rotate(-90 45 45)"
             />
           </svg>
           <div className="metric-ring-value" style={{ color: color }}>
@@ -91,9 +101,9 @@ export default function ProjectCaseStudy() {
       <div className="case-orb orb orb-3" style={{ bottom: "10%", left: "20%", opacity: 0.12 }} />
 
       <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        initial={isMobile ? undefined : { opacity: 0, y: -20 }}
+        animate={isMobile ? undefined : { opacity: 1, y: 0 }}
+        transition={isMobile ? undefined : { duration: 0.6, ease: "easeOut" }}
         className="case-header container"
       >
         <div className="header-title-row">
@@ -115,9 +125,9 @@ export default function ProjectCaseStudy() {
 
       {/* Main Cover Image */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        initial={isMobile ? undefined : { opacity: 0, scale: 0.96 }}
+        animate={isMobile ? undefined : { opacity: 1, scale: 1 }}
+        transition={isMobile ? undefined : { duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className="container case-hero-image-wrap"
       >
         <div 
@@ -128,19 +138,19 @@ export default function ProjectCaseStudy() {
       </motion.div>
 
       <motion.main
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+        variants={isMobile ? undefined : containerVariants}
+        initial={isMobile ? undefined : "hidden"}
+        animate={isMobile ? undefined : "visible"}
         className="container case-main-grid"
       >
         {/* Left Side: Long Description, Features, and Architecture */}
         <div className="case-left-col">
-          <motion.section variants={itemVariants} className="case-section">
+          <motion.section variants={isMobile ? undefined : itemVariants} className="case-section">
             <h2 className="case-section-heading">Project Overview</h2>
             <p className="case-paragraph">{project.longDescription}</p>
           </motion.section>
 
-          <motion.section variants={itemVariants} className="case-section">
+          <motion.section variants={isMobile ? undefined : itemVariants} className="case-section">
             <h2 className="case-section-heading">Key Features & Scope</h2>
             <div className="features-grid">
               {project.features.map((feature, idx) => (
@@ -152,7 +162,7 @@ export default function ProjectCaseStudy() {
             </div>
           </motion.section>
 
-          <motion.section variants={itemVariants} className="case-section">
+          <motion.section variants={isMobile ? undefined : itemVariants} className="case-section">
             <h2 className="case-section-heading">System Architecture</h2>
             <p className="case-paragraph">{project.architecture.description}</p>
             
@@ -194,7 +204,7 @@ export default function ProjectCaseStudy() {
           </motion.section>
 
           {project.challenge && (
-            <motion.section variants={itemVariants} className="case-section">
+            <motion.section variants={isMobile ? undefined : itemVariants} className="case-section">
               <h2 className="case-section-heading">Biggest Challenge & Resolution</h2>
               <div className="challenge-card glass-card" style={{ padding: "24px", borderRadius: "20px", background: "rgba(239, 68, 68, 0.02)", borderColor: "rgba(239, 68, 68, 0.15)" }}>
                 <h4 style={{ color: "#ef4444", display: "flex", alignItems: "center", gap: "8px", fontSize: "16px", fontWeight: "700", marginBottom: "12px" }}>
@@ -213,7 +223,7 @@ export default function ProjectCaseStudy() {
         {/* Right Side: Performance Metrics & Tech Stack */}
         <div className="case-right-col">
           {/* Performance Section */}
-          <motion.section variants={itemVariants} className="case-section glass-card metrics-card">
+          <motion.section variants={isMobile ? undefined : itemVariants} className="case-section glass-card metrics-card">
             <h3 className="sidebar-heading">
               <BarChart3 size={18} /> Performance & Vitals
             </h3>
@@ -254,7 +264,7 @@ export default function ProjectCaseStudy() {
           </motion.section>
 
           {/* Tech Stack List */}
-          <motion.section variants={itemVariants} className="case-section glass-card tech-card">
+          <motion.section variants={isMobile ? undefined : itemVariants} className="case-section glass-card tech-card">
             <h3 className="sidebar-heading">
               <Zap size={18} /> Technologies Used
             </h3>
@@ -269,7 +279,7 @@ export default function ProjectCaseStudy() {
 
           {/* SEO Search Tags */}
           {project.seoTags && project.seoTags.length > 0 && (
-            <motion.section variants={itemVariants} className="case-section glass-card seo-tags-card">
+            <motion.section variants={isMobile ? undefined : itemVariants} className="case-section glass-card seo-tags-card">
               <h3 className="sidebar-heading" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Globe size={18} style={{ color: 'var(--accent-cyan)' }} /> SEO Search Tags
               </h3>
@@ -287,7 +297,7 @@ export default function ProjectCaseStudy() {
           )}
 
           {/* Hire Me CTA sidebar */}
-          <motion.section variants={itemVariants} className="case-section glass-card cta-sidebar-card">
+          <motion.section variants={isMobile ? undefined : itemVariants} className="case-section glass-card cta-sidebar-card">
             <h3 className="sidebar-heading">Need a similar product?</h3>
             <p className="cta-sidebar-desc">
               Get an instant cost estimate and development timeline breakdown using the interactive estimator.
@@ -307,12 +317,24 @@ export default function ProjectCaseStudy() {
           color: #f8fafc;
           padding: 120px 0 120px;
           position: relative;
-          overflow: hidden;
+          overflow-x: hidden;
         }
 
         @media (max-width: 768px) {
           .case-study-page {
             padding: 80px 0 80px;
+          }
+          /* Prevent hover transitions/sticky styles on touch devices */
+          .back-btn-logo:hover,
+          .arch-node:hover,
+          .feature-item:hover,
+          .tech-pill-tag:hover,
+          .sidebar-cta-btn:hover {
+            transform: none !important;
+            box-shadow: none !important;
+            background: rgba(255, 255, 255, 0.03) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            color: var(--text-secondary) !important;
           }
         }
 

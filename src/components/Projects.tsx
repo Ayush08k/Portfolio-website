@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Code, ExternalLink, FolderGit2 } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
@@ -7,6 +8,17 @@ import { PORTFOLIO_DATA } from "@/data/portfolio";
 const projects = PORTFOLIO_DATA.projects;
 
 export default function Projects() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section id="projects" className="section container">
       <h2 className="section-title">
@@ -19,10 +31,10 @@ export default function Projects() {
           return (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              initial={isMobile ? undefined : { opacity: 0, y: 60 }}
+              whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
+              viewport={isMobile ? undefined : { once: true, margin: "-100px" }}
+              transition={isMobile ? undefined : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className={isEven ? "project-row" : "project-row reversed"}
             >
               {/* Project Content */}
@@ -81,7 +93,7 @@ export default function Projects() {
 
               {/* Project Visual Canvas Overlay */}
               <motion.div 
-                whileHover={{ scale: 1.01 }}
+                whileHover={isMobile ? undefined : { scale: 1.01 }}
                 className="project-image-wrapper"
               >
                 <div 

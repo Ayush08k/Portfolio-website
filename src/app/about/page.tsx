@@ -1,10 +1,22 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, BookOpen, Briefcase, Cpu, Terminal, Laptop, ShieldCheck, Heart, Layers, MessageSquare, Code2, Sparkles, Send } from "lucide-react";
 import Link from "next/link";
 
 export default function AboutPage() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   // Timeline Data
   const timelineData = [
     {
@@ -101,8 +113,8 @@ export default function AboutPage() {
       <div className="orb orb-3" style={{ bottom: "5%", left: "15%", opacity: 0.15 }} />
 
       <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={isMobile ? undefined : { opacity: 0, y: -20 }}
+        animate={isMobile ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="about-header container"
       >
@@ -125,9 +137,9 @@ export default function AboutPage() {
       </motion.header>
 
       <motion.main
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+        variants={isMobile ? undefined : containerVariants}
+        initial={isMobile ? undefined : "hidden"}
+        animate={isMobile ? undefined : "visible"}
         className="container about-main-grid"
       >
         {/* Timeline Column */}
@@ -226,7 +238,7 @@ export default function AboutPage() {
           color: #f8fafc;
           padding: 120px 0 120px;
           position: relative;
-          overflow: hidden;
+          overflow-x: hidden;
         }
 
         .about-header {

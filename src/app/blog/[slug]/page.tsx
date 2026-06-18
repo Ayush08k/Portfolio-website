@@ -246,7 +246,7 @@ export default function BlogDetail({ params }: BlogDetailProps) {
           color: #f8fafc;
           padding: 120px 0 120px;
           position: relative;
-          overflow: hidden;
+          overflow-x: hidden;
         }
 
         .blog-detail-layout {

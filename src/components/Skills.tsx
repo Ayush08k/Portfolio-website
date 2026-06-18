@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Globe, Layout, Smartphone, Brain, ShoppingBag, Terminal } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
@@ -22,6 +23,17 @@ const skills = PORTFOLIO_DATA.services.map(service => ({
 const techSkills = PORTFOLIO_DATA.skills.marquee;
 
 export default function Skills() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section id="skills" className="section container">
       <h2 className="section-title">
@@ -40,10 +52,10 @@ export default function Skills() {
           return (
             <motion.div
               key={skill.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              initial={isMobile ? undefined : { opacity: 0, y: 30 }}
+              whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
+              viewport={isMobile ? undefined : { once: true }}
+              transition={isMobile ? undefined : { duration: 0.5, delay: i * 0.08 }}
               className="glass-card"
               style={{ 
                 display: "flex", 
@@ -110,6 +122,17 @@ export default function Skills() {
           alignItems: "center"
         }}
       >
+        {/* Style block for GPU accelerated marquee on mobile */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes mobileMarquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-33.333%, 0, 0); }
+          }
+          .mobile-marquee-animated {
+            animation: mobileMarquee 45s linear infinite !important;
+          }
+        `}} />
+
         {/* Left & Right ambient fade elements */}
         <div style={{
           position: "absolute",
@@ -133,8 +156,8 @@ export default function Skills() {
         }} />
 
         <motion.div
-          animate={{ x: [0, -2000] }}
-          transition={{
+          animate={isMobile ? undefined : { x: [0, -2000] }}
+          transition={isMobile ? undefined : {
             x: {
               repeat: Infinity,
               repeatType: "loop",
@@ -142,6 +165,7 @@ export default function Skills() {
               ease: "linear"
             }
           }}
+          className={isMobile ? "mobile-marquee-animated" : ""}
           style={{
             display: "flex",
             gap: "24px",

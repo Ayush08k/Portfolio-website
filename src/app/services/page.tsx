@@ -1,12 +1,23 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Globe, Smartphone, Cpu, Sparkles, ShoppingBag, HelpCircle, Layers, Settings, ShieldCheck, Zap } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function ServicesPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const servicesData = [
     {
@@ -138,8 +149,8 @@ export default function ServicesPage() {
           {servicesData.map((svc, i) => (
             <motion.div
               key={svc.name}
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={isMobile ? undefined : { opacity: 0, y: 25 }}
+              animate={isMobile ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="svc-card glass-card"
               style={{ borderColor: `rgba(255, 255, 255, 0.05)` }}
@@ -264,7 +275,7 @@ export default function ServicesPage() {
           color: #f8fafc;
           padding: 120px 0 120px;
           position: relative;
-          overflow: hidden;
+          overflow-x: hidden;
         }
 
         .services-header {

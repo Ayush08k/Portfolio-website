@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { BLOG_POSTS, BlogPost } from "@/data/blog";
 import { Search, BookOpen, Clock, Calendar, ArrowRight, Sparkles, MessageSquare } from "lucide-react";
 import Link from "next/link";
@@ -9,6 +9,17 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function BlogIndex() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const categories = ["All", "Frontend", "Backend", "Mobile", "DevOps"];
 
@@ -79,9 +90,9 @@ export default function BlogIndex() {
                   filteredPosts.map((post, index) => (
                     <motion.article
                       key={post.slug}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
+                      initial={isMobile ? undefined : { opacity: 0, y: 20 }}
+                      animate={isMobile ? undefined : { opacity: 1, y: 0 }}
+                      exit={isMobile ? undefined : { opacity: 0, y: -20 }}
                       transition={{ duration: 0.4, delay: index * 0.05 }}
                       className="blog-card glass-card"
                     >
@@ -129,8 +140,8 @@ export default function BlogIndex() {
                   ))
                 ) : (
                   <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={isMobile ? undefined : { opacity: 0 }}
+                    animate={isMobile ? undefined : { opacity: 1 }}
                     className="no-results glass-card"
                   >
                     <h3>No articles found</h3>
@@ -172,7 +183,7 @@ export default function BlogIndex() {
           color: #f8fafc;
           padding: 120px 0 120px;
           position: relative;
-          overflow: hidden;
+          overflow-x: hidden;
         }
 
         .blog-header {
