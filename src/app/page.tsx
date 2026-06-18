@@ -62,6 +62,11 @@ function useSkillBars() {
 /* ─── 3D card tilt hook ─────────────────────────────────── */
 function useTilt(selector: string) {
   useEffect(() => {
+    // Disable 3D tilt effect on touch/mobile devices to prevent visual jitter/glitching
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    const isMobile = window.innerWidth <= 768;
+    if (isTouchDevice || isMobile) return;
+
     const handleMove = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const card = target.closest<HTMLElement>(selector);
