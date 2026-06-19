@@ -148,8 +148,8 @@ export const PORTFOLIO_DATA = {
       title: "JLM Tournaments",
       description: "A robust platform for organizing gaming tournaments featuring a sophisticated modal interface, event filtering, live match viewing, dynamic leaderboards, and comprehensive profile workflows.",
       tech: ["React", "Vite", "Supabase", "Express JS", "JavaScript", "Tailwind CSS"],
-      link: "https://github.com/Ayush08k/jlm-tournament",
-      github: "https://github.com/Ayush08k/jlm-tournament",
+      link: "#",
+      github: "#",
       image: "/jlm.png",
       slug: "jlm-tournaments",
       category: "Web",
@@ -284,6 +284,58 @@ export const PORTFOLIO_DATA = {
         "Three.js mobile frame rate fix",
         "VRAM optimization web 3D",
         "Creative frontend developer portfolio 3D"
+      ]
+    },
+    {
+      title: "Clothing E commerce Website",
+      description: "A premium clothing and fashion e-commerce storefront featuring interactive style selectors, dynamic collection pages, secure checkout flows, and user-friendly order tracking.",
+      tech: ["TypeScript", "Next.js", "React 19", "Tailwind CSS", "Framer Motion", "Node.js", "Express", "MongoDB", "Stripe API"],
+      link: "#",
+      github: "#",
+      image: "/project images/E-commerce.png",
+      slug: "clothing-ecommerce",
+      category: "E-Commerce",
+      longDescription: "Clothing E-commerce Website is a next-generation fashion retail storefront built to deliver an immersive and lightning-fast shopping experience. By combining Next.js Server Components with Framer Motion, it offers smooth micro-interactions, responsive lookbooks, and clean animations that mirror high-end fashion brands. It integrates a secure payment gateway with Stripe, implements automated order processing, and has a full-featured administrator dashboard for inventory management and sales analytics.",
+      lighthouseMetrics: {
+        performance: 98,
+        accessibility: 99,
+        bestPractices: 96,
+        seo: 100
+      },
+      features: [
+        "Interactive fashion lookbook with zoomable details and outfit selectors",
+        "Robust cart management and persistent wishlist with smooth animative feedback",
+        "Custom checkout experience powered by Stripe Elements and secure billing",
+        "Dynamic collection filtering based on size, color, brand, and price range"
+      ],
+      architecture: {
+        description: "Designed with Next.js App Router for server-rendered page optimization and dynamic search query updates. The checkout pipeline uses Stripe API webhooks to handle payments asynchronously and updates inventory status in a scalable MongoDB database.",
+        database: "MongoDB (via Mongoose)",
+        hosting: "Vercel & Render"
+      },
+      gallery: ["/project images/E-commerce.png"],
+      challenge: {
+        problem: "Rendering high-resolution product imagery and multi-layered collection page filters led to slow first-contentful-paint (FCP) times and layout shifts on mobile devices.",
+        solution: "Implemented Next.js Image optimization with blur-up placeholders, cached database queries with Redis, and deferred non-critical component loading using React Suspense."
+      },
+      seoTags: [
+        "Clothing E-Commerce Website",
+        "Next.js Fashion Storefront",
+        "Framer Motion E-Commerce",
+        "Stripe Payment Gateway React",
+        "High Performance E-Commerce Nextjs",
+        "Online Clothing Store Ayush",
+        "TypeScript E-commerce project",
+        "React 19 fashion e-commerce storefront",
+        "NodeJS Express backend e-commerce",
+        "MongoDB Mongoose shopping cart database",
+        "Core Web Vitals e-commerce optimization",
+        "Next.js App Router dynamic routes checkout",
+        "Stripe Elements customizable payment page",
+        "Responsive lookbook CSS grid Tailwind",
+        "Server-rendered e-commerce listing SEO",
+        "Freelance full-stack developer portfolio project",
+        "Ayush Kumar web developer project case study"
       ]
     }
   ] as Project[],

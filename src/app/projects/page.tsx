@@ -149,12 +149,12 @@ export default function ProjectsArchive() {
                       </Link>
                       
                       <div className="archive-card-links">
-                        {project.github && project.github !== "#" && (
+                        {project.github && project.github !== "#" && project.slug !== "jlm-tournaments" && (
                           <a href={project.github} target="_blank" rel="noopener noreferrer" className="archive-icon-link" data-hover aria-label="GitHub Repo">
                             <Code2 size={16} />
                           </a>
                         )}
-                        {project.link && project.link !== "#" && (
+                        {project.link && project.link !== "#" && project.slug !== "jlm-tournaments" && (
                           <a href={project.link} target="_blank" rel="noopener noreferrer" className="archive-icon-link" data-hover aria-label="Live Demo">
                             <ExternalLink size={16} />
                           </a>

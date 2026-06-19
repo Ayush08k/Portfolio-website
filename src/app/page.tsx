@@ -772,6 +772,7 @@ function SeoBlock() {
       <ul>
         <li>Feedo — Customer feedback and satisfaction platform built with React Native, Expo SDK 54, NestJS, and MongoDB</li>
         <li>Music Player App — Cross-platform music streaming app with React Native, Expo, and real-time audio visualization</li>
+        <li>Clothing E commerce Website — Premium fashion retail storefront with dynamic lookbooks, Stripe Elements, and Framer Motion</li>
         <li>E-Commerce Platform — Full-featured Next.js online store with Stripe, inventory management, and SEO optimization</li>
         <li>JLM Tournaments — Online gaming tournament platform with React, Vite, and Supabase real-time features</li>
         <li>Gurugram University Attendance Management System — Full stack attendance tracking with React, Node.js, and MongoDB</li>
