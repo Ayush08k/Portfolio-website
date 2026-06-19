@@ -14,7 +14,8 @@ import {
   CalendarRange, 
   Calculator,
   ArrowRight,
-  LayoutGrid
+  LayoutGrid,
+  Box
 } from "lucide-react";
 
 export interface EstimatorData {
@@ -40,7 +41,7 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "landing",
     name: "Landing Page",
-    basePrice: 600,
+    basePrice: 150,
     description: "High-conversion single-page marketing or campaign website.",
     baseScreens: 1,
     baseWeeks: 1,
@@ -49,7 +50,7 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "webapp",
     name: "SaaS / Full Stack App",
-    basePrice: 1000,
+    basePrice: 600,
     description: "Scalable, end-to-end full stack web application with user dashboard.",
     baseScreens: 6,
     baseWeeks: 4,
@@ -58,7 +59,7 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "mobile",
     name: "Mobile App (iOS/Android)",
-    basePrice: 2000,
+    basePrice: 750,
     description: "Cross-platform mobile application built with React Native & Expo.",
     baseScreens: 8,
     baseWeeks: 7,
@@ -67,7 +68,7 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "ecommerce",
     name: "E-Commerce Store",
-    basePrice: 1500,
+    basePrice: 400,
     description: "Shopify Custom Liquid or Next.js store with checkout integration.",
     baseScreens: 5,
     baseWeeks: 5,
@@ -76,11 +77,20 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "ai",
     name: "AI Integration & Agents",
-    basePrice: 1600,
+    basePrice: 400,
     description: "Intelligent web agents, LLM automation flows, or AI chatbot helpers.",
     baseScreens: 4,
     baseWeeks: 5,
     icon: Cpu,
+  },
+  {
+    id: "threed",
+    name: "3D Site",
+    basePrice: 250,
+    description: "Immersive 3D interactive web experiences using WebGL/Three.js/Spline.",
+    baseScreens: 3,
+    baseWeeks: 3,
+    icon: Box,
   },
 ];
 
@@ -96,28 +106,28 @@ const ADD_ONS: AddOn[] = [
   {
     id: "ai",
     name: "AI Personalization Engine",
-    price: 800,
+    price: 150,
     description: "Add user recommendations, semantic search, or advanced NLP filters.",
     icon: Cpu,
   },
   {
     id: "payments",
     name: "Secure Stripe Payments",
-    price: 500,
+    price: 300,
     description: "Add subscription billing, shopping carts, and Stripe checkout.",
     icon: CreditCard,
   },
   {
     id: "cms",
     name: "CMS Content Manager",
-    price: 800,
+    price: 150,
     description: "WordPress/Shopify admin backend or custom dashboard integration.",
     icon: Layers,
   },
   {
     id: "rush",
     name: "Priority Rush Delivery",
-    price: 1000,
+    price: 250,
     description: "Accelerate your project schedule by 35% - 50% priority support.",
     icon: Zap,
   },
@@ -148,7 +158,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
   // Calculations
   const basePrice = selectedType.basePrice;
   const extraScreens = Math.max(0, screens - selectedType.baseScreens);
-  const screensCost = extraScreens * 150;
+  const screensCost = extraScreens * 50;
   
   const addOnsCost = selectedAddOns.reduce((total, addOnId) => {
     const addOn = ADD_ONS.find((a) => a.id === addOnId);
@@ -182,8 +192,8 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
     timelineString = `${minDays}-${maxDays} Days`;
   } else {
     // For other types in weeks
-    let minWeeks = selectedType.id === "webapp" ? 3 : selectedType.id === "mobile" ? 6 : 4; // webapp: 3-5, mobile: 6-9, ecommerce/ai: 4-6
-    let maxWeeks = selectedType.id === "webapp" ? 5 : selectedType.id === "mobile" ? 9 : 6;
+    let minWeeks = selectedType.id === "webapp" ? 3 : selectedType.id === "mobile" ? 6 : selectedType.id === "threed" ? 2 : 4; // webapp: 3-5, mobile: 6-9, threed: 2-4, ecommerce/ai: 4-6
+    let maxWeeks = selectedType.id === "webapp" ? 5 : selectedType.id === "mobile" ? 9 : selectedType.id === "threed" ? 4 : 6;
     
     // Add time for extra screens
     const screensAddition = Math.ceil(extraScreens / 3);
