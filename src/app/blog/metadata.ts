@@ -257,7 +257,7 @@ export const metadata: Metadata = {
     description:
       "Expert tutorials, comparisons, tips, and freelance insights by Ayush Kumar. Topics: Next.js, React Native, Node.js, NestJS, TypeScript, AI integrations, SaaS, and developer career growth.",
     url: `${siteUrl}/blog`,
-    siteName: "Ayush Kumar — Portfolio",
+    siteName: "Freelancer Ayush",
     images: [
       {
         url: `${siteUrl}/myprofile.png`,

@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     description:
       "Design your custom web or mobile application scope in real-time. Calculate instant transparent estimates for SaaS, mobile apps, e-commerce, and AI integrations.",
     url: `${siteUrl}/estimator`,
-    siteName: "Ayush Kumar — Portfolio",
+    siteName: "Freelancer Ayush",
     images: [
       {
         url: `${siteUrl}/myprofile.png`,

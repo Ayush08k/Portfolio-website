@@ -230,7 +230,7 @@ export const metadata: Metadata = {
     description:
       "End-to-end freelance development services: web apps, mobile apps, AI integrations, SaaS portals, e-commerce, APIs, and more. Affordable, reliable, and world-class quality by Ayush Kumar.",
     url: `${siteUrl}/services`,
-    siteName: "Ayush Kumar — Portfolio",
+    siteName: "Freelancer Ayush",
     images: [
       {
         url: `${siteUrl}/myprofile.png`,

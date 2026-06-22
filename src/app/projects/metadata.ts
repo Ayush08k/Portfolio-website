@@ -253,7 +253,7 @@ export const metadata: Metadata = {
     description:
       "Detailed case studies and live project demos by Ayush Kumar — SaaS dashboards, React Native mobile apps, AI integrations, e-commerce stores, tournament platforms, and more.",
     url: `${siteUrl}/projects`,
-    siteName: "Ayush Kumar — Portfolio",
+    siteName: "Freelancer Ayush",
     images: [
       {
         url: `${siteUrl}/myprofile.png`,

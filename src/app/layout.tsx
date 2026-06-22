@@ -4,7 +4,7 @@ import Cursor from "@/components/Cursor";
 import Navbar from "@/components/Navbar";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
-const siteName = "Ayush Kumar — Portfolio";
+const siteName = "Freelancer Ayush";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -319,8 +319,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "WebSite",
     "@id": `${siteUrl}/#website`,
     url: siteUrl,
-    name: "Ayush Kumar",
-    alternateName: ["Ayush Kumar Portfolio", "Freelance Ayush"],
+    name: "Freelancer Ayush",
+    alternateName: ["Freelancer Ayush", "Ayush Kumar — Portfolio"],
     description:
       "Ayush Kumar — Top Freelance Full Stack & Mobile App Developer. Specializing in high-performance web applications, React Native mobile apps, and AI integrations. Hire me today for custom, scalable software.",
     author: { "@id": `${siteUrl}/#person` },

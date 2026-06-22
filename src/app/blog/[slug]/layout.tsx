@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${post.title} | Ayush Kumar Blog`,
       description: post.description,
       url: `${siteUrl}/blog/${post.slug}`,
-      siteName: "Ayush Kumar — Portfolio",
+      siteName: "Freelancer Ayush",
       images: [
         {
           url: post.image.startsWith("http") ? post.image : `${siteUrl}${post.image}`,
