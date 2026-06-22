@@ -299,7 +299,7 @@ function Projects() {
         </div>
 
         <div className="projects-grid">
-          {PORTFOLIO_DATA.projects.map((p, i) => (
+          {PORTFOLIO_DATA.projects.slice(0, 6).map((p, i) => (
             <div
               className={`project-card reveal${i % 2 !== 0 ? " reversed" : ""}`}
               key={p.title}
@@ -338,6 +338,13 @@ function Projects() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "56px" }} className="reveal">
+          <Link href="/projects" className="btn-primary" data-hover>
+            <span>More Projects</span>
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </section>

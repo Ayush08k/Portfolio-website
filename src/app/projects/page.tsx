@@ -21,7 +21,7 @@ export default function ProjectsArchive() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const categories = ["All", "Web", "Mobile", "E-Commerce"];
+  const categories = ["All", "Web", "Mobile", "AI", "E-Commerce", "SaaS"];
 
   const filteredProjects = useMemo(() => {
     return PORTFOLIO_DATA.projects.filter((project) => {
@@ -40,8 +40,12 @@ export default function ProjectsArchive() {
         return <Globe size={16} className="text-cyan" />;
       case "Mobile":
         return <Smartphone size={16} className="text-purple" />;
+      case "AI":
+        return <Cpu size={16} className="text-pink" style={{ color: "#ec4899" }} />;
       case "E-Commerce":
         return <ShoppingBag size={16} className="text-green" />;
+      case "SaaS":
+        return <Sparkles size={16} className="text-yellow" style={{ color: "#eab308" }} />;
       default:
         return <Cpu size={16} />;
     }
