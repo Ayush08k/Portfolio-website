@@ -6,7 +6,7 @@ export interface Project {
   link?: string;
   github?: string;
   slug: string;
-  category: "Web" | "Mobile" | "AI" | "E-Commerce";
+  category: "Web" | "Mobile" | "AI" | "E-Commerce" | "SaaS";
   longDescription: string;
   lighthouseMetrics?: {
     performance: number;
@@ -701,7 +701,7 @@ export const PORTFOLIO_DATA = {
       title: "Whisper Chat App",
       description: "A secure, end-to-end encrypted chat application utilizing the Signal protocol for private messaging.",
       tech: ["React Native", "Expo", "WebRTC", "SQLite", "Node.js", "Socket.IO", "TypeScript"],
-      image: "/super.png",
+      image: "/project images/whisper chat.png",
       slug: "whisper-chat-app",
       category: "Mobile",
       longDescription: "Whisper guarantees privacy by implementing the Signal double-ratchet encryption protocol. All messages, voice notes, and media are encrypted locally before transmission, ensuring that no interceptor can read logs.",
@@ -717,14 +717,14 @@ export const PORTFOLIO_DATA = {
         database: "SQLite (with SQLCipher encryption)",
         hosting: "Google Play Store & VPS"
       },
-      gallery: ["/super.png"],
+      gallery: ["/project images/whisper chat.png"],
       seoTags: ["Whisper Encrypted Chat", "React Native Signal Protocol", "WebRTC mobile video calling", "SQLite SQLCipher secure chat"]
     },
     {
       title: "CryptoPulse Tracker",
       description: "A beautiful cryptocurrency portfolio tracker with price widgets, alert thresholds, and news curation.",
       tech: ["Kotlin", "Android SDK", "Jetpack Compose", "Room Database", "Retrofit", "Coingecko API"],
-      image: "/feedo.png",
+      image: "/project images/crypto tracker.png",
       slug: "cryptopulse-tracker",
       category: "Mobile",
       longDescription: "CryptoPulse allows traders to track their portfolios across multiple chains. It connects to cryptocurrency data sources, displaying live token values, tracking gains/losses, and alerting users of market movements.",
@@ -740,14 +740,14 @@ export const PORTFOLIO_DATA = {
         database: "Room Database (SQLite)",
         hosting: "Google Play Store"
       },
-      gallery: ["/feedo.png"],
+      gallery: ["/project images/crypto tracker.png"],
       seoTags: ["CryptoPulse Tracker Android", "Kotlin Room database crypto", "Jetpack Compose candle charts", "Coingecko API wallet tracker"]
     },
     {
       title: "EcoTrack Carbon Counter",
       description: "An app letting users record their daily travel and food choices to calculate and offset their carbon footprint.",
       tech: ["React Native", "Expo", "Supabase", "Node.js", "Mapbox", "TypeScript"],
-      image: "/music.png",
+      image: "/project images/ecotrack.png",
       slug: "ecotrack-carbon-counter",
       category: "Mobile",
       longDescription: "EcoTrack gamifies carbon offset goals by analyzing travel habits, utility invoices, and meal logs. Users track their carbon savings, compete in community challenges, and purchase offsets from certified tree-planting initiatives.",
@@ -763,14 +763,14 @@ export const PORTFOLIO_DATA = {
         database: "Supabase (PostgreSQL)",
         hosting: "Google Play Store & Supabase Cloud"
       },
-      gallery: ["/music.png"],
+      gallery: ["/project images/ecotrack.png"],
       seoTags: ["EcoTrack Carbon Counter", "React Native carbon tracker", "Supabase mobile offset checker", "Expo location tracking app"]
     },
     {
       title: "BookShelf Library & Reader",
       description: "An ebook reader and cataloging app with EPUB support, reading highlights, and audio narration.",
       tech: ["Android SDK", "Kotlin", "Room Database", "Retrofit", "ExoPlayer", "Jetpack Compose"],
-      image: "/feedo.png",
+      image: "/project images/bookself.png",
       slug: "bookshelf-reader",
       category: "Mobile",
       longDescription: "BookShelf is a native Android e-reader. It renders EPUB books with custom page layout options, manages digital collections, and generates natural-sounding audio narratives from text components.",
@@ -786,7 +786,7 @@ export const PORTFOLIO_DATA = {
         database: "Room Database",
         hosting: "Google Play Store"
       },
-      gallery: ["/feedo.png"],
+      gallery: ["/project images/bookself.png"],
       seoTags: ["BookShelf Reader Android", "Kotlin EPUB viewer", "Android text to speech book reader", "Room database book organizer"]
     },
 
@@ -795,7 +795,7 @@ export const PORTFOLIO_DATA = {
       title: "Interactive Coding Sandbox",
       description: "A browser-based code editor and previewer executing HTML, CSS, and JS in a secure iframe sandbox.",
       tech: ["React", "Monaco Editor", "Tailwind CSS", "Vite", "Web Workers", "TypeScript"],
-      image: "/jlm.png",
+      image: "/project images/coding sandbox.png",
       slug: "interactive-code-sandbox",
       category: "Web",
       longDescription: "An online sandbox for web developers. It runs code on-the-fly inside isolated iframes, providing console feedback and preview screens. Web Workers compile code templates, ensuring that infinite loops won't crash the editor.",
@@ -811,14 +811,14 @@ export const PORTFOLIO_DATA = {
         database: "LocalStorage & URL State",
         hosting: "Vercel & Netlify"
       },
-      gallery: ["/jlm.png"],
+      gallery: ["/project images/coding sandbox.png"],
       seoTags: ["Interactive Coding Sandbox", "Monaco Editor React component", "Iframe sandboxed code previewer", "Web Workers Javascript compiler"]
     },
     {
       title: "DevDock Documentation Platform",
       description: "A lightning-fast MDX markdown docs platform with versioning, instant global search, and clean design.",
       tech: ["Next.js", "MDX", "Algolia Search", "Tailwind CSS", "TypeScript", "Vercel"],
-      image: "/super.png",
+      image: "/project images/devdock.png",
       slug: "devdock-docs-platform",
       category: "Web",
       longDescription: "DevDock helps software teams ship product documentation fast. It parses MDX files into pages, styling tables and code blocks automatically. Algolia indexes pages, delivering search results as the user types.",
@@ -834,14 +834,14 @@ export const PORTFOLIO_DATA = {
         database: "Git Repository & Algolia Index",
         hosting: "Vercel & GitHub Actions"
       },
-      gallery: ["/super.png"],
+      gallery: ["/project images/devdock.png"],
       seoTags: ["DevDock Docs Platform", "NextJS MDX documentation", "Algolia search static site documentation", "Unified compiler markdown React"]
     },
     {
       title: "Vibrant Agency Portfolio",
       description: "A highly interactive 3D WebGL agency landing page featuring fluid cursor trails and smooth scrolling.",
       tech: ["HTML5", "CSS3", "JavaScript", "GSAP", "Three.js", "Canvas API"],
-      image: "/project images/starbucks.png",
+      image: "/project images/agency portfolio.png",
       slug: "vibrant-agency-portfolio",
       category: "Web",
       longDescription: "A creative landing page built to push the limits of modern browser capabilities. It merges WebGL scenes, custom shader textures, and GSAP scroll triggers, building a memorable sensory narrative for visiting users.",
@@ -857,14 +857,14 @@ export const PORTFOLIO_DATA = {
         database: "None (Static Website)",
         hosting: "GitHub Pages & Cloudflare CDN"
       },
-      gallery: ["/project images/starbucks.png"],
+      gallery: ["/project images/agency portfolio.png"],
       seoTags: ["Vibrant Agency Portfolio", "Threejs WebGL portfolio template", "GSAP ScrollTrigger creative page", "Custom fragment shader interactive canvas"]
     },
     {
       title: "GitVisual Pull Request Reviewer",
       description: "A web app generating visual branch graphs and diff trees to simplify GitHub code reviews.",
       tech: ["React", "TypeScript", "GitHub REST API", "D3.js", "Node.js", "Express"],
-      image: "/jlm.png",
+      image: "/project images/gitvisual.png",
       slug: "gitvisual-pr-reviewer",
       category: "Web",
       longDescription: "GitVisual offers an interactive alternative to GitHub's file diff lists. It processes change histories, mapping files onto D3 radial graphs. Code files are colored based on change size, highlighting risky commits.",
@@ -880,14 +880,14 @@ export const PORTFOLIO_DATA = {
         database: "Redis Cache",
         hosting: "Render & Vercel"
       },
-      gallery: ["/jlm.png"],
+      gallery: ["/project images/gitvisual.png"],
       seoTags: ["GitVisual PR Reviewer", "D3js code change visualizer", "GitHub REST API developer dashboard", "React Git diff graph"]
     },
     {
       title: "Zenith Headless Blog CMS",
       description: "A headless blog system with a visual editor, media library, and static site generator webhooks.",
       tech: ["Next.js", "Node.js", "Express.js", "MongoDB", "AWS S3", "GraphQL", "TypeScript"],
-      image: "/super.png",
+      image: "/project images/zenith.png",
       slug: "zenith-blog-cms",
       category: "Web",
       longDescription: "Zenith offers a headless editing environment for writers. Content creators draft blogs within block-based visual editors, while developers query content via high-speed GraphQL endpoints for static pages.",
@@ -903,14 +903,14 @@ export const PORTFOLIO_DATA = {
         database: "MongoDB (Mongoose Schema)",
         hosting: "AWS ECS & Vercel"
       },
-      gallery: ["/super.png"],
+      gallery: ["/project images/zenith.png"],
       seoTags: ["Zenith Headless Blog CMS", "NestJS GraphQL blog engine", "AWS S3 media library CMS", "MongoDB NextJS block editor"]
     },
     {
       title: "AssetHub Digital Asset Manager",
       description: "A portal for designers to store, tag, convert, and collaborate on heavy asset files.",
       tech: ["React", "Node.js", "Express.js", "PostgreSQL", "Cloudinary", "AWS S3", "TypeScript"],
-      image: "/e-commerce.png",
+      image: "/project images/assethub.png",
       slug: "assethub-digital-asset",
       category: "Web",
       longDescription: "AssetHub enables design teams to index visual libraries. Users upload PNGs, SVGs, and heavy video clips, tag them using AI recognition, and convert them to web formats (WebP, MP4) directly in the browser.",
@@ -926,14 +926,14 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL & Redis",
         hosting: "DigitalOcean droplets"
       },
-      gallery: ["/e-commerce.png"],
+      gallery: ["/project images/assethub.png"],
       seoTags: ["AssetHub Digital Asset Manager", "Sharp image conversion React", "AWS S3 bulk media uploader", "PostgreSQL file indexing SaaS"]
     },
     {
       title: "MindMap Collaborative Brainstormer",
       description: "A collaborative mind-mapping tool with real-time pointer sharing and auto-save canvas.",
       tech: ["Next.js", "React Flow", "Supabase Realtime", "Tailwind CSS", "TypeScript"],
-      image: "/jlm.png",
+      image: "/project images/mindmap.png",
       slug: "mindmap-brainstormer",
       category: "Web",
       longDescription: "MindMap brings brainstorming sessions online. Users construct node-based mind maps on infinite canvases. Supabase synchronizes changes, showing team cursor coordinates and text edits as they happen.",
@@ -949,14 +949,14 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL (Supabase)",
         hosting: "Vercel & Supabase Cloud"
       },
-      gallery: ["/jlm.png"],
+      gallery: ["/project images/mindmap.png"],
       seoTags: ["MindMap Brainstormer", "React Flow infinite canvas", "Supabase Realtime cursor sharing", "Collaborative design dashboard NextJS"]
     },
     {
       title: "StatLink Link Shortener",
       description: "An enterprise URL shortener with geo-location tracking, QR codes, and performance graphs.",
       tech: ["Next.js", "Redis", "PostgreSQL", "Chart.js", "Tailwind CSS", "TypeScript"],
-      image: "/feedo.png",
+      image: "/project images/statlink.png",
       slug: "statlink-link-shortener",
       category: "Web",
       longDescription: "StatLink provides marketing teams with secure URL aliases. When clicked, it logs browser properties, referring sites, and geo-locations, routing users to their destination within milliseconds.",
@@ -972,14 +972,14 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL & Redis DB",
         hosting: "Vercel & Upstash Redis"
       },
-      gallery: ["/feedo.png"],
+      gallery: ["/project images/statlink.png"],
       seoTags: ["StatLink Link Shortener", "Redis Edge URL routing", "NextJS URL redirection dashboard", "ChartJS analytics short links"]
     },
     {
       title: "CollabEdit Realtime Editor",
       description: "An online rich text editor allowing simultaneous document editing with cursor presence.",
       tech: ["React", "Quill.js", "Yjs", "WebSockets", "Express.js", "TypeScript"],
-      image: "/super.png",
+      image: "/project images/collabedit.png",
       slug: "collabedit-realtime-editor",
       category: "Web",
       longDescription: "CollabEdit replicates the collaborative writing features of Google Docs. Using conflict-free replicated data types (CRDTs), it resolves typing overlaps without requiring central coordination, keeping document states aligned.",
@@ -995,14 +995,14 @@ export const PORTFOLIO_DATA = {
         database: "SQLite (document history)",
         hosting: "Render droplet & Vercel"
       },
-      gallery: ["/super.png"],
+      gallery: ["/project images/collabedit.png"],
       seoTags: ["CollabEdit Realtime Editor", "QuillJS collaborative editor", "Yjs CRDT text synchronization", "WebSocket Express text editor"]
     },
     {
       title: "Apex Task Board",
       description: "A sleek project management tool inspired by Linear with shortcuts, fast navigation, and dark styling.",
       tech: ["React", "Redux Toolkit", "Tailwind CSS", "Node.js", "MongoDB", "TypeScript"],
-      image: "/jlm.png",
+      image: "/project images/apex.png",
       slug: "apex-task-board",
       category: "Web",
       longDescription: "Apex is built for developers who favor keyboard-centric interfaces. With full keyboard shortcuts, command menus, and high-performance list filters, developers can search and manage tasks without clicking.",
@@ -1018,7 +1018,7 @@ export const PORTFOLIO_DATA = {
         database: "MongoDB (Mongoose ODM)",
         hosting: "AWS EC2 & Vercel"
       },
-      gallery: ["/jlm.png"],
+      gallery: ["/project images/apex.png"],
       seoTags: ["Apex Task Board", "Linear alternative React dashboard", "Command palette Ctrl K search", "MongoDB MERN developer board"]
     },
 
@@ -1027,7 +1027,7 @@ export const PORTFOLIO_DATA = {
       title: "InvoiceFlow SaaS",
       description: "A automated client invoicing and subscription billing platform for freelance agencies and consulting firms.",
       tech: ["Next.js", "Stripe Billing", "Node.js", "Express.js", "PostgreSQL", "Prisma", "TypeScript"],
-      image: "/vanguard.png",
+      image: "/project images/invoiceflow.png",
       slug: "invoiceflow-saas",
       category: "SaaS",
       longDescription: "InvoiceFlow automates invoicing pipelines for professional service firms. It handles recurring billing schedules, sends reminders to clients automatically, and matches bank accounts to settle ledger balances.",
@@ -1043,14 +1043,14 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL (Prisma ORM)",
         hosting: "Vercel & Supabase Cloud"
       },
-      gallery: ["/vanguard.png"],
+      gallery: ["/project images/invoiceflow.png"],
       seoTags: ["InvoiceFlow SaaS Billing", "Stripe billing NextJS platform", "Prisma PostgreSQL invoice engine", "Automated freelance invoice generator"]
     },
     {
       title: "PagePulse Analytics",
       description: "A privacy-friendly, lightweight web analytics platform tracking traffic, referrers, and goals in real-time.",
       tech: ["Next.js", "ClickHouse", "Node.js", "Redis", "Tailwind CSS", "TypeScript"],
-      image: "/lumina.png",
+      image: "/project images/pagepulse.png",
       slug: "pagepulse-analytics-saas",
       category: "SaaS",
       longDescription: "PagePulse offers a lightweight alternative to Google Analytics. It tracks page views, user sessions, and custom conversion events without deploying tracking cookies, remaining compliant with GDPR regulations.",
@@ -1066,14 +1066,14 @@ export const PORTFOLIO_DATA = {
         database: "ClickHouse (OLAP) & Redis",
         hosting: "AWS EC2 & Vercel"
       },
-      gallery: ["/lumina.png"],
+      gallery: ["/project images/pagepulse.png"],
       seoTags: ["PagePulse Analytics SaaS", "GDPR compliant web analytics", "ClickHouse high volume analytics NextJS", "Lightweight tracking script dashboard"]
     },
     {
       title: "MailBlast Email Marketer",
       description: "A self-hosted email newsletter platform managing list segments, campaign builders, and tracking.",
       tech: ["Next.js", "Node.js", "Amazon SES", "PostgreSQL", "Redis", "BullMQ", "TypeScript"],
-      image: "/e-commerce.png",
+      image: "/project images/mailblast.png",
       slug: "mailblast-email-saas",
       category: "SaaS",
       longDescription: "MailBlast provides companies with marketing newsletter control. It imports lists, constructs templates in block editors, and sends messages via Amazon SES, reducing monthly marketing costs.",
@@ -1089,14 +1089,14 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL & Redis queue",
         hosting: "AWS ECS & Vercel"
       },
-      gallery: ["/e-commerce.png"],
+      gallery: ["/project images/mailblast.png"],
       seoTags: ["MailBlast Email Marketer", "Amazon SES newsletter SaaS", "BullMQ background worker NextJS", "Drag drop email editor React"]
     },
     {
       title: "SiteGuard Uptime Monitor",
       description: "A monitoring service checking HTTP/TCP endpoints every minute, alerting via SMS, Slack, or email.",
       tech: ["React", "NestJS", "Redis", "PostgreSQL", "Twilio", "SendGrid", "TypeScript"],
-      image: "/vanguard.png",
+      image: "/project images/siteguard.png",
       slug: "siteguard-uptime-saas",
       category: "SaaS",
       longDescription: "SiteGuard monitors company websites for downtime. It executes request checks, logs response latency, and sends instant alerts via Twilio and Slack if error status codes are returned.",
@@ -1112,14 +1112,14 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL & Redis",
         hosting: "DigitalOcean Droplet & Vercel"
       },
-      gallery: ["/vanguard.png"],
+      gallery: ["/project images/siteguard.png"],
       seoTags: ["SiteGuard Uptime Monitor", "NestJS cron service checks", "Twilio API SMS downtime warning", "Uptime status page SaaS"]
     },
     {
       title: "DocuSigner PDF Contract Platform",
       description: "A SaaS platform enabling companies to upload contracts, place signature fields, and request signatures.",
       tech: ["Next.js", "PDF-lib", "Node.js", "Express.js", "MongoDB", "AWS S3", "TypeScript"],
-      image: "/lumina.png",
+      image: "/project images/docusigner.png",
       slug: "docusigner-contract-saas",
       category: "SaaS",
       longDescription: "DocuSigner streamlines signing workflows. Users upload PDF documents, drag dynamic signing areas onto sheets, and invite signers, receiving email notifications when signatures are completed.",
@@ -1135,14 +1135,14 @@ export const PORTFOLIO_DATA = {
         database: "MongoDB (Mongoose ODM)",
         hosting: "AWS ECS & Vercel"
       },
-      gallery: ["/lumina.png"],
+      gallery: ["/project images/docusigner.png"],
       seoTags: ["DocuSigner PDF SaaS", "PDF lib canvas drawing signatures", "AWS S3 contract locker", "Secure document audit trail"]
     },
     {
       title: "TaskSync Enterprise CRM",
       description: "A client relationship management portal with pipeline workflows, lead scoring, and meeting schedules.",
       tech: ["React", "NestJS", "PostgreSQL", "Supabase", "Google Calendar API", "TypeScript"],
-      image: "/e-commerce.png",
+      image: "/project images/tasksync.png",
       slug: "tasksync-crm-saas",
       category: "SaaS",
       longDescription: "TaskSync helps sales teams organize lead pipelines. It logs client interactions, scores lead profiles using business metrics, and syncs team calendars to coordinate client appointments.",
@@ -1158,14 +1158,14 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL (Supabase)",
         hosting: "Supabase & Vercel"
       },
-      gallery: ["/e-commerce.png"],
+      gallery: ["/project images/tasksync.png"],
       seoTags: ["TaskSync Enterprise CRM", "NestJS Google Calendar API CRM", "Sales pipeline drag drop React", "Supabase PostgreSQL client dashboard"]
     },
     {
       title: "FormForge Form Builder",
       description: "A SaaS to build beautiful, custom contact forms and host them with secure endpoints, exporting responses.",
       tech: ["Next.js", "Tailwind CSS", "PostgreSQL", "Prisma", "Resend API", "TypeScript"],
-      image: "/vanguard.png",
+      image: "/project images/formforge.png",
       slug: "formforge-builder-saas",
       category: "SaaS",
       longDescription: "FormForge enables users to publish forms without programming. Users assemble form inputs in visual builders, embed forms on their websites, and route submitted answers directly to email boxes.",
@@ -1181,14 +1181,14 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL (Prisma ORM)",
         hosting: "Vercel & Supabase Cloud"
       },
-      gallery: ["/vanguard.png"],
+      gallery: ["/project images/formforge.png"],
       seoTags: ["FormForge Form Builder", "NextJS drag drop form editor", "Resend API email contact notifications", "Prisma Postgres form submissions"]
     },
     {
       title: "SocialPulse Scheduler",
       description: "A multi-channel social media publisher allowing users to schedule and preview posts for X, LinkedIn, and Instagram.",
       tech: ["Next.js", "Node.js", "Buffer API", "PostgreSQL", "Redis", "BullMQ", "TypeScript"],
-      image: "/lumina.png",
+      image: "/project images/social.png",
       slug: "socialpulse-scheduler-saas",
       category: "SaaS",
       longDescription: "SocialPulse consolidates social postings. Users compile message campaigns, preview layouts across platforms, and schedule drafts, letting the platform release updates to networks automatically.",
@@ -1204,14 +1204,14 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL & Redis DB",
         hosting: "AWS ECS & Vercel"
       },
-      gallery: ["/lumina.png"],
+      gallery: ["/project images/social.png"],
       seoTags: ["SocialPulse Scheduler SaaS", "NextJS Buffer api social compiler", "BullMQ social queue Redis", "Multi channel scheduler dashboard"]
     },
     {
       title: "KubeDash Kubernetes Monitor",
       description: "A developer dashboard aggregating logs, resource usage, and health states of Kubernetes clusters.",
       tech: ["Next.js", "Kubernetes API", "Prometheus", "Grafana", "Node.js", "TypeScript"],
-      image: "/e-commerce.png",
+      image: "/project images/kube.png",
       slug: "kubedash-k8s-saas",
       category: "SaaS",
       longDescription: "KubeDash offers system administrators visual control of cloud environments. It aggregates pod states, tracks CPU utilization, and streams deployment log files directly to developer screens.",
@@ -1227,14 +1227,14 @@ export const PORTFOLIO_DATA = {
         database: "Redis Cache",
         hosting: "EKS (Elastic Kubernetes Service)"
       },
-      gallery: ["/e-commerce.png"],
+      gallery: ["/project images/kube.png"],
       seoTags: ["KubeDash Kubernetes Dashboard", "NextJS Kubernetes api terminal logs", "Prometheus container metrics dashboard", "EKS container state monitor"]
     },
     {
       title: "SupportGenie Ticketing",
       description: "A multi-agent support ticketing hub integrating emails, chats, and FAQs into a single inbox.",
       tech: ["React", "Node.js", "Socket.IO", "PostgreSQL", "Sequelize", "AWS S3", "TypeScript"],
-      image: "/vanguard.png",
+      image: "/project images/support.png",
       slug: "supportgenie-ticketing-saas",
       category: "SaaS",
       longDescription: "SupportGenie organizes customer inquiries. It consolidates support tickets from chat widgets and email routes, tracks agent response times, and suggests answers using built-in knowledge bases.",
@@ -1250,7 +1250,7 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL (Sequelize ORM)",
         hosting: "AWS EC2 & Vercel"
       },
-      gallery: ["/vanguard.png"],
+      gallery: ["/project images/support.png"],
       seoTags: ["SupportGenie Support Ticketing", "Socket.IO helpdesk chat React", "Sequelize Postgres ticket manager", "Unified client service dashboard"]
     }
   ] as Project[],
