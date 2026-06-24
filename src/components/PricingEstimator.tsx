@@ -254,6 +254,10 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                 </div>
               </div>
 
+              <p className="pricing-disclaimer-india" style={{ marginTop: 0, marginBottom: "20px" }}>
+                🇮🇳 <strong>For Indian Clients & Startups:</strong> Special localized rates are available. We can discuss and negotiate the final price to fit your budget!
+              </p>
+
               <div className="type-cards-grid">
                 {PROJECT_TYPES.map((type) => {
                   const Icon = type.icon;
