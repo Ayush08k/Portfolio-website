@@ -234,7 +234,7 @@ export default function AboutPage() {
       <style>{`
         .about-page {
           min-height: 100vh;
-          background: #030014;
+          background: #000000;
           color: #f8fafc;
           padding: 120px 0 120px;
           position: relative;
@@ -361,7 +361,7 @@ export default function AboutPage() {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #030014;
+          color: #000000;
           box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
         }
 

@@ -159,10 +159,10 @@ export default function HiringAgentSandbox() {
               width: "60px",
               height: "60px",
               borderRadius: "50%",
-              background: "linear-gradient(135deg, #112240 0%, #0a192f 100%)",
-              border: "2px solid #64ffda",
-              boxShadow: "0 0 20px rgba(100, 255, 218, 0.3)",
-              color: "#64ffda",
+              background: "linear-gradient(135deg, #1f1f1f 0%, #000000 100%)",
+              border: "2px solid #ffffff",
+              boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)",
+              color: "#ffffff",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -170,7 +170,7 @@ export default function HiringAgentSandbox() {
               cursor: "pointer",
               outline: "none",
             }}
-            whileHover={{ scale: 1.1, boxShadow: "0 0 30px rgba(100, 255, 218, 0.6)" }}
+            whileHover={{ scale: 1.1, boxShadow: "0 0 30px rgba(255, 255, 255, 0.35)" }}
             whileTap={{ scale: 0.95 }}
           >
             <Bot size={28} className="animate-pulse" />
@@ -201,9 +201,9 @@ export default function HiringAgentSandbox() {
             style={{
               position: "fixed",
               zIndex: 998,
-              background: "rgba(10, 25, 47, 0.95)",
-              border: isMobile ? "none" : "1px solid rgba(100, 255, 218, 0.15)",
-              boxShadow: "0 20px 40px rgba(2, 12, 27, 0.8)",
+              background: "rgba(0, 0, 0, 0.95)",
+              border: isMobile ? "none" : "1px solid rgba(255, 255, 255, 0.1)",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.8)",
               backdropFilter: "blur(20px)",
               display: "flex",
               flexDirection: "column",
@@ -229,11 +229,11 @@ export default function HiringAgentSandbox() {
             <div
               style={{
                 padding: "20px",
-                borderBottom: "1px solid rgba(100, 255, 218, 0.1)",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                background: "rgba(17, 34, 64, 0.6)",
+                background: "rgba(255, 255, 255, 0.02)",
                 borderTopLeftRadius: isMobile ? 0 : "16px",
                 borderTopRightRadius: isMobile ? 0 : "16px",
               }}
@@ -243,7 +243,7 @@ export default function HiringAgentSandbox() {
                   <button
                     onClick={() => setIsOpen(false)}
                     style={{
-                      color: "#64ffda",
+                      color: "#ffffff",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -258,11 +258,11 @@ export default function HiringAgentSandbox() {
                       width: "36px",
                       height: "36px",
                       borderRadius: "50%",
-                      background: "rgba(100, 255, 218, 0.1)",
+                      background: "rgba(255, 255, 255, 0.08)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      color: "#64ffda",
+                      color: "#ffffff",
                     }}
                   >
                     <Bot size={20} />
@@ -280,7 +280,7 @@ export default function HiringAgentSandbox() {
                     }}
                   >
                     Hiring Agent AI
-                    <Sparkles size={14} style={{ color: "#64ffda" }} />
+                    <Sparkles size={14} style={{ color: "#ffffff" }} />
                   </h3>
                   <p style={{ fontSize: "12px", color: "#8892b0", display: "flex", alignItems: "center", gap: "5px" }}>
                     <span
@@ -288,8 +288,8 @@ export default function HiringAgentSandbox() {
                         width: "6px",
                         height: "6px",
                         borderRadius: "50%",
-                        backgroundColor: "#64ffda",
-                        boxShadow: "0 0 8px #64ffda",
+                        backgroundColor: "#ffffff",
+                        boxShadow: "0 0 8px #ffffff",
                       }}
                     />
                     Online • Copilot
@@ -308,7 +308,7 @@ export default function HiringAgentSandbox() {
                   padding: "4px",
                   transition: "var(--transition)",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#64ffda")}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#8892b0")}
               >
                 <X size={20} />
@@ -349,7 +349,7 @@ export default function HiringAgentSandbox() {
                   >
                     {msg.sender === "bot" ? (
                       <>
-                        <Bot size={12} style={{ color: "#64ffda" }} />
+                        <Bot size={12} style={{ color: "#ffffff" }} />
                         <span>AI Copilot</span>
                       </>
                     ) : (
@@ -368,14 +368,14 @@ export default function HiringAgentSandbox() {
                       whiteSpace: "pre-line",
                       ...(msg.sender === "user"
                         ? {
-                            background: "rgba(100, 255, 218, 0.1)",
-                            color: "#64ffda",
-                            border: "1px solid rgba(100, 255, 218, 0.2)",
+                            background: "rgba(255, 255, 255, 0.08)",
+                            color: "#ffffff",
+                            border: "1px solid rgba(255, 255, 255, 0.15)",
                             borderTopRightRadius: "2px",
                           }
                         : {
-                            background: "#112240",
-                            color: "#ccd6f6",
+                            background: "rgba(255, 255, 255, 0.03)",
+                            color: "#e2e8f0",
                             border: "1px solid rgba(255, 255, 255, 0.05)",
                             borderTopLeftRadius: "2px",
                           }),
@@ -389,7 +389,7 @@ export default function HiringAgentSandbox() {
               {isTyping && (
                 <div style={{ display: "flex", flexDirection: "column", alignSelf: "flex-start", maxWidth: "80%" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px", fontSize: "10px", color: "#8892b0" }}>
-                    <Bot size={12} style={{ color: "#64ffda" }} />
+                    <Bot size={12} style={{ color: "#ffffff" }} />
                     <span>AI Copilot typing...</span>
                   </div>
                   <div
@@ -397,15 +397,15 @@ export default function HiringAgentSandbox() {
                       padding: "12px 16px",
                       borderRadius: "12px",
                       borderTopLeftRadius: "2px",
-                      background: "#112240",
+                      background: "rgba(255, 255, 255, 0.03)",
                       display: "flex",
                       alignItems: "center",
                       gap: "5px",
                     }}
                   >
-                    <span className="dot" style={{ width: "6px", height: "6px", backgroundColor: "#64ffda", borderRadius: "50%", display: "inline-block", animation: "pulse 1s infinite alternate" }} />
-                    <span className="dot" style={{ width: "6px", height: "6px", backgroundColor: "#64ffda", borderRadius: "50%", display: "inline-block", animation: "pulse 1s infinite alternate 0.2s" }} />
-                    <span className="dot" style={{ width: "6px", height: "6px", backgroundColor: "#64ffda", borderRadius: "50%", display: "inline-block", animation: "pulse 1s infinite alternate 0.4s" }} />
+                    <span className="dot" style={{ width: "6px", height: "6px", backgroundColor: "#ffffff", borderRadius: "50%", display: "inline-block", animation: "pulse 1s infinite alternate" }} />
+                    <span className="dot" style={{ width: "6px", height: "6px", backgroundColor: "#ffffff", borderRadius: "50%", display: "inline-block", animation: "pulse 1s infinite alternate 0.2s" }} />
+                    <span className="dot" style={{ width: "6px", height: "6px", backgroundColor: "#ffffff", borderRadius: "50%", display: "inline-block", animation: "pulse 1s infinite alternate 0.4s" }} />
                   </div>
                 </div>
               )}
@@ -473,17 +473,17 @@ export default function HiringAgentSandbox() {
                 onKeyDown={handleKeyPress}
                 style={{
                   flex: 1,
-                  background: "#0a192f",
-                  border: "1px solid rgba(100, 255, 218, 0.2)",
+                  background: "rgba(255, 255, 255, 0.03)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
                   borderRadius: "8px",
                   padding: "12px 16px",
-                  color: "#ccd6f6",
+                  color: "#e2e8f0",
                   fontSize: "14px",
                   outline: "none",
                   transition: "var(--transition)",
                 }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = "#64ffda")}
-                onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.2)")}
+                onFocus={(e) => (e.currentTarget.style.borderColor = "#ffffff")}
+                onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)")}
               />
               <button
                 onClick={() => handleSendMessage(inputValue)}
@@ -491,19 +491,19 @@ export default function HiringAgentSandbox() {
                   width: "45px",
                   height: "45px",
                   borderRadius: "8px",
-                  background: "#64ffda",
-                  color: "#0a192f",
+                  background: "#ffffff",
+                  color: "#000000",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   transition: "var(--transition)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#52e0c0";
-                  e.currentTarget.style.boxShadow = "0 0 10px rgba(100, 255, 218, 0.4)";
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.85)";
+                  e.currentTarget.style.boxShadow = "0 0 10px rgba(255, 255, 255, 0.3)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "#64ffda";
+                  e.currentTarget.style.background = "#ffffff";
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >

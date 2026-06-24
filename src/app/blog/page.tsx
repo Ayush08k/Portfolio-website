@@ -179,7 +179,7 @@ export default function BlogIndex() {
       <style>{`
         .blog-index-page {
           min-height: 100vh;
-          background: #030014;
+          background: #000000;
           color: #f8fafc;
           padding: 120px 0 120px;
           position: relative;

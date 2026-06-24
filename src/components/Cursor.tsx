@@ -21,6 +21,8 @@ export default function Cursor() {
   const particlesRef = useRef<Particle[]>([]);
   const particleIdRef = useRef(0);
   const isHoveringRef = useRef(false);
+  const ringPosRef = useRef({ x: -100, y: -100 });
+  const ringSizeRef = useRef(8);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -36,7 +38,6 @@ export default function Cursor() {
     if (!ctx) return;
 
     let lastMoveTime = Date.now();
-    let pointerAngle = 0;
 
     // Resize canvas to cover viewport with Retina/High-DPI scaling
     const handleResize = () => {
@@ -50,35 +51,47 @@ export default function Cursor() {
     window.addEventListener("resize", handleResize);
     handleResize();
 
-    // Vibrant neon palette matching the portfolio's Deep Space Aurora design
+    // Premium monochromatic palette matching the "True Black" theme
     const colors = [
-      "#7c3aed", // violet
-      "#3b82f6", // blue
-      "#10b981", // emerald
-      "#f59e0b", // gold
-      "#ec4899", // pink
-      "#00f2fe", // cyan
-      "#ffffff", // bright white
+      "#ffffff",                  // Pure white
+      "rgba(255, 255, 255, 0.95)", // High contrast white
+      "rgba(255, 255, 255, 0.8)",  // Soft white
+      "rgba(241, 245, 249, 0.7)",  // Slate 100
+      "rgba(226, 232, 240, 0.5)",  // Slate 200
+      "rgba(203, 213, 225, 0.4)",  // Slate 300
     ];
 
-    const createParticle = (x: number, y: number, isIdle = false) => {
+    const createParticle = (x: number, y: number, isIdle = false, isBurst = false) => {
       particleIdRef.current += 1;
       const angle = Math.random() * Math.PI * 2;
       
-      // Idle particles are smaller and slower for a subtle aura effect
-      const speed = isIdle 
-        ? (Math.random() * 0.5 + 0.15) 
-        : (Math.random() * 1.6 + 0.4);
-      const size = isIdle 
-        ? (Math.random() * 3.5 + 2.5) 
-        : (Math.random() * 8 + 6);
+      let speed;
+      if (isIdle) {
+        speed = Math.random() * 0.4 + 0.1;
+      } else if (isBurst) {
+        speed = Math.random() * 2.5 + 1.2;
+      } else {
+        speed = Math.random() * 1.4 + 0.3;
+      }
+
+      let size;
+      if (isIdle) {
+        size = Math.random() * 2 + 1.2;
+      } else if (isBurst) {
+        size = Math.random() * 4.5 + 2.5;
+      } else {
+        size = Math.random() * 3.5 + 2.0;
+      }
       
       const color = colors[Math.floor(Math.random() * colors.length)];
-      const type = Math.random() > 0.4 ? "star" : "circle";
+      const type = Math.random() > 0.45 ? "star" : "circle";
 
-      // Slight upward float drift
-      const vx = Math.cos(angle) * speed * 0.4;
-      const vy = Math.sin(angle) * speed * 0.4 - (isIdle ? 0.12 : 0.35);
+      let vx = Math.cos(angle) * speed * 0.4;
+      let vy = Math.sin(angle) * speed * 0.4;
+      
+      if (!isBurst) {
+        vy -= (isIdle ? 0.08 : 0.25); // Gentle upward float drift
+      }
 
       particlesRef.current.push({
         id: particleIdRef.current,
@@ -90,7 +103,7 @@ export default function Cursor() {
         color,
         birthTime: Date.now(),
         rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * (isIdle ? 0.04 : 0.08),
+        rotationSpeed: (Math.random() - 0.5) * (isIdle ? 0.03 : 0.07),
         type,
       });
     };
@@ -105,17 +118,15 @@ export default function Cursor() {
       const dy = clientY - mouseRef.current.lastY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      // Spawn particles if the cursor has moved
       if (distance > 2) {
-        // Interpolate points between last mouse position and current position for a perfectly smooth trail
-        const steps = Math.min(Math.floor(distance / 6), 6);
+        const steps = Math.min(Math.floor(distance / 8), 5);
         for (let i = 0; i <= steps; i++) {
           const t = i / steps;
           const px = mouseRef.current.lastX + dx * t;
           const py = mouseRef.current.lastY + dy * t;
           
           createParticle(px, py);
-          if (Math.random() > 0.7) {
+          if (Math.random() > 0.75) {
             createParticle(px, py);
           }
         }
@@ -135,8 +146,19 @@ export default function Cursor() {
       }
     };
 
+    const handleMouseDown = () => {
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+      if (mx > 0 && my > 0) {
+        for (let i = 0; i < 10; i++) {
+          createParticle(mx, my, false, true);
+        }
+      }
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseover", handleMouseOver);
+    window.addEventListener("mousedown", handleMouseDown);
 
     // Render helper for 4-pointed sparkles
     const drawSparkle = (
@@ -162,7 +184,7 @@ export default function Cursor() {
       c.quadraticCurveTo(0, 0, 0, -size);
       c.closePath();
 
-      c.shadowBlur = size * 1.5;
+      c.shadowBlur = size * 1.2;
       c.shadowColor = color;
       c.fill();
       c.restore();
@@ -186,7 +208,7 @@ export default function Cursor() {
       c.arc(0, 0, size, 0, Math.PI * 2);
       c.closePath();
 
-      c.shadowBlur = size * 2;
+      c.shadowBlur = size * 1.5;
       c.shadowColor = color;
       c.fill();
       c.restore();
@@ -198,27 +220,26 @@ export default function Cursor() {
     const updateAndDraw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const now = Date.now();
-      const duration = 450; // 450ms animation duration for a tighter, cleaner trail
+      const duration = 400; // slightly faster fade
 
       // 1. Update & draw all active trail particles
       particlesRef.current = particlesRef.current.filter((p) => {
         const age = now - p.birthTime;
         if (age >= duration) return false;
 
-        const progress = age / duration; // 0 to 1
-        const alpha = 1 - progress; // Fade out to 0 over 450ms
+        const progress = age / duration;
+        const alpha = 1 - progress;
 
         p.x += p.vx;
         p.y += p.vy;
         p.rotation += p.rotationSpeed;
 
-        // Particles shrink as they age
-        const currentSize = p.size * (1 - progress * 0.6);
+        const currentSize = p.size * (1 - progress * 0.5);
 
         if (p.type === "star") {
           drawSparkle(ctx, p.x, p.y, currentSize, p.rotation, p.color, alpha);
         } else {
-          drawCircle(ctx, p.x, p.y, currentSize * 0.4, p.color, alpha);
+          drawCircle(ctx, p.x, p.y, currentSize * 0.45, p.color, alpha);
         }
 
         return true;
@@ -229,19 +250,52 @@ export default function Cursor() {
 
       // 2. Idle Sparkle Spawning (gently sparkles when cursor is stationary)
       if (mx > 0 && my > 0 && now - lastMoveTime > 80) {
-        if (Math.random() > 0.88) { // occasional idle sparks
-          const rx = mx + (Math.random() - 0.5) * 16;
-          const ry = my + (Math.random() - 0.5) * 16;
-          createParticle(rx, ry, true); // true = isIdle
+        if (Math.random() > 0.9) {
+          const rx = mx + (Math.random() - 0.5) * 12;
+          const ry = my + (Math.random() - 0.5) * 12;
+          createParticle(rx, ry, true);
         }
       }
 
-      // 3. Draw a precise leading cursor pointer (slowly spinning 4-pointed sparkle)
+      // 3. Draw a fluid lagging ring and a precise central dot pointer
       if (mx > 0 && my > 0) {
-        pointerAngle += 0.015; // slow rotate
-        const pointerSize = isHoveringRef.current ? 8 : 5;
-        const pointerColor = isHoveringRef.current ? "#10b981" : "#7c3aed"; // emerald green on hover, violet normally
-        drawSparkle(ctx, mx, my, pointerSize, pointerAngle, pointerColor, 1.0);
+        if (ringPosRef.current.x === -100) {
+          ringPosRef.current.x = mx;
+          ringPosRef.current.y = my;
+        } else {
+          // Smooth spring-like lerping
+          ringPosRef.current.x += (mx - ringPosRef.current.x) * 0.16;
+          ringPosRef.current.y += (my - ringPosRef.current.y) * 0.16;
+        }
+
+        const targetSize = isHoveringRef.current ? 18 : 7;
+        ringSizeRef.current += (targetSize - ringSizeRef.current) * 0.2;
+
+        // Draw outer ring
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(ringPosRef.current.x, ringPosRef.current.y, ringSizeRef.current, 0, Math.PI * 2);
+        ctx.strokeStyle = isHoveringRef.current ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.45)";
+        ctx.lineWidth = isHoveringRef.current ? 1.0 : 1.25;
+        
+        if (isHoveringRef.current) {
+          ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
+          ctx.fill();
+        }
+        
+        ctx.stroke();
+        ctx.restore();
+
+        // Draw central dot (shrinks/fades out completely when hovering)
+        const targetDotSize = isHoveringRef.current ? 0 : 2.5;
+        if (targetDotSize > 0) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(mx, my, targetDotSize, 0, Math.PI * 2);
+          ctx.fillStyle = "#ffffff";
+          ctx.fill();
+          ctx.restore();
+        }
       }
 
       animationFrameId = requestAnimationFrame(updateAndDraw);
@@ -253,6 +307,7 @@ export default function Cursor() {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener("mousedown", handleMouseDown);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -272,4 +327,3 @@ export default function Cursor() {
     />
   );
 }
-

@@ -94,6 +94,10 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: "#000000",
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   // ─── Schema: Person ───────────────────────────────────────────────────
@@ -477,7 +481,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" prefix="og: https://ogp.me/ns#">
       <head>
         {/* ─── Core PWA & Device Meta ──────────────────────── */}
-        <meta name="theme-color" content="#050816" />
+        <meta name="theme-color" content="#000000" />
         <meta name="color-scheme" content="dark" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />

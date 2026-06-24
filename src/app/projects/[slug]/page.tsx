@@ -312,7 +312,7 @@ export default function ProjectCaseStudy() {
       <style>{`
         .case-study-page {
           min-height: 100vh;
-          background: #030014;
+          background: #000000;
           color: #f8fafc;
           padding: 120px 0 120px;
           position: relative;
@@ -454,7 +454,7 @@ export default function ProjectCaseStudy() {
           left: 0;
           right: 0;
           height: 150px;
-          background: linear-gradient(to top, #030014 0%, rgba(3, 0, 20, 0) 100%);
+          background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0) 100%);
           pointer-events: none;
         }
 
