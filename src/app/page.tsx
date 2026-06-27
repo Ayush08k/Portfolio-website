@@ -352,9 +352,129 @@ function Projects() {
 }
 
 /* ─── CONTACT ────────────────────────────────────────────── */
-function Contact({ estimatorData }: { estimatorData: EstimatorData }) {
+const PROJECT_TYPES_MAP = {
+  "Landing Page": { basePrice: 150, baseScreens: 1, baseWeeks: 1, id: "landing" },
+  "SaaS / Full Stack App": { basePrice: 600, baseScreens: 6, baseWeeks: 4, id: "webapp" },
+  "Mobile App (iOS/Android)": { basePrice: 750, baseScreens: 8, baseWeeks: 7, id: "mobile" },
+  "E-Commerce Store": { basePrice: 400, baseScreens: 5, baseWeeks: 5, id: "ecommerce" },
+  "AI Integration & Agents": { basePrice: 400, baseScreens: 4, baseWeeks: 5, id: "ai" },
+  "3D Site": { basePrice: 250, baseScreens: 3, baseWeeks: 3, id: "threed" },
+};
+
+const ADD_ONS_LIST = [
+  { name: "AI Personalization Engine", price: 150, id: "ai" },
+  { name: "Payment Integration", price: 100, id: "payments" },
+  { name: "CMS Content Manager", price: 150, id: "cms" },
+  { name: "Priority Rush Delivery", price: 100, id: "rush" },
+];
+
+const recalculateEstimate = (projectTypeName: string, newScreens: number, addOnsString: string) => {
+  const project = PROJECT_TYPES_MAP[projectTypeName as keyof typeof PROJECT_TYPES_MAP] || PROJECT_TYPES_MAP["SaaS / Full Stack App"];
+  
+  const basePrice = project.basePrice;
+  const discount = basePrice * 0.5;
+  const discountedBasePrice = basePrice - discount;
+  
+  const extraScreens = Math.max(0, newScreens - project.baseScreens);
+  const screensCost = extraScreens * 50;
+
+  const activeAddOns = ADD_ONS_LIST.filter(addon => addOnsString.includes(addon.name));
+  const addOnsCost = activeAddOns.reduce((sum, addon) => sum + addon.price, 0);
+
+  const minPrice = discountedBasePrice + screensCost + addOnsCost;
+  const maxPrice = Math.round(minPrice * 1.2);
+
+  const isRush = addOnsString.includes("Priority Rush Delivery");
+  let timelineString = "";
+  if (project.id === "landing") {
+    let minDays = 7;
+    let maxDays = 10;
+    minDays += extraScreens * 2;
+    maxDays += extraScreens * 3;
+    const activeAddonsCount = activeAddOns.filter(addon => addon.id !== "rush").length;
+    minDays += activeAddonsCount * 1;
+    maxDays += activeAddonsCount * 2;
+    if (isRush) {
+      minDays = Math.max(4, Math.round(minDays * 0.6));
+      maxDays = Math.max(6, Math.round(maxDays * 0.6));
+    }
+    timelineString = `${minDays}-${maxDays} Days`;
+  } else {
+    let minWeeks = project.id === "webapp" ? 3 : project.id === "mobile" ? 6 : project.id === "threed" ? 2 : 4;
+    let maxWeeks = project.id === "webapp" ? 5 : project.id === "mobile" ? 9 : project.id === "threed" ? 4 : 6;
+    const screensAddition = Math.ceil(extraScreens / 3);
+    minWeeks += screensAddition;
+    maxWeeks += screensAddition;
+    const activeAddonsCount = activeAddOns.filter(addon => addon.id !== "rush").length;
+    minWeeks += Math.ceil(activeAddonsCount * 0.5);
+    maxWeeks += Math.ceil(activeAddonsCount * 0.5);
+    if (isRush) {
+      minWeeks = Math.max(2, Math.round(minWeeks * 0.65));
+      maxWeeks = Math.max(3, Math.round(maxWeeks * 0.65));
+    }
+    timelineString = `${minWeeks}-${maxWeeks} Weeks`;
+  }
+
+  return {
+    hasEstimate: true,
+    projectType: projectTypeName,
+    screens: newScreens,
+    addOns: addOnsString,
+    budget: `$${minPrice.toLocaleString()} - $${maxPrice.toLocaleString()} USD`,
+    timeline: timelineString,
+    projectActualPrice: `$${basePrice.toLocaleString()} USD`,
+    discount: `-$${discount.toLocaleString()} USD (50% Off)`,
+    screensPrice: extraScreens > 0 ? `+$${screensCost.toLocaleString()} USD` : "$0 USD (Base included)",
+    addOnsPrice: `+$${addOnsCost.toLocaleString()} USD`,
+  };
+};
+
+function Contact({ 
+  estimatorData, 
+  setEstimatorData 
+}: { 
+  estimatorData: EstimatorData;
+  setEstimatorData: React.Dispatch<React.SetStateAction<EstimatorData>>;
+}) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleClearEstimate = () => {
+    setIsEditing(false);
+    setEstimatorData({
+      hasEstimate: false,
+      projectType: "",
+      screens: 0,
+      addOns: "",
+      budget: "",
+      timeline: "",
+    });
+  };
+
+  const handleUpdateScreens = (newScreens: number) => {
+    const clamped = Math.max(1, Math.min(25, newScreens));
+    const updated = recalculateEstimate(estimatorData.projectType, clamped, estimatorData.addOns);
+    setEstimatorData(updated);
+  };
+
+  const handleUpdateProjectType = (newType: string) => {
+    const project = PROJECT_TYPES_MAP[newType as keyof typeof PROJECT_TYPES_MAP];
+    const updated = recalculateEstimate(newType, project.baseScreens, estimatorData.addOns);
+    setEstimatorData(updated);
+  };
+
+  const handleToggleAddOn = (addonName: string) => {
+    let currentAddOns = estimatorData.addOns === "None" ? [] : estimatorData.addOns.split(", ").map(x => x.trim()).filter(Boolean);
+    if (currentAddOns.includes(addonName)) {
+      currentAddOns = currentAddOns.filter(x => x !== addonName);
+    } else {
+      currentAddOns.push(addonName);
+    }
+    const addOnsString = currentAddOns.join(", ") || "None";
+    const updated = recalculateEstimate(estimatorData.projectType, estimatorData.screens, addOnsString);
+    setEstimatorData(updated);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -466,36 +586,208 @@ function Contact({ estimatorData }: { estimatorData: EstimatorData }) {
               
               {estimatorData && estimatorData.hasEstimate && (
                 <div className="estimator-locked-summary glass">
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
-                    <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "var(--violet)", boxShadow: "0 0 8px var(--violet)" }} />
-                    <span style={{ fontSize: "11px", fontFamily: "JetBrains Mono", fontWeight: "700", color: "var(--violet)", letterSpacing: "0.05em" }}>ESTIMATOR DETAILS (LOCKED)</span>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <div style={{ 
+                        width: "8px", 
+                        height: "8px", 
+                        borderRadius: "50%", 
+                        background: isEditing ? "var(--accent-cyan)" : "var(--violet)", 
+                        boxShadow: isEditing ? "0 0 8px var(--accent-cyan)" : "0 0 8px var(--violet)" 
+                      }} />
+                      <span style={{ fontSize: "11px", fontFamily: "JetBrains Mono", fontWeight: "700", color: isEditing ? "var(--accent-cyan)" : "var(--violet)", letterSpacing: "0.05em" }}>
+                        ESTIMATOR DETAILS {isEditing ? "(EDITING)" : "(ACTIVE)"}
+                      </span>
+                    </div>
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <button 
+                        type="button" 
+                        onClick={() => setIsEditing(!isEditing)} 
+                        style={{
+                          background: isEditing ? "var(--accent-cyan)" : "rgba(255, 255, 255, 0.05)",
+                          border: "1px solid var(--glass-border)",
+                          color: isEditing ? "var(--black)" : "var(--white)",
+                          fontSize: "11px",
+                          fontWeight: "bold",
+                          padding: "6px 12px",
+                          borderRadius: "6px",
+                          cursor: "pointer",
+                          transition: "all 0.2s"
+                        }}
+                      >
+                        {isEditing ? "Done" : "Modify"}
+                      </button>
+                      <button 
+                        type="button" 
+                        onClick={handleClearEstimate} 
+                        style={{
+                          background: "rgba(239, 68, 68, 0.1)",
+                          border: "1px solid rgba(239, 68, 68, 0.25)",
+                          color: "#ef4444",
+                          fontSize: "11px",
+                          fontWeight: "bold",
+                          padding: "6px 12px",
+                          borderRadius: "6px",
+                          cursor: "pointer",
+                          transition: "all 0.2s"
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                   
-                  <div className="locked-fields-grid">
+                  <div className="locked-fields-grid" style={{ gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
                     <div>
                       <span className="locked-field-label">PROJECT TYPE</span>
-                      <span className="locked-field-value">{estimatorData.projectType}</span>
-                    </div>
-                    <div>
-                      <span className="locked-field-label">TOTAL PAGES / SCREENS</span>
-                      <span className="locked-field-value">{estimatorData.screens} screens</span>
+                      {isEditing ? (
+                        <select 
+                          value={estimatorData.projectType}
+                          onChange={(e) => handleUpdateProjectType(e.target.value)}
+                          style={{
+                            background: "rgba(10, 10, 12, 0.9)",
+                            border: "1px solid var(--glass-border)",
+                            color: "var(--white)",
+                            padding: "6px 10px",
+                            borderRadius: "6px",
+                            fontSize: "13px",
+                            width: "100%",
+                            marginTop: "6px",
+                            cursor: "pointer",
+                            outline: "none"
+                          }}
+                        >
+                          {Object.keys(PROJECT_TYPES_MAP).map(name => (
+                            <option key={name} value={name}>{name}</option>
+                          ))}
+                        </select>
+                      ) : (
+                        <span className="locked-field-value">{estimatorData.projectType}</span>
+                      )}
                     </div>
                     <div>
                       <span className="locked-field-label">ESTIMATED TIMELINE</span>
-                      <span className="locked-field-value">{estimatorData.timeline}</span>
-                    </div>
-                    <div>
-                      <span className="locked-field-label">ESTIMATED BUDGET</span>
-                      <span className="locked-field-value gradient-text" style={{ fontWeight: "800" }}>{estimatorData.budget}</span>
+                      <span className="locked-field-value" style={{ marginTop: isEditing ? "10px" : "0" }}>{estimatorData.timeline}</span>
                     </div>
                   </div>
 
-                  {estimatorData.addOns !== "None" && (
-                    <div style={{ marginTop: "16px", borderTop: "1px solid var(--glass-border)", paddingTop: "12px" }}>
-                      <span className="locked-field-label">SELECTED ADD-ONS</span>
-                      <span className="locked-field-value" style={{ fontSize: "13px" }}>{estimatorData.addOns}</span>
+                  {isEditing ? (
+                    <div style={{ marginTop: "16px", borderTop: "1px solid var(--glass-border)", paddingTop: "16px" }}>
+                      <span className="locked-field-label">EDIT ESTIMATED SCREENS / SUBPAGES</span>
+                      <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "8px" }}>
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateScreens(estimatorData.screens - 1)}
+                          style={{
+                            width: "32px",
+                            height: "32px",
+                            borderRadius: "8px",
+                            background: "rgba(255, 255, 255, 0.05)",
+                            border: "1px solid var(--glass-border)",
+                            color: "var(--white)",
+                            fontSize: "18px",
+                            fontWeight: "bold",
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            transition: "all 0.2s"
+                          }}
+                        >
+                          -
+                        </button>
+                        <span style={{ fontSize: "16px", fontWeight: "700", color: "var(--white)", minWidth: "24px", textAlign: "center", fontFamily: "JetBrains Mono" }}>
+                          {estimatorData.screens}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateScreens(estimatorData.screens + 1)}
+                          style={{
+                            width: "32px",
+                            height: "32px",
+                            borderRadius: "8px",
+                            background: "rgba(255, 255, 255, 0.05)",
+                            border: "1px solid var(--glass-border)",
+                            color: "var(--white)",
+                            fontSize: "18px",
+                            fontWeight: "bold",
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            transition: "all 0.2s"
+                          }}
+                        >
+                          +
+                        </button>
+                        <span style={{ fontSize: "11px", color: "var(--muted)" }}>
+                          (Base project includes {PROJECT_TYPES_MAP[estimatorData.projectType as keyof typeof PROJECT_TYPES_MAP]?.baseScreens || 1} screens)
+                        </span>
+                      </div>
+
+                      <div style={{ marginTop: "16px", borderTop: "1px dashed var(--glass-border)", paddingTop: "12px" }}>
+                        <span className="locked-field-label">TOGGLE ADD-ONS</span>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "8px" }}>
+                          {ADD_ONS_LIST.map(addon => {
+                            const isActive = estimatorData.addOns.includes(addon.name);
+                            return (
+                              <button
+                                key={addon.id}
+                                type="button"
+                                onClick={() => handleToggleAddOn(addon.name)}
+                                style={{
+                                  fontSize: "11px",
+                                  padding: "6px 12px",
+                                  borderRadius: "20px",
+                                  border: "1px solid",
+                                  borderColor: isActive ? "var(--violet)" : "var(--glass-border)",
+                                  background: isActive ? "rgba(124, 58, 237, 0.15)" : "rgba(0, 0, 0, 0.3)",
+                                  color: isActive ? "var(--white)" : "var(--muted)",
+                                  cursor: "pointer",
+                                  transition: "all 0.2s"
+                                }}
+                              >
+                                {addon.name} (+${addon.price})
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
                     </div>
-                  )}
+                  ) : null}
+
+                  <div style={{ marginTop: "16px", borderTop: "1px solid var(--glass-border)", paddingTop: "16px", display: "flex", flexDirection: "column", gap: "12px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                      <span style={{ color: "var(--muted)" }}>Project Base Price:</span>
+                      <span style={{ fontWeight: 600, color: "var(--white)", fontFamily: "JetBrains Mono" }}>{estimatorData.projectActualPrice}</span>
+                    </div>
+                    
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                      <span style={{ color: "var(--emerald)" }}>50% Special Discount:</span>
+                      <span style={{ fontWeight: 600, color: "var(--emerald)", fontFamily: "JetBrains Mono" }}>{estimatorData.discount}</span>
+                    </div>
+
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                      <span style={{ color: "var(--muted)" }}>Screens ({estimatorData.screens} total):</span>
+                      <span style={{ fontWeight: 600, color: "var(--white)", fontFamily: "JetBrains Mono" }}>{estimatorData.screensPrice}</span>
+                    </div>
+
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                      <span style={{ color: "var(--muted)" }}>Custom Add-ons:</span>
+                      <span style={{ fontWeight: 600, color: "var(--white)", fontFamily: "JetBrains Mono" }}>{estimatorData.addOnsPrice}</span>
+                    </div>
+
+                    {!isEditing && estimatorData.addOns !== "None" && (
+                      <div style={{ fontSize: "11px", color: "var(--muted)", paddingLeft: "10px", borderLeft: "2px solid var(--violet)", marginTop: "-4px" }}>
+                        Selected: {estimatorData.addOns}
+                      </div>
+                    )}
+
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "15px", borderTop: "1px dashed var(--glass-border)", paddingTop: "12px", marginTop: "4px" }}>
+                      <span style={{ fontWeight: "bold", color: "var(--white)" }}>Total Estimated Budget:</span>
+                      <span className="gradient-text" style={{ fontWeight: "800", fontFamily: "JetBrains Mono" }}>{estimatorData.budget}</span>
+                    </div>
+                  </div>
 
                   {/* Hidden inputs to pass data via formData on submit */}
                   <input type="hidden" name="estimatorProjectType" value={estimatorData.projectType} />
@@ -503,6 +795,10 @@ function Contact({ estimatorData }: { estimatorData: EstimatorData }) {
                   <input type="hidden" name="estimatorAddOns" value={estimatorData.addOns} />
                   <input type="hidden" name="estimatorBudget" value={estimatorData.budget} />
                   <input type="hidden" name="estimatorTimeline" value={estimatorData.timeline} />
+                  <input type="hidden" name="estimatorProjectActualPrice" value={estimatorData.projectActualPrice} />
+                  <input type="hidden" name="estimatorDiscount" value={estimatorData.discount} />
+                  <input type="hidden" name="estimatorScreensPrice" value={estimatorData.screensPrice} />
+                  <input type="hidden" name="estimatorAddOnsPrice" value={estimatorData.addOnsPrice} />
                 </div>
               )}
 
@@ -860,7 +1156,7 @@ export default function Home() {
         <SectionDivider />
         <PricingEstimator onProceed={handleProceedEstimate} />
         <SectionDivider />
-        <Contact estimatorData={estimatorData} />
+        <Contact estimatorData={estimatorData} setEstimatorData={setEstimatorData} />
       </main>
       <Footer />
     </>

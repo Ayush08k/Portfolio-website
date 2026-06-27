@@ -17,7 +17,11 @@ export async function POST(req: Request) {
       estimatorScreens,
       estimatorAddOns,
       estimatorBudget,
-      estimatorTimeline 
+      estimatorTimeline,
+      estimatorProjectActualPrice,
+      estimatorDiscount,
+      estimatorScreensPrice,
+      estimatorAddOnsPrice
     } = data;
 
     // VALIDATION
@@ -36,7 +40,11 @@ export async function POST(req: Request) {
       estimatorScreens,
       estimatorAddOns,
       estimatorBudget,
-      estimatorTimeline 
+      estimatorTimeline,
+      estimatorProjectActualPrice,
+      estimatorDiscount,
+      estimatorScreensPrice,
+      estimatorAddOnsPrice
     });
 
     const receiverEmail = process.env.CONTACT_RECEIVER_EMAIL || "ayushkumar2467@gmail.com";
@@ -82,24 +90,41 @@ export async function POST(req: Request) {
               <h4 style="margin-top: 0; color: #15803d; margin-bottom: 15px; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">📊 Scope & Pricing Estimate Details</h4>
               <table style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
                 <tr>
-                  <td style="padding: 6px 0; font-weight: bold; color: #166534; width: 150px;">Project Type:</td>
+                  <td style="padding: 6px 0; font-weight: bold; color: #166534; width: 200px;">Project Type:</td>
                   <td style="padding: 6px 0; color: #14532d; font-weight: 600;">${estimatorProjectType}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 6px 0; font-weight: bold; color: #166534;">Total Screens:</td>
-                  <td style="padding: 6px 0; color: #14532d;">${estimatorScreens} screens</td>
-                </tr>
-                <tr>
-                  <td style="padding: 6px 0; font-weight: bold; color: #166534;">Selected Add-ons:</td>
-                  <td style="padding: 6px 0; color: #14532d;">${estimatorAddOns}</td>
                 </tr>
                 <tr>
                   <td style="padding: 6px 0; font-weight: bold; color: #166534;">Estimated Timeline:</td>
                   <td style="padding: 6px 0; color: #14532d; font-weight: 600;">${estimatorTimeline}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 6px 0; font-weight: bold; color: #166534;">Estimated Budget:</td>
-                  <td style="padding: 6px 0; color: #15803d; font-weight: 800; font-size: 15px;">${estimatorBudget}</td>
+                  <td style="padding: 6px 0; font-weight: bold; color: #166534; border-top: 1px dashed #bbf7d0; padding-top: 10px;">Project Base Price:</td>
+                  <td style="padding: 6px 0; color: #14532d; font-family: monospace; border-top: 1px dashed #bbf7d0; padding-top: 10px;">${estimatorProjectActualPrice || "N/A"}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold; color: #166534;">50% Special Discount:</td>
+                  <td style="padding: 6px 0; color: #166534; font-weight: 600; font-family: monospace;">${estimatorDiscount || "N/A"}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold; color: #166534;">Screens Price (${estimatorScreens} total):</td>
+                  <td style="padding: 6px 0; color: #14532d; font-family: monospace;">${estimatorScreensPrice || "N/A"}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold; color: #166534;">Custom Add-ons Price:</td>
+                  <td style="padding: 6px 0; color: #14532d; font-family: monospace;">${estimatorAddOnsPrice || "N/A"}</td>
+                </tr>
+                ${
+                  estimatorAddOns !== "None"
+                    ? `
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold; color: #166534; font-size: 12px; font-style: italic;">↳ Selected Add-ons:</td>
+                  <td style="padding: 6px 0; color: #4a5568; font-size: 12.5px;">${estimatorAddOns}</td>
+                </tr>
+                ` : ""
+                }
+                <tr>
+                  <td style="padding: 10px 0 6px; font-weight: bold; color: #15803d; border-top: 2px solid #bbf7d0; font-size: 15px;">Total Estimated Budget:</td>
+                  <td style="padding: 10px 0 6px; color: #15803d; font-weight: 800; font-size: 16px; border-top: 2px solid #bbf7d0; font-family: monospace;">${estimatorBudget}</td>
                 </tr>
               </table>
             </div>

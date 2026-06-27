@@ -25,6 +25,10 @@ export interface EstimatorData {
   addOns: string;
   budget: string;
   timeline: string;
+  projectActualPrice?: string;
+  discount?: string;
+  screensPrice?: string;
+  addOnsPrice?: string;
 }
 
 interface ProjectType {
@@ -112,8 +116,8 @@ const ADD_ONS: AddOn[] = [
   },
   {
     id: "payments",
-    name: "Secure Stripe Payments",
-    price: 300,
+    name: "Payment Integration",
+    price: 100,
     description: "Add subscription billing, shopping carts, and Stripe checkout.",
     icon: CreditCard,
   },
@@ -127,7 +131,7 @@ const ADD_ONS: AddOn[] = [
   {
     id: "rush",
     name: "Priority Rush Delivery",
-    price: 250,
+    price: 100,
     description: "Accelerate your project schedule by 35% - 50% priority support.",
     icon: Zap,
   },
@@ -157,6 +161,8 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
 
   // Calculations
   const basePrice = selectedType.basePrice;
+  const discount = basePrice * 0.5;
+  const discountedBasePrice = basePrice - discount;
   const extraScreens = Math.max(0, screens - selectedType.baseScreens);
   const screensCost = extraScreens * 50;
   
@@ -165,7 +171,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
     return total + (addOn ? addOn.price : 0);
   }, 0);
 
-  const minPrice = basePrice + screensCost + addOnsCost;
+  const minPrice = discountedBasePrice + screensCost + addOnsCost;
   const maxPrice = Math.round(minPrice * 1.2); // 20% variance range
 
   // Timeline calculations
@@ -225,6 +231,10 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
       addOns: activeAddOnNames || "None",
       budget: `$${minPrice.toLocaleString()} - $${maxPrice.toLocaleString()} USD`,
       timeline: timelineString,
+      projectActualPrice: `$${basePrice.toLocaleString()} USD`,
+      discount: `-$${discount.toLocaleString()} USD (50% Off)`,
+      screensPrice: extraScreens > 0 ? `+$${screensCost.toLocaleString()} USD` : "$0 USD (Base included)",
+      addOnsPrice: `+$${addOnsCost.toLocaleString()} USD`,
     });
   };
 
@@ -254,9 +264,26 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                 </div>
               </div>
 
-              <p className="pricing-disclaimer-india" style={{ marginTop: 0, marginBottom: "20px" }}>
+              <p className="pricing-disclaimer-india" style={{ marginTop: 0, marginBottom: "15px" }}>
                 🇮🇳 <strong>For Indian Clients & Startups:</strong> Special localized rates are available. We can discuss and negotiate the final price to fit your budget!
               </p>
+
+              <div className="discount-notice-box" style={{ 
+                background: "rgba(124, 58, 237, 0.08)", 
+                border: "1px solid rgba(124, 58, 237, 0.25)", 
+                borderRadius: "12px", 
+                padding: "12px 16px", 
+                marginBottom: "20px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                fontSize: "12px"
+              }}>
+                <span style={{ fontSize: "16px" }}>🔥</span>
+                <p style={{ margin: 0, color: "var(--white)", lineHeight: "1.4" }}>
+                  <strong>50% Special Discount Applied!</strong> The discount is applied directly to the base project price (add-ons and screen upgrades are regular price).
+                </p>
+              </div>
 
               <div className="type-cards-grid">
                 {PROJECT_TYPES.map((type) => {
@@ -372,27 +399,34 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
               <div className="summary-divider" />
 
               <div className="summary-details">
+                {/* 1. Project actual price */}
                 <div className="summary-line">
-                  <span>Base App Type</span>
-                  <span>{selectedType.name}</span>
-                </div>
-                <div className="summary-line font-mono">
-                  <span>Base cost</span>
-                  <span>${basePrice.toLocaleString()}</span>
-                </div>
-                
-                <div className="summary-line">
-                  <span>Subpages ({screens} total)</span>
-                  <span>{extraScreens > 0 ? `${extraScreens} extra` : "Base included"}</span>
-                </div>
-                <div className="summary-line font-mono">
-                  <span>Pages cost</span>
-                  <span>${screensCost.toLocaleString()}</span>
+                  <span>Project Base Price ({selectedType.name})</span>
+                  <span className="font-mono">${basePrice.toLocaleString()}</span>
                 </div>
 
+                {/* 2. Discount on that (50% off) */}
+                <div className="summary-line text-emerald">
+                  <span>50% Special Discount</span>
+                  <span className="font-mono">-${discount.toLocaleString()}</span>
+                </div>
+                
+                {/* 3. Screens count and screens price */}
+                <div className="summary-line">
+                  <span>Screens ({screens} total)</span>
+                  <span>{extraScreens > 0 ? `${extraScreens} extra` : "Base included"}</span>
+                </div>
+                {extraScreens > 0 && (
+                  <div className="summary-line sub-line font-mono">
+                    <span>↳ Additional Screen Price</span>
+                    <span>+${screensCost.toLocaleString()}</span>
+                  </div>
+                )}
+
+                {/* 4. Add-ons price */}
                 <div className="summary-line">
                   <span>Custom Add-Ons</span>
-                  <span>{selectedAddOns.filter(id => id !== "rush").length} selected</span>
+                  <span>{selectedAddOns.length} selected</span>
                 </div>
 
                 {selectedAddOns.map((id) => {
@@ -401,20 +435,30 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                   return (
                     <div key={id} className="summary-line sub-line font-mono">
                       <span>↳ {addOn.name}</span>
-                      <span>+${addOn.price}</span>
+                      <span>+${addOn.price.toLocaleString()}</span>
                     </div>
                   );
                 })}
+                {selectedAddOns.length > 0 && (
+                  <div className="summary-line sub-line font-mono" style={{ fontWeight: 600 }}>
+                    <span>↳ Add-Ons Total Cost</span>
+                    <span>+${addOnsCost.toLocaleString()}</span>
+                  </div>
+                )}
               </div>
 
               <div className="summary-divider" />
 
+              {/* 5. Total price */}
               <div className="result-price-box">
-                <div className="result-label">Estimated Investment</div>
+                <div className="result-label">Total Estimated Price (50% Off Applied)</div>
                 <div className="result-value gradient-text">
                   ${minPrice.toLocaleString()} – ${maxPrice.toLocaleString()}
                 </div>
                 <div className="result-currency">USD (Project Rate)</div>
+                <p style={{ fontSize: "10.5px", color: "var(--muted)", marginTop: "8px", lineHeight: "1.4" }}>
+                  *Note: 50% discount is applied only to the base project price. Extra screens and custom add-ons are regular price.
+                </p>
               </div>
 
               <div className="result-meta-grid">

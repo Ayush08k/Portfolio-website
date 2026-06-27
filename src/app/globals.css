@@ -1562,3 +1562,72 @@ a:active {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* ─── ANNOUNCEMENT BAR ────────────────────────────────────── */
+.announcement-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 38px;
+  background: rgba(10, 10, 12, 0.8);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  pointer-events: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.announcement-track {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: max-content;
+  animation: announcement-marquee 35s linear infinite;
+  white-space: nowrap;
+}
+
+.announcement-track span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.announcement-track .separator {
+  color: var(--violet);
+  font-weight: bold;
+  text-shadow: 0 0 10px var(--violet);
+  margin: 0 8px;
+}
+
+@keyframes announcement-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+body.has-announcement .nav {
+  top: 38px;
+}
+
+body.has-announcement .hero {
+  padding-top: calc(120px + 38px);
+}
+
+@media (max-width: 768px) {
+  body.has-announcement .nav-links {
+    top: 118px;
+  }
+}
+
+
