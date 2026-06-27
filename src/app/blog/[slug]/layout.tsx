@@ -19,20 +19,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   // Combine base blog keywords with post-specific SEO tags
   const baseKeywords = [
-    "ayush kumar developer blog",
-    "software developer tutorial",
-    "technical blog post"
+    "web development tutorial",
+    "developer guide",
   ];
   const keywords = [...baseKeywords, ...(post.seoTags || [])];
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
 
   return {
-    title: `${post.title} | Ayush Kumar Blog`,
+    title: `${post.title} — ${post.readTime} Guide`,
     description: post.description,
     keywords,
     openGraph: {
-      title: `${post.title} | Ayush Kumar Blog`,
+      title: `${post.title} — ${post.readTime} Guide`,
       description: post.description,
       url: `${siteUrl}/blog/${post.slug}`,
       siteName: "Freelancer Ayush",
@@ -49,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${post.title} | Ayush Kumar Blog`,
+      title: `${post.title} — ${post.readTime} Guide`,
       description: post.description,
       images: [post.image.startsWith("http") ? post.image : `${siteUrl}${post.image}`],
       creator: "@Ayush08k",

@@ -3,11 +3,14 @@ import type { Metadata } from "next";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Blog | Ayush Kumar — Full Stack Dev Tutorials, Tips & Freelance Insights 2025",
+  title: "Developer Blog — React, Next.js, React Native Tutorials & Tips",
   description:
-    "Read expert tutorials, tips, and insights by Ayush Kumar on Next.js, React Native, Node.js, NestJS, TypeScript, AI integrations, SaaS architecture, freelance development, and high-performance web apps.",
+    "Practical tutorials on React Native, Next.js, Node.js, and modern web development. Written by a developer who has shipped 50+ real-world projects. No fluff — real code.",
   keywords: [
-    // ── Core Blog Keywords ─────────────────────────────────────────────────
+    "react native tutorial",
+    "next.js tutorial",
+    "web development blog",
+    "react native offline sync",
     "full stack developer blog",
     "next.js tutorial blog",
     "react native developer blog",
@@ -253,9 +256,9 @@ export const metadata: Metadata = {
     "react three fiber shadows soft shadow map",
   ],
   openGraph: {
-    title: "Blog — Ayush Kumar | Full Stack Dev Tutorials, Tips & Freelance Insights",
+    title: "Developer Blog — React, Next.js, React Native Tutorials & Tips",
     description:
-      "Expert tutorials, comparisons, tips, and freelance insights by Ayush Kumar. Topics: Next.js, React Native, Node.js, NestJS, TypeScript, AI integrations, SaaS, and developer career growth.",
+      "Practical tutorials on React Native, Next.js, Node.js, and modern web development. Written by a developer who has shipped 50+ real-world projects.",
     url: `${siteUrl}/blog`,
     siteName: "Freelancer Ayush",
     images: [
@@ -263,7 +266,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/myprofile.png`,
         width: 1200,
         height: 630,
-        alt: "Ayush Kumar Developer Blog — Full Stack Dev Tutorials & Freelance Insights",
+        alt: "Ayush Kumar Developer Blog — Tutorials & Tips",
         type: "image/png",
       },
     ],
@@ -272,9 +275,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog — Ayush Kumar | Full Stack Dev Tutorials & Insights",
+    title: "Developer Blog — React, Next.js, React Native Tutorials & Tips",
     description:
-      "Tutorials, tips, and insights from Ayush Kumar on Next.js, React Native, Node.js, AI, SaaS, and freelancing.",
+      "Practical tutorials on React Native, Next.js, Node.js, and modern web development. No fluff — real code from 50+ shipped projects.",
     images: [`${siteUrl}/myprofile.png`],
     creator: "@Ayush08k",
   },

@@ -43,12 +43,12 @@ function toISODate(dateString: string): string {
 // ── Real last-modification dates for static pages ──────────────────────────────
 // These should be updated whenever meaningful content changes on each page.
 const STATIC_PAGE_DATES = {
-  home: "2026-06-13",
-  services: "2026-06-10",
-  projects: "2026-06-12",
-  blog: "2026-06-12",
-  about: "2026-06-11",
-  estimator: "2026-06-18",
+  home: "2026-06-27",
+  services: "2026-06-27",
+  projects: "2026-06-27",
+  blog: "2026-06-27",
+  about: "2026-06-27",
+  estimator: "2026-06-27",
 } as const;
 
 // ── Sitemap Generator ──────────────────────────────────────────────────────────

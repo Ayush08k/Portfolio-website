@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Projects | Ayush Kumar — Full Stack & Mobile App Case Studies & Portfolio",
+  title: "50+ Real Projects & Case Studies — Web Apps, Mobile Apps, AI & E-Commerce",
   description:
-    "Explore Ayush Kumar's complete portfolio of real-world web and mobile app projects. Detailed case studies on SaaS dashboards, React Native mobile apps, e-commerce platforms, AI integrations, tournament platforms, and attendance management systems.",
+    "See 50+ live projects: SaaS dashboards, React Native apps, AI integrations, e-commerce stores & 3D web experiences. All built by one freelance developer. View case studies →",
   keywords: [
     // ── Core Portfolio Keywords ────────────────────────────────────────────
     "freelance developer portfolio projects",
@@ -249,9 +249,9 @@ export const metadata: Metadata = {
     "3d web product designer portfolio",
   ],
   openGraph: {
-    title: "Projects — Ayush Kumar | Full Stack & Mobile App Portfolio & Case Studies",
+    title: "50+ Real Projects & Case Studies — Web Apps, Mobile Apps, AI & E-Commerce",
     description:
-      "Detailed case studies and live project demos by Ayush Kumar — SaaS dashboards, React Native mobile apps, AI integrations, e-commerce stores, tournament platforms, and more.",
+      "See 50+ live projects: SaaS dashboards, React Native apps, AI integrations, e-commerce stores & 3D web experiences. View case studies →",
     url: `${siteUrl}/projects`,
     siteName: "Freelancer Ayush",
     images: [
@@ -259,7 +259,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/myprofile.png`,
         width: 1200,
         height: 630,
-        alt: "Ayush Kumar — Full Stack & Mobile App Projects Portfolio",
+        alt: "Ayush Kumar — 50+ Web & Mobile App Projects Portfolio",
         type: "image/png",
       },
     ],
@@ -268,9 +268,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects — Ayush Kumar | Developer Portfolio & Case Studies",
+    title: "50+ Real Projects & Case Studies — Web Apps, Mobile Apps, AI & E-Commerce",
     description:
-      "Real-world case studies and live project demos by freelance full stack developer Ayush Kumar. SaaS, mobile apps, AI, e-commerce, and more.",
+      "See 50+ live projects: SaaS dashboards, React Native apps, AI integrations, e-commerce stores & 3D web experiences. View case studies →",
     images: [`${siteUrl}/myprofile.png`],
     creator: "@Ayush08k",
   },

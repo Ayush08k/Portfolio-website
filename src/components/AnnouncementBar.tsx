@@ -20,7 +20,7 @@ export default function AnnouncementBar() {
 
   if (!isHome) return null;
 
-  const announcementText = "🔥 SPECIAL OFFER: Get 50% OFF on all projects currently! Limited booking slots available for this month. Get a free proposal today! 🚀";
+  const announcementText = "⚡ LIMITED SLOTS: 50% OFF all projects this month — Landing pages from $75, full apps from $300. Book your free consultation now! ⚡";
 
   return (
     <div className="announcement-bar" role="complementary" aria-label="Announcement">
