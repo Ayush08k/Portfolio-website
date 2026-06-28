@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   title: {
-    default: "Hire a Freelance Full Stack & Mobile App Developer — 50+ Projects Shipped | Ayush Kumar",
+    default: "Freelance Ayush | 50% OFF on All Services",
     template: "%s | Ayush Kumar — Freelance Developer for Hire",
   },
   description:
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Hire a Freelance Full Stack & Mobile App Developer — 50+ Projects | Ayush Kumar",
+    title: "Freelance Ayush | 50% OFF on All Services",
     description:
       "50+ projects shipped, 5★ reviews. React, Next.js, React Native expert. Currently offering 50% OFF — get a free quote today.",
     url: siteUrl,
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hire a Freelance Full Stack & Mobile App Developer — 50+ Projects | Ayush Kumar",
+    title: "Freelance Ayush | 50% OFF on All Services",
     description:
       "50+ projects shipped, 5★ reviews. React, Next.js, React Native expert. Currently offering 50% OFF — get a free quote today.",
     images: [`${siteUrl}/myprofile.png`],
