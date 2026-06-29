@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe, Smartphone, Cpu, Sparkles, ShoppingBag, HelpCircle, Layers, Settings, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, Globe, Smartphone, Cpu, Sparkles, ShoppingBag, HelpCircle, Layers, Settings, ShieldCheck, Zap, FileText } from "lucide-react";
 import Link from "next/link";
 
 export default function ServicesPage() {
@@ -143,6 +143,123 @@ export default function ServicesPage() {
         </div>
       </header>
 
+      {/* Client Prerequisites & Guarantees Section */}
+      <section className="collaboration-section container">
+        <div className="sec-header-center">
+          <span className="section-label">Collaboration Blueprint</span>
+          <h2 className="sec-title-center">Project Alignment & Commitments</h2>
+          <p className="sec-subtitle-center">
+            A transparent framework designed to align expectations, streamline development, and guarantee exceptional results.
+          </p>
+        </div>
+
+        <div className="blueprint-grid">
+          {/* Card 1: What We Require */}
+          <motion.div
+            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={isMobile ? { duration: 0 } : { duration: 0.5, delay: 0.1 }}
+            className="blueprint-card require-card glass-card"
+          >
+            <div className="blueprint-card-header">
+              <div className="blueprint-icon-box req-icon">
+                <FileText size={26} className="text-cyan" />
+              </div>
+              <div className="blueprint-header-meta">
+                <h3 className="blueprint-card-title">What We Require From You</h3>
+                <span className="blueprint-card-subtitle">Essential inputs to initiate engineering</span>
+              </div>
+            </div>
+
+            <div className="blueprint-list">
+              <div className="blueprint-item">
+                <span className="bullet-num">01</span>
+                <div className="blueprint-content">
+                  <h4>SRS / Scope Document</h4>
+                  <p>A Software Requirements Specification or detailed outline defining target features, core user stories, and ultimate project goals.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">02</span>
+                <div className="blueprint-content">
+                  <h4>Brand Assets & Figma Designs</h4>
+                  <p>High-fidelity Figma mockups, wireframes, logos, custom typography preferences, and branding guidelines.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">03</span>
+                <div className="blueprint-content">
+                  <h4>API & Database Specifications</h4>
+                  <p>Existing backend API documentation, data schemas, or credentials for any third-party integrations needed.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">04</span>
+                <div className="blueprint-content">
+                  <h4>Active Feedback Loops</h4>
+                  <p>Prompt communication and availability for brief check-ins during milestone reviews to ensure timely launch.</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 2: What We Guarantee */}
+          <motion.div
+            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={isMobile ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
+            className="blueprint-card deliver-card glass-card"
+          >
+            <div className="blueprint-card-header">
+              <div className="blueprint-icon-box del-icon">
+                <ShieldCheck size={26} className="text-purple" />
+              </div>
+              <div className="blueprint-header-meta">
+                <h3 className="blueprint-card-title">What We Guarantee In Return</h3>
+                <span className="blueprint-card-subtitle">Our core commitments to your project</span>
+              </div>
+            </div>
+
+            <div className="blueprint-list">
+              <div className="blueprint-item">
+                <span className="bullet-num">01</span>
+                <div className="blueprint-content">
+                  <h4>Timely & Transparent Updates</h4>
+                  <p>Routine progress reports, structured demo sessions, and interactive staging links so you can track progress live.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">02</span>
+                <div className="blueprint-content">
+                  <h4>Rigorous Testing & QA</h4>
+                  <p>Comprehensive end-to-end testing, full mobile/tablet responsive testing, and speed optimization for perfect Core Web Vitals.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">03</span>
+                <div className="blueprint-content">
+                  <h4>Premium & Clean Codebase</h4>
+                  <p>100% intellectual property ownership of a modular, fully documented, component-driven React / Next.js / TypeScript codebase.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">04</span>
+                <div className="blueprint-content">
+                  <h4>Post-Launch Technical Support</h4>
+                  <p>30 days of complimentary technical warranty cover to address any post-launch bugs, performance checks, or hosting adjustments.</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Services Grid */}
       <main className="container services-main">
         <div className="services-grid">
@@ -280,6 +397,121 @@ export default function ServicesPage() {
 
         .services-header {
           margin-bottom: 64px;
+        }
+
+        /* Blueprint / Collaboration Section Styles */
+        .collaboration-section {
+          margin-top: 0px;
+          margin-bottom: 96px;
+        }
+
+        .blueprint-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+
+        @media (min-width: 992px) {
+          .blueprint-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
+        .blueprint-card {
+          border-radius: 24px;
+          padding: 40px;
+          display: flex;
+          flex-direction: column;
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .require-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(6, 182, 212, 0.25) !important;
+          box-shadow: 0 12px 40px rgba(6, 182, 212, 0.08);
+        }
+
+        .deliver-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(168, 85, 247, 0.25) !important;
+          box-shadow: 0 12px 40px rgba(168, 85, 247, 0.08);
+        }
+
+        .blueprint-card-header {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          margin-bottom: 36px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          padding-bottom: 24px;
+        }
+
+        .blueprint-icon-box {
+          width: 56px;
+          height: 56px;
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          flex-shrink: 0;
+        }
+
+        .req-icon {
+          background: rgba(6, 182, 212, 0.06);
+        }
+
+        .del-icon {
+          background: rgba(168, 85, 247, 0.06);
+        }
+
+        .blueprint-card-title {
+          font-size: 22px;
+          font-weight: 800;
+          color: var(--text-white);
+          letter-spacing: -0.01em;
+        }
+
+        .blueprint-card-subtitle {
+          font-size: 13px;
+          color: var(--text-secondary);
+          margin-top: 4px;
+        }
+
+        .blueprint-list {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .blueprint-item {
+          display: flex;
+          gap: 20px;
+        }
+
+        .bullet-num {
+          font-size: 14px;
+          font-family: 'JetBrains Mono', monospace;
+          font-weight: 700;
+          color: var(--text-secondary);
+          opacity: 0.5;
+          margin-top: 3px;
+        }
+
+        .blueprint-content h4 {
+          font-size: 16px;
+          font-weight: 700;
+          color: var(--text-white);
+          margin-bottom: 6px;
+        }
+
+        .blueprint-content p {
+          font-size: 14px;
+          color: var(--text-secondary);
+          line-height: 1.6;
         }
 
         .services-hero-text {

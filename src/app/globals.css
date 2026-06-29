@@ -1630,4 +1630,185 @@ body.has-announcement .hero {
   }
 }
 
+/* Stacking Sticky Projects Classes */
+@media (min-width: 769px) {
+  .sticky-projects-wrapper {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .sticky-project-card {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100% !important;
+    transform-origin: center center;
+    will-change: transform, opacity;
+    background: #050505 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+@media (max-width: 768px) {
+  .sticky-projects-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: auto !important;
+  }
+  .sticky-project-card {
+    position: relative !important;
+    width: 100%;
+    height: auto !important;
+    margin-bottom: 24px;
+    background: #050505 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* Blueprint / Collaboration Section Styles */
+.collaboration-section {
+  margin-top: 0px;
+  margin-bottom: 96px;
+}
+
+.blueprint-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 992px) {
+  .blueprint-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.blueprint-card {
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.require-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(6, 182, 212, 0.25) !important;
+  box-shadow: 0 12px 40px rgba(6, 182, 212, 0.08);
+}
+
+.deliver-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 85, 247, 0.25) !important;
+  box-shadow: 0 12px 40px rgba(168, 85, 247, 0.08);
+}
+
+.blueprint-card-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 36px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 24px;
+}
+
+.blueprint-icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.req-icon {
+  background: rgba(6, 182, 212, 0.06);
+}
+
+.del-icon {
+  background: rgba(168, 85, 247, 0.06);
+}
+
+.blueprint-card-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+
+.blueprint-card-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.blueprint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.blueprint-item {
+  display: flex;
+  gap: 20px;
+}
+
+.bullet-num {
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--muted);
+  opacity: 0.5;
+  margin-top: 3px;
+}
+
+.blueprint-content h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.blueprint-content p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Scroll Vignettes - Top & Bottom Fade out/in mask */
+.scroll-vignette-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to bottom, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  z-index: 90;
+  pointer-events: none;
+}
+
+.scroll-vignette-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  z-index: 90;
+  pointer-events: none;
+}
+
+
+
+
 

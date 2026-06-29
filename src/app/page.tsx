@@ -1,9 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
-import { ArrowRight, Code2, ExternalLink, Send, CheckCircle, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Code2, ExternalLink, Send, CheckCircle, Star, ChevronLeft, ChevronRight, FileText, ShieldCheck } from "lucide-react";
 import PricingEstimator, { EstimatorData } from "@/components/PricingEstimator";
 import Link from "next/link";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 /* ─── Typewriter hook ───────────────────────────────────── */
 function useTypewriter(words: string[], speed = 70, pause = 1800) {
@@ -285,10 +288,224 @@ function Skills() {
   );
 }
 
+
+/* ─── COLLABORATION BLUEPRINT ────────────────────────────── */
+function CollaborationBlueprint() {
+  return (
+    <section className="section scroll-mt-24" id="blueprint">
+      <div className="container">
+        <div style={{ textAlign: "center", marginBottom: "64px" }} className="reveal">
+          <p className="section-label">Collaboration Blueprint</p>
+          <h2 className="section-title">Project Alignment & <span className="gradient-text">Commitments</span></h2>
+          <p className="section-sub" style={{ margin: "16px auto 0" }}>
+            A transparent framework designed to align expectations, streamline development, and guarantee exceptional results.
+          </p>
+        </div>
+
+        <div className="blueprint-grid">
+          {/* Card 1: What We Require */}
+          <div className="blueprint-card require-card glass-card reveal">
+            <div className="blueprint-card-header">
+              <div className="blueprint-icon-box req-icon">
+                <FileText size={26} className="text-cyan" style={{ color: "var(--accent-cyan)" }} />
+              </div>
+              <div className="blueprint-header-meta">
+                <h3 className="blueprint-card-title">What We Require From You</h3>
+                <span className="blueprint-card-subtitle">Essential inputs to initiate engineering</span>
+              </div>
+            </div>
+
+            <div className="blueprint-list">
+              <div className="blueprint-item">
+                <span className="bullet-num">01</span>
+                <div className="blueprint-content">
+                  <h4>SRS / Scope Document</h4>
+                  <p>A Software Requirements Specification or detailed outline defining target features, core user stories, and ultimate project goals.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">02</span>
+                <div className="blueprint-content">
+                  <h4>Brand Assets & Figma Designs</h4>
+                  <p>High-fidelity Figma mockups, wireframes, logos, custom typography preferences, and branding guidelines.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">03</span>
+                <div className="blueprint-content">
+                  <h4>API & Database Specifications</h4>
+                  <p>Existing backend API documentation, data schemas, or credentials for any third-party integrations needed.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">04</span>
+                <div className="blueprint-content">
+                  <h4>Active Feedback Loops</h4>
+                  <p>Prompt communication and availability for brief check-ins during milestone reviews to ensure timely launch.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: What We Guarantee */}
+          <div className="blueprint-card deliver-card glass-card reveal" style={{ transitionDelay: "0.1s" }}>
+            <div className="blueprint-card-header">
+              <div className="blueprint-icon-box del-icon">
+                <ShieldCheck size={26} className="text-purple" style={{ color: "var(--violet)" }} />
+              </div>
+              <div className="blueprint-header-meta">
+                <h3 className="blueprint-card-title">What We Guarantee In Return</h3>
+                <span className="blueprint-card-subtitle">Our core commitments to your project</span>
+              </div>
+            </div>
+
+            <div className="blueprint-list">
+              <div className="blueprint-item">
+                <span className="bullet-num">01</span>
+                <div className="blueprint-content">
+                  <h4>Timely & Transparent Updates</h4>
+                  <p>Routine progress reports, structured demo sessions, and interactive staging links so you can track progress live.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">02</span>
+                <div className="blueprint-content">
+                  <h4>Rigorous Testing & QA</h4>
+                  <p>Comprehensive end-to-end testing, full mobile/tablet responsive testing, and speed optimization for perfect Core Web Vitals.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">03</span>
+                <div className="blueprint-content">
+                  <h4>Premium & Clean Codebase</h4>
+                  <p>100% intellectual property ownership of a modular, fully documented, component-driven React / Next.js / TypeScript codebase.</p>
+                </div>
+              </div>
+
+              <div className="blueprint-item">
+                <span className="bullet-num">04</span>
+                <div className="blueprint-content">
+                  <h4>Post-Launch Technical Support</h4>
+                  <p>30 days of complimentary technical warranty cover to address any post-launch bugs, performance checks, or hosting adjustments.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── PROJECTS ───────────────────────────────────────────── */
 function Projects() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useGSAP(
+    () => {
+      // Register GSAP ScrollTrigger plugin
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Filter out null values
+      const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+      const totalCards = cards.length;
+
+      if (totalCards === 0) return;
+
+      // Only run stacking animations on desktop (min-width: 769px)
+      const isDesktop = window.matchMedia("(min-width: 769px)").matches;
+      if (!isDesktop) return;
+
+      // Card 0 starts at center
+      gsap.set(cards[0], { y: "0%", scale: 1, rotation: 0, zIndex: 1 });
+
+      // All other cards start offset at 100%
+      for (let i = 1; i < totalCards; i++) {
+        gsap.set(cards[i], { y: "100%", scale: 1, rotation: 0, zIndex: i + 1 });
+      }
+
+      // Create scroll timeline
+      const scrollTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".sticky-projects-wrapper",
+          start: "top 100px", // Align nicely below sticky navigation header
+          end: () => `+=${window.innerHeight * (totalCards - 1)}`,
+          pin: true,
+          scrub: 0.5,
+          pinSpacing: true,
+        },
+      });
+
+      // Animate transition between cards
+      for (let i = 0; i < totalCards - 1; i++) {
+        const currentCard = cards[i];
+        const nextCard = cards[i + 1];
+        const position = i;
+
+        if (!currentCard || !nextCard) continue;
+
+        // Shrink, fade, and slightly rotate current card (creates stacked effect)
+        scrollTimeline.to(
+          currentCard,
+          {
+            scale: 0.9,
+            rotation: -2,
+            opacity: 0.7,
+            duration: 1,
+            ease: "none",
+          },
+          position
+        );
+
+        // Slide in next card
+        scrollTimeline.to(
+          nextCard,
+          {
+            y: "0%",
+            duration: 1,
+            ease: "none",
+          },
+          position
+        );
+      }
+
+      // Refresh scroll trigger on container resize
+      const resizeObserver = new ResizeObserver(() => {
+        ScrollTrigger.refresh();
+      });
+
+      if (containerRef.current) {
+        resizeObserver.observe(containerRef.current);
+      }
+
+      return () => {
+        resizeObserver.disconnect();
+        scrollTimeline.kill();
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
+    },
+    { scope: containerRef }
+  );
+
+  const featuredSlugs = [
+    "starbucks-3d",
+    "ai-ecommerce-chatbot",
+    "invoiceflow-saas",
+    "attendance-system",
+    "feedo"
+  ];
+  const projectsToDisplay = featuredSlugs
+    .map(slug => PORTFOLIO_DATA.projects.find(p => p.slug === slug))
+    .filter((p): p is typeof PORTFOLIO_DATA.projects[0] => p !== undefined);
+
   return (
-    <section className="section" id="projects">
+    <section className="section scroll-mt-24" id="projects" ref={containerRef}>
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: "64px" }} className="reveal">
           <p className="section-label">My Work</p>
@@ -298,12 +515,14 @@ function Projects() {
           </p>
         </div>
 
-        <div className="projects-grid">
-          {PORTFOLIO_DATA.projects.slice(0, 6).map((p, i) => (
+        <div className="sticky-projects-wrapper">
+          {projectsToDisplay.map((p, i) => (
             <div
-              className={`project-card reveal${i % 2 !== 0 ? " reversed" : ""}`}
+              className={`project-card sticky-project-card ${i % 2 !== 0 ? "reversed" : ""}`}
               key={p.title}
-              style={{ transitionDelay: `${i * 0.1}s` }}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
               data-hover
             >
               {/* Image */}
@@ -350,6 +569,7 @@ function Projects() {
     </section>
   );
 }
+
 
 /* ─── CONTACT ────────────────────────────────────────────── */
 const PROJECT_TYPES_MAP = {
@@ -1047,6 +1267,8 @@ export default function Home() {
         <About />
         <SectionDivider />
         <Skills />
+        <SectionDivider />
+        <CollaborationBlueprint />
         <SectionDivider />
         <Projects />
         <SectionDivider />

@@ -113,7 +113,18 @@ export const PORTFOLIO_DATA = {
         database: "MongoDB (Mongoose ODM)",
         hosting: "AWS EC2 & Vercel"
       },
-      gallery: ["/super.png"]
+      gallery: ["/super.png"],
+      challenge: {
+        problem: "The university's manual attendance tracking involved paper sheets for over 10,000 students, causing massive data entry errors, delayed warning reports for low attendance, and frequent scheduling conflicts.",
+        solution: "Built a centralized Next.js/MERN portal with automated background cron jobs that calculate attendance thresholds nightly. Integrated custom calendar conflict-resolution algorithms to prevent room double-bookings, reducing admin overhead by 85%."
+      },
+      seoTags: [
+        "Gurugram University Attendance System",
+        "MERN Stack University Portal",
+        "Automated Attendance Tracker",
+        "NextJS Student Faculty Dashboard",
+        "Academic scheduling conflict resolution"
+      ]
     },
     {
       title: "Feedo",
@@ -142,7 +153,18 @@ export const PORTFOLIO_DATA = {
         database: "MongoDB & Redis Caching",
         hosting: "Heroku & Vercel"
       },
-      gallery: ["/feedo.png"]
+      gallery: ["/feedo.png"],
+      challenge: {
+        problem: "Collecting customer feedback at low-connectivity trade shows and retail stores resulted in data loss, and standard surveys failed to highlight urgent customer complaints for support teams.",
+        solution: "Developed an offline-first sync queue using React Native AsyncStorage that stores survey submissions locally and syncs them automatically when connection is restored. Integrated a NestJS NLP sentiment analysis pipeline that flags negative responses and alerts support agents via Socket.IO instantly."
+      },
+      seoTags: [
+        "Feedo Mobile Survey App",
+        "React Native Offline Sync",
+        "Expo customer feedback dashboard",
+        "NestJS sentiment analysis NLP",
+        "Real-time NPS tracker socket.io"
+      ]
     },
     {
       title: "JLM Tournaments",
@@ -348,6 +370,10 @@ export const PORTFOLIO_DATA = {
         hosting: "AWS ECS & Vercel"
       },
       gallery: ["/project images/chatbot for ecommerce.png"],
+      challenge: {
+        problem: "The online storefront struggled with a high volume of repetitive support queries regarding order tracking and product recommendations, leading to slow response times and cart abandonment.",
+        solution: "Built a LangChain-powered RAG chatbot utilizing OpenAI's GPT-4 and Pinecone vector database. It securely accesses live Shopify order tracking APIs and semantically searches the catalog, resolving 70% of support tickets instantly and boosting conversion rates by 18%."
+      },
       seoTags: ["AI Chatbot E-Commerce Integration", "MERN Stack AI Assistant", "Retrieval-Augmented Generation chatbot", "OpenAI GPT-4 Shopify integration"]
     },
     {
@@ -1044,6 +1070,10 @@ export const PORTFOLIO_DATA = {
         hosting: "Vercel & Supabase Cloud"
       },
       gallery: ["/project images/invoiceflow.png"],
+      challenge: {
+        problem: "Professional service agencies struggled with manual PDF generation, late payments, and the overhead of matching bank transfers to outstanding bills across multiple currencies.",
+        solution: "Architected a Next.js invoice engine integrated with Stripe Billing. It automatically compiles and emails cryptographic, tamper-proof PDF invoices, handles automated dunning email campaigns for late fees, and syncs account ledger balances in real-time, reducing late payments by 40%."
+      },
       seoTags: ["InvoiceFlow SaaS Billing", "Stripe billing NextJS platform", "Prisma PostgreSQL invoice engine", "Automated freelance invoice generator"]
     },
     {

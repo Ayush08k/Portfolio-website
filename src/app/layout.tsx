@@ -563,6 +563,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Cursor />
         <AnnouncementBar />
         <Navbar />
+        <div className="scroll-vignette-top" />
+        <div className="scroll-vignette-bottom" />
         {children}
       </body>
     </html>
