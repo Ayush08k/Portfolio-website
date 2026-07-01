@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   title: {
-    default: "Freelance Ayush | 50% OFF on All Services",
-    template: "%s | Ayush Kumar — Freelance Developer for Hire",
+    default: "Freelancer | 50% off on all services",
+    template: "%s | Freelancer | 50% off on all services",
   },
   description:
-    "Need a web or mobile app built fast? 50+ projects shipped, 5★ client reviews, 50% OFF right now. React, Next.js, React Native expert — get a free quote in hours.",
+    "Freelancer | 50% off on all services. Need a web or mobile app built fast? 50+ projects shipped, 5★ client reviews. React, Next.js, React Native expert — get a free quote in hours.",
   keywords: [
     "hire freelance developer",
     "freelance full stack developer",
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Freelance Ayush | 50% OFF on All Services",
+    title: "Freelancer | 50% off on all services",
     description:
-      "50+ projects shipped, 5★ reviews. React, Next.js, React Native expert. Currently offering 50% OFF — get a free quote today.",
+      "Freelancer | 50% off on all services. 50+ projects shipped, 5★ reviews. React, Next.js, React Native expert — get a free quote today.",
     url: siteUrl,
     siteName,
     images: [
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/myprofile.png`,
         width: 1200,
         height: 630,
-        alt: "Ayush Kumar — Freelance Full Stack Developer | 50+ Projects Shipped | 5★ Reviews",
+        alt: "Ayush Kumar — Freelancer | 50% off on all services | 50+ Projects Shipped | 5★ Reviews",
         type: "image/png",
       },
     ],
@@ -77,9 +77,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Freelance Ayush | 50% OFF on All Services",
+    title: "Freelancer | 50% off on all services",
     description:
-      "50+ projects shipped, 5★ reviews. React, Next.js, React Native expert. Currently offering 50% OFF — get a free quote today.",
+      "Freelancer | 50% off on all services. 50+ projects shipped, 5★ reviews. React, Next.js, React Native expert — get a free quote today.",
     images: [`${siteUrl}/myprofile.png`],
     creator: "@Ayush08k",
     site: "@Ayush08k",
