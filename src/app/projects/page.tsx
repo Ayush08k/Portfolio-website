@@ -147,6 +147,56 @@ export default function ProjectsArchive() {
                       )}
                     </div>
 
+                    {project.lighthouseMetrics && (
+                      <div className="project-metrics archive-project-metrics" style={{ margin: "14px 0" }}>
+                        <div className="metric-item" title="Lighthouse Performance Score">
+                          <span className="metric-dot performance"></span>
+                          <span className="metric-name">Perf:</span>
+                          <span className="metric-value">{project.lighthouseMetrics.performance}%</span>
+                        </div>
+                        <div className="metric-item" title="Lighthouse Accessibility Score">
+                          <span className="metric-dot accessibility"></span>
+                          <span className="metric-name">Access:</span>
+                          <span className="metric-value">{project.lighthouseMetrics.accessibility}%</span>
+                        </div>
+                        <div className="metric-item" title="Lighthouse Best Practices Score">
+                          <span className="metric-dot best-practices"></span>
+                          <span className="metric-name">Best Practices:</span>
+                          <span className="metric-value">{project.lighthouseMetrics.bestPractices}%</span>
+                        </div>
+                        <div className="metric-item" title="Lighthouse Search Engine Optimization Score">
+                          <span className="metric-dot seo"></span>
+                          <span className="metric-name">SEO:</span>
+                          <span className="metric-value">{project.lighthouseMetrics.seo}%</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {project.mobileMetrics && (
+                      <div className="project-metrics archive-project-metrics" style={{ margin: "14px 0" }}>
+                        <div className="metric-item" title="Mobile App Startup Speed">
+                          <span className="metric-dot performance"></span>
+                          <span className="metric-name">Startup:</span>
+                          <span className="metric-value">{project.mobileMetrics.startupTime}</span>
+                        </div>
+                        <div className="metric-item" title="Production App Bundle Size">
+                          <span className="metric-dot accessibility"></span>
+                          <span className="metric-name">Size:</span>
+                          <span className="metric-value">{project.mobileMetrics.bundleSize}</span>
+                        </div>
+                        <div className="metric-item" title="Crash Free Session Rate">
+                          <span className="metric-dot best-practices"></span>
+                          <span className="metric-name">Crash-Free:</span>
+                          <span className="metric-value">{project.mobileMetrics.crashFreeRate}</span>
+                        </div>
+                        <div className="metric-item" title="Render Frames Per Second">
+                          <span className="metric-dot seo"></span>
+                          <span className="metric-name">FPS:</span>
+                          <span className="metric-value">{project.mobileMetrics.fps}</span>
+                        </div>
+                      </div>
+                    )}
+
                     <div className="archive-card-footer">
                       <Link href={`/projects/${project.slug}`} className="view-case-study-btn" data-hover>
                         View Case Study

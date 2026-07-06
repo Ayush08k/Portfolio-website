@@ -536,9 +536,59 @@ function Projects() {
                 <p className="project-overline">Case Study {String(i + 1).padStart(2, "0")}</p>
                 <h3 className="project-title">{p.title}</h3>
                 <p className="project-desc">{p.description}</p>
-                <div className="project-tech">
+                 <div className="project-tech">
                   {p.tech.map(t => <span className="project-tech-tag" key={t}>{t}</span>)}
                 </div>
+
+                {p.lighthouseMetrics && (
+                  <div className="project-metrics">
+                    <div className="metric-item" title="Lighthouse Performance Score">
+                      <span className="metric-dot performance"></span>
+                      <span className="metric-name">Perf:</span>
+                      <span className="metric-value">{p.lighthouseMetrics.performance}%</span>
+                    </div>
+                    <div className="metric-item" title="Lighthouse Accessibility Score">
+                      <span className="metric-dot accessibility"></span>
+                      <span className="metric-name">Access:</span>
+                      <span className="metric-value">{p.lighthouseMetrics.accessibility}%</span>
+                    </div>
+                    <div className="metric-item" title="Lighthouse Best Practices Score">
+                      <span className="metric-dot best-practices"></span>
+                      <span className="metric-name">Best Practices:</span>
+                      <span className="metric-value">{p.lighthouseMetrics.bestPractices}%</span>
+                    </div>
+                    <div className="metric-item" title="Lighthouse Search Engine Optimization Score">
+                      <span className="metric-dot seo"></span>
+                      <span className="metric-name">SEO:</span>
+                      <span className="metric-value">{p.lighthouseMetrics.seo}%</span>
+                    </div>
+                  </div>
+                )}
+
+                {p.mobileMetrics && (
+                  <div className="project-metrics">
+                    <div className="metric-item" title="Mobile App Startup Speed">
+                      <span className="metric-dot performance"></span>
+                      <span className="metric-name">Startup:</span>
+                      <span className="metric-value">{p.mobileMetrics.startupTime}</span>
+                    </div>
+                    <div className="metric-item" title="Production App Bundle Size">
+                      <span className="metric-dot accessibility"></span>
+                      <span className="metric-name">Bundle Size:</span>
+                      <span className="metric-value">{p.mobileMetrics.bundleSize}</span>
+                    </div>
+                    <div className="metric-item" title="Crash Free Session Rate">
+                      <span className="metric-dot best-practices"></span>
+                      <span className="metric-name">Crash-Free:</span>
+                      <span className="metric-value">{p.mobileMetrics.crashFreeRate}</span>
+                    </div>
+                    <div className="metric-item" title="Render Frames Per Second">
+                      <span className="metric-dot seo"></span>
+                      <span className="metric-name">FPS:</span>
+                      <span className="metric-value">{p.mobileMetrics.fps}</span>
+                    </div>
+                  </div>
+                )}
                 <div className="project-links">
                   <Link href={`/projects/${p.slug}`} className="project-link-btn" style={{ borderColor: "var(--accent-cyan)", color: "var(--accent-cyan)" }} data-hover>
                     Case Study

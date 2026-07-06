@@ -6,42 +6,28 @@ import { BLOG_POSTS } from "@/data/blog";
  * Professional XML Sitemap for Google Search Console
  * ──────────────────────────────────────────────────────
  * Follows: https://www.sitemaps.org/protocol.html
- *
- * Key rules applied:
- *  1. lastModified uses REAL content dates, NOT new Date() (avoids Google penalty)
- *  2. Priority uses decimal format consistently (0.0 – 1.0)
- *  3. All URLs are absolute with no trailing slashes
- *  4. Blog dates are properly parsed to ISO 8601 date-only format (YYYY-MM-DD)
- *  5. changeFrequency matches actual update cadence
  */
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
-/** Normalize the base URL — strip any trailing slashes */
 function getBaseUrl(): string {
   const raw =
     process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
   return raw.replace(/\/+$/, "");
 }
 
-/**
- * Parse a human-readable date string into a stable ISO date (YYYY-MM-DD).
- * Falls back to a safe static date if parsing fails.
- */
 function toISODate(dateString: string): string {
   try {
     const parsed = new Date(dateString);
     if (isNaN(parsed.getTime())) {
-      return "2026-06-01"; // safe fallback
+      return "2026-06-01";
     }
-    return parsed.toISOString().split("T")[0]; // e.g. "2026-06-08"
+    return parsed.toISOString().split("T")[0];
   } catch {
     return "2026-06-01";
   }
 }
 
-// ── Real last-modification dates for static pages ──────────────────────────────
-// These should be updated whenever meaningful content changes on each page.
 const STATIC_PAGE_DATES = {
   home: "2026-06-27",
   services: "2026-06-27",
@@ -49,6 +35,7 @@ const STATIC_PAGE_DATES = {
   blog: "2026-06-27",
   about: "2026-06-27",
   estimator: "2026-06-27",
+  speed: "2026-07-06",
 } as const;
 
 // ── Sitemap Generator ──────────────────────────────────────────────────────────
@@ -94,13 +81,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/speed`,
+      lastModified: new Date(STATIC_PAGE_DATES.speed),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
   ];
 
   // ── 2. Individual Project Case Study Pages ─────────────────────────────────
   const projectRoutes: MetadataRoute.Sitemap = PORTFOLIO_DATA.projects.map(
     (project) => ({
       url: `${baseUrl}/projects/${project.slug}`,
-      lastModified: new Date(STATIC_PAGE_DATES.projects), // use the projects page date
+      lastModified: new Date(STATIC_PAGE_DATES.projects),
       changeFrequency: "monthly" as const,
       priority: 0.75,
     })
@@ -110,7 +103,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(toISODate(post.date)),
-    changeFrequency: "yearly" as const, // blog posts rarely change after publication
+    changeFrequency: "yearly" as const,
     priority: 0.7,
   }));
 
