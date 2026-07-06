@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   title: {
-    default: "Freelancer | 50% off on all services",
-    template: "%s | Freelancer | 50% off on all services",
+    default: "Best Freelance Web & Mobile Developer — 50% OFF | Shipped in 7 Days",
+    template: "%s | Best Freelance Web & Mobile Developer — 50% OFF",
   },
   description:
-    "Freelancer | 50% off on all services. Need a web or mobile app built fast? 50+ projects shipped, 5★ client reviews. React, Next.js, React Native expert — get a free quote in hours.",
+    "Need a web or mobile app built? Save 50% today! Get agency-quality Next.js, React, and React Native apps delivered in 7 days with a 100% money-back guarantee. 50+ projects shipped, 5★ client reviews.",
   keywords: [
     "hire freelance developer",
     "freelance full stack developer",
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Freelancer | 50% off on all services",
+    title: "Best Freelance Web & Mobile Developer — 50% OFF | Shipped in 7 Days",
     description:
-      "Freelancer | 50% off on all services. 50+ projects shipped, 5★ reviews. React, Next.js, React Native expert — get a free quote today.",
+      "Need a web or mobile app built? Save 50% today! Get agency-quality Next.js, React, and React Native apps delivered in 7 days with a 100% money-back guarantee. 50+ projects shipped, 5★ client reviews.",
     url: siteUrl,
     siteName,
     images: [
@@ -77,9 +77,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Freelancer | 50% off on all services",
+    title: "Best Freelance Web & Mobile Developer — 50% OFF | Shipped in 7 Days",
     description:
-      "Freelancer | 50% off on all services. 50+ projects shipped, 5★ reviews. React, Next.js, React Native expert — get a free quote today.",
+      "Need a web or mobile app built? Save 50% today! Get agency-quality Next.js, React, and React Native apps delivered in 7 days with a 100% money-back guarantee. 50+ projects shipped, 5★ client reviews.",
     images: [`${siteUrl}/myprofile.png`],
     creator: "@Ayush08k",
     site: "@Ayush08k",

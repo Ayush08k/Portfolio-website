@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
 
 export const metadata: Metadata = {
-  title: "50+ Real Projects & Case Studies — Web Apps, Mobile Apps, AI & E-Commerce",
+  title: "50+ Real Projects & Case Studies — 50% OFF Web & Mobile Development",
   description:
-    "See 50+ live projects: SaaS dashboards, React Native apps, AI integrations, e-commerce stores & 3D web experiences. All built by one freelance developer. View case studies →",
+    "Explore 50+ real-world web apps, SaaS dashboards, and mobile apps built with React, Next.js, and React Native. Professional development at 50% off. View case studies →",
   keywords: [
     // ── Core Portfolio Keywords ────────────────────────────────────────────
     "freelance developer portfolio projects",

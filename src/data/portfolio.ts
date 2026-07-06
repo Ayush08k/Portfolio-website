@@ -92,7 +92,7 @@ export const PORTFOLIO_DATA = {
       title: "Gurugram University Attendance System",
       description: "Faculty can track and mark student attendance with real-time class scheduling and automated reminders, while students access a personal dashboard to monitor their attendance history, grades, and university updates.",
       tech: ["React", "Node.js", "Express.js", "Tailwind CSS", "JavaScript", "MongoDB"],
-      image: "/super.png",
+      image: "/project images/super.png",
       slug: "attendance-system",
       category: "Web",
       longDescription: "This attendance system was designed and built to digitize Gurugram University's legacy paper-based attendance workflows. The platform hosts three distinct portals: an Admin Console for managing courses/schedules, a Faculty Interface for marking attendance with quick checkbox grids, and a student dashboard for viewing attendance percentages and progress. Security is handled via JWT and HTTP-only cookies, ensuring that grade and attendance logs remain tamper-proof.",
@@ -113,7 +113,7 @@ export const PORTFOLIO_DATA = {
         database: "MongoDB (Mongoose ODM)",
         hosting: "AWS EC2 & Vercel"
       },
-      gallery: ["/super.png"],
+      gallery: ["/project images/super.png"],
       challenge: {
         problem: "The university's manual attendance tracking involved paper sheets for over 10,000 students, causing massive data entry errors, delayed warning reports for low attendance, and frequent scheduling conflicts.",
         solution: "Built a centralized Next.js/MERN portal with automated background cron jobs that calculate attendance thresholds nightly. Integrated custom calendar conflict-resolution algorithms to prevent room double-bookings, reducing admin overhead by 85%."

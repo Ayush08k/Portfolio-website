@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Web & Mobile App Development Services — 50% OFF | From $150",
+  title: "Freelance Web & Mobile App Development Services — 50% OFF | Shipped in 7 Days",
   description:
-    "Landing pages from $150, full stack apps from $600, mobile apps from $750. 50+ projects shipped, 5★ reviews. React, Next.js, React Native. Get a free quote today.",
+    "Custom Next.js websites, full stack web portals, and iOS/Android mobile apps shipped in 7 days at 50% off. Start with a free consultation and get an instant estimate!",
   keywords: [
     "web development services",
     "mobile app development services",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     "hire remote developer",
   ],
   openGraph: {
-    title: "Web & Mobile App Development Services — 50% OFF | From $150",
+    title: "Freelance Web & Mobile App Development Services — 50% OFF | Shipped in 7 Days",
     description:
-      "Landing pages from $150, full stack apps from $600, mobile apps from $750. 50+ projects shipped, 5★ reviews. Get a free quote today.",
+      "Custom Next.js websites, full stack web portals, and iOS/Android mobile apps shipped in 7 days at 50% off. Start with a free consultation and get an instant estimate!",
     url: `${siteUrl}/services`,
     siteName: "Freelancer Ayush",
     images: [
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Web & Mobile App Development Services — 50% OFF | From $150",
+    title: "Freelance Web & Mobile App Development Services — 50% OFF | Shipped in 7 Days",
     description:
-      "Landing pages from $150, full stack apps from $600, mobile apps from $750. 50+ projects shipped, 5★ reviews. Get a free quote today.",
+      "Custom Next.js websites, full stack web portals, and iOS/Android mobile apps shipped in 7 days at 50% off. Start with a free consultation and get an instant estimate!",
     images: [`${siteUrl}/myprofile.png`],
     creator: "@Ayush08k",
   },
