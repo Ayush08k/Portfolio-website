@@ -86,15 +86,22 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
     if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
+    const context = canvas.getContext("2d", { alpha: true });
     if (!context) return;
+
+    // ── Device-aware quality settings ──────────────────────────────
+    const isMobile = window.innerWidth <= 768;
+    const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768;
+    // Clamp DPR to max 2 to avoid overdraw on high-DPI screens
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
+    // Sparser dots on mobile/tablet for faster point-in-polygon + less draw calls
+    const dotSpacing = isMobile ? 24 : isTablet ? 20 : 16;
 
     // Set up responsive dimensions
     const containerWidth = Math.min(width, window.innerWidth - 40);
     const containerHeight = Math.min(height, window.innerHeight - 100);
     const radius = Math.min(containerWidth, containerHeight) / 2.2;
 
-    const dpr = window.devicePixelRatio || 1;
     canvas.width = containerWidth * dpr;
     canvas.height = containerHeight * dpr;
     canvas.style.width = `${containerWidth}px`;
@@ -161,12 +168,12 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
       return false;
     };
 
-    const generateDotsInPolygon = (feature: any, dotSpacing = 16) => {
+    const generateDotsInPolygon = (feature: any, spacing: number) => {
       const dots: [number, number][] = [];
       const bounds = d3.geoBounds(feature);
       const [[minLng, minLat], [maxLng, maxLat]] = bounds;
 
-      const stepSize = dotSpacing * 0.08;
+      const stepSize = spacing * 0.08;
 
       for (let lng = minLng; lng <= maxLng; lng += stepSize) {
         for (let lat = minLat; lat <= maxLat; lat += stepSize) {
@@ -189,6 +196,7 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
     const allDots: DotData[] = [];
     let landFeatures: any;
 
+    // ── Optimized batched render ──────────────────────────────────
     const render = () => {
       // Clear canvas
       context.clearRect(0, 0, containerWidth, containerHeight);
@@ -196,14 +204,12 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
       const currentScale = projection.scale();
       const scaleFactor = currentScale / radius;
 
-      // Draw ocean (globe background) - transparent/subtle fill so the background aurora/stars are visible
+      // Draw ocean (globe background) - NO border/stroke for cleaner look
       context.beginPath();
       context.arc(containerWidth / 2, containerHeight / 2, currentScale, 0, 2 * Math.PI);
       context.fillStyle = "rgba(0, 0, 0, 0.15)";
       context.fill();
-      context.strokeStyle = "rgba(255, 255, 255, 0.35)";
-      context.lineWidth = 1.2 * scaleFactor;
-      context.stroke();
+      // Border removed — seamless globe appearance
 
       if (landFeatures) {
         // Draw graticule (longitude and latitude grid lines)
@@ -225,8 +231,12 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
         context.lineWidth = 0.8 * scaleFactor;
         context.stroke();
 
-        // Draw halftone dots
-        allDots.forEach((dot) => {
+        // ── BATCHED halftone dots (single beginPath for ALL dots) ──
+        const dotRadius = 1.0 * scaleFactor;
+        context.fillStyle = "rgba(255, 255, 255, 0.45)";
+        context.beginPath();
+        for (let i = 0, len = allDots.length; i < len; i++) {
+          const dot = allDots[i];
           const projected = projection([dot.lng, dot.lat]);
           if (
             projected &&
@@ -235,12 +245,12 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
             projected[1] >= 0 &&
             projected[1] <= containerHeight
           ) {
-            context.beginPath();
-            context.arc(projected[0], projected[1], 1.0 * scaleFactor, 0, 2 * Math.PI);
-            context.fillStyle = "rgba(255, 255, 255, 0.45)";
-            context.fill();
+            // Inline sub-path: moveTo + arc avoids closing/opening paths
+            context.moveTo(projected[0] + dotRadius, projected[1]);
+            context.arc(projected[0], projected[1], dotRadius, 0, 2 * Math.PI);
           }
-        });
+        }
+        context.fill();
 
         // Draw client glowing dots
         const invert = projection.invert;
@@ -251,6 +261,7 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
             const deg2rad = Math.PI / 180;
             const phi1 = centerLat * deg2rad;
             const lambda1 = centerLng * deg2rad;
+            const now = Date.now();
 
             clientDots.forEach((dot) => {
               const phi2 = dot.lat * deg2rad;
@@ -268,7 +279,7 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
                   projected[1] >= 0 &&
                   projected[1] <= containerHeight
                 ) {
-                  const pulse = Math.abs(Math.sin(Date.now() * 0.0035 + dot.pulseOffset));
+                  const pulse = Math.abs(Math.sin(now * 0.0035 + dot.pulseOffset));
                   const glowRadius = (4.5 + pulse * 6.5) * scaleFactor;
 
                   // Pulsing outer glow (Cyan/emerald mix for cyberpunk/tech aesthetic)
@@ -306,9 +317,9 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
 
         landFeatures = await response.json();
 
-        // Generate dots for all land features
+        // Generate dots for all land features (device-appropriate spacing)
         landFeatures.features.forEach((feature: any) => {
-          const dots = generateDotsInPolygon(feature, 16);
+          const dots = generateDotsInPolygon(feature, dotSpacing);
           dots.forEach(([lng, lat]) => {
             allDots.push({ lng, lat, visible: true });
           });
@@ -325,12 +336,19 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
     let autoRotate = true;
     const rotationSpeed = 0.45;
 
-    const rotate = () => {
-      if (autoRotate) {
-        rotation[0] += rotationSpeed;
-        projection.rotate(rotation as [number, number, number]);
+    // ── Frame-throttled rotation (cap at ~30fps for rotation, saves CPU) ──
+    let lastFrameTime = 0;
+    const targetFrameInterval = isMobile ? 50 : 33; // ~20fps mobile, ~30fps desktop
+
+    const rotate = (timestamp: number) => {
+      if (timestamp - lastFrameTime >= targetFrameInterval) {
+        if (autoRotate) {
+          rotation[0] += rotationSpeed;
+          projection.rotate(rotation as [number, number, number]);
+        }
+        render();
+        lastFrameTime = timestamp;
       }
-      render();
     };
 
     // Auto-rotation timer

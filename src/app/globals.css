@@ -2045,7 +2045,165 @@ body.has-announcement .hero {
   border: 0 !important;
 }
 
+/* ─── LOADING / SPLASH SCREEN ────────────────────────────── */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.loading-screen-exit {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+.loading-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.loading-greeting {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(48px, 10vw, 80px);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.loading-greeting-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.loading-hi {
+  display: inline-block;
+}
+.loading-comma {
+  color: var(--muted);
+}
+.loading-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease 0.15s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+.loading-name-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.loading-ayush {
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+.loading-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease 0.3s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+.loading-bar-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.loading-bar-track {
+  width: clamp(140px, 30vw, 220px);
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--white), var(--muted));
+  border-radius: 100px;
+  transition: width 0.08s linear;
+  will-change: width;
+}
+.loading-percentage {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 30px;
+  text-align: right;
+}
 
+/* ─── PERFORMANCE: GPU LAYER HINTS & CONTAINMENT ─────────── */
+.hero-visual,
+.hero-content {
+  will-change: transform, opacity;
+}
+.bento-card,
+.project-card,
+.reviews-card,
+.stat-card {
+  contain: layout style;
+}
+.marquee-track {
+  will-change: transform;
+  contain: layout;
+}
+.slider-track {
+  will-change: transform;
+}
 
+/* ─── MOBILE: Disable heavy effects ──────────────────────── */
+@media (max-width: 768px) {
+  /* Disable body background animation for perf */
+  body::after {
+    display: none !important;
+  }
 
+  /* Reduce animation complexity */
+  .loading-screen {
+    transition-duration: 0.3s;
+  }
+}
+
+/* ─── CLICK EFFECT ────────────────────────────── */
+.click-effect-text {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999999;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--emerald);
+  transform: translate(-50%, -50%);
+  animation: clickFloat 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  white-space: nowrap;
+}
+
+@keyframes clickFloat {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -70%) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -150%) scale(1);
+  }
+}
 

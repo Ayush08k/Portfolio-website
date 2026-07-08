@@ -3,6 +3,8 @@ import "./globals.css";
 import Cursor from "@/components/Cursor";
 import Navbar from "@/components/Navbar";
 import AnnouncementBar from "@/components/AnnouncementBar";
+import LoadingScreen from "@/components/LoadingScreen";
+import ClickEffect from "@/components/ClickEffect";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
 const siteName = "Freelancer Ayush";
@@ -560,6 +562,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <LoadingScreen />
+        <ClickEffect />
         <Cursor />
         <AnnouncementBar />
         <Navbar />

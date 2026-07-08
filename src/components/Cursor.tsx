@@ -39,9 +39,10 @@ export default function Cursor() {
 
     let lastMoveTime = Date.now();
 
-    // Resize canvas to cover viewport with Retina/High-DPI scaling
+    // Resize canvas to cover viewport — cap DPR to avoid overdraw
+    const MAX_DPR = 1.5;
     const handleResize = () => {
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       ctx.scale(dpr, dpr);
@@ -160,7 +161,7 @@ export default function Cursor() {
     window.addEventListener("mouseover", handleMouseOver);
     window.addEventListener("mousedown", handleMouseDown);
 
-    // Render helper for 4-pointed sparkles
+    // Render helper for 4-pointed sparkles (shadowBlur removed for perf)
     const drawSparkle = (
       c: CanvasRenderingContext2D,
       x: number,
@@ -184,13 +185,11 @@ export default function Cursor() {
       c.quadraticCurveTo(0, 0, 0, -size);
       c.closePath();
 
-      c.shadowBlur = size * 1.2;
-      c.shadowColor = color;
       c.fill();
       c.restore();
     };
 
-    // Render helper for stardust circles
+    // Render helper for stardust circles (shadowBlur removed for perf)
     const drawCircle = (
       c: CanvasRenderingContext2D,
       x: number,
@@ -208,8 +207,6 @@ export default function Cursor() {
       c.arc(0, 0, size, 0, Math.PI * 2);
       c.closePath();
 
-      c.shadowBlur = size * 1.5;
-      c.shadowColor = color;
       c.fill();
       c.restore();
     };
@@ -217,6 +214,7 @@ export default function Cursor() {
     // Animation Loop
     let animationFrameId: number;
 
+    const MAX_PARTICLES = 60; // Cap particles for perf
     const updateAndDraw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const now = Date.now();
@@ -249,7 +247,7 @@ export default function Cursor() {
       const my = mouseRef.current.y;
 
       // 2. Idle Sparkle Spawning (gently sparkles when cursor is stationary)
-      if (mx > 0 && my > 0 && now - lastMoveTime > 80) {
+      if (mx > 0 && my > 0 && now - lastMoveTime > 80 && particlesRef.current.length < MAX_PARTICLES) {
         if (Math.random() > 0.9) {
           const rx = mx + (Math.random() - 0.5) * 12;
           const ry = my + (Math.random() - 0.5) * 12;

@@ -2,6 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  // ── Compiler: strip console.log in production for smaller bundles ─────
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
+  },
+
   // ── Custom Headers for SEO & Sitemap Caching ────────────────────────────────
   async headers() {
     return [
@@ -40,6 +45,16 @@ const nextConfig = {
           {
             key: "Content-Type",
             value: "application/xml; charset=utf-8",
+          },
+        ],
+      },
+      {
+        // Aggressive caching for all static assets (JS, CSS, images, fonts)
+        source: "/:path*.(js|css|png|jpg|jpeg|webp|avif|svg|ico|woff|woff2|ttf|eot)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

@@ -10,22 +10,47 @@ export default function AuroraBackground() {
     const container = containerRef.current;
     if (!container) return;
 
+    // ── Device-aware quality settings ──────────────────────────────
+    const isMobile = window.innerWidth <= 768;
+    const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768;
+    // Render at lower resolution on mobile/tablet for massive perf gain
+    const resolutionScale = isMobile ? 0.35 : isTablet ? 0.5 : 0.65;
+    const numOctaves = isMobile ? 2 : 3;
+    const loopIterations = isMobile ? 20 : isTablet ? 28 : 35;
+
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: false, // AA not needed for background shader
+        alpha: true,
+        powerPreference: isMobile ? "low-power" : "default",
+      });
+    } catch {
+      // WebGL not available — fail silently
+      return;
+    }
     
-    // Get container dimensions
-    const width = container.clientWidth || window.innerWidth;
-    const height = container.clientHeight || window.innerHeight;
+    // Get container dimensions at reduced resolution
+    const fullW = container.clientWidth || window.innerWidth;
+    const fullH = container.clientHeight || window.innerHeight;
+    const w = Math.round(fullW * resolutionScale);
+    const h = Math.round(fullH * resolutionScale);
     
-    renderer.setSize(width, height);
+    renderer.setSize(w, h);
+    // Stretch the low-res canvas to fill container via CSS
+    renderer.domElement.style.width = "100%";
+    renderer.domElement.style.height = "100%";
+    renderer.domElement.style.imageRendering = "auto";
     container.appendChild(renderer.domElement);
 
-    // Create the shader material matching the user's exact specification
+    // Create the shader material with device-tuned parameters
     const material = new THREE.ShaderMaterial({
       uniforms: {
         iTime: { value: 0 },
-        iResolution: { value: new THREE.Vector2(width, height) }
+        iResolution: { value: new THREE.Vector2(w, h) }
       },
       vertexShader: `
         void main() {
@@ -36,7 +61,7 @@ export default function AuroraBackground() {
         uniform float iTime;
         uniform vec2 iResolution;
 
-        #define NUM_OCTAVES 3
+        #define NUM_OCTAVES ${numOctaves}
 
         float rand(vec2 n) {
           return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
@@ -74,9 +99,9 @@ export default function AuroraBackground() {
 
           float f = 2.0 + fbm(p + vec2(iTime * 5.0, 0.0)) * 0.5;
 
-          for (float i = 0.0; i < 35.0; i++) {
+          for (float i = 0.0; i < ${loopIterations}.0; i++) {
             v = p + cos(i * i + (iTime + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 + vec2(sin(iTime * 3.0 + i) * 0.003, cos(iTime * 3.5 - i) * 0.003);
-            float tailNoise = fbm(v + vec2(iTime * 0.5, i)) * 0.3 * (1.0 - (i / 35.0));
+            float tailNoise = fbm(v + vec2(iTime * 0.5, i)) * 0.3 * (1.0 - (i / ${loopIterations}.0));
             vec4 auroraColors = vec4(
               0.1 + 0.3 * sin(i * 0.2 + iTime * 0.4),
               0.3 + 0.5 * cos(i * 0.3 + iTime * 0.5),
@@ -84,7 +109,7 @@ export default function AuroraBackground() {
               1.0
             );
             vec4 currentContribution = auroraColors * exp(sin(i * i + iTime * 0.8)) / length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));
-            float thinnessFactor = smoothstep(0.0, 1.0, i / 35.0) * 0.6;
+            float thinnessFactor = smoothstep(0.0, 1.0, i / ${loopIterations}.0) * 0.6;
             o += currentContribution * (1.0 + tailNoise * 0.8) * thinnessFactor;
           }
 
@@ -98,20 +123,32 @@ export default function AuroraBackground() {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
+    // ── Throttled animation (reduce frame rate for background effect) ──
     let frameId: number;
-    const animate = () => {
+    let lastTime = 0;
+    const frameInterval = isMobile ? 50 : 33; // ~20fps mobile, ~30fps desktop
+
+    const animate = (timestamp: number) => {
+      frameId = requestAnimationFrame(animate);
+      if (timestamp - lastTime < frameInterval) return;
+      lastTime = timestamp;
+
       material.uniforms.iTime.value += 0.045;
       renderer.render(scene, camera);
-      frameId = requestAnimationFrame(animate);
     };
-    animate();
+    frameId = requestAnimationFrame(animate);
 
     const handleResize = () => {
       if (!container) return;
-      const w = container.clientWidth || window.innerWidth;
-      const h = container.clientHeight || window.innerHeight;
+      const fullW = container.clientWidth || window.innerWidth;
+      const fullH = container.clientHeight || window.innerHeight;
+      const w = Math.round(fullW * resolutionScale);
+      const h = Math.round(fullH * resolutionScale);
       renderer.setSize(w, h);
       material.uniforms.iResolution.value.set(w, h);
+      // Keep CSS size at 100%
+      renderer.domElement.style.width = "100%";
+      renderer.domElement.style.height = "100%";
     };
     window.addEventListener("resize", handleResize);
 
@@ -140,6 +177,7 @@ export default function AuroraBackground() {
         pointerEvents: "none",
         overflow: "hidden",
         opacity: 0.45, // Set opacity so text and main content remain perfectly readable
+        contain: "strict", // CSS containment for layout isolation
       }}
     />
   );
