@@ -156,9 +156,9 @@ export default function ServicesPage() {
         <div className="blueprint-grid">
           {/* Card 1: What We Require */}
           <motion.div
-            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={isMobile ? { duration: 0 } : { duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.4, delay: 0.05 }}
             className="blueprint-card require-card glass-card"
           >
             <div className="blueprint-card-header">
@@ -208,9 +208,9 @@ export default function ServicesPage() {
 
           {/* Card 2: What We Guarantee */}
           <motion.div
-            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={isMobile ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
             className="blueprint-card deliver-card glass-card"
           >
             <div className="blueprint-card-header">
@@ -266,9 +266,9 @@ export default function ServicesPage() {
           {servicesData.map((svc, i) => (
             <motion.div
               key={svc.name}
-              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={isMobile ? { duration: 0 } : { duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
               className="svc-card glass-card"
               style={{ borderColor: `rgba(255, 255, 255, 0.05)` }}
             >

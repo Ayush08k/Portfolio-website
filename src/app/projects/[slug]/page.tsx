@@ -55,9 +55,9 @@ export default function ProjectCaseStudy() {
               strokeWidth="6"
               fill="transparent"
               strokeDasharray={circumference}
-              initial={isMobile ? { strokeDashoffset } : { strokeDashoffset: circumference }}
+              initial={{ strokeDashoffset: circumference }}
               animate={{ strokeDashoffset }}
-              transition={isMobile ? { duration: 0 } : { duration: 1.5, ease: "easeOut", delay: 0.3 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
               strokeLinecap="round"
               transform="rotate(-90 45 45)"
             />
@@ -73,22 +73,22 @@ export default function ProjectCaseStudy() {
 
   // Stagger variants for sub-elements
   const containerVariants = {
-    hidden: { opacity: isMobile ? 1 : 0 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: isMobile ? { duration: 0 } : {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
       },
     },
   };
 
   const itemVariants: any = {
-    hidden: { opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 12 },
+    hidden: { opacity: 0, y: 8 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: isMobile ? { duration: 0 } : { duration: 0.35, ease: "easeOut" },
+      transition: { duration: 0.3, ease: "easeOut" },
     },
   };
 
@@ -100,9 +100,9 @@ export default function ProjectCaseStudy() {
       <div className="case-orb orb orb-3" style={{ bottom: "10%", left: "20%", opacity: 0.12 }} />
 
       <motion.header
-        initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={isMobile ? { duration: 0 } : { duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         className="case-header container"
       >
         <div className="header-title-row">
@@ -124,9 +124,9 @@ export default function ProjectCaseStudy() {
 
       {/* Main Cover Image */}
       <motion.div
-        initial={isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
+        initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={isMobile ? { duration: 0 } : { duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         className="container case-hero-image-wrap"
       >
         <div 

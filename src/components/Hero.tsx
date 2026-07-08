@@ -36,9 +36,9 @@ export default function Hero() {
         <div className="hero-text-content">
           {/* Status Badge */}
           <motion.div
-            initial={isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={isMobile ? { duration: 0 } : { duration: 0.5 }}
+            transition={{ duration: 0.4 }}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -70,9 +70,9 @@ export default function Hero() {
 
           {/* Subtitle */}
           <motion.p
-            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.4, delay: 0.05 }}
             style={{ 
               color: "var(--text-secondary)", 
               fontFamily: "'Fira Code', monospace", 
@@ -86,9 +86,9 @@ export default function Hero() {
 
           {/* Main Title */}
           <motion.h1
-            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
             style={{
               fontSize: "clamp(36px, 6vw, 64px)",
               color: "var(--text-white)",
@@ -106,10 +106,10 @@ export default function Hero() {
             <AnimatePresence mode="wait">
               <motion.h2
                 key={roles[roleIndex]}
-                initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={isMobile ? { opacity: 0, y: 0 } : { opacity: 0, y: -25 }}
-                transition={isMobile ? { duration: 0 } : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                   fontSize: "clamp(20px, 4vw, 36px)",
                   color: "var(--text-primary)",
@@ -126,9 +126,9 @@ export default function Hero() {
 
           {/* Short Intro Bio */}
           <motion.p
-            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.4, delay: 0.25 }}
             style={{
               maxWidth: "560px",
               color: "var(--text-secondary)",
@@ -142,9 +142,9 @@ export default function Hero() {
 
           {/* Action Buttons */}
           <motion.div
-            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.4, delay: 0.35 }}
             style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}
           >
             <a href="#projects" className="btn-primary">
@@ -159,9 +159,9 @@ export default function Hero() {
 
         {/* Cyber Holographic Avatar / Profile Display */}
         <motion.div
-          initial={isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={isMobile ? { duration: 0 } : { duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="hero-image-wrapper"
         >
           <div className="hero-dashed-ring">
@@ -170,8 +170,8 @@ export default function Hero() {
           
           {/* Glass floating 3D elements */}
           <motion.div
-            animate={isMobile ? { y: 0 } : { y: [0, -10, 0] }}
-            transition={isMobile ? { duration: 0 } : { repeat: Infinity, duration: 5, ease: "easeInOut" }}
+            animate={{ y: [0, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
             className="floating-tag tag-top-right floating-tag-cyan"
           >
             <Smartphone size={15} style={{ color: "var(--accent-cyan)" }} />
@@ -180,8 +180,8 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            animate={isMobile ? { y: 0 } : { y: [0, 12, 0] }}
-            transition={isMobile ? { duration: 0 } : { repeat: Infinity, duration: 6, ease: "easeInOut" }}
+            animate={{ y: [0, 12, 0] }}
+            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
             className="floating-tag tag-bottom-left floating-tag-purple"
           >
             <Terminal size={15} style={{ color: "var(--accent-purple)" }} />
@@ -190,8 +190,8 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            animate={isMobile ? { scale: 1 } : { scale: [1, 1.05, 1] }}
-            transition={isMobile ? { duration: 0 } : { repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             className="floating-tag tag-middle-right"
           >
             <Cpu size={15} style={{ color: "#10b981" }} />

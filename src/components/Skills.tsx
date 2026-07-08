@@ -52,10 +52,10 @@ export default function Skills() {
           return (
             <motion.div
               key={skill.name}
-              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={isMobile ? undefined : { once: true }}
-              transition={isMobile ? { duration: 0 } : { duration: 0.5, delay: i * 0.08 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
               className="glass-card"
               style={{ 
                 display: "flex", 
@@ -122,14 +122,13 @@ export default function Skills() {
           alignItems: "center"
         }}
       >
-        {/* Style block for GPU accelerated marquee on mobile */}
         <style dangerouslySetInnerHTML={{ __html: `
-          @keyframes mobileMarquee {
+          @keyframes marqueeAnim {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-33.333%, 0, 0); }
           }
-          .mobile-marquee-animated {
-            animation: mobileMarquee 45s linear infinite !important;
+          .marquee-animated {
+            animation: marqueeAnim 45s linear infinite !important;
           }
         `}} />
 
@@ -155,17 +154,8 @@ export default function Skills() {
           pointerEvents: "none"
         }} />
 
-        <motion.div
-          animate={isMobile ? {} : { x: [0, -2000] }}
-          transition={isMobile ? { duration: 0 } : {
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 35,
-              ease: "linear"
-            }
-          }}
-          className={isMobile ? "mobile-marquee-animated" : ""}
+        <div
+          className="marquee-animated"
           style={{
             display: "flex",
             gap: "24px",
@@ -198,7 +188,7 @@ export default function Skills() {
               {skill}
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

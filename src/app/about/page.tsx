@@ -113,8 +113,8 @@ export default function AboutPage() {
       <div className="orb orb-3" style={{ bottom: "5%", left: "15%", opacity: 0.15 }} />
 
       <motion.header
-        initial={isMobile ? undefined : { opacity: 0, y: -20 }}
-        animate={isMobile ? undefined : { opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="about-header container"
       >
@@ -137,9 +137,9 @@ export default function AboutPage() {
       </motion.header>
 
       <motion.main
-        variants={isMobile ? undefined : containerVariants}
-        initial={isMobile ? undefined : "hidden"}
-        animate={isMobile ? undefined : "visible"}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
         className="container about-main-grid"
       >
         {/* Timeline Column */}

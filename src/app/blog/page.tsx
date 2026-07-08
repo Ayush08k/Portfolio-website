@@ -90,9 +90,9 @@ export default function BlogIndex() {
                   filteredPosts.map((post, index) => (
                     <motion.article
                       key={post.slug}
-                      initial={isMobile ? undefined : { opacity: 0, y: 20 }}
-                      animate={isMobile ? undefined : { opacity: 1, y: 0 }}
-                      exit={isMobile ? undefined : { opacity: 0, y: -20 }}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -15 }}
                       transition={{ duration: 0.4, delay: index * 0.05 }}
                       className="blog-card glass-card"
                     >
@@ -140,8 +140,8 @@ export default function BlogIndex() {
                   ))
                 ) : (
                   <motion.div 
-                    initial={isMobile ? undefined : { opacity: 0 }}
-                    animate={isMobile ? undefined : { opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     className="no-results glass-card"
                   >
                     <h3>No articles found</h3>
