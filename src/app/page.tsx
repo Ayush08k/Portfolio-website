@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { ArrowRight, Code2, ExternalLink, Send, CheckCircle, Star, ChevronLeft, ChevronRight, FileText, ShieldCheck } from "lucide-react";
 import PricingEstimator, { EstimatorData } from "@/components/PricingEstimator";
+import AuroraBackground from "@/components/AuroraBackground";
+import RotatingEarth from "@/components/RotatingEarth";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -108,6 +110,9 @@ function Hero() {
 
   return (
     <section className="hero" id="home">
+      {/* Three.js Aurora background */}
+      <AuroraBackground />
+
       {/* Floating orbs */}
       <div className="orb orb-1" />
       <div className="orb orb-2" />
@@ -115,19 +120,12 @@ function Hero() {
 
       <div className="container">
         <div className="hero-grid">
-          <div className="hero-visual reveal" style={{ transitionDelay: "0.2s" }}>
-            <div className="split-glow-container">
-              {/* Pulsing Backglow */}
-              <div className="split-glow-backlight" />
-
-              {/* Image Frame with gradient blending masks */}
-              <div className="split-glow-frame">
-                <img src="/myprofile.png" alt="Ayush Kumar — Expert Freelance Full Stack, Mobile App & AI Developer from India" className="split-glow-img" width="400" height="480" />
-                <div className="split-glow-overlay" />
-              </div>
-            </div>
+          {/* Visual column with Rotating Earth (No border/frame) */}
+          <div className="hero-visual reveal" style={{ transitionDelay: "0.2s", justifyContent: "center" }}>
+            <RotatingEarth width={500} height={500} />
           </div>
 
+          {/* Content column */}
           <div className="hero-content reveal">
             <div className="hero-badge">
               <span className="hero-badge-dot" />
@@ -149,11 +147,11 @@ function Hero() {
             </p>
 
             <div className="hero-actions">
-              <a href="#projects" className="btn-primary" data-hover>
+              <a href="#projects" className="btn-primary btn-glow" data-hover>
                 <span>View My Work</span>
                 <ArrowRight size={16} />
               </a>
-              <a href="#contact" className="btn-outline" data-hover>
+              <a href="#contact" className="btn-outline btn-glow" data-hover>
                 Get in Touch
               </a>
             </div>
@@ -189,13 +187,13 @@ function About() {
                 { n: "6", l: "Core Services" },
                 { n: "100%", l: "Client Satisfaction" },
               ].map(s => (
-                <div className="stat-card glass" key={s.l}>
+                <div className="stat-card glass card-glow" key={s.l}>
                   <div className="stat-number gradient-text">{s.n}</div>
                   <div className="stat-label">{s.l}</div>
                 </div>
               ))}
             </div>
-            <div className="glass" style={{ padding: "24px", borderRadius: "20px" }}>
+            <div className="glass card-glow" style={{ padding: "24px", borderRadius: "20px" }}>
               <p style={{ fontSize: "13px", fontFamily: "'JetBrains Mono',monospace", color: "var(--violet)", marginBottom: "6px" }}>
                 $ whoami
               </p>
@@ -260,7 +258,7 @@ function Skills() {
 
         <div className="bento-grid">
           {PORTFOLIO_DATA.services.map((s, i) => (
-            <div className="bento-card reveal" key={s.name} style={{ transitionDelay: `${i * 0.07}s` }} data-hover>
+            <div className="bento-card card-glow reveal" key={s.name} style={{ transitionDelay: `${i * 0.07}s` }} data-hover>
               <div className="bento-icon" style={{ background: `${iconColors[i % iconColors.length]}18` }}>
                 <span style={{ fontSize: "26px" }}>{serviceEmojis[i]}</span>
               </div>
@@ -304,7 +302,7 @@ function CollaborationBlueprint() {
 
         <div className="blueprint-grid">
           {/* Card 1: What We Require */}
-          <div className="blueprint-card require-card glass-card reveal">
+          <div className="blueprint-card card-glow require-card glass-card reveal">
             <div className="blueprint-card-header">
               <div className="blueprint-icon-box req-icon">
                 <FileText size={26} className="text-cyan" style={{ color: "var(--accent-cyan)" }} />
@@ -351,7 +349,7 @@ function CollaborationBlueprint() {
           </div>
 
           {/* Card 2: What We Guarantee */}
-          <div className="blueprint-card deliver-card glass-card reveal" style={{ transitionDelay: "0.1s" }}>
+          <div className="blueprint-card card-glow deliver-card glass-card reveal" style={{ transitionDelay: "0.1s" }}>
             <div className="blueprint-card-header">
               <div className="blueprint-icon-box del-icon">
                 <ShieldCheck size={26} className="text-purple" style={{ color: "var(--violet)" }} />
@@ -518,7 +516,7 @@ function Projects() {
         <div className="sticky-projects-wrapper">
           {projectsToDisplay.map((p, i) => (
             <div
-              className={`project-card sticky-project-card ${i % 2 !== 0 ? "reversed" : ""}`}
+              className={`project-card card-glow sticky-project-card ${i % 2 !== 0 ? "reversed" : ""}`}
               key={p.title}
               ref={(el) => {
                 cardRefs.current[i] = el;
@@ -590,16 +588,16 @@ function Projects() {
                   </div>
                 )}
                 <div className="project-links">
-                  <Link href={`/projects/${p.slug}`} className="project-link-btn" style={{ borderColor: "var(--accent-cyan)", color: "var(--accent-cyan)" }} data-hover>
+                  <Link href={`/projects/${p.slug}`} className="project-link-btn btn-glow" style={{ borderColor: "var(--accent-cyan)", color: "var(--accent-cyan)" }} data-hover>
                     Case Study
                   </Link>
                   {p.github && p.github !== "#" && p.slug !== "jlm-tournaments" && (
-                    <a href={p.github} target="_blank" rel="noopener noreferrer" className="project-link-btn" data-hover>
+                    <a href={p.github} target="_blank" rel="noopener noreferrer" className="project-link-btn btn-glow" data-hover>
                       <Code2 size={14} /> Source
                     </a>
                   )}
                   {p.link && p.link !== "#" && p.slug !== "jlm-tournaments" && (
-                    <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" data-hover>
+                    <a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link-btn btn-glow" data-hover>
                       <ExternalLink size={14} /> Live Demo
                     </a>
                   )}
@@ -610,7 +608,7 @@ function Projects() {
         </div>
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "56px" }} className="reveal">
-          <Link href="/projects" className="btn-primary" data-hover>
+          <Link href="/projects" className="btn-primary btn-glow" data-hover>
             <span>More Projects</span>
             <ArrowRight size={16} />
           </Link>
@@ -784,7 +782,7 @@ function Contact({
           </div>
 
           {status === "success" ? (
-            <div className="contact-success-card glass success-pop-in">
+            <div className="contact-success-card glass card-glow success-pop-in">
               <div className="success-icon-wrap">
                 <svg className="checkmark-svg" viewBox="0 0 52 52">
                   <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
@@ -823,12 +821,12 @@ function Contact({
               <p className="success-text">
                 Ayush will contact you soon. Stay tuned! 🚀
               </p>
-              <button onClick={() => setStatus("idle")} className="btn-outline success-reset-btn" data-hover>
+              <button onClick={() => setStatus("idle")} className="btn-outline btn-glow success-reset-btn" data-hover>
                 Send Another Message
               </button>
             </div>
           ) : (
-            <form className="contact-form reveal" style={{ transitionDelay: "0.1s" }} onSubmit={handleSubmit}>
+            <form className="contact-form card-glow reveal" style={{ transitionDelay: "0.1s" }} onSubmit={handleSubmit}>
               <div className="form-row">
                 <div>
                   <label>YOUR NAME</label>
@@ -855,7 +853,7 @@ function Contact({
               </div>
               
               {estimatorData && estimatorData.hasEstimate && (
-                <div className="estimator-locked-summary glass">
+                <div className="estimator-locked-summary glass card-glow">
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                       <div style={{ 
@@ -1084,7 +1082,7 @@ function Contact({
                   className="textarea" 
                 />
               </div>
-              <button type="submit" className="btn-primary" data-hover disabled={status === "loading"}
+              <button type="submit" className="btn-primary btn-glow" data-hover disabled={status === "loading"}
                 style={{ alignSelf: "flex-start" }}>
                 <span>{status === "loading" ? "Sending..." : "Launch Message"}</span>
                 <Send size={15} />
@@ -1215,7 +1213,7 @@ function ClientReviews() {
                   className="slider-slide"
                   style={{ flex: `0 0 ${100 / visibleCards}%` }}
                 >
-                  <div className="glass reviews-card">
+                  <div className="glass reviews-card card-glow">
                     <div className="reviews-rating">
                       {[...Array(r.rating)].map((_, idx) => (
                         <Star key={idx} size={16} fill="var(--emerald)" stroke="var(--emerald)" />

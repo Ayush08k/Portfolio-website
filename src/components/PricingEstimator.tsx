@@ -255,7 +255,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
           {/* Left panel: Inputs */}
           <div className="estimator-inputs">
             {/* Step 1: Project Type */}
-            <div className="estimator-step reveal visible">
+            <div className="estimator-step card-glow reveal visible">
               <div className="step-header">
                 <span className="step-num">01</span>
                 <div>
@@ -293,7 +293,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                     <button
                       key={type.id}
                       onClick={() => setSelectedType(type)}
-                      className={`type-card glass ${isSelected ? "active" : ""}`}
+                      className={`type-card glass card-glow ${isSelected ? "active" : ""}`}
                       data-hover
                     >
                       <div className="type-card-accent" />
@@ -312,7 +312,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
             </div>
 
             {/* Step 2: Screen scale slider */}
-            <div className="estimator-step reveal visible" style={{ marginTop: "40px" }}>
+            <div className="estimator-step card-glow reveal visible" style={{ marginTop: "40px" }}>
               <div className="step-header">
                 <span className="step-num">02</span>
                 <div>
@@ -321,7 +321,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                 </div>
               </div>
 
-              <div className="glass slider-box">
+              <div className="glass slider-box card-glow">
                 <div className="slider-labels">
                   <span>Screens & Subpages</span>
                   <span className="slider-counter gradient-text">{screens} screens</span>
@@ -348,7 +348,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
             </div>
 
             {/* Step 3: Add-ons */}
-            <div className="estimator-step reveal visible" style={{ marginTop: "40px" }}>
+            <div className="estimator-step card-glow reveal visible" style={{ marginTop: "40px" }}>
               <div className="step-header">
                 <span className="step-num">03</span>
                 <div>
@@ -365,7 +365,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                     <button
                       key={addon.id}
                       onClick={() => toggleAddOn(addon.id)}
-                      className={`addon-card glass ${isSelected ? "active" : ""}`}
+                      className={`addon-card glass card-glow ${isSelected ? "active" : ""}`}
                       data-hover
                     >
                       <div className="addon-check">
@@ -390,7 +390,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
 
           {/* Right panel: Summary Sticky Card */}
           <div className="estimator-summary-wrap">
-            <div className="glass summary-sticky-card">
+            <div className="glass summary-sticky-card card-glow">
               <div className="summary-header">
                 <Calculator size={22} className="summary-calc-icon" />
                 <h3>Quote Summary</h3>
@@ -462,14 +462,14 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
               </div>
 
               <div className="result-meta-grid">
-                <div className="result-meta-card">
+                <div className="result-meta-card card-glow">
                   <CalendarRange size={16} className="text-violet" />
                   <div>
                     <div className="meta-lbl">Duration</div>
                     <div className="meta-val">{timelineString}</div>
                   </div>
                 </div>
-                <div className="result-meta-card">
+                <div className="result-meta-card card-glow">
                   <Zap size={16} className="text-emerald" />
                   <div>
                     <div className="meta-lbl">Warranty</div>
@@ -480,7 +480,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
 
               <button 
                 onClick={handleProceedClick}
-                className="btn-primary start-project-btn" 
+                className="btn-primary btn-glow start-project-btn" 
                 data-hover
               >
                 <span>Proceed with Estimate</span>

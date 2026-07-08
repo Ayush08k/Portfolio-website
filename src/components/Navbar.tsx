@@ -99,7 +99,7 @@ export default function Navbar() {
           ))}
           {/* CTA Link to Contact */}
           <li onClick={closeMenu}>
-            <Link href="/#contact" className="nav-cta-btn">
+            <Link href="/#contact" className="nav-cta-btn btn-glow">
               Consultation
               <ArrowUpRight size={14} />
             </Link>

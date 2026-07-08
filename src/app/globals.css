@@ -343,6 +343,45 @@ h1,h2,h3,h4,h5,h6 { font-family:'Outfit',sans-serif; color:var(--white); font-we
   align-items: center;
 }
 
+/* ─── CENTERED HERO & EARTH BACKDROP ─────────────────────── */
+.hero-content-center {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-content-center .hero-badge {
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-content-center .hero-desc {
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-content-center .hero-actions {
+  justify-content: center;
+}
+.hero-earth-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: screen;
+}
+@media (max-width: 768px) {
+  .hero-earth-bg {
+    opacity: 0.15;
+  }
+}
+
+
 /* ─── IMMERSIVE SPLIT GLOW ─────────────────────────────────── */
 .hero-visual {
   position: relative;
@@ -1858,6 +1897,152 @@ body.has-announcement .hero {
   background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0) 100%);
   z-index: 90;
   pointer-events: none;
+}
+
+/* ─── ROTATING GLOW BORDER EFFECT ────────────────────────── */
+@keyframes spin-glow {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Cards Rotating Glow */
+.card-glow {
+  position: relative !important;
+  z-index: 1 !important;
+  overflow: hidden !important;
+  border-color: transparent !important;
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 45%,
+    var(--accent-cyan) 65%,
+    var(--violet) 85%,
+    transparent 100%
+  );
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: spin-glow 5s linear infinite;
+  z-index: -2;
+  opacity: 0.45;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card-glow::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: #09090b; /* Solid opaque near-black background to block glow bleed */
+  border-radius: inherit;
+  z-index: -1;
+  transition: background 0.4s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  /* Ensure any existing border is hidden on hover */
+  .card-glow:hover {
+    border-color: transparent !important;
+  }
+  .card-glow:hover::before {
+    opacity: 1;
+  }
+  .card-glow:hover::after {
+    background: #040405;
+  }
+}
+
+/* Button Rotating Glow */
+.btn-glow {
+  position: relative !important;
+  z-index: 1 !important;
+  overflow: hidden !important;
+  border-color: transparent !important;
+}
+
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 50%,
+    var(--accent-cyan) 70%,
+    var(--violet) 85%,
+    transparent 100%
+  );
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: spin-glow 3s linear infinite;
+  z-index: -2;
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.btn-glow.btn-primary::after, .btn-glow.nav-cta-btn::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  background: var(--white);
+  border-radius: inherit;
+  z-index: -1;
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+.btn-glow.btn-outline::after, .btn-glow.project-link-btn::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  background: #000000; /* Solid opaque black to block glow inside the button body */
+  border-radius: inherit;
+  z-index: -1;
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .btn-glow:hover::before {
+    opacity: 1;
+  }
+  /* For primary buttons: solid white, turns black on hover */
+  .btn-glow.btn-primary:hover, .btn-glow.nav-cta-btn:hover {
+    color: var(--white) !important;
+    border-color: transparent !important;
+  }
+  .btn-glow.btn-primary:hover::after, .btn-glow.nav-cta-btn:hover::after {
+    background: #000000;
+  }
+  /* For outline buttons: transparent background */
+  .btn-glow.btn-outline:hover, .btn-glow.project-link-btn:hover {
+    border-color: transparent !important;
+  }
+  .btn-glow.btn-outline:hover::after, .btn-glow.project-link-btn:hover::after {
+    background: #0a0a0c;
+  }
+}
+
+/* Accessibility / Screen-Reader Only (SEO friendly) helper */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 
