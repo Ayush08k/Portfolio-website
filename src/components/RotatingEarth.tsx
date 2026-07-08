@@ -428,17 +428,8 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
       document.addEventListener("touchend", handleTouchEnd);
     };
 
-    const handleWheel = (event: WheelEvent) => {
-      event.preventDefault();
-      const scaleFactor = event.deltaY > 0 ? 0.9 : 1.1;
-      const newRadius = Math.max(radius * 0.5, Math.min(radius * 3, projection.scale() * scaleFactor));
-      projection.scale(newRadius);
-      render();
-    };
-
     canvas.addEventListener("mousedown", handleMouseDown);
     canvas.addEventListener("touchstart", handleTouchStart, { passive: true });
-    canvas.addEventListener("wheel", handleWheel);
 
     // Load the world data
     loadWorldData();
@@ -448,7 +439,6 @@ export default function RotatingEarth({ width = 850, height = 850, className = "
       rotationTimer.stop();
       canvas.removeEventListener("mousedown", handleMouseDown);
       canvas.removeEventListener("touchstart", handleTouchStart);
-      canvas.removeEventListener("wheel", handleWheel);
     };
   }, [width, height]);
 

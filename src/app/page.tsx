@@ -412,79 +412,31 @@ function Projects() {
 
       // Filter out null values
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
-      const totalCards = cards.length;
 
-      if (totalCards === 0) return;
+      if (cards.length === 0) return;
 
-      // Only run stacking animations on desktop (min-width: 769px)
-      const isDesktop = window.matchMedia("(min-width: 769px)").matches;
-      if (!isDesktop) return;
-
-      // Card 0 starts at center
-      gsap.set(cards[0], { y: "0%", scale: 1, rotation: 0, zIndex: 1 });
-
-      // All other cards start offset at 100%
-      for (let i = 1; i < totalCards; i++) {
-        gsap.set(cards[i], { y: "100%", scale: 1, rotation: 0, zIndex: i + 1 });
-      }
-
-      // Create scroll timeline
-      const scrollTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".sticky-projects-wrapper",
-          start: "top 100px", // Align nicely below sticky navigation header
-          end: () => `+=${window.innerHeight * (totalCards - 1)}`,
-          pin: true,
-          scrub: 0.5,
-          pinSpacing: true,
-        },
-      });
-
-      // Animate transition between cards
-      for (let i = 0; i < totalCards - 1; i++) {
-        const currentCard = cards[i];
-        const nextCard = cards[i + 1];
-        const position = i;
-
-        if (!currentCard || !nextCard) continue;
-
-        // Shrink, fade, and slightly rotate current card (creates stacked effect)
-        scrollTimeline.to(
-          currentCard,
+      cards.forEach((card) => {
+        gsap.fromTo(
+          card,
           {
-            scale: 0.9,
-            rotation: -2,
-            opacity: 0.7,
-            duration: 1,
-            ease: "none",
+            opacity: 0,
+            y: 45,
           },
-          position
-        );
-
-        // Slide in next card
-        scrollTimeline.to(
-          nextCard,
           {
-            y: "0%",
-            duration: 1,
-            ease: "none",
-          },
-          position
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%", // Starts animating when card enters the screen
+              toggleActions: "play none none none",
+            },
+          }
         );
-      }
-
-      // Refresh scroll trigger on container resize
-      const resizeObserver = new ResizeObserver(() => {
-        ScrollTrigger.refresh();
       });
-
-      if (containerRef.current) {
-        resizeObserver.observe(containerRef.current);
-      }
 
       return () => {
-        resizeObserver.disconnect();
-        scrollTimeline.kill();
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
@@ -513,10 +465,10 @@ function Projects() {
           </p>
         </div>
 
-        <div className="sticky-projects-wrapper">
+        <div className="projects-grid">
           {projectsToDisplay.map((p, i) => (
             <div
-              className={`project-card card-glow sticky-project-card ${i % 2 !== 0 ? "reversed" : ""}`}
+              className={`project-card card-glow ${i % 2 !== 0 ? "reversed" : ""}`}
               key={p.title}
               ref={(el) => {
                 cardRefs.current[i] = el;
