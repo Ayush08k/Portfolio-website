@@ -2069,11 +2069,12 @@ body.has-announcement .hero {
   align-items: center;
 }
 .loading-welcome {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Agbalumo", system-ui;
+  font-weight: 400;
+  font-style: normal;
   font-size: clamp(32px, 8vw, 64px);
-  font-weight: 700;
   color: var(--white);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);

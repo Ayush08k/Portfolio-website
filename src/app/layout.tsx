@@ -524,6 +524,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* ─── Fonts Preconnect (performance = better CWV = better rankings) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Agbalumo&display=swap" rel="stylesheet" />
 
         {/* Canonical is handled per-page via Next.js metadata alternates */}
 
