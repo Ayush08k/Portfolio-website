@@ -3,54 +3,29 @@
 import { useEffect, useState } from "react";
 
 export default function LoadingScreen() {
-  const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState<"initial" | "intro" | "loading" | "exit">("initial");
+  const [phase, setPhase] = useState<"initial" | "loading" | "exit">("initial");
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Phase 0: Trigger fade in of the first text immediately after mount
+    // Show immediately
     const startTimer = setTimeout(() => {
-      setPhase("intro");
+      setPhase("loading");
     }, 50);
 
-    // Phase 1: Show the rest of the text and progress bar
-    const loadingTimer = setTimeout(() => {
-      setPhase("loading");
-    }, 800);
-
-    // Phase 2: Simulate progress bar while assets load
-    let progressInterval: ReturnType<typeof setInterval>;
-    const progressTimer = setTimeout(() => {
-      progressInterval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(progressInterval);
-            return 100;
-          }
-          // Fast start, slow middle, fast finish
-          const increment = prev < 30 ? 8 : prev < 70 ? 3 : prev < 90 ? 5 : 10;
-          return Math.min(100, prev + increment);
-        });
-      }, 60);
-    }, 900);
-
-    // Phase 3: Exit after progress completes
+    // Let the animation play: 1s for Red, 2s for Yellow, 3s for Green. Exit at 3.5s.
     const exitTimer = setTimeout(() => {
       setPhase("exit");
-    }, 2800);
+    }, 3500); 
 
-    // Phase 4: Remove from DOM
+    // Remove from DOM
     const removeTimer = setTimeout(() => {
       setVisible(false);
-    }, 3400);
+    }, 4100);
 
     return () => {
       clearTimeout(startTimer);
-      clearTimeout(loadingTimer);
-      clearTimeout(progressTimer);
       clearTimeout(exitTimer);
       clearTimeout(removeTimer);
-      if (progressInterval) clearInterval(progressInterval);
     };
   }, []);
 
@@ -62,26 +37,13 @@ export default function LoadingScreen() {
       aria-hidden="true"
     >
       <div className="loading-content">
-        {/* Greeting text */}
-        <div className={`loading-greeting ${(phase === "intro" || phase === "loading" || phase === "exit") ? "loading-greeting-visible" : ""}`}>
-          <span className="loading-hi">Hi</span>
-          <span className="loading-comma">,</span>
+        <div className={`loading-welcome ${(phase === "loading" || phase === "exit") ? "loading-welcome-visible" : ""}`}>
+          Welcome
         </div>
-
-        <div className={`loading-name ${phase === "loading" || phase === "exit" ? "loading-name-visible" : ""}`}>
-          <span>this is</span>{" "}
-          <span className="loading-ayush">Ayush</span>
-        </div>
-
-        {/* Progress bar */}
-        <div className={`loading-bar-wrap ${phase === "loading" || phase === "exit" ? "loading-bar-visible" : ""}`}>
-          <div className="loading-bar-track">
-            <div
-              className="loading-bar-fill"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <span className="loading-percentage">{progress}%</span>
+        <div className={`loading-dots-container ${(phase === "loading" || phase === "exit") ? "loading-dots-visible" : ""}`}>
+          <span className="dot dot-red"></span>
+          <span className="dot dot-yellow"></span>
+          <span className="dot dot-green"></span>
         </div>
       </div>
     </div>
