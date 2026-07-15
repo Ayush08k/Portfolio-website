@@ -35,15 +35,22 @@ Here's a simple breakdown of what I can help you with:
 
 ---
 
-## Pricing (Rough Idea)
+## 💰 Pricing & Promo (50% Off Active!)
 
-| What You Need | Starting Price |
-|---|---|
-| Landing Page / Marketing Site | $1,500 – $3,000 |
-| Full Web App or Platform | $5,000+ |
-| Ongoing Work / Retainer | Let's talk |
+I am currently running a **50% Off Promotion** for all new projects this month. Here is a rough breakdown of my base starting rates (with and without the promotion):
 
-Every project gets **30 days of free support** after delivery. No ghosting after handoff.
+| Service Type | Regular Price | ⚡ Promo Price (50% Off) |
+|---|---|---|
+| **Landing Page** | ~~$300~~ | **$75** |
+| **3D Interactive Site** | ~~$500~~ | **$125** |
+| **E-Commerce Store** | ~~$800~~ | **$200** |
+| **AI Integration & Agents** | ~~$800~~ | **$200** |
+| **SaaS / Full Stack App** | ~~$1,200~~ | **$300** |
+| **Mobile App (iOS/Android)** | ~~$1,500~~ | **$375** |
+
+> 🇮🇳 **For Indian Clients & Startups:** Special localized rates are available to fit your budget. Let's discuss!
+
+Every project includes **30 days of free post-delivery support** and warranty. No ghosting, guaranteed.
 
 ---
 
