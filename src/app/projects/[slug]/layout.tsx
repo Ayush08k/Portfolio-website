@@ -6,6 +6,16 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+/**
+ * Pre-render all project case study pages at build time.
+ * This ensures Google receives fully rendered HTML for indexing.
+ */
+export async function generateStaticParams() {
+  return PORTFOLIO_DATA.projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const project = PORTFOLIO_DATA.projects.find((p) => p.slug === resolvedParams.slug);

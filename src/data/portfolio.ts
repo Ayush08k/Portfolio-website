@@ -193,7 +193,18 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL (via Supabase)",
         hosting: "Vercel & Supabase Edge Functions"
       },
-      gallery: ["/jlm.png"]
+      gallery: ["/jlm.png"],
+      challenge: {
+        problem: "Managing real-time tournament brackets for hundreds of concurrent players caused race conditions in score updates and bracket progression, leading to inconsistent standings.",
+        solution: "Implemented Supabase Realtime subscriptions with optimistic locking on score updates. Built a custom bracket progression engine that validates match results server-side before advancing players, eliminating race conditions and ensuring leaderboard accuracy."
+      },
+      seoTags: [
+        "JLM Gaming Tournament Platform",
+        "Supabase Realtime bracket system",
+        "React Vite esports platform",
+        "Live leaderboard gaming dashboard",
+        "Double elimination bracket generator"
+      ]
     },
     {
       title: "Music Player App",
@@ -222,7 +233,18 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL & local SQLite cache",
         hosting: "AWS S3 & VPS"
       },
-      gallery: ["/music.png"]
+      gallery: ["/music.png"],
+      challenge: {
+        problem: "Background audio playback on both iOS and Android required platform-specific handling, and extracting dominant colors from album art in real-time caused UI jank on lower-end devices.",
+        solution: "Built a custom background audio service using Expo AV with lock-screen controls and notification integration. Implemented a Web Worker-based color extraction algorithm that processes album art off the main thread, maintaining 60 FPS animations even on budget devices."
+      },
+      seoTags: [
+        "React Native Music Player App",
+        "Expo audio streaming mobile",
+        "Redux Toolkit offline music app",
+        "Album art color extraction React Native",
+        "Background playback Expo AV"
+      ]
     },
     {
       title: "E-Commerce Platform",
@@ -251,7 +273,18 @@ export const PORTFOLIO_DATA = {
         database: "PostgreSQL (via Supabase)",
         hosting: "Vercel & Supabase Cloud"
       },
-      gallery: ["/e-commerce.png"]
+      gallery: ["/e-commerce.png"],
+      challenge: {
+        problem: "Product filtering with hundreds of SKUs caused slow database queries, and Stripe webhook race conditions occasionally led to duplicate order fulfillment or missed inventory decrements.",
+        solution: "Optimized PostgreSQL queries with composite indexes and materialized views for filter combinations. Implemented idempotent Stripe webhook handlers with signature verification and database-level advisory locks to prevent duplicate processing, achieving sub-100ms checkout completion."
+      },
+      seoTags: [
+        "Next.js E-Commerce Platform",
+        "Stripe payment integration case study",
+        "Supabase PostgreSQL online store",
+        "Server Components SSR storefront",
+        "Real-time inventory management system"
+      ]
     },
     {
       title: "Starbucks 3D Website",

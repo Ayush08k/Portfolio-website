@@ -21,7 +21,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/", "/static-sitemap.xml"],
+        disallow: ["/api/", "/_next/"],
       },
       {
         userAgent: "Googlebot",
@@ -34,10 +34,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: [
-      `${baseUrl}/sitemap.xml`,
-      `${baseUrl}/static-sitemap.xml`,
-    ],
+    sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,
   };
 }

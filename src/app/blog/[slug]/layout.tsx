@@ -6,6 +6,16 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+/**
+ * Pre-render all blog post pages at build time.
+ * This ensures Google receives fully rendered HTML for indexing.
+ */
+export async function generateStaticParams() {
+  return BLOG_POSTS.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const post = BLOG_POSTS.find((p) => p.slug === resolvedParams.slug);

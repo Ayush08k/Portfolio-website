@@ -29,13 +29,13 @@ function toISODate(dateString: string): string {
 }
 
 const STATIC_PAGE_DATES = {
-  home: "2026-06-27",
-  services: "2026-06-27",
-  projects: "2026-06-27",
-  blog: "2026-06-27",
-  about: "2026-06-27",
-  estimator: "2026-06-27",
-  speed: "2026-07-06",
+  home: "2026-07-15",
+  services: "2026-07-15",
+  projects: "2026-07-15",
+  blog: "2026-07-15",
+  about: "2026-07-15",
+  estimator: "2026-07-15",
+  speed: "2026-07-15",
 } as const;
 
 // ── Sitemap Generator ──────────────────────────────────────────────────────────
