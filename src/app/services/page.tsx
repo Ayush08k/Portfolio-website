@@ -689,7 +689,7 @@ export default function ServicesPage() {
           font-weight: 600;
           text-decoration: none;
           transition: all 0.2s ease;
-          cursor: none;
+          
         }
 
         .svc-estimate-btn:hover,
@@ -873,7 +873,7 @@ export default function ServicesPage() {
           text-decoration: none;
           transition: all 0.3s ease;
           box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
-          cursor: none;
+          
         }
 
          .cta-primary-btn:hover,
@@ -894,7 +894,7 @@ export default function ServicesPage() {
            font-weight: 600;
            text-decoration: none;
            transition: all 0.3s ease;
-           cursor: none;
+           
          }
  
          .cta-secondary-btn:hover,

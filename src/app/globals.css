@@ -19,7 +19,7 @@
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-html { scroll-behavior:smooth; cursor:none; }
+html { scroll-behavior:smooth;  }
 
 body {
   background: var(--bg);
@@ -117,7 +117,7 @@ h1,h2,h3,h4,h5,h6 { font-family:'Outfit',sans-serif; color:var(--white); font-we
   background: var(--white);
   color: #000000; font-weight:600; font-size:15px;
   font-family:'Outfit',sans-serif;
-  border: 1px solid var(--white); cursor:none;
+  border: 1px solid var(--white); 
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
   transition: var(--transition);
   position:relative; overflow:hidden;
@@ -138,7 +138,7 @@ h1,h2,h3,h4,h5,h6 { font-family:'Outfit',sans-serif; color:var(--white); font-we
   color:var(--text); font-weight:600; font-size:15px;
   font-family:'Outfit',sans-serif;
   border: 1.5px solid var(--glass-border);
-  cursor:none; transition: var(--transition);
+   transition: var(--transition);
 }
 .btn-outline:hover {
   border-color: var(--white);
@@ -196,7 +196,7 @@ h1,h2,h3,h4,h5,h6 { font-family:'Outfit',sans-serif; color:var(--white); font-we
 }
 .nav-link {
   color:var(--muted); font-size:14px; font-weight:500;
-  text-decoration:none; cursor:none;
+  text-decoration:none; 
   padding: 8px 16px;
   border-radius: 9999px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -221,7 +221,7 @@ h1,h2,h3,h4,h5,h6 { font-family:'Outfit',sans-serif; color:var(--white); font-we
   font-family: var(--font-mono);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
-  cursor: none;
+  
 }
 .nav-cta-btn:hover {
   transform: translateY(-1px);
@@ -546,7 +546,7 @@ h1,h2,h3,h4,h5,h6 { font-family:'Outfit',sans-serif; color:var(--white); font-we
   background:var(--bg-card);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(12px);
-  cursor:none;
+  
   transition: var(--transition);
   transform-style: preserve-3d;
   position:relative; overflow:hidden;
@@ -599,7 +599,7 @@ h1,h2,h3,h4,h5,h6 { font-family:'Outfit',sans-serif; color:var(--white); font-we
   background:var(--bg-card);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(12px);
-  cursor:none;
+  
   transition:var(--transition);
   perspective: 1000px;
 }
@@ -689,7 +689,7 @@ h1,h2,h3,h4,h5,h6 { font-family:'Outfit',sans-serif; color:var(--white); font-we
   display:inline-flex; align-items:center; gap:6px;
   padding:8px 16px; border-radius:10px;
   font-size:13px; font-weight:600;
-  cursor:none; transition:var(--transition); text-decoration:none;
+   transition:var(--transition); text-decoration:none;
   border:1px solid var(--glass-border); color:var(--text);
 }
 .project-link-btn:hover { border-color:var(--white); color:var(--white); background:rgba(255,255,255,0.05); }
@@ -734,7 +734,7 @@ footer {
 .footer-links { display:flex; justify-content:center; gap:28px; margin-bottom:20px; flex-wrap:wrap; }
 .footer-link {
   color:var(--muted); text-decoration:none; font-size:14px;
-  transition:color 0.3s; cursor:none;
+  transition:color 0.3s; 
 }
 .footer-link:hover { color:var(--white); }
 .footer-copy { font-size:12px; color:rgba(148,163,184,0.4); font-family:'JetBrains Mono',monospace; }
@@ -905,7 +905,7 @@ footer {
   align-items: center;
   justify-content: center;
   color: var(--muted);
-  cursor: none;
+  
   transition: var(--transition);
   flex-shrink: 0;
 }
@@ -925,7 +925,7 @@ footer {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.15);
   border: none;
-  cursor: none;
+  
   transition: var(--transition);
   padding: 0;
 }
@@ -1186,7 +1186,7 @@ footer {
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--glass-border);
-  cursor: none;
+  
   text-align: left;
   transition: var(--transition);
   outline: none;
@@ -1282,7 +1282,7 @@ footer {
   border-radius: 100px;
   background: rgba(255, 255, 255, 0.08);
   outline: none;
-  cursor: none;
+  
 }
 
 .estimator-slider::-webkit-slider-thumb {
@@ -1293,7 +1293,7 @@ footer {
   background: var(--white);
   border: 2px solid #000000;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  cursor: none;
+  
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1324,7 +1324,7 @@ footer {
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--glass-border);
-  cursor: none;
+  
   transition: var(--transition);
   outline: none;
 }
@@ -1551,7 +1551,7 @@ footer {
   width: 100%;
   justify-content: center;
   padding: 14px 20px;
-  cursor: none;
+  
 }
 
 .pricing-disclaimer {

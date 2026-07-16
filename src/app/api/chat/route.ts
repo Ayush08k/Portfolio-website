@@ -194,6 +194,8 @@ Let's get started—go ahead and fill out the Contact form below!`
 
 function classifyQueryLocally(query: string): string {
   const lowerQuery = query.toLowerCase();
+  // Remove basic punctuation to help word boundaries and word matching
+  const cleanQuery = lowerQuery.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, " ");
   const intents = getLocalIntents();
   
   let bestIntent = "default";
@@ -202,11 +204,15 @@ function classifyQueryLocally(query: string): string {
   for (const intent of intents) {
     let score = 0;
     for (const kw of intent.keywords) {
-      if (lowerQuery.includes(kw)) {
+      // Escape special regex characters in keywords
+      const escapedKw = kw.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      // Create word boundary regex
+      const kwRegex = new RegExp(`\\b${escapedKw}\\b`, 'i');
+      if (kwRegex.test(cleanQuery)) {
         score += 2; // Exact match reward
       } else {
         // Partial token matching for misspelled words or variations
-        const words = lowerQuery.split(/\s+/);
+        const words = cleanQuery.split(/\s+/);
         for (const word of words) {
           if (word.length > 3 && kw.includes(word)) {
             score += 0.5;

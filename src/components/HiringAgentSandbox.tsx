@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { MessageSquareCode, X, ArrowLeft, Bot, Sparkles, Send, User, Loader2 } from "lucide-react";
+import { MessageSquareCode, X, ArrowLeft, Bot, Sparkles, User, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Message {
@@ -11,11 +11,17 @@ interface Message {
   timestamp: Date;
 }
 
-const SUGGESTED_PROMPTS = [
-  { text: "🟢 Check current availability", query: "availability" },
-  { text: "💻 Tech stack & specializations", query: "tech stack" },
-  { text: "💰 Typical project rates", query: "rates" },
-  { text: "📝 How do we start a project?", query: "how to start" },
+const FAQ_QUESTIONS = [
+  { icon: "🟢", label: "Check Availability & Timezone", question: "What is your current availability and timezone?" },
+  { icon: "💻", label: "Technical Skills & Stack", question: "What is your tech stack and technical expertise?" },
+  { icon: "💰", label: "Project Rates & Pricing Guide", question: "What are your typical project rates and pricing?" },
+  { icon: "🚀", label: "Featured Works & Projects", question: "Can you show me some of your featured projects?" },
+  { icon: "⏱️", label: "Delivery Speed & Timelines", question: "What are your typical project delivery timelines?" },
+  { icon: "📱", label: "Mobile App Development", question: "Do you develop iOS and Android mobile apps?" },
+  { icon: "🛍️", label: "E-Commerce & Shopify Experience", question: "What is your experience with E-Commerce and Shopify?" },
+  { icon: "🤖", label: "AI & Automation Capabilities", question: "Can you integrate AI chatbots and automation?" },
+  { icon: "🔒", label: "NDAs, Support & Figma files", question: "Do you sign NDAs and provide post-launch support?" },
+  { icon: "📝", label: "How to Start a Project?", question: "How do we get started on a project?" },
 ];
 
 const renderMessageText = (text: string) => {
@@ -36,8 +42,6 @@ const renderMessageText = (text: string) => {
 export default function HiringAgentSandbox() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [inputValue, setInputValue] = useState("");
-  const [isThinking, setIsThinking] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
@@ -75,7 +79,7 @@ export default function HiringAgentSandbox() {
   // Scroll to bottom on new messages
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping, isThinking]);
+  }, [messages, isTyping]);
 
   const handleSendMessage = async (textToSend: string) => {
     if (!textToSend.trim()) return;
@@ -89,8 +93,7 @@ export default function HiringAgentSandbox() {
 
     const updatedMessages = [...messages, newUserMessage];
     setMessages(updatedMessages);
-    setInputValue("");
-    setIsThinking(true);
+    setIsTyping(true);
 
     // 1. Start fetching API response in parallel
     const apiPromise = fetch("/api/chat", {
@@ -107,13 +110,8 @@ export default function HiringAgentSandbox() {
       throw new Error("Chat API route returned non-OK response");
     });
 
-    // 2. Wait exactly 2 seconds for thinking animation
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setIsThinking(false);
-    setIsTyping(true);
-
-    // 3. Show typing animation for at least 1.5 seconds while waiting for API
-    const typingDelayPromise = new Promise((resolve) => setTimeout(resolve, 1500));
+    // 2. Show typing animation for at least 800ms to look natural
+    const typingDelayPromise = new Promise((resolve) => setTimeout(resolve, 800));
 
     try {
       const [reply] = await Promise.all([apiPromise, typingDelayPromise]);
@@ -128,7 +126,7 @@ export default function HiringAgentSandbox() {
       ]);
     } catch (error) {
       console.error("Chat API error, using static fallback:", error);
-      await typingDelayPromise; // Ensure typing shows for at least 1.5s even on error
+      await typingDelayPromise; // Ensure typing shows for at least 800ms even on error
       
       setMessages((prev) => [
         ...prev,
@@ -144,15 +142,8 @@ export default function HiringAgentSandbox() {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleSendMessage(inputValue);
-    }
-  };
-
   return (
     <>
-      {/* Floating Logo Trigger Button (Bottom Right Corner) */}
       <AnimatePresence>
         {!isOpen && (
           <motion.button
@@ -161,179 +152,165 @@ export default function HiringAgentSandbox() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             style={{
               position: "fixed",
-              bottom: "30px",
-              right: "30px",
+              bottom: "24px",
+              right: "24px",
               width: "60px",
               height: "60px",
-              borderRadius: "50%",
-              background: "linear-gradient(135deg, #1f1f1f 0%, #000000 100%)",
-              border: "2px solid #ffffff",
-              boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)",
-              color: "#ffffff",
+              borderRadius: "30px",
+              background: "linear-gradient(135deg, #64ffda 0%, #0a192f 100%)",
+              border: "2px solid rgba(100, 255, 218, 0.4)",
+              boxShadow: "0 10px 30px -10px rgba(100, 255, 218, 0.5), inset 0 1px 0 rgba(255,255,255,0.2)",
+              cursor: "pointer",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              zIndex: 999,
-              cursor: "pointer",
-              outline: "none",
+              zIndex: 9999,
+              color: "#ffffff",
             }}
-            whileHover={{ scale: 1.1, boxShadow: "0 0 30px rgba(255, 255, 255, 0.35)" }}
-            whileTap={{ scale: 0.95 }}
           >
-            <Bot size={28} className="animate-pulse" />
+            <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", alignItems: "center", justifyItems: "center", justifyContent: "center" }}>
+              <MessageSquareCode size={24} style={{ color: "#ffffff" }} />
+              <span
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "50%",
+                  border: "2px solid #64ffda",
+                  animation: "pulse 2s infinite alternate",
+                  pointerEvents: "none",
+                  left: 0,
+                  top: 0,
+                }}
+              />
+            </div>
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* Responsive Chat Interface */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={
-              isMobile
-                ? { y: "100%", opacity: 0 }
-                : { y: 50, scale: 0.95, opacity: 0 }
-            }
-            animate={
-              isMobile
-                ? { y: 0, opacity: 1 }
-                : { y: 0, scale: 1, opacity: 1 }
-            }
-            exit={
-              isMobile
-                ? { y: "100%", opacity: 0 }
-                : { y: 30, scale: 0.95, opacity: 0 }
-            }
-            transition={{ type: "spring", damping: 25, stiffness: 350 }}
+            key="chat-sandbox-drawer"
+            initial={isMobile ? { y: "100%", opacity: 0 } : { y: 100, scale: 0.9, opacity: 0 }}
+            animate={isMobile ? { y: 0, opacity: 1 } : { y: 0, scale: 1, opacity: 1 }}
+            exit={isMobile ? { y: "100%", opacity: 0 } : { y: 100, scale: 0.9, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 220 }}
             style={{
               position: "fixed",
-              zIndex: 998,
-              background: "rgba(0, 0, 0, 0.95)",
-              border: isMobile ? "none" : "1px solid rgba(255, 255, 255, 0.1)",
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.8)",
+              bottom: isMobile ? 0 : "100px",
+              right: isMobile ? 0 : "24px",
+              width: isMobile ? "100vw" : "420px",
+              height: isMobile ? "100vh" : "600px",
+              background: "rgba(10, 25, 47, 0.95)",
               backdropFilter: "blur(20px)",
+              border: isMobile ? "none" : "1px solid rgba(100, 255, 218, 0.15)",
+              borderRadius: isMobile ? 0 : "16px",
+              boxShadow: "0 20px 40px -15px rgba(2, 12, 27, 0.8), 0 0 0 1px rgba(100, 255, 218, 0.1)",
               display: "flex",
               flexDirection: "column",
-              // Responsive Styles
-              ...(isMobile
-                ? {
-                    top: 0,
-                    left: 0,
-                    width: "100vw",
-                    height: "100vh",
-                    borderRadius: 0,
-                  }
-                : {
-                    bottom: "30px",
-                    right: "30px",
-                    width: "380px",
-                    height: "580px",
-                    borderRadius: "16px",
-                  }),
+              zIndex: 9999,
+              overflow: "hidden",
             }}
           >
-            {/* Header section */}
             <div
               style={{
-                padding: "20px",
+                padding: "16px 20px",
                 borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+                background: "rgba(2, 12, 27, 0.4)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                background: "rgba(255, 255, 255, 0.02)",
-                borderTopLeftRadius: isMobile ? 0 : "16px",
-                borderTopRightRadius: isMobile ? 0 : "16px",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                {isMobile ? (
-                  <button
-                    onClick={() => setIsOpen(false)}
+                <div
+                  style={{
+                    width: "36px",
+                    height: "36px",
+                    borderRadius: "50%",
+                    background: "rgba(100, 255, 218, 0.1)",
+                    border: "1px solid rgba(100, 255, 218, 0.3)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "relative",
+                  }}
+                >
+                  <Bot size={18} style={{ color: "#64ffda" }} />
+                  <span
                     style={{
-                      color: "#ffffff",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginRight: "8px",
-                    }}
-                  >
-                    <ArrowLeft size={24} />
-                  </button>
-                ) : (
-                  <div
-                    style={{
-                      width: "36px",
-                      height: "36px",
+                      position: "absolute",
+                      bottom: "-1px",
+                      right: "-1px",
+                      width: "10px",
+                      height: "10px",
                       borderRadius: "50%",
-                      background: "rgba(255, 255, 255, 0.08)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "#ffffff",
+                      background: "#64ffda",
+                      border: "2px solid #0a192f",
                     }}
-                  >
-                    <Bot size={20} />
-                  </div>
-                )}
+                  />
+                </div>
                 <div>
                   <h3
                     style={{
-                      fontSize: "16px",
-                      color: "#e6f1ff",
+                      margin: 0,
+                      fontSize: "15px",
                       fontWeight: 600,
+                      color: "#e6f1ff",
+                      fontFamily: "Outfit, sans-serif",
                       display: "flex",
                       alignItems: "center",
                       gap: "6px",
                     }}
                   >
-                    Ask Me
-                    <Sparkles size={14} style={{ color: "#ffffff" }} />
+                    Ask Me <Sparkles size={12} style={{ color: "#64ffda" }} />
                   </h3>
-                  <p style={{ fontSize: "12px", color: "#8892b0", display: "flex", alignItems: "center", gap: "5px" }}>
-                    <span
-                      style={{
-                        width: "6px",
-                        height: "6px",
-                        borderRadius: "50%",
-                        backgroundColor: "#ffffff",
-                        boxShadow: "0 0 8px #ffffff",
-                      }}
-                    />
-                    Online • Copilot
-                  </p>
+                  <span style={{ fontSize: "11px", color: "#8892b0", fontFamily: "Outfit, sans-serif" }}>
+                    Ayush's Interactive AI Assistant
+                  </span>
                 </div>
               </div>
-              
               <button
                 onClick={() => setIsOpen(false)}
                 style={{
+                  background: "transparent",
+                  border: "none",
                   color: "#8892b0",
+                  cursor: "pointer",
+                  padding: "4px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  borderRadius: "4px",
-                  padding: "4px",
-                  transition: "var(--transition)",
+                  borderRadius: "50%",
+                  transition: "all 0.2s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#8892b0")}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#ffffff";
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.05)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "#8892b0";
+                  e.currentTarget.style.background = "transparent";
+                }}
               >
-                <X size={20} />
+                {isMobile ? <ArrowLeft size={20} /> : <X size={20} />}
               </button>
             </div>
 
-            {/* Conversation Messages */}
             <div
               style={{
                 flex: 1,
-                overflowY: "auto",
                 padding: "20px",
+                overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
                 gap: "16px",
+                background: "radial-gradient(circle at 50% 0%, rgba(100, 255, 218, 0.03) 0%, transparent 75%)",
               }}
             >
               {messages.map((msg) => (
@@ -342,19 +319,19 @@ export default function HiringAgentSandbox() {
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: msg.sender === "user" ? "flex-end" : "flex-start",
-                    maxWidth: "85%",
                     alignSelf: msg.sender === "user" ? "flex-end" : "flex-start",
+                    maxWidth: "80%",
                   }}
                 >
                   <div
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "8px",
+                      gap: "6px",
                       marginBottom: "4px",
                       fontSize: "10px",
                       color: "#8892b0",
+                      alignSelf: msg.sender === "user" ? "flex-end" : "flex-start",
                     }}
                   >
                     {msg.sender === "bot" ? (
@@ -378,15 +355,15 @@ export default function HiringAgentSandbox() {
                       whiteSpace: "pre-line",
                       ...(msg.sender === "user"
                         ? {
-                            background: "rgba(255, 255, 255, 0.08)",
+                            background: "rgba(100, 255, 218, 0.1)",
                             color: "#ffffff",
-                            border: "1px solid rgba(255, 255, 255, 0.15)",
+                            border: "1px solid rgba(100, 255, 218, 0.2)",
                             borderTopRightRadius: "2px",
                           }
                         : {
-                            background: "rgba(255, 255, 255, 0.03)",
+                            background: "rgba(255, 255, 255, 0.05)",
                             color: "#e2e8f0",
-                            border: "1px solid rgba(255, 255, 255, 0.05)",
+                            border: "1px solid rgba(255, 255, 255, 0.1)",
                             borderTopLeftRadius: "2px",
                           }),
                     }}
@@ -395,30 +372,6 @@ export default function HiringAgentSandbox() {
                   </div>
                 </div>
               ))}
-
-              {isThinking && (
-                <div style={{ display: "flex", flexDirection: "column", alignSelf: "flex-start", maxWidth: "80%" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px", fontSize: "10px", color: "#8892b0" }}>
-                    <Bot size={12} style={{ color: "#ffffff" }} />
-                    <span>Ask Me is thinking...</span>
-                  </div>
-                  <div
-                    style={{
-                      padding: "12px 16px",
-                      borderRadius: "12px",
-                      borderTopLeftRadius: "2px",
-                      background: "rgba(255, 255, 255, 0.03)",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      border: "1px solid rgba(255, 255, 255, 0.05)",
-                    }}
-                  >
-                    <Loader2 size={14} className="spin-loader" style={{ color: "#ffffff" }} />
-                    <span style={{ fontSize: "13px", color: "#a8b2d1", fontFamily: "Outfit, sans-serif" }}>Formulating response...</span>
-                  </div>
-                </div>
-              )}
 
               {isTyping && (
                 <div style={{ display: "flex", flexDirection: "column", alignSelf: "flex-start", maxWidth: "80%" }}>
@@ -446,103 +399,88 @@ export default function HiringAgentSandbox() {
               <div ref={chatEndRef} />
             </div>
 
-            {/* Quick suggested chips */}
-            {messages.length > 0 && inputValue.trim() === "" && (
+            <div
+              style={{
+                padding: "16px 20px 20px 20px",
+                borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+                background: "rgba(2, 12, 27, 0.6)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
               <div
                 style={{
-                  padding: "0 20px 10px 20px",
+                  fontSize: "11px",
+                  color: "#8892b0",
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  letterSpacing: "1px",
                   display: "flex",
-                  flexWrap: "wrap",
-                  gap: "8px",
+                  alignItems: "center",
+                  justifyContent: "space-between",
                 }}
               >
-                {SUGGESTED_PROMPTS.map((prompt, index) => (
+                <span>Select a Frequently Asked Question:</span>
+                {isTyping && (
+                  <span style={{ color: "#64ffda", fontSize: "10px", textTransform: "none", animation: "pulse 1s infinite alternate" }}>
+                    Agent is responding...
+                  </span>
+                )}
+              </div>
+              <div
+                className="faq-scroll-container"
+                style={{
+                  maxHeight: "150px",
+                  overflowY: "auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "8px",
+                  paddingRight: "4px",
+                }}
+              >
+                {FAQ_QUESTIONS.map((faq, index) => (
                   <button
                     key={index}
-                    onClick={() => handleSendMessage(prompt.text)}
+                    disabled={isTyping}
+                    onClick={() => handleSendMessage(faq.question)}
                     style={{
-                      fontSize: "12px",
-                      padding: "6px 12px",
-                      borderRadius: "16px",
-                      background: "rgba(17, 34, 64, 0.8)",
-                      border: "1px solid rgba(100, 255, 218, 0.15)",
-                      color: "#8892b0",
-                      transition: "all 0.2s ease",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      width: "100%",
                       textAlign: "left",
+                      padding: "10px 14px",
+                      borderRadius: "8px",
+                      background: "rgba(255, 255, 255, 0.03)",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      color: "#ccd6f6",
+                      fontSize: "13px",
+                      fontFamily: "Outfit, sans-serif",
+                      cursor: isTyping ? "not-allowed" : "pointer",
+                      opacity: isTyping ? 0.6 : 1,
+                      transition: "all 0.2s ease-in-out",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "#64ffda";
-                      e.currentTarget.style.borderColor = "#64ffda";
-                      e.currentTarget.style.background = "rgba(100, 255, 218, 0.05)";
+                      if (isTyping) return;
+                      e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
+                      e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                      e.currentTarget.style.color = "#ffffff";
+                      e.currentTarget.style.transform = "translateX(2px)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "#8892b0";
-                      e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.15)";
-                      e.currentTarget.style.background = "rgba(17, 34, 64, 0.8)";
+                      if (isTyping) return;
+                      e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
+                      e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
+                      e.currentTarget.style.color = "#ccd6f6";
+                      e.currentTarget.style.transform = "none";
                     }}
                   >
-                    {prompt.text}
+                    <span style={{ fontSize: "14px", flexShrink: 0 }}>{faq.icon}</span>
+                    <span style={{ flex: 1 }}>{faq.label}</span>
                   </button>
                 ))}
               </div>
-            )}
-
-            {/* Input field */}
-            <div
-              style={{
-                padding: "20px",
-                borderTop: "1px solid rgba(100, 255, 218, 0.1)",
-                display: "flex",
-                gap: "10px",
-                background: "rgba(17, 34, 64, 0.4)",
-                borderBottomLeftRadius: isMobile ? 0 : "16px",
-                borderBottomRightRadius: isMobile ? 0 : "16px",
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Ask about availability, stack, rates..."
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={handleKeyPress}
-                style={{
-                  flex: 1,
-                  background: "rgba(255, 255, 255, 0.03)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
-                  borderRadius: "8px",
-                  padding: "12px 16px",
-                  color: "#e2e8f0",
-                  fontSize: "14px",
-                  outline: "none",
-                  transition: "var(--transition)",
-                }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = "#ffffff")}
-                onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)")}
-              />
-              <button
-                onClick={() => handleSendMessage(inputValue)}
-                style={{
-                  width: "45px",
-                  height: "45px",
-                  borderRadius: "8px",
-                  background: "#ffffff",
-                  color: "#000000",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: "var(--transition)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.85)";
-                  e.currentTarget.style.boxShadow = "0 0 10px rgba(255, 255, 255, 0.3)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "#ffffff";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <Send size={18} />
-              </button>
             </div>
           </motion.div>
         )}
@@ -559,6 +497,19 @@ export default function HiringAgentSandbox() {
         }
         .spin-loader {
           animation: spin 1s linear infinite;
+        }
+        .faq-scroll-container::-webkit-scrollbar {
+          width: 4px;
+        }
+        .faq-scroll-container::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.1);
+        }
+        .faq-scroll-container::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 2px;
+        }
+        .faq-scroll-container::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.4);
         }
       `}</style>
     </>

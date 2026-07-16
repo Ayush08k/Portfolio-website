@@ -560,7 +560,7 @@ export default function BlogIndex() {
           text-decoration: none;
           transition: all 0.3s ease;
           box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
-          cursor: none;
+          
         }
 
         .sidebar-cta-btn:hover {
