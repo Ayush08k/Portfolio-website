@@ -13,6 +13,251 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    title: "Building 'Ask Me' — An AI Chatbot for a Developer Portfolio Using Next.js & Google Gemini",
+    slug: "building-ai-chatbot-portfolio-nextjs-gemini",
+    category: "Backend",
+    date: "July 16, 2026",
+    readTime: "9 min read",
+    description: "A complete technical walkthrough on how I designed and built the 'Ask Me' AI chatbot embedded in my freelance portfolio — covering local intent classification, deterministic FAQ engines, Google Gemini API integration, and how to make a chatbot fully SEO-friendly.",
+    tags: ["Next.js", "AI", "Chatbot", "Google Gemini", "TypeScript", "SEO"],
+    image: "/project images/chatbot for ecommerce.png",
+    content: `
+# Building 'Ask Me' — An AI Chatbot for a Developer Portfolio Using Next.js & Google Gemini
+
+When potential clients land on a developer portfolio, they have very specific questions: *What is your tech stack? How fast do you deliver? What are your rates?* A traditional static FAQ page buries these answers. An intelligent chatbot surfaces them instantly, in a conversational format that feels human and professional.
+
+This is a complete technical breakdown of how I designed, built, and deployed the **"Ask Me"** AI assistant embedded in my own freelance portfolio at [freelance-ayush.vercel.app](https://freelance-ayush.vercel.app).
+
+---
+
+## 1. Architecture Decision: Local Classifier vs. External LLM
+
+The most important design question was: **should every message hit an LLM API (e.g., Google Gemini), or should we handle known queries locally first?**
+
+For a portfolio chatbot, the vast majority of questions are predictable and repeat across visitors. Routing every single message to an LLM adds latency (300–1500ms), costs money per token, and risks rate limiting. The solution is a **hybrid, two-layer architecture**:
+
+\`\`\`
+[User Query]
+     │
+     ▼
+[Local Intent Classifier] ──── Match Found ──▶ [Instant Local Reply]
+     │
+  No Match
+     │
+     ▼
+[Google Gemini API] ──────────────────────────▶ [AI-Generated Reply]
+\`\`\`
+
+**Layer 1 — Local Intent Engine** handles all predictable questions (tech stack, pricing, availability, projects, FAQ) using a keyword-scoring algorithm. Zero API cost, sub-10ms response.
+
+**Layer 2 — Gemini API** handles creative or complex questions that fall outside known intents — like "Can you explain how you would architect a multi-tenant SaaS?" — with a dynamically generated system prompt loaded from portfolio data.
+
+---
+
+## 2. Designing the Intent Classification Engine
+
+The local classifier works by scoring each incoming query against defined **intent buckets** (greetings, rates, tech stack, projects, delivery timelines, mobile, AI, e-commerce, FAQ, contact).
+
+Each intent has a list of trigger keywords. The classifier iterates over all intents and scores the query using two strategies:
+
+**A. Exact Boundary Match (Score +2):** Uses a regex word-boundary check, awarding full score for precise word matches.
+
+**B. Partial Token Match (Score +0.5):** Catches misspellings and partial words — e.g., if the user types "techstk", the word "tech" still triggers the stack intent.
+
+\`\`\`typescript
+function classifyQueryLocally(query: string): string {
+  const lowerQuery = query.toLowerCase();
+  const cleanQuery = lowerQuery.replace(/[.,\/#!$%\^&\*;:{}=\-_\`~()?]/g, " ");
+
+  let bestIntent = "default";
+  let maxScore = 0;
+
+  for (const intent of intents) {
+    let score = 0;
+    for (const kw of intent.keywords) {
+      const escapedKw = kw.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      const kwRegex = new RegExp(\`\\\\b\${escapedKw}\\\\b\`, 'i');
+
+      if (kwRegex.test(cleanQuery)) {
+        score += 2; // Exact match
+      } else {
+        const words = cleanQuery.split(/\\s+/);
+        for (const word of words) {
+          if (word.length > 3 && kw.includes(word)) {
+            score += 0.5; // Partial match
+          }
+        }
+      }
+    }
+    if (score > maxScore) {
+      maxScore = score;
+      bestIntent = intent.name;
+    }
+  }
+
+  if (maxScore < 1) return getFallbackReply(); // Route to Gemini
+  return intents.find((i) => i.name === bestIntent)!.reply;
+}
+\`\`\`
+
+A minimum score threshold of **1.0** prevents false positives — if no intent scores strongly, the query is treated as a fallback and optionally escalated to the Gemini API.
+
+---
+
+## 3. Dynamic System Prompt from Portfolio Data
+
+A key architectural choice is that **no data is hardcoded in the API handler itself**. All pricing, project details, availability status, and service descriptions are pulled from a central \`PORTFOLIO_DATA\` source of truth at runtime:
+
+\`\`\`typescript
+import { PORTFOLIO_DATA } from "@/data/portfolio";
+
+const getSystemPrompt = () => {
+  const p = PORTFOLIO_DATA.personal;
+  const b = PORTFOLIO_DATA.businessGuides;
+
+  const projectsList = PORTFOLIO_DATA.projects.map((proj) =>
+    \`- \${proj.title}: \${proj.description}. Tech: \${proj.tech.join(", ")}\`
+  ).join("\\n");
+
+  return \`You are the AI Assistant for \${p.name}.
+  
+About \${p.name}:
+- Title: \${p.role}
+- Experience: \${p.experienceYears}+ years, \${p.deployedCount}+ deployments
+
+Services: ...
+Projects: \${projectsList}
+
+Pricing:
+- Landing Page: \${b.pricing.landingPage}
+- Web App / SaaS: \${b.pricing.webApp}
+
+Reply professionally in markdown. Always suggest filling the Contact form.\`;
+};
+\`\`\`
+
+This means updating portfolio pricing, tech stack, or project descriptions automatically propagates to the chatbot responses — **zero maintenance overhead**.
+
+---
+
+## 4. The Next.js API Route
+
+The chat API is a simple Next.js Route Handler at \`/api/chat\`. It always tries the local classifier first, and (in the full Gemini version) falls back to the LLM if the local score is insufficient:
+
+\`\`\`typescript
+// src/app/api/chat/route.ts
+import { NextResponse } from "next/server";
+
+export async function POST(req: Request) {
+  try {
+    const { messages } = await req.json();
+
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+      return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+    }
+
+    const latestUserMessage = messages[messages.length - 1];
+    const userQuery = latestUserMessage.text;
+
+    // Layer 1: Local deterministic classifier
+    const localReply = classifyQueryLocally(userQuery);
+    return NextResponse.json({ reply: localReply });
+
+    // Layer 2 (optional): Gemini API for fallback
+    // const geminiReply = await callGeminiAPI(messages, getSystemPrompt());
+    // return NextResponse.json({ reply: geminiReply });
+
+  } catch (error) {
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}
+\`\`\`
+
+---
+
+## 5. The Frontend Chat Interface
+
+The chatbot UI (\`HiringAgentSandbox.tsx\`) is a \`"use client"\` React component using Framer Motion for smooth spring animations. It floats as a fixed button in the bottom-right corner and expands into a full drawer.
+
+Key UX patterns used:
+
+- **FAQ Quick-Pick buttons**: Pre-defined questions rendered as clickable chips. Clicking one sends the question as a user message, giving visitors an instant, guided way to get answers without typing.
+- **Parallel API + minimum typing delay**: The API call is made in parallel with a 800ms artificial delay using \`Promise.all()\`, ensuring the typing indicator always shows naturally:
+
+\`\`\`typescript
+const apiPromise = fetch("/api/chat", { method: "POST", body: ... });
+const typingDelayPromise = new Promise((resolve) => setTimeout(resolve, 800));
+const [reply] = await Promise.all([apiPromise, typingDelayPromise]);
+\`\`\`
+
+- **Auto-scroll on new messages**: A \`chatEndRef\` div at the bottom of the message list is scrolled into view after every message update.
+- **Mobile-aware layout**: On small screens, the chat drawer renders as a full-screen bottom sheet (100vw × 100vh) instead of a corner popup.
+
+---
+
+## 6. Making the Chatbot SEO-Friendly
+
+A floating chat widget is inherently client-side and invisible to search engine crawlers. Here is the strategy to make its content indexable and discoverable:
+
+**A. FAQ Schema Markup (JSON-LD):** The chatbot's FAQ question/answer pairs are rendered as a \`FAQPage\` structured data block in the page \`<head>\`. Google reads this and may display the Q&A pairs directly in search results as rich snippets:
+
+\`\`\`typescript
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": FAQ_QUESTIONS.map(({ question, answer }) => ({
+    "@type": "Question",
+    "name": question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": answer
+    }
+  }))
+};
+\`\`\`
+
+**B. Dedicated Blog Post (This Article):** Publishing a detailed blog post that describes how the chatbot works gives search engines a crawlable, static page that targets high-intent keywords like *"AI chatbot for portfolio"*, *"Next.js chatbot tutorial"*, and *"Google Gemini chatbot integration"*.
+
+**C. Sitemap Inclusion:** The blog post URL (\`/blog/building-ai-chatbot-portfolio-nextjs-gemini\`) is automatically added to the XML sitemap, signalling its existence and priority to Google Search Console.
+
+---
+
+## Results & Key Takeaways
+
+The final "Ask Me" bot handles **100% of common visitor questions** instantly with zero latency, no API costs, and zero dependency on external uptime. The architecture is simple enough to maintain and extend: adding a new intent is just adding an object to the \`intents\` array.
+
+**Key lessons:**
+- For domain-specific bots with predictable query sets, a local classifier beats an LLM on speed, cost, and reliability.
+- Dynamic system prompts that read from a data source make the bot maintenance-free.
+- FAQ Schema JSON-LD is the most effective way to make chatbot content SEO-indexable without a separate crawlable page.
+- A 14-question FAQ chip selector dramatically improves conversions vs. an open text field alone.
+
+You can interact with the live chatbot at [freelance-ayush.vercel.app](https://freelance-ayush.vercel.app). The source code architecture follows the patterns described in this article.
+    `,
+    seoTags: [
+      "AI chatbot for portfolio website",
+      "Next.js chatbot tutorial",
+      "Google Gemini API integration Node.js",
+      "build AI assistant Next.js TypeScript",
+      "portfolio chatbot SEO friendly",
+      "FAQ chatbot intent classification",
+      "deterministic chatbot without LLM",
+      "local intent engine classification algorithm",
+      "Framer Motion chatbot UI tutorial",
+      "Next.js API route chat handler",
+      "freelance developer AI chatbot",
+      "chatbot system prompt dynamic data",
+      "FAQPage schema JSON-LD SEO",
+      "chatbot portfolio website Ayush Kumar",
+      "RAG vs local classifier chatbot comparison",
+      "AI assistant portfolio conversion rate",
+      "chatbot UX design best practices",
+      "Next.js route handler POST tutorial",
+      "TypeScript keyword scoring algorithm",
+      "portfolio website AI integration 2026",
+    ]
+  },
+  {
     title: "Tuning Next.js Server Components for < 1s Load Times",
     slug: "tuning-nextjs-server-components",
     category: "Frontend",

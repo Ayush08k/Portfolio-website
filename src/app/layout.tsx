@@ -378,17 +378,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     ],
   };
 
-  // ─── Schema: FAQPage (FAQ snippets in Google results) ─────────────────
+  // ─── Schema: FAQPage (chatbot Q&A + general FAQs — indexed by Google) ────
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: [
+      // ── General Hire-Intent FAQs ──────────────────────────────────────────
       {
         "@type": "Question",
         name: "How do I hire Ayush Kumar as a freelance developer?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: `You can hire Ayush Kumar by visiting his portfolio at ${siteUrl.replace(/^https?:\/\//, "")} and using the Contact form to describe your project, budget, and timeline. He typically responds within a few hours.`,
+          text: `You can hire Ayush Kumar by visiting his portfolio at ${siteUrl.replace(/^https?:\/\//, "")} and filling out the Contact form. He personally reviews every inquiry and responds within a few hours.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is Ayush Kumar's current availability and timezone?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Ayush Kumar is currently available for select freelance contracts and actively seeking full-time opportunities. He is based in India (IST, UTC+5:30) and is fully flexible to align with US, UK, EU, or AU client timezones as per project needs.",
         },
       },
       {
@@ -396,7 +405,95 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         name: "What technologies does Ayush Kumar specialize in?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Ayush Kumar specializes in React, Next.js, React Native, Expo, Node.js, NestJS, TypeScript, MongoDB, PostgreSQL, Tailwind CSS, Framer Motion, and AI/ML integrations using OpenAI and LLMs.",
+          text: "Ayush Kumar's tech stack spans the full development lifecycle: React, Next.js, TypeScript, Tailwind CSS, Framer Motion (Frontend); React Native, Expo, Kotlin (Mobile); Node.js, Express, NestJS, REST APIs (Backend); MongoDB, PostgreSQL, Firebase, Supabase (Databases); OpenAI GPT-4, Google Gemini, LangChain (AI/ML); AWS, Docker, Vercel (Cloud/DevOps).",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What are Ayush Kumar's freelance project rates and pricing?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Ayush Kumar offers transparent fixed-scope pricing (currently 50% OFF): Premium Interactive Landing Pages from $75, Custom Full-Stack Web Apps / SaaS from $300, and ongoing Retainers available. Every project includes a 30-day free post-launch warranty, 95+ Google Lighthouse score, and a fully responsive, cross-device tested UI.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What featured projects has Ayush Kumar built?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Ayush Kumar has delivered 50+ projects including: Gurugram University Attendance System (MERN, 10,000+ students), JLM Tournaments (real-time gaming platform), Feedo (B2B mobile feedback app with NPS scoring), AI E-Commerce Chatbot (RAG + GPT-4, resolves 70% of support tickets), Starbucks 3D Website (React Three Fiber, WebGL), and a full clothing E-Commerce store with Stripe payments.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What are Ayush Kumar's typical project delivery timelines?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Premium Landing Pages are delivered in 7 days. Full-Stack Web Apps / SaaS Projects typically take 2–3 weeks, with fast-track 10-day delivery available depending on scope. All deliverables include cross-device testing, a Lighthouse audit, and a 30-day free post-launch support window.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Does Ayush Kumar develop iOS and Android mobile apps?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Ayush Kumar specializes in React Native and Expo for cross-platform iOS and Android apps, as well as native Android development with Kotlin and Jetpack Compose. His apps consistently achieve crash-free rates above 99.94% and startup times under 1.5 seconds.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is Ayush Kumar's experience with E-Commerce and Shopify?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Ayush Kumar has deep hands-on expertise in Shopify (custom Liquid themes, app integrations, checkout workflows), Headless E-Commerce (Next.js + Shopify), full-stack stores (Next.js, PostgreSQL, Stripe), and secure payment integrations supporting Apple Pay, Google Pay, and standard cards.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can Ayush Kumar integrate AI chatbots and automation into websites?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Ayush Kumar integrates OpenAI (GPT-4), Google Gemini, Meta AI, and LangChain into web and mobile products. He has built RAG systems, AI code reviewers, sentiment analysis platforms, and the 'Ask Me' AI assistant you see on this portfolio — all with custom intent classification and dynamic prompt engineering.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Does Ayush Kumar sign NDAs and provide post-launch support?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Ayush Kumar is happy to sign a Non-Disclosure Agreement (NDA) before any confidential project details are shared. Every project includes 30 days of free post-launch maintenance and support. He is based in India (IST, UTC+5:30) and available 24/7 as per project needs. He can also work seamlessly with Figma, Adobe XD, Sketch, and Photoshop design files.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I get started on a project with Ayush Kumar?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Starting a project with Ayush Kumar is straightforward: (1) Fill out the Contact form describing your goals, timeline, and budget. (2) Ayush reviews your brief and responds personally, often sharing a Figma mockup or fixed-price proposal within 24 hours. (3) Development begins with live preview links updated every few days. (4) Deployment to high-performance hosting, followed by a 30-day free post-launch support period.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Does Ayush Kumar work with startups, agencies, or enterprise clients?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Ayush Kumar collaborates with early-stage startups, established design agencies, and enterprise clients on both fixed-scope projects and ongoing retainer contracts. He is available for discovery calls to discuss specific requirements.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Does Ayush Kumar offer free post-launch maintenance?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Every project Ayush Kumar delivers includes 30 days of free post-launch maintenance and support to ensure smooth operation after go-live. He also provides a clean, well-documented codebase for full client ownership.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can Ayush Kumar build websites directly from Figma UI designs?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Absolutely. Ayush Kumar works seamlessly with existing UI assets from Figma, Adobe XD, Sketch, and Photoshop, delivering pixel-perfect implementations directly from design files.",
         },
       },
       {
@@ -405,22 +502,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         acceptedAnswer: {
           "@type": "Answer",
           text: "Yes, Ayush Kumar works with clients worldwide. He is based in India and is available for remote freelance work for clients across the US, UK, Europe, Australia, and beyond.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "How much does Ayush Kumar charge for freelance development?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Ayush Kumar offers competitive freelance rates starting from $10/hr (Reg. $20/hr - 50% Off), with project-based pricing also available. Landing pages start at $75 (Reg. $150), full stack web apps from $300 (Reg. $600), mobile apps from $375 (Reg. $750), e-commerce from $200 (Reg. $400), and AI integrations from $200 (Reg. $400). Try our interactive Project Pricing & Scope Estimator on the site for a dynamic quote showing active 50% discounts.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Can Ayush Kumar build mobile apps?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, Ayush Kumar is an expert React Native and Expo developer who builds high-quality cross-platform iOS and Android mobile applications with smooth UI/UX, offline support, and real-time features.",
         },
       },
       {

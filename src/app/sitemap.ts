@@ -29,13 +29,14 @@ function toISODate(dateString: string): string {
 }
 
 const STATIC_PAGE_DATES = {
-  home: "2026-07-15",
+  home: "2026-07-16",
   services: "2026-07-15",
   projects: "2026-07-15",
-  blog: "2026-07-15",
+  blog: "2026-07-16",
   about: "2026-07-15",
   estimator: "2026-07-15",
   speed: "2026-07-15",
+  chatbot: "2026-07-16",
 } as const;
 
 // ── Sitemap Generator ──────────────────────────────────────────────────────────
@@ -86,6 +87,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(STATIC_PAGE_DATES.speed),
       changeFrequency: "weekly",
       priority: 0.85,
+    },
+    {
+      // Dedicated SEO landing for the "Ask Me" AI chatbot
+      url: `${baseUrl}/blog/building-ai-chatbot-portfolio-nextjs-gemini`,
+      lastModified: new Date(STATIC_PAGE_DATES.chatbot),
+      changeFrequency: "monthly",
+      priority: 0.88,
     },
   ];
 
