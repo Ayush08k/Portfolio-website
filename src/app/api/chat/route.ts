@@ -73,121 +73,172 @@ const getLocalIntents = () => {
   return [
     {
       name: "greetings",
-      keywords: ["hello", "hi", "hey", "greetings", "yo", "who are you", "what is your name", "about yourself", "who is ayush", "tell me about", "introduce"],
-      reply: `Looking for the best freelancer to bring your project to life? You are at the right place!
+      keywords: ["hello", "hi", "hey", "greetings", "yo", "who are you", "what is your name", "about yourself", "who is ayush", "tell me about", "introduce", "professional background", "experience", "background"],
+      reply: `Hi there! 👋 Welcome to Ayush's portfolio.
 
-Hi, this is Ayush. I have been a freelancer for the last 3 years and have successfully delivered 50+ projects that are currently live and in use.
+**Ayush** is a Full Stack & Mobile App Developer with **3+ years of professional freelancing experience**, having successfully designed, developed, and deployed **50+ live websites and mobile applications** for clients across diverse industries.
 
-I am **Ask Me**, Ayush's AI Copilot. How can I help you today? You can ask me about his technical skills, project rates, delivery times, timezone availability, or how to get started!`
+He started his development journey in **2018** and has since built a sharp expertise in delivering high-performance, production-grade digital products — from sleek marketing landing pages to complex SaaS portals and AI-integrated systems.
+
+I am **Ask Me**, Ayush's AI Copilot. I can help you learn about his tech stack, project pricing, delivery timelines, availability, or how to get started. What would you like to know?`
     },
     {
       name: "availability",
-      keywords: ["available", "availability", "free", "schedule", "timing", "calendar", "full time", "full-time", "hire", "job", "opportunity", "opening", "contract", "freelance"],
-      reply: `${p.name} has exciting availability depending on your project needs:
+      keywords: ["available", "availability", "free", "schedule", "timing", "calendar", "full time", "full-time", "hire", "job", "opportunity", "opening", "contract", "freelance", "startups", "agencies", "enterprise", "custom enterprise contracts"],
+      reply: `${p.name} is currently available for select, high-quality engagements. Here is a breakdown:
 
-• **Full-Time Opportunities**: ${b.availability.fullTime}
 • **Freelance Contracts**: ${b.availability.freelance}
-• **Location & Timezone**: Based in **India**, available **24/7 as per project needs** to align with your team's local timezone.
+• **Full-Time Opportunities**: ${b.availability.fullTime}
+• **Timezone**: Based in **India (IST, UTC+5:30)**, and fully flexible to align with **US, UK, EU, or AU client timezones** as per project needs.
 
-To lock in a discovery slot or discuss full-time hiring, please submit your details in the **Contact form** at the bottom of the page!`
+${p.name} collaborates with early-stage **startups**, established **design agencies**, and **enterprise clients** on both fixed-scope and ongoing retainer contracts.
+
+To lock in a discovery call or discuss your specific requirements, please fill out the **Contact form** at the bottom of this page!`
     },
     {
       name: "techstack",
       keywords: ["stack", "tech", "technology", "skills", "languages", "frameworks", "react", "next", "node", "typescript", "javascript", "backend", "frontend", "database", "sql", "nosql", "cloud", "aws"],
-      reply: `${p.name} possesses an elite, comprehensive technical skill set spanning the entire digital product lifecycle:
+      reply: `${p.name} commands a comprehensive, production-tested tech stack covering the full development lifecycle:
 
-${servicesList}
+**Frontend & UI**
+• React, Next.js, TypeScript, JavaScript (ES6+), Vanilla CSS, Tailwind CSS, Framer Motion, GSAP
 
-He specializes in building solid, production-grade applications that scale beautifully while delivering top-tier UI/UX.`
+**Mobile Development**
+• React Native, Expo, Kotlin (Android), Jetpack Compose
+
+**Backend & APIs**
+• Node.js, Express.js, NestJS, REST APIs, Spring Boot, Rust, Go
+
+**Databases & Storage**
+• MongoDB, PostgreSQL, MySQL, Firebase, Supabase, Prisma, Sequelize, SQLite
+
+**AI & Automation**
+• Meta AI, OpenAI (GPT-4), Google Gemini, LangChain, Hugging Face Transformers
+
+**Cloud & DevOps**
+• AWS (EC2, S3, Lambda, ECS), Vercel, Docker, Kubernetes
+
+**E-Commerce**
+• Shopify (Liquid), Stripe API, WordPress
+
+He specializes in building **scalable, production-grade applications** that merge stunning UI/UX with robust, secure backend engineering.`
     },
     {
       name: "rates",
       keywords: ["rate", "rates", "cost", "costing", "price", "pricing", "budget", "money", "quote", "charge", "charges", "estimate", "fee", "fees", "how much"],
-      reply: `${p.name} provides highly value-driven, fixed-scope project rates rather than unpredictable hourly billing. Here is a typical pricing guide:
+      reply: `${p.name} offers transparent, fixed-scope pricing — no surprise hourly billing:
 
-• **Premium Interactive Landing Page**: ${b.pricing.landingPage} (Built for ultra-high conversion, speed, and premium micro-animations)
-• **Custom Full-Stack Web Application / SaaS**: ${b.pricing.webApp}
-• **Development Retainers**: ${b.pricing.retainer} for ongoing priority updates.
+• **Premium Interactive Landing Page**: **${b.pricing.landingPage}**
+  *(High-conversion design, micro-animations, mobile-optimized, blazing fast)*
+• **Custom Full-Stack Web App / SaaS**: **${b.pricing.webApp}**
+  *(End-to-end architecture, scalable database, polished UI/UX)*
+• **Ongoing Retainers**: ${b.pricing.retainer}
 
-**Every project includes**:
-✔ Comprehensive cross-device and responsive testing
-✔ Extreme speed audits (Google Lighthouse 95+ score)
-✔ A solid **30-day post-launch warranty & maintenance support**
+**Every project includes:**
+✔ Fully responsive, cross-device tested UI
+✔ Google Lighthouse performance score of **95+**
+✔ **${b.warrantyDays}-day free post-launch warranty and maintenance**
+✔ Clean, documented, hand-over-ready codebase
 
-I highly recommend filling out the **Contact form** below with your requirements so ${p.name} can send you a detailed, custom proposal!`
+To get a detailed custom proposal for your specific project, fill out the **Contact form** at the bottom of the page — Ayush reviews every inquiry personally!`
     },
     {
       name: "projects",
       keywords: ["project", "projects", "portfolio", "work", "featured", "examples", "built", "created", "done", "developed", "show me"],
-      reply: `${p.name} has designed and deployed over ${p.deployedCount} websites and applications. Here are some of his recent featured works:
+      reply: `${p.name} has successfully deployed **50+ websites and applications** across Web, Mobile, AI, E-Commerce, and SaaS categories. Here are some notable highlights:
 
-${projectsList}
+**Web & SaaS**
+• **Gurugram University Attendance System** — MERN Stack portal for 10,000+ students with automated scheduling and CSV report generation. *(React, Node.js, MongoDB)*
+• **JLM Tournaments** — Real-time gaming tournament platform with live brackets and leaderboards. *(React, Vite, Supabase, Express)*
 
-*Note: To protect client confidentiality, ${p.name} does not display commercial source codes on public portals. However, you can check his open-source replicas and featured repositories directly in the **Featured Work** section above!*`
+**Mobile Apps**
+• **Feedo** — B2B mobile feedback platform with offline sync, real-time NPS scoring, and Socket.IO alerts. *(React Native, Expo, NestJS)*
+• **Music Player App** — Full-featured streaming app with adaptive album-art themes and offline playback. *(React Native, Expo, Redux Toolkit)*
+
+**AI Projects**
+• **AI Chatbot for E-Commerce** — RAG-powered support assistant resolving 70% of tickets instantly. *(LangChain, OpenAI GPT-4, Pinecone)*
+• **AI Code Reviewer** — GitHub-integrated PR reviewer using Google Gemini for automated code feedback. *(Node.js, Gemini API, Docker)*
+
+**E-Commerce**
+• **Starbucks 3D Website** — Immersive 3D product configurator with WebGL, GSAP, and React Three Fiber.
+• **Clothing E-Commerce** — Full Next.js fashion storefront with Stripe payments and admin analytics.
+
+*Client confidentiality is strictly maintained — commercial source code is kept private. Open-source replicas are available in the **Featured Work** section above!*`
     },
     {
       name: "ecommerce",
       keywords: ["ecommerce", "e-commerce", "shopify", "store", "shop", "online store", "sales", "stripe", "payment"],
-      reply: `${p.name} is highly experienced in creating premium, high-converting e-commerce experiences:
+      reply: `${p.name} has deep, hands-on expertise in building high-converting e-commerce experiences:
 
-• **Shopify Development**: Custom Liquid theme coding, third-party app integrations, custom checkout setups, and setting up high-converting, blazing-fast storefronts.
-• **Headless E-Commerce**: Connecting React/Next.js frontends to Shopify, BigCommerce, or Stripe APIs for bespoke, ultra-fast buyer experiences.
-• **Security & Payments**: Integrating trusted payment gateways (Stripe, PayPal, Razorpay) with robust cart management and transaction workflows.
+• **Shopify Development**: Custom Liquid theme development, third-party app integrations, automated checkout workflows, and performance-optimized storefronts built for conversion.
+• **Headless E-Commerce**: Connecting Next.js or React frontends to Shopify, or custom backends for bespoke buyer experiences that load in under 1 second.
+• **Full-Stack Stores**: Built complete e-commerce platforms from scratch using Next.js, PostgreSQL, Supabase, and Stripe — featuring server-side rendering (SSR), live inventory tracking, and real-time order fulfillment.
+• **Secure Payments**: Stripe Elements integration supporting Apple Pay, Google Pay, and standard credit cards with secure webhook-based transaction handling.
 
-If you want to launch a modern store that loads in milliseconds and maximizes conversions, drop a line via the **Contact form** below!`
+Have a store idea or need to upgrade an existing one? Drop your requirements in the **Contact form** below!`
     },
     {
       name: "mobile",
-      keywords: ["mobile", "app", "apps", "ios", "android", "phone", "react native", "expo", "vanguard", "native"],
-      reply: `${p.name} is a specialist in mobile development, delivering high-performance iOS and Android applications:
+      keywords: ["mobile", "app", "apps", "ios", "android", "phone", "react native", "expo", "kotlin", "native"],
+      reply: `${p.name} specializes in building high-performance, production-ready mobile applications for both iOS and Android:
 
-• **Cross-Platform React Native & Expo**: Writes single-codebase apps that run smoothly on both platforms, saving development costs and time.
-• **Capabilities**: Real-time notifications, local databases, biometric authentication, wearable device synchronization, maps, and offline support.
+• **React Native & Expo** *(Cross-platform)*: Writes single-codebase apps that run natively on both platforms — used for Feedo, Music Player, FitQuest, and more.
+• **Kotlin & Jetpack Compose** *(Native Android)*: Built LocalBite (food delivery), CryptoPulse (crypto tracker), and TaskFlow (Kanban organizer) as full native Android applications.
+• **Capabilities include**: Offline sync (AsyncStorage, SQLite, Realm), push notifications, biometric auth, WebRTC video calls, real-time WebSocket feeds, background audio, maps, and wearable device integration.
+• **App Quality**: Consistently achieves crash-free rates above **99.94%** and startup times under **1.5 seconds** across deployed apps.
 
-Have a mobile app idea? Reach out using the **Contact form** and let's bring it to life!`
+Have a mobile app idea? Reach out through the **Contact form** below and let's bring it to life!`
     },
     {
       name: "ai",
-      keywords: ["ai", "chat", "bot", "chatbot", "automation", "workflows", "llm", "intelligence", "agent", "meta", "openai", "gpt"],
-      reply: `${p.name} is at the forefront of AI and automation integration, bringing modern intelligence to digital platforms:
+      keywords: ["ai", "chat", "bot", "chatbot", "automation", "workflows", "llm", "intelligence", "agent", "meta", "openai", "gpt", "gemini", "langchain"],
+      reply: `${p.name} is experienced in integrating modern AI capabilities into real-world digital products:
 
-• **LLM Integrations**: Connecting applications to OpenAI (GPT), Google Gemini, or Meta AI to enable smart assistants, dynamic chatbots, and intelligent search.
-• **Workflow Automation**: Automating repetitive business tasks, connecting third-party platforms via custom APIs, and building background scrapers/sync jobs.
-• **Prompt Engineering**: Designing optimized prompt flows to ensure AI models respond accurately and securely.
+• **LLM Integrations**: OpenAI (GPT-4), Google Gemini, Meta AI, and Hugging Face Transformers — used for chatbots, code reviewers, content generators, and smart assistants.
+• **RAG Systems**: Built Retrieval-Augmented Generation pipelines using LangChain and Pinecone for context-aware, accurate AI responses (e.g., AI E-Commerce Chatbot resolving 70% of support tickets autonomously).
+• **AI Features Built**: Smart medical image diagnosis, sentiment analysis platforms, predictive maintenance dashboards, expense tracking OCR, and AI-powered business analytics.
+• **Workflow Automation**: Background scraper workers, automated ticketing, BullMQ job queues, and API orchestration pipelines.
+• **Prompt Engineering**: Crafting optimized prompt flows ensuring AI models respond accurately, safely, and on-brand.
 
-He built this very AI chatbot you are chatting with! He can deploy similar custom AI features tailored for your business.`
+He built this very chatbot you are interacting with! He can deploy similar custom AI features tailored specifically for your business needs.`
     },
     {
       name: "delivery",
       keywords: ["delivery", "timeline", "how long", "weeks", "days", "how fast", "fast", "speed", "duration", "timeframe", "turnaround", "urgency", "urgent"],
-      reply: `${p.name} delivers high-quality work extremely fast:
+      reply: `${p.name} is known for delivering high-quality work at impressive speed:
 
-• **Landing Pages**: Typically delivered in **7 days**.
-• **Full Stack Projects**: Typically takes **2-3 weeks**, but can be fast-tracked to **10 days or even faster** depending on project complexity.
+• **Premium Landing Pages**: Delivered in **7 days** — fully responsive, animated, SEO-optimized, and production-ready.
+• **Full-Stack Web Apps / SaaS Projects**: Typically **2–3 weeks**, with the possibility of a fast-tracked **10-day delivery** depending on project scope and complexity.
+• **Mobile Applications**: Timeline discussed based on feature set during the discovery phase.
 
-If you have a tight deadline, please mention it in the **Contact form** below and we will do our best to accommodate it!`
+All deliverables include thorough cross-device testing, a Lighthouse performance audit, and a **${b.warrantyDays}-day free post-launch support window**.
+
+If you have a tight deadline, please mention it clearly in the **Contact form** below — Ayush is very accommodating with urgent timelines!`
     },
     {
       name: "faq",
-      keywords: ["nda", "support", "maintenance", "timezone", "location", "india", "figma", "design", "adobe", "xd", "post-launch", "post launch", "warranty"],
-      reply: `Here are answers to some of the most common questions about working with ${p.name}:
+      keywords: ["nda", "support", "maintenance", "timezone", "location", "india", "figma", "design", "adobe", "xd", "post-launch", "post launch", "warranty", "figma UI designs", "figma design", "build websites directly from figma", "free post-launch maintenance"],
+      reply: `Here are the most common questions about working with ${p.name}:
 
-• **Post-Launch Support**: Yes, ${p.name} provides **30 days of free post-launch maintenance and support** on every project to guarantee perfect operation.
-• **Non-Disclosure Agreement (NDA)**: Yes, we are absolutely happy to sign an NDA before you share any confidential project details.
-• **Location & Timezone**: Based in **India**, and fully available **24/7 as per project needs** to coordinate smoothly across US and global time zones.
-• **Design Assets**: Yes, he works seamlessly with existing UI design files from **Figma, Adobe XD, Sketch, and Photoshop**.`
+• **Post-Launch Support**: Yes — every project includes **${b.warrantyDays} days of free post-launch maintenance and support** to ensure smooth operation after go-live.
+• **NDA**: Absolutely. ${p.name} is happy to sign a **Non-Disclosure Agreement (NDA)** before any confidential project details are shared.
+• **Location & Timezone**: Based in **India (IST, UTC+5:30)** — fully available **24/7 as per project needs**, coordinating smoothly with US, UK, EU, and AU time zones.
+• **Design Files**: Works seamlessly with existing UI assets from **Figma, Adobe XD, Sketch, and Photoshop**. He can build pixel-perfect implementations directly from your Figma designs.
+• **Codebase Handover**: A clean, well-documented codebase is delivered at project completion for full client ownership.`
     },
     {
       name: "contact",
-      keywords: ["contact", "email", "form", "start", "process", "roadmap", "meet", "call", "touch", "reach out", "message", "hire you"],
-      reply: `Starting a project with ${p.name} is incredibly seamless and structured:
+      keywords: ["contact", "email", "form", "start", "process", "roadmap", "meet", "call", "touch", "reach out", "message", "hire you", "get started"],
+      reply: `Starting a project with ${p.name} is straightforward and well-structured:
 
-1. **Discovery & Brief**: Fill out the **Contact form** below to describe your objectives.
-2. **Strategy & Mockup**: ${p.name} drafts a Figma mockup and a crystal-clear, fixed-price proposal.
-3. **Active Development**: Dynamic milestones with live interactive preview links updated every few days.
-4. **Launch & Support**: Deployment to high-performance cloud hosts, followed by a **30-day free post-launch support period**.
+1. **Discovery & Brief** — Fill out the **Contact form** at the bottom of this page describing your goals, timeline, and budget.
+2. **Strategy & Mockup** — ${p.name} reviews your brief and responds personally, often sharing a Figma mockup or a crystal-clear fixed-price proposal within 24 hours.
+3. **Active Development** — Work begins with live, interactive preview links updated every few days, ensuring full visibility and control throughout.
+4. **Launch & Support** — Deployment to high-performance hosting, followed by a **${b.warrantyDays}-day free post-launch support period**.
 
-Let's get started—go ahead and fill out the Contact form below!`
+**Current Availability**: ${b.availability.freelance}
+
+Go ahead and fill out the **Contact form** below — Ayush personally reviews every message and responds promptly!`
     }
   ];
 };
@@ -249,53 +300,7 @@ export async function POST(req: Request) {
     const latestUserMessage = messages[messages.length - 1];
     const userQuery = latestUserMessage.text;
 
-    const apiKey = process.env.GEMINI_API_KEY;
-
-    if (apiKey) {
-      // 1. Convert message history to Google Gemini API structures
-      // Skip the greeting template to keep model conversation focused on relevant entries
-      const filteredMessages = messages.filter(m => m.id !== "greeting");
-      const contents = filteredMessages.map((msg) => ({
-        role: msg.sender === "bot" ? "model" : "user",
-        parts: [{ text: msg.text }],
-      }));
-
-      try {
-        const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              contents,
-              systemInstruction: {
-                parts: [{ text: getSystemPrompt() }],
-              },
-              generationConfig: {
-                temperature: 0.7,
-                maxOutputTokens: 800,
-              },
-            }),
-          }
-        );
-
-        if (response.ok) {
-          const resData = await response.json();
-          const replyText = resData.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (replyText) {
-            return NextResponse.json({ reply: replyText });
-          }
-        }
-        
-        console.warn("Gemini API call failed or returned empty content. Falling back to local classifier.");
-      } catch (err) {
-        console.error("Gemini API invocation error:", err);
-      }
-    }
-
-    // 2. Fallback to advanced local rule-based intent engine
+    // Always use the hardcoded local classifier for replies
     const localReply = classifyQueryLocally(userQuery);
     return NextResponse.json({ reply: localReply });
   } catch (error) {

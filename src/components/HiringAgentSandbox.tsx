@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { MessageSquareCode, X, ArrowLeft, Bot, Sparkles, User, Loader2 } from "lucide-react";
+import { MessageSquareCode, X, ArrowLeft, Bot, Sparkles, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Message {
@@ -22,6 +22,10 @@ const FAQ_QUESTIONS = [
   { icon: "🤖", label: "AI & Automation Capabilities", question: "Can you integrate AI chatbots and automation?" },
   { icon: "🔒", label: "NDAs, Support & Figma files", question: "Do you sign NDAs and provide post-launch support?" },
   { icon: "📝", label: "How to Start a Project?", question: "How do we get started on a project?" },
+  { icon: "👨‍💻", label: "Ayush's Freelance Background", question: "Tell me about Ayush's professional background and experience." },
+  { icon: "✨", label: "Working with Startups & Agencies", question: "Do you work with startups, agencies, or custom enterprise contracts?" },
+  { icon: "🛠️", label: "Post-Launch Free Maintenance", question: "Do you offer free post-launch maintenance and support?" },
+  { icon: "🎨", label: "Figma UI/UX File Integration", question: "Can you build websites directly from Figma UI designs?" },
 ];
 
 const renderMessageText = (text: string) => {
@@ -44,6 +48,7 @@ export default function HiringAgentSandbox() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showQuestions, setShowQuestions] = useState(true);
   
   const chatEndRef = useRef<HTMLDivElement>(null);
 
@@ -59,20 +64,23 @@ export default function HiringAgentSandbox() {
 
   // Pre-populate with bot greeting on first open
   useEffect(() => {
-    if (isOpen && messages.length === 0) {
-      setIsTyping(true);
-      const timer = setTimeout(() => {
-        setMessages([
-          {
-            id: "greeting",
-            sender: "bot",
-            text: "Looking for the best freelancer to bring your project to life? You are at the right place!\n\nHi, this is Ayush. I have been a freelancer for the last 3 years and have successfully delivered 50+ projects that are currently live and in use.\n\nHow can I help you today?",
-            timestamp: new Date(),
-          },
-        ]);
-        setIsTyping(false);
-      }, 800);
-      return () => clearTimeout(timer);
+    if (isOpen) {
+      setShowQuestions(true); // Always reset questions list to visible on open
+      if (messages.length === 0) {
+        setIsTyping(true);
+        const timer = setTimeout(() => {
+          setMessages([
+            {
+              id: "greeting",
+              sender: "bot",
+              text: "Looking for the best freelancer to bring your project to life? You are at the right place!\n\nHi, this is Ayush. I have been a freelancer for the last 3 years and have successfully delivered 50+ projects that are currently live and in use.\n\nHow can I help you today?",
+              timestamp: new Date(),
+            },
+          ]);
+          setIsTyping(false);
+        }, 800);
+        return () => clearTimeout(timer);
+      }
     }
   }, [isOpen, messages.length]);
 
@@ -83,6 +91,8 @@ export default function HiringAgentSandbox() {
 
   const handleSendMessage = async (textToSend: string) => {
     if (!textToSend.trim()) return;
+
+    setShowQuestions(false);
 
     const newUserMessage: Message = {
       id: `msg-${Date.now()}`,
@@ -396,92 +406,140 @@ export default function HiringAgentSandbox() {
                   </div>
                 </div>
               )}
+
+              {showQuestions && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                    marginTop: "8px",
+                    borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "11px",
+                      color: "#8892b0",
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                      letterSpacing: "1px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <span>Select a Frequently Asked Question:</span>
+                    {isTyping && (
+                      <span style={{ color: "#64ffda", fontSize: "10px", textTransform: "none", animation: "pulse 1s infinite alternate" }}>
+                        Agent is responding...
+                      </span>
+                    )}
+                  </div>
+                  <div
+                    className="faq-scroll-container"
+                    style={{
+                      maxHeight: "220px",
+                      overflowY: "auto",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                      paddingRight: "4px",
+                    }}
+                  >
+                    {FAQ_QUESTIONS.map((faq, index) => (
+                      <button
+                        key={index}
+                        disabled={isTyping}
+                        onClick={() => handleSendMessage(faq.question)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                          width: "100%",
+                          textAlign: "left",
+                          padding: "10px 14px",
+                          borderRadius: "8px",
+                          background: "rgba(255, 255, 255, 0.03)",
+                          border: "1px solid rgba(255, 255, 255, 0.08)",
+                          color: "#ccd6f6",
+                          fontSize: "13px",
+                          fontFamily: "Outfit, sans-serif",
+                          cursor: isTyping ? "not-allowed" : "pointer",
+                          opacity: isTyping ? 0.6 : 1,
+                          transition: "all 0.2s ease-in-out",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (isTyping) return;
+                          e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
+                          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                          e.currentTarget.style.color = "#ffffff";
+                          e.currentTarget.style.transform = "translateX(2px)";
+                        }}
+                        onMouseLeave={(e) => {
+                          if (isTyping) return;
+                          e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
+                          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
+                          e.currentTarget.style.color = "#ccd6f6";
+                          e.currentTarget.style.transform = "none";
+                        }}
+                      >
+                        <span style={{ fontSize: "14px", flexShrink: 0 }}>{faq.icon}</span>
+                        <span style={{ flex: 1 }}>{faq.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div ref={chatEndRef} />
             </div>
 
-            <div
-              style={{
-                padding: "16px 20px 20px 20px",
-                borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-                background: "rgba(2, 12, 27, 0.6)",
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-              }}
-            >
+            {!showQuestions && (
               <div
                 style={{
-                  fontSize: "11px",
-                  color: "#8892b0",
-                  fontWeight: 600,
-                  textTransform: "uppercase",
-                  letterSpacing: "1px",
+                  padding: "16px 20px 20px 20px",
+                  borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+                  background: "rgba(2, 12, 27, 0.6)",
                   display: "flex",
+                  justifyContent: "center",
                   alignItems: "center",
-                  justifyContent: "space-between",
                 }}
               >
-                <span>Select a Frequently Asked Question:</span>
-                {isTyping && (
-                  <span style={{ color: "#64ffda", fontSize: "10px", textTransform: "none", animation: "pulse 1s infinite alternate" }}>
-                    Agent is responding...
-                  </span>
-                )}
+                <button
+                  onClick={() => setShowQuestions(true)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "10px 24px",
+                    borderRadius: "20px",
+                    background: "rgba(100, 255, 218, 0.1)",
+                    border: "1px solid rgba(100, 255, 218, 0.3)",
+                    color: "#64ffda",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    fontFamily: "Outfit, sans-serif",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease-in-out",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(100, 255, 218, 0.2)";
+                    e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.5)";
+                    e.currentTarget.style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(100, 255, 218, 0.1)";
+                    e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.3)";
+                    e.currentTarget.style.transform = "none";
+                  }}
+                >
+                  <MessageSquareCode size={16} />
+                  Ask More
+                </button>
               </div>
-              <div
-                className="faq-scroll-container"
-                style={{
-                  maxHeight: "150px",
-                  overflowY: "auto",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "8px",
-                  paddingRight: "4px",
-                }}
-              >
-                {FAQ_QUESTIONS.map((faq, index) => (
-                  <button
-                    key={index}
-                    disabled={isTyping}
-                    onClick={() => handleSendMessage(faq.question)}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      width: "100%",
-                      textAlign: "left",
-                      padding: "10px 14px",
-                      borderRadius: "8px",
-                      background: "rgba(255, 255, 255, 0.03)",
-                      border: "1px solid rgba(255, 255, 255, 0.08)",
-                      color: "#ccd6f6",
-                      fontSize: "13px",
-                      fontFamily: "Outfit, sans-serif",
-                      cursor: isTyping ? "not-allowed" : "pointer",
-                      opacity: isTyping ? 0.6 : 1,
-                      transition: "all 0.2s ease-in-out",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (isTyping) return;
-                      e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
-                      e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
-                      e.currentTarget.style.color = "#ffffff";
-                      e.currentTarget.style.transform = "translateX(2px)";
-                    }}
-                    onMouseLeave={(e) => {
-                      if (isTyping) return;
-                      e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
-                      e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
-                      e.currentTarget.style.color = "#ccd6f6";
-                      e.currentTarget.style.transform = "none";
-                    }}
-                  >
-                    <span style={{ fontSize: "14px", flexShrink: 0 }}>{faq.icon}</span>
-                    <span style={{ flex: 1 }}>{faq.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
