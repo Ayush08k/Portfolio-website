@@ -1319,8 +1319,8 @@ export const PORTFOLIO_DATA = {
   ] as Project[],
   businessGuides: {
     pricing: {
-      landingPage: "$1,500 – $3,000",
-      webApp: "$5,000+",
+      landingPage: "$75 USD (50% Special Discount Applied - Regular $150)",
+      webApp: "$300 USD (50% Special Discount Applied - Regular $600)",
       retainer: "Available upon discussion"
     },
     warrantyDays: 30,

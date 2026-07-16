@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { MessageSquareCode, X, ArrowLeft, Bot, Sparkles, Send, User } from "lucide-react";
+import { MessageSquareCode, X, ArrowLeft, Bot, Sparkles, Send, User, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Message {
@@ -37,6 +37,7 @@ export default function HiringAgentSandbox() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
+  const [isThinking, setIsThinking] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
@@ -61,7 +62,7 @@ export default function HiringAgentSandbox() {
           {
             id: "greeting",
             sender: "bot",
-            text: "Hello! I am Ayush's AI Copilot. Ask me anything about his technical expertise, project rates, or availability. I'm here to help you scope your project!",
+            text: "Looking for the best freelancer to bring your project to life? You are at the right place!\n\nHi, this is Ayush. I have been a freelancer for the last 3 years and have successfully delivered 50+ projects that are currently live and in use.\n\nHow can I help you today?",
             timestamp: new Date(),
           },
         ]);
@@ -74,7 +75,7 @@ export default function HiringAgentSandbox() {
   // Scroll to bottom on new messages
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping]);
+  }, [messages, isTyping, isThinking]);
 
   const handleSendMessage = async (textToSend: string) => {
     if (!textToSend.trim()) return;
@@ -89,38 +90,46 @@ export default function HiringAgentSandbox() {
     const updatedMessages = [...messages, newUserMessage];
     setMessages(updatedMessages);
     setInputValue("");
-    setIsTyping(true);
+    setIsThinking(true);
 
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ messages: updatedMessages }),
-      });
-
+    // 1. Start fetching API response in parallel
+    const apiPromise = fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ messages: updatedMessages }),
+    }).then(async (response) => {
       if (response.ok) {
         const data = await response.json();
-        if (data.reply) {
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: `reply-${Date.now()}`,
-              sender: "bot",
-              text: data.reply,
-              timestamp: new Date(),
-            },
-          ]);
-          setIsTyping(false);
-          return;
-        }
+        if (data.reply) return data.reply;
       }
       throw new Error("Chat API route returned non-OK response");
+    });
+
+    // 2. Wait exactly 2 seconds for thinking animation
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setIsThinking(false);
+    setIsTyping(true);
+
+    // 3. Show typing animation for at least 1.5 seconds while waiting for API
+    const typingDelayPromise = new Promise((resolve) => setTimeout(resolve, 1500));
+
+    try {
+      const [reply] = await Promise.all([apiPromise, typingDelayPromise]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `reply-${Date.now()}`,
+          sender: "bot",
+          text: reply,
+          timestamp: new Date(),
+        },
+      ]);
     } catch (error) {
       console.error("Chat API error, using static fallback:", error);
+      await typingDelayPromise; // Ensure typing shows for at least 1.5s even on error
       
-      // Secondary fallback in case endpoint crashes completely
       setMessages((prev) => [
         ...prev,
         {
@@ -130,6 +139,7 @@ export default function HiringAgentSandbox() {
           timestamp: new Date(),
         },
       ]);
+    } finally {
       setIsTyping(false);
     }
   };
@@ -279,7 +289,7 @@ export default function HiringAgentSandbox() {
                       gap: "6px",
                     }}
                   >
-                    Hiring Agent AI
+                    Ask Me
                     <Sparkles size={14} style={{ color: "#ffffff" }} />
                   </h3>
                   <p style={{ fontSize: "12px", color: "#8892b0", display: "flex", alignItems: "center", gap: "5px" }}>
@@ -386,11 +396,35 @@ export default function HiringAgentSandbox() {
                 </div>
               ))}
 
+              {isThinking && (
+                <div style={{ display: "flex", flexDirection: "column", alignSelf: "flex-start", maxWidth: "80%" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px", fontSize: "10px", color: "#8892b0" }}>
+                    <Bot size={12} style={{ color: "#ffffff" }} />
+                    <span>Ask Me is thinking...</span>
+                  </div>
+                  <div
+                    style={{
+                      padding: "12px 16px",
+                      borderRadius: "12px",
+                      borderTopLeftRadius: "2px",
+                      background: "rgba(255, 255, 255, 0.03)",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      border: "1px solid rgba(255, 255, 255, 0.05)",
+                    }}
+                  >
+                    <Loader2 size={14} className="spin-loader" style={{ color: "#ffffff" }} />
+                    <span style={{ fontSize: "13px", color: "#a8b2d1", fontFamily: "Outfit, sans-serif" }}>Formulating response...</span>
+                  </div>
+                </div>
+              )}
+
               {isTyping && (
                 <div style={{ display: "flex", flexDirection: "column", alignSelf: "flex-start", maxWidth: "80%" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px", fontSize: "10px", color: "#8892b0" }}>
                     <Bot size={12} style={{ color: "#ffffff" }} />
-                    <span>AI Copilot typing...</span>
+                    <span>Ask Me typing...</span>
                   </div>
                   <div
                     style={{
@@ -518,6 +552,13 @@ export default function HiringAgentSandbox() {
         @keyframes pulse {
           from { opacity: 0.3; transform: scale(0.9); }
           to { opacity: 1; transform: scale(1.1); }
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .spin-loader {
+          animation: spin 1s linear infinite;
         }
       `}</style>
     </>

@@ -15,7 +15,7 @@ const getSystemPrompt = () => {
     return `- ${ser.name}: ${ser.description}`;
   }).join("\n");
 
-  return `You are the highly professional and intelligent AI Hiring Copilot for ${p.name}. Your goal is to answer questions about ${p.name}'s professional background, skills, projects, rates, and availability in a sleek, expert, and persuasive manner. You want to convince potential clients, recruiters, and collaborators that ${p.name} is the top-tier talent they need.
+  return `You are the highly professional and intelligent AI Assistant for ${p.name}. Your name is "Ask Me". Your goal is to answer questions about ${p.name}'s professional background, skills, projects, rates, and availability in a sleek, expert, and persuasive manner. You want to convince potential clients, recruiters, and collaborators that ${p.name} is the top-tier talent they need.
 
 About ${p.name}:
 - Name: ${p.name}
@@ -39,9 +39,15 @@ Freelance Rates & Business Guide:
 - Retainers & Custom Contracts: ${b.pricing.retainer}.
 *Every project includes rigorous testing, Google Lighthouse speed audits, and a comprehensive ${b.warrantyDays}-day warranty.
 
-Current Availability:
-- Freelance Bandwidth: ${b.availability.freelance}
-- Employment Status: ${b.availability.fullTime}
+Delivery Speed & Timelines:
+- Premium Landing Pages: Delivered in **7 days**.
+- Full Stack / SaaS Projects: Typically takes **2-3 weeks**, but can deliver in **10 days or even faster** depending on requirements.
+
+Support, NDA & Location FAQ:
+- Post-Launch Support: **30 days of free maintenance and support** on all projects.
+- NDA: Happy to sign an **NDA** before discussing project details.
+- Location & Availability: Based in **India**, available **24/7 as per project needs** to align with client timezones.
+- Design Files: Can work seamlessly with existing design files (**Figma, Adobe XD, Sketch**, etc.).
 
 Style and Tone:
 - Professional, articulate, intelligent, and polite. Keep the tone premium.
@@ -68,9 +74,11 @@ const getLocalIntents = () => {
     {
       name: "greetings",
       keywords: ["hello", "hi", "hey", "greetings", "yo", "who are you", "what is your name", "about yourself", "who is ayush", "tell me about", "introduce"],
-      reply: `Hello! I am ${p.name}'s AI Copilot. I'm here to assist you with any questions about his technical skills, professional background, recent projects, development rates, or general availability.
+      reply: `Looking for the best freelancer to bring your project to life? You are at the right place!
 
-Whether you're looking to hire a full-time software engineer, partner on a freelance contract, or just explore his work, let me know how I can help!`
+Hi, this is Ayush. I have been a freelancer for the last 3 years and have successfully delivered 50+ projects that are currently live and in use.
+
+I am **Ask Me**, Ayush's AI Copilot. How can I help you today? You can ask me about his technical skills, project rates, delivery times, timezone availability, or how to get started!`
     },
     {
       name: "availability",
@@ -79,6 +87,7 @@ Whether you're looking to hire a full-time software engineer, partner on a freel
 
 • **Full-Time Opportunities**: ${b.availability.fullTime}
 • **Freelance Contracts**: ${b.availability.freelance}
+• **Location & Timezone**: Based in **India**, available **24/7 as per project needs** to align with your team's local timezone.
 
 To lock in a discovery slot or discuss full-time hiring, please submit your details in the **Contact form** at the bottom of the page!`
     },
@@ -103,7 +112,7 @@ He specializes in building solid, production-grade applications that scale beaut
 **Every project includes**:
 ✔ Comprehensive cross-device and responsive testing
 ✔ Extreme speed audits (Google Lighthouse 95+ score)
-✔ A solid **${b.warrantyDays}-day post-launch warranty**
+✔ A solid **30-day post-launch warranty & maintenance support**
 
 I highly recommend filling out the **Contact form** below with your requirements so ${p.name} can send you a detailed, custom proposal!`
     },
@@ -146,7 +155,27 @@ Have a mobile app idea? Reach out using the **Contact form** and let's bring it 
 • **Workflow Automation**: Automating repetitive business tasks, connecting third-party platforms via custom APIs, and building background scrapers/sync jobs.
 • **Prompt Engineering**: Designing optimized prompt flows to ensure AI models respond accurately and securely.
 
-He built this very AI chatbot you are chatting with! He can deploy similar advanced custom AI features tailored for your business.`
+He built this very AI chatbot you are chatting with! He can deploy similar custom AI features tailored for your business.`
+    },
+    {
+      name: "delivery",
+      keywords: ["delivery", "timeline", "how long", "weeks", "days", "how fast", "fast", "speed", "duration", "timeframe", "turnaround", "urgency", "urgent"],
+      reply: `${p.name} delivers high-quality work extremely fast:
+
+• **Landing Pages**: Typically delivered in **7 days**.
+• **Full Stack Projects**: Typically takes **2-3 weeks**, but can be fast-tracked to **10 days or even faster** depending on project complexity.
+
+If you have a tight deadline, please mention it in the **Contact form** below and we will do our best to accommodate it!`
+    },
+    {
+      name: "faq",
+      keywords: ["nda", "support", "maintenance", "timezone", "location", "india", "figma", "design", "adobe", "xd", "post-launch", "post launch", "warranty"],
+      reply: `Here are answers to some of the most common questions about working with ${p.name}:
+
+• **Post-Launch Support**: Yes, ${p.name} provides **30 days of free post-launch maintenance and support** on every project to guarantee perfect operation.
+• **Non-Disclosure Agreement (NDA)**: Yes, we are absolutely happy to sign an NDA before you share any confidential project details.
+• **Location & Timezone**: Based in **India**, and fully available **24/7 as per project needs** to coordinate smoothly across US and global time zones.
+• **Design Assets**: Yes, he works seamlessly with existing UI design files from **Figma, Adobe XD, Sketch, and Photoshop**.`
     },
     {
       name: "contact",
@@ -156,7 +185,7 @@ He built this very AI chatbot you are chatting with! He can deploy similar advan
 1. **Discovery & Brief**: Fill out the **Contact form** below to describe your objectives.
 2. **Strategy & Mockup**: ${p.name} drafts a Figma mockup and a crystal-clear, fixed-price proposal.
 3. **Active Development**: Dynamic milestones with live interactive preview links updated every few days.
-4. **Launch & Support**: Deployment to high-performance cloud hosts, followed by a **${b.warrantyDays}-day warranty** to ensure everything runs flawlessly.
+4. **Launch & Support**: Deployment to high-performance cloud hosts, followed by a **30-day free post-launch support period**.
 
 Let's get started—go ahead and fill out the Contact form below!`
     }

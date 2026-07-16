@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import LoadingScreen from "@/components/LoadingScreen";
 import ClickEffect from "@/components/ClickEffect";
+import HiringAgentSandbox from "@/components/HiringAgentSandbox";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
@@ -411,7 +412,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         name: "How much does Ayush Kumar charge for freelance development?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Ayush Kumar offers competitive freelance rates starting from $20/hr, with project-based pricing also available. Landing pages start at $600, full stack web apps from $1,000, mobile apps from $2,000, e-commerce from $1,500, and AI integrations from $1,600. Try our new interactive Project Pricing & Scope Estimator on the site for a dynamic quote.",
+          text: "Ayush Kumar offers competitive freelance rates starting from $10/hr (Reg. $20/hr - 50% Off), with project-based pricing also available. Landing pages start at $75 (Reg. $150), full stack web apps from $300 (Reg. $600), mobile apps from $375 (Reg. $750), e-commerce from $200 (Reg. $400), and AI integrations from $200 (Reg. $400). Try our interactive Project Pricing & Scope Estimator on the site for a dynamic quote showing active 50% discounts.",
         },
       },
       {
@@ -572,6 +573,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="scroll-vignette-top" />
         <div className="scroll-vignette-bottom" />
         {children}
+        <HiringAgentSandbox />
         <SpeedInsights />
       </body>
     </html>
