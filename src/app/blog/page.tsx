@@ -181,13 +181,25 @@ export default function BlogIndex() {
           min-height: 100vh;
           background: #000000;
           color: #f8fafc;
-          padding: 120px 0 120px;
+          padding: 80px 0 80px;
           position: relative;
           overflow-x: hidden;
         }
 
+        @media (min-width: 768px) {
+          .blog-index-page {
+            padding: 120px 0 120px;
+          }
+        }
+
         .blog-header {
-          margin-bottom: 56px;
+          margin-bottom: 32px;
+        }
+
+        @media (min-width: 768px) {
+          .blog-header {
+            margin-bottom: 56px;
+          }
         }
 
         .blog-hero-text {
@@ -195,17 +207,31 @@ export default function BlogIndex() {
         }
 
         .blog-title {
-          font-size: 48px;
+          font-size: 32px;
           font-weight: 800;
           letter-spacing: -0.02em;
           margin-top: 12px;
-          margin-bottom: 20px;
+          margin-bottom: 16px;
+          line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+          .blog-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+          }
         }
 
         .blog-subtitle {
-          font-size: 18px;
+          font-size: 15px;
           color: var(--text-secondary);
           line-height: 1.6;
+        }
+
+        @media (min-width: 768px) {
+          .blog-subtitle {
+            font-size: 18px;
+          }
         }
 
         .blog-main-layout {
@@ -215,22 +241,30 @@ export default function BlogIndex() {
         .blog-content-row {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 40px;
+          gap: 32px;
         }
 
         @media (min-width: 1024px) {
           .blog-content-row {
             grid-template-columns: 2.3fr 1fr;
+            gap: 40px;
           }
         }
 
         .blog-controls {
           display: flex;
           flex-direction: column;
-          gap: 20px;
-          padding: 24px;
+          gap: 16px;
+          padding: 16px;
           border-radius: 16px;
-          margin-bottom: 32px;
+          margin-bottom: 24px;
+        }
+
+        @media (min-width: 640px) {
+          .blog-controls {
+            padding: 24px;
+            margin-bottom: 32px;
+          }
         }
 
         @media (min-width: 768px) {
@@ -238,13 +272,20 @@ export default function BlogIndex() {
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
           }
         }
 
         .search-bar-wrapper {
           position: relative;
-          flex: 1;
-          max-width: 450px;
+          width: 100%;
+        }
+
+        @media (min-width: 768px) {
+          .search-bar-wrapper {
+            flex: 1;
+            max-width: 400px;
+          }
         }
 
         .search-icon {
@@ -262,7 +303,7 @@ export default function BlogIndex() {
           border-radius: 10px;
           padding: 12px 16px 12px 48px;
           color: var(--text-white);
-          font-size: 14.5px;
+          font-size: 14px;
           transition: all 0.2s ease;
         }
 
@@ -277,19 +318,34 @@ export default function BlogIndex() {
           display: flex;
           gap: 8px;
           flex-wrap: wrap;
+          width: 100%;
+        }
+
+        @media (min-width: 768px) {
+          .filter-buttons {
+            width: auto;
+            justify-content: flex-end;
+          }
         }
 
         .filter-btn {
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 8px;
-          padding: 8px 14px;
-          font-size: 13.5px;
+          padding: 6px 12px;
+          font-size: 13px;
           font-weight: 500;
           color: var(--text-secondary);
           cursor: pointer;
           transition: all 0.2s ease;
           outline: none;
+        }
+
+        @media (min-width: 640px) {
+          .filter-btn {
+            padding: 8px 14px;
+            font-size: 13.5px;
+          }
         }
 
         .filter-btn:hover {
@@ -324,7 +380,13 @@ export default function BlogIndex() {
         .blog-posts-grid {
           display: flex;
           flex-direction: column;
-          gap: 32px;
+          gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+          .blog-posts-grid {
+            gap: 32px;
+          }
         }
 
         .blog-card {
@@ -348,7 +410,7 @@ export default function BlogIndex() {
 
         .blog-card-image-wrap {
           width: 100%;
-          height: 180px;
+          height: 140px;
           background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(124, 58, 237, 0.15) 100%);
           position: relative;
           overflow: hidden;
@@ -357,8 +419,14 @@ export default function BlogIndex() {
 
         @media (min-width: 640px) {
           .blog-card-image-wrap {
-            width: 220px;
+            width: 200px;
             height: auto;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .blog-card-image-wrap {
+            width: 220px;
           }
         }
 
@@ -378,28 +446,48 @@ export default function BlogIndex() {
 
         .blog-banner-tag {
           position: absolute;
-          top: 16px;
-          left: 16px;
+          top: 12px;
+          left: 12px;
           background: rgba(3, 0, 20, 0.8);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 30px;
           padding: 4px 10px;
-          font-size: 11px;
+          font-size: 10px;
           font-weight: 600;
           color: var(--accent-cyan);
         }
 
+        @media (min-width: 640px) {
+          .blog-banner-tag {
+            top: 16px;
+            left: 16px;
+            font-size: 11px;
+          }
+        }
+
         .blog-card-body {
-          padding: 28px;
+          padding: 20px;
           display: flex;
           flex-direction: column;
           flex: 1;
         }
 
+        @media (min-width: 640px) {
+          .blog-card-body {
+            padding: 24px;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .blog-card-body {
+            padding: 28px;
+          }
+        }
+
         .blog-card-meta {
           display: flex;
           gap: 16px;
-          margin-bottom: 12px;
+          margin-bottom: 10px;
           font-size: 12px;
           color: var(--text-secondary);
         }
@@ -411,10 +499,23 @@ export default function BlogIndex() {
         }
 
         .blog-card-title {
-          font-size: 22px;
+          font-size: 18px;
           font-weight: 700;
-          margin-bottom: 12px;
+          margin-bottom: 8px;
           line-height: 1.4;
+        }
+
+        @media (min-width: 640px) {
+          .blog-card-title {
+            font-size: 20px;
+            margin-bottom: 12px;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .blog-card-title {
+            font-size: 22px;
+          }
         }
 
         .blog-title-link {
@@ -428,33 +529,40 @@ export default function BlogIndex() {
         }
 
         .blog-card-desc {
-          font-size: 14.5px;
+          font-size: 13.5px;
           color: var(--text-secondary);
           line-height: 1.6;
-          margin-bottom: 20px;
+          margin-bottom: 16px;
+        }
+
+        @media (min-width: 640px) {
+          .blog-card-desc {
+            font-size: 14.5px;
+            margin-bottom: 20px;
+          }
         }
 
         .blog-card-tags {
           display: flex;
           gap: 8px;
           flex-wrap: wrap;
-          margin-bottom: 24px;
+          margin-bottom: 20px;
         }
 
         .blog-tag {
-          font-size: 11.5px;
+          font-size: 11px;
           font-weight: 500;
           color: var(--text-secondary);
         }
 
         .blog-card-footer {
           margin-top: auto;
-          padding-top: 16px;
+          padding-top: 14px;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .read-more-link {
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 600;
           color: var(--accent-cyan);
           text-decoration: none;
@@ -464,69 +572,124 @@ export default function BlogIndex() {
           transition: opacity 0.2s ease;
         }
 
+        @media (min-width: 640px) {
+          .read-more-link {
+            font-size: 14px;
+          }
+        }
+
         .read-more-link:hover {
           text-decoration: underline;
         }
 
         .no-results {
-          padding: 80px 24px;
+          padding: 60px 16px;
           text-align: center;
         }
 
+        @media (min-width: 640px) {
+          .no-results {
+            padding: 80px 24px;
+          }
+        }
+
         .no-results h3 {
-          font-size: 20px;
+          font-size: 18px;
           margin-bottom: 8px;
           color: var(--text-white);
         }
 
         .no-results p {
           color: var(--text-secondary);
+          font-size: 14px;
         }
 
         /* Sidebar Column */
         .sticky-sidebar {
-          position: sticky;
-          top: 100px;
+          position: relative;
+        }
+
+        @media (min-width: 1024px) {
+          .sticky-sidebar {
+            position: sticky;
+            top: 100px;
+          }
         }
 
         .contact-sidebar-card {
-          padding: 32px;
-          border-radius: 24px;
+          padding: 20px;
+          border-radius: 20px;
           border-color: rgba(6, 182, 212, 0.15);
         }
 
+        @media (min-width: 640px) {
+          .contact-sidebar-card {
+            padding: 32px;
+            border-radius: 24px;
+          }
+        }
+
         .sidebar-decor-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 12px;
+          width: 44px;
+          height: 44px;
+          border-radius: 10px;
           background: rgba(6, 182, 212, 0.08);
           border: 1px solid rgba(6, 182, 212, 0.15);
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 20px;
+          margin-bottom: 16px;
+        }
+
+        @media (min-width: 640px) {
+          .sidebar-decor-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+          }
         }
 
         .contact-sidebar-card h3 {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 700;
           color: var(--text-white);
-          margin-bottom: 12px;
+          margin-bottom: 10px;
           line-height: 1.4;
         }
 
+        @media (min-width: 640px) {
+          .contact-sidebar-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+          }
+        }
+
         .contact-sidebar-card p {
-          font-size: 13.5px;
+          font-size: 13px;
           color: var(--text-secondary);
           line-height: 1.6;
-          margin-bottom: 24px;
+          margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+          .contact-sidebar-card p {
+            font-size: 13.5px;
+            margin-bottom: 24px;
+          }
         }
 
         .availability-indicator-row {
           display: flex;
           align-items: center;
           gap: 10px;
-          margin-bottom: 24px;
+          margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+          .availability-indicator-row {
+            margin-bottom: 24px;
+          }
         }
 
         .pulse-green {
@@ -550,17 +713,24 @@ export default function BlogIndex() {
           justify-content: center;
           gap: 8px;
           width: 100%;
-          padding: 14px;
-          border-radius: 12px;
+          padding: 12px;
+          border-radius: 10px;
           background: linear-gradient(135deg, var(--violet) 0%, var(--blue) 100%);
           border: none;
           color: var(--white);
-          font-size: 13.5px;
+          font-size: 13px;
           font-weight: 600;
           text-decoration: none;
           transition: all 0.3s ease;
           box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
-          
+        }
+
+        @media (min-width: 640px) {
+          .sidebar-cta-btn {
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 13.5px;
+          }
         }
 
         .sidebar-cta-btn:hover {
