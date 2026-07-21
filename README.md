@@ -1,4 +1,4 @@
-# Hey, I'm Ayush 👋
+# Ayush Kumar — Portfolio Website 💻
 
 I'm a **Full Stack & Mobile App Developer** with over **3 years of freelancing experience**. I've shipped **50+ websites and mobile apps** for clients across different industries — from small businesses to larger platforms. I started doing this back in 2018 just because I loved building things, and it turned into a full-on career.
 
@@ -35,9 +35,9 @@ Here's a simple breakdown of what I can help you with:
 
 ---
 
-## 💰 Pricing & Promo (50% Off Active!)
+## 💰 Service Rates & Promo (50% Off Active!)
 
-I am currently running a **50% Off Promotion** for all new projects this month. Here is a rough breakdown of my base starting rates (with and without the promotion):
+Currently running a **50% Off Promotion** for select development projects:
 
 | Service Type | Regular Price | ⚡ Promo Price (50% Off) |
 |---|---|---|
