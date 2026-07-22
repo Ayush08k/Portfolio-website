@@ -1,4 +1,4 @@
-# Ayush Kumar — Portfolio Website 💻
+# Ayush Kumar - Portfolio Website 💻
 
 I'm a **Full Stack & Mobile App Developer** with over **3 years of freelancing experience**. I've shipped **50+ websites and mobile apps** for clients across different industries — from small businesses to larger platforms. I started doing this back in 2018 just because I loved building things, and it turned into a full-on career.
 
