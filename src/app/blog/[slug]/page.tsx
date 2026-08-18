@@ -1,3 +1,8 @@
+// ── Force static pre-rendering at build time ──────────────────────────────────
+// Guarantees Vercel generates a static HTML file for every blog post slug,
+// so Googlebot always receives fully-rendered content (not a blank SSR shell).
+export const dynamic = "force-static";
+
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BLOG_POSTS } from "@/data/blog";

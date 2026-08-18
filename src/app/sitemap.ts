@@ -6,6 +6,9 @@ import { BLOG_POSTS } from "@/data/blog";
  * Professional XML Sitemap for Google Search Console
  * ──────────────────────────────────────────────────────
  * Follows: https://www.sitemaps.org/protocol.html
+ *
+ * Updated: 2026-08-18 — refreshed lastModified dates to trigger re-crawl
+ * and added image metadata for improved Google Image Search discoverability.
  */
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
@@ -20,23 +23,23 @@ function toISODate(dateString: string): string {
   try {
     const parsed = new Date(dateString);
     if (isNaN(parsed.getTime())) {
-      return "2026-06-01";
+      return "2026-08-18";
     }
     return parsed.toISOString().split("T")[0];
   } catch {
-    return "2026-06-01";
+    return "2026-08-18";
   }
 }
 
 const STATIC_PAGE_DATES = {
-  home: "2026-07-16",
-  services: "2026-07-15",
-  projects: "2026-07-15",
-  blog: "2026-07-16",
-  about: "2026-07-15",
-  estimator: "2026-07-15",
-  speed: "2026-07-15",
-  chatbot: "2026-07-16",
+  home: "2026-08-18",
+  services: "2026-08-18",
+  projects: "2026-08-18",
+  blog: "2026-08-18",
+  about: "2026-08-18",
+  estimator: "2026-08-18",
+  speed: "2026-08-18",
+  chatbot: "2026-08-18",
 } as const;
 
 // ── Sitemap Generator ──────────────────────────────────────────────────────────
@@ -103,7 +106,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/projects/${project.slug}`,
       lastModified: new Date(STATIC_PAGE_DATES.projects),
       changeFrequency: "monthly" as const,
-      priority: 0.75,
+      priority: 0.8,
+      // Next.js MetadataRoute.Sitemap images field requires string[] (URL only)
+      ...(project.image && {
+        images: [
+          project.image.startsWith("http")
+            ? project.image
+            : `${baseUrl}${project.image}`,
+        ],
+      }),
     })
   );
 
@@ -112,7 +123,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(toISODate(post.date)),
     changeFrequency: "yearly" as const,
-    priority: 0.7,
+    priority: 0.75,
+    // Next.js MetadataRoute.Sitemap images field requires string[] (URL only)
+    ...(post.image && {
+      images: [
+        post.image.startsWith("http")
+          ? post.image
+          : `${baseUrl}${post.image}`,
+      ],
+    }),
   }));
 
   return [...staticRoutes, ...projectRoutes, ...blogRoutes];
