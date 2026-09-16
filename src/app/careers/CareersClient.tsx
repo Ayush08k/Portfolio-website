@@ -2,20 +2,15 @@
 
 import { useState } from "react";
 import { 
-  Briefcase, 
   MapPin, 
   Clock, 
-  DollarSign, 
   Sparkles, 
   Upload, 
   CheckCircle2, 
   X, 
   FileText, 
   ArrowRight,
-  Code2,
-  Cpu,
-  BrainCircuit,
-  Zap
+  BrainCircuit
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
