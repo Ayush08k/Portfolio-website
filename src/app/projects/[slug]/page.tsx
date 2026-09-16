@@ -58,7 +58,7 @@ export async function generateMetadata({
     creator: "Ayush Kumar",
     publisher: "Ayush Kumar",
     alternates: {
-      canonical: `/projects/${project.slug}`,
+      canonical: canonicalUrl,
     },
     robots: {
       index: true,

@@ -51,7 +51,7 @@ export async function generateMetadata({
     creator: "Ayush Kumar",
     publisher: "Ayush Kumar",
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
       type: "article",
