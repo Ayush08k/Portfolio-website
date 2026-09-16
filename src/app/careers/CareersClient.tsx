@@ -495,7 +495,7 @@ export default function CareersClient() {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         .careers-page {
           min-height: 100vh;
           background: #000000;
