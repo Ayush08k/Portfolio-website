@@ -43,7 +43,7 @@ const JOB_OPENINGS: JobOpening[] = [
     location: "Remote (Global / India)",
     type: "Full-Time",
     experience: "2–5 Years",
-    ctcRange: "₹18 LPA – ₹30 LPA / ($75k - $120k)",
+    ctcRange: "",
     featured: true,
     description: "We are seeking a high-caliber AI / ML Engineer to architect, fine-tune, and deploy cutting-edge Large Language Models (LLMs), RAG pipelines, and autonomous agent workflows across our client portfolio.",
     responsibilities: [
@@ -59,48 +59,6 @@ const JOB_OPENINGS: JobOpening[] = [
       "Strong understanding of prompt engineering, function calling, structured output schemas, and token budget management."
     ],
     skills: ["Python", "PyTorch", "LLMs", "LangChain", "Vector DBs", "Next.js", "OpenAI / Gemini", "RAG"]
-  },
-  {
-    id: "fullstack-developer",
-    title: "Senior Full Stack Engineer",
-    department: "Core Engineering",
-    location: "Remote (India)",
-    type: "Full-Time",
-    experience: "3–6 Years",
-    ctcRange: "₹16 LPA – ₹26 LPA",
-    featured: false,
-    description: "Build high-performance web applications, serverless microservices, and sleek user interfaces using Next.js 15, React 19, TypeScript, and Node.js/NestJS.",
-    responsibilities: [
-      "Architect modular Next.js App Router web applications with sub-second page load speeds.",
-      "Design RESTful APIs and PostgreSQL/MongoDB schemas with Prisma ORM.",
-      "Implement real-time WebSocket communication and secure OAuth2/JWT authentication."
-    ],
-    requirements: [
-      "Deep mastery of React, Next.js, TypeScript, TailwindCSS, and Node.js.",
-      "Proven track record of shipping production web applications.",
-      "Experience with Redis caching, PostgreSQL indexing, and CI/CD pipelines."
-    ],
-    skills: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "TailwindCSS"]
-  },
-  {
-    id: "mobile-developer",
-    title: "Mobile App Developer (React Native)",
-    department: "Mobile Engineering",
-    location: "Remote (Global)",
-    type: "Full-Time / Contract",
-    experience: "2–4 Years",
-    ctcRange: "₹14 LPA – ₹24 LPA",
-    featured: false,
-    description: "Lead cross-platform mobile development for iOS & Android using React Native, Expo SDK, NativeWind, and offline-first MMKV sync engines.",
-    responsibilities: [
-      "Develop butter-smooth mobile user experiences targeting 60fps across iOS & Android.",
-      "Integrate native modules, push notification services (FCM/APNs), and in-app subscriptions."
-    ],
-    requirements: [
-      "Strong proficiency in React Native, Expo, TypeScript, and state management (Zustand/Redux).",
-      "Published apps on Apple App Store & Google Play Store."
-    ],
-    skills: ["React Native", "Expo", "TypeScript", "iOS", "Android", "Mobile Architecture"]
   }
 ];
 
@@ -247,10 +205,7 @@ export default function CareersClient() {
                   <MapPin size={14} /> {job.location}
                 </span>
                 <span className="job-meta-item">
-                  <Clock size={14} /> {job.type} • {job.experience}
-                </span>
-                <span className="job-meta-item ctc-highlight">
-                  <DollarSign size={14} /> CTC: {job.ctcRange}
+                  <Clock size={14} /> {job.type} • Experience: {job.experience}
                 </span>
               </div>
 

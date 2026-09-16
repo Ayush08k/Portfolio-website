@@ -172,7 +172,7 @@ h1,h2,h3,h4,h5,h6 { font-family:'Outfit',sans-serif; color:var(--white); font-we
 }
 .nav-links {
   position: absolute;
-  left: 50%;
+  left: 54%;
   top: 50%;
   transform: translate(-50%, -50%);
   display: flex;
