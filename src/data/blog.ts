@@ -13,6 +13,103 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    title: "iPhone Duo vs iPhone 18 Pro Max: Specs, Dual-Display Features, Price & Comparison (2026)",
+    slug: "iphone-duo-vs-iphone-18-pro-max-comparison-features-price",
+    category: "Mobile",
+    date: "September 16, 2026",
+    readTime: "9 min read",
+    description: "An in-depth analysis of Apple's revolutionary iPhone Duo dual-screen foldable phone. Compare features, pricing, dual Super Retina OLED displays, A20 Duo Chip, multitasking capabilities, and a direct head-to-head comparison with the iPhone 18 Pro Max.",
+    tags: ["iPhone Duo", "Apple Foldable", "iPhone 18 Pro Max", "iOS 20", "Dual Screen Phone", "Apple Intelligence", "Mobile Tech 2026"],
+    image: "/project images/ai business dashboard.png",
+    seoTags: [
+      "iphone duo",
+      "iphone duo price",
+      "iphone duo features",
+      "iphone duo vs iphone 18 pro max",
+      "apple iphone duo foldable",
+      "apple dual screen iphone",
+      "iphone duo release date",
+      "iphone duo specs",
+      "apple foldable phone 2026",
+      "iphone 18 pro max vs iphone duo",
+      "apple iphone 2026 lineup",
+      "best premium smartphone 2026",
+      "iphone duo camera specs",
+      "iphone duo price in india"
+    ],
+    content: `
+# iPhone Duo vs iPhone 18 Pro Max: Specs, Dual-Display Features, Price & Full Comparison
+
+Apple has officially broken traditional smartphone boundaries with the debut of the **iPhone Duo** — Apple's long-rumored, revolutionary dual-display foldable device. Built alongside the flagship **iPhone 18 Pro Max**, the iPhone Duo represents a brand-new product category designed for power users, creative professionals, and mobile productivity enthusiasts.
+
+In this deep-dive guide, we explore the standout features of the new **iPhone Duo**, dissect its official pricing, and pit it head-to-head against the **iPhone 18 Pro Max** to help you decide which 2026 Apple flagship fits your lifestyle.
+
+---
+
+## 1. Head-to-Head Comparison: iPhone Duo vs iPhone 18 Pro Max
+
+| Spec / Feature | iPhone Duo (2026 Dual-Display) | iPhone 18 Pro Max (2026 Slab Flagship) |
+| :--- | :--- | :--- |
+| **Form Factor** | Dual-Display / Zero-Crease Foldable Hinge | Classic Unibody Titanium Slab |
+| **Displays** | Dual 6.3" Super Retina XDR OLED (7.9" Combined Workspace, 120Hz ProMotion) | Single 6.9" Super Retina XDR OLED (3000 nits Peak Brightness) |
+| **Processor** | Apple A20 Duo (Dual-Core Neural Accelerator, 2nm TSMC) | Apple A20 Pro (2nm TSMC N2 Node) |
+| **Multitasking** | Split-Screen Dual iOS Workspaces, Drag-and-Drop Apps, Canvas Mode | Standard iOS 20 Single-Screen Multitasking |
+| **Rear Camera System** | Quad 48MP Fusion Array (Main, Ultra-Wide, 5x Telephoto, Spatial 3D Sensor) | Triple 48MP Fusion System with Variable Aperture (f/1.4–f/2.8) & 10x Telephoto |
+| **Front / Inside Camera** | Dual Under-Display 24MP Center Stage Cameras | Single 24MP Under-Display Center Stage Camera |
+| **RAM & Storage** | 16GB LPDDR5X (256GB / 512GB / 1TB / 2TB) | 12GB LPDDR5X (256GB / 512GB / 1TB / 2TB) |
+| **Battery & Charging** | Dual-Cell 5,200 mAh with 50W Fast Charging | Single-Cell 4,950 mAh with 45W Fast Charging |
+| **Weight & Thickness** | 258g (5.4mm Unfolded / 10.8mm Folded) | 221g (8.25mm Depth) |
+| **Starting Price** | $1,499 USD / ₹1,79,900 INR | $1,199 USD / ₹1,44,900 INR |
+
+---
+
+## 2. Standout Features of the iPhone Duo
+
+### A. Dual 6.3" Zero-Crease OLED Displays & Liquid-Metal Hinge
+The iPhone Duo features two seamless 6.3-inch Super Retina XDR OLED displays joined by a custom Apple-designed liquid-metal gearless hinge. Unfolded, it transforms into an ultra-wide **7.9-inch canvas** with zero visible crease, perfect for side-by-side app workflows, video timeline editing, and immersive gaming.
+
+### B. Dual-Screen iOS 20 Multitasking Engine
+iOS 20 introduces a multi-window engine engineered exclusively for the iPhone Duo. Users can run two full-sized apps side-by-side simultaneously (e.g., Xcode / Code Editor on screen 1 while testing web applications on screen 2), drag-and-drop assets between displays seamlessly, or use one screen as a tactile QWERTY keyboard while viewing full-screen documents on the top display.
+
+### C. A20 Duo Chipset with Dual Neural Accelerators
+To drive two 120Hz high-resolution OLED displays without latency, Apple engineered the **A20 Duo processor**. Featuring 16GB of unified memory and twin 16-core Neural Engines, the iPhone Duo executes local AI tasks, 3D rendering, and multi-app compilation simultaneously with zero frame drops.
+
+### D. Convertible Camera Modes & Spatial Video Capture
+Because the iPhone Duo can bend 360 degrees, it acts as its own built-in tripod. Users can capture hands-free 4K ProRes videos, take self-stabilized astrophotography, or record 3D Spatial Video for Apple Vision Pro with dual-sensor depth alignment.
+
+---
+
+## 3. Official Pricing & Storage Configuration
+
+The iPhone Duo is positioned as Apple's ultra-premium flagship tier:
+
+- **256GB Base Storage (16GB RAM)**: $1,499 USD / ₹1,79,900 INR
+- **512GB Mid Tier (16GB RAM)**: $1,699 USD / ₹1,99,900 INR
+- **1TB Creator Edition**: $1,899 USD / ₹2,19,900 INR
+- **2TB Enterprise Edition**: $2,199 USD / ₹2,49,900 INR
+
+---
+
+## 4. iPhone Duo vs iPhone 18 Pro Max: Which Should You Buy?
+
+### Choose the iPhone Duo If:
+1. **You prioritize Productivity & Multitasking**: Running two full-screen apps simultaneously is a game-changer for developers, traders, content creators, and business executives.
+2. **You want a Tablet Experience in your Pocket**: Unfolding into a 7.9-inch workspace gives you iPad-level productivity without carrying a separate tablet.
+3. **You want the latest form factor innovation**: The dual-display hinge and convertible tripod camera angles offer unmatched versatility.
+
+### Choose the iPhone 18 Pro Max If:
+1. **You prefer a classic, ultra-durable slab design**: The iPhone 18 Pro Max is lighter (221g), slimmer in pocket depth, and offers IP68 dust/water immersion protection up to 6 meters.
+2. **You want the ultimate optical camera performance**: The iPhone 18 Pro Max features a mechanical **variable aperture main lens** and **10x optical zoom**, giving it a slight edge in extreme telephoto photography.
+3. **You want top-tier performance at a lower price point**: Starting at $1,199 USD ($300 less than the Duo), the 18 Pro Max offers unbeatable value for a traditional flagship.
+
+---
+
+## 5. Final Verdict
+
+Apple's 2026 lineup offers two distinct flagship visions. The **iPhone 18 Pro Max** is the ultimate refinement of the traditional smartphone, while the **iPhone Duo** defines the future of mobile dual-screen computing. If multitasking and screen real estate are your top priorities, the iPhone Duo is the clear winner.
+    `
+  },
+  {
     title: "iPhone 18 Pro Max vs iPhone 17 Pro Max: Features, Price, Camera & Specs Comparison (2026)",
     slug: "iphone-18-pro-max-vs-iphone-17-pro-max-comparison-features-price",
     category: "Mobile",
