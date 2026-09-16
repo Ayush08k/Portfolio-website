@@ -78,17 +78,21 @@ export default function CareersClient() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const [submitError, setSubmitError] = useState("");
+
   const handleOpenApplyModal = (job: JobOpening) => {
     setSelectedJob(job);
     setFormData((prev) => ({ ...prev, role: job.title }));
     setIsModalOpen(true);
     setIsSubmitted(false);
     setResumeError("");
+    setSubmitError("");
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setIsSubmitted(false);
+    setSubmitError("");
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,7 +113,7 @@ export default function CareersClient() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!resumeFile) {
@@ -118,9 +122,38 @@ export default function CareersClient() {
     }
 
     setIsSubmitting(true);
+    setSubmitError("");
 
-    // Simulate server processing
-    setTimeout(() => {
+    try {
+      // Convert resume file to Base64
+      const reader = new FileReader();
+      const base64Promise = new Promise<string>((resolve, reject) => {
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = (err) => reject(err);
+      });
+      reader.readAsDataURL(resumeFile);
+      const resumeBase64 = await base64Promise;
+
+      const payload = {
+        ...formData,
+        resumeFileName: resumeFile.name,
+        resumeBase64: resumeBase64,
+      };
+
+      const res = await fetch("/api/apply", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const resData = await res.json();
+
+      if (!res.ok) {
+        throw new Error(resData.error || "Failed to submit application.");
+      }
+
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormData({
@@ -135,7 +168,11 @@ export default function CareersClient() {
         expectedCtc: "",
       });
       setResumeFile(null);
-    }, 1200);
+    } catch (err: any) {
+      console.error("Submission error:", err);
+      setSubmitError(err.message || "An error occurred while submitting your application. Please try again.");
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -470,6 +507,11 @@ export default function CareersClient() {
                     </div>
 
                     <div className="modal-submit-row">
+                      {submitError && (
+                        <p className="form-error-msg" style={{ marginBottom: "12px", textAlign: "center" }}>
+                          {submitError}
+                        </p>
+                      )}
                       {/* Submit Button with Rotating Glow animation (.btn-glow) */}
                       <button
                         type="submit"
@@ -478,7 +520,7 @@ export default function CareersClient() {
                         style={{ width: "100%", justifyContent: "center", cursor: "pointer" }}
                       >
                         {isSubmitting ? (
-                          <span>Submitting Application...</span>
+                          <span>Sending Application & Resume...</span>
                         ) : (
                           <>
                             <span>Submit Compulsory Application</span>
