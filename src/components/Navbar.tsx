@@ -83,7 +83,7 @@ export default function Navbar() {
         </Link>
 
         {/* Dynamic Menu items */}
-        <ul className={isOpen ? "nav-links active" : "nav-links"}>
+        <ul className={isOpen ? "nav-links active" : "nav-links"} suppressHydrationWarning>
           {navLinks.map((link, i) => (
             <li 
               key={link.name} 
