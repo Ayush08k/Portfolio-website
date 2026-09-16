@@ -537,7 +537,7 @@ export default function CareersClient() {
         )}
       </AnimatePresence>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .careers-page {
           min-height: 100vh;
           background: #000000;
@@ -972,7 +972,7 @@ export default function CareersClient() {
           max-width: 480px;
           margin: 0 auto;
         }
-      `}</style>
+      ` }} />
     </div>
   );
 }
