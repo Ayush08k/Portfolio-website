@@ -36,6 +36,7 @@ const STATIC_PAGE_DATES = {
   services: "2026-09-16",
   projects: "2026-09-16",
   blog: "2026-09-16",
+  careers: "2026-09-16",
   about: "2026-09-16",
   estimator: "2026-09-16",
   speed: "2026-09-16",
@@ -72,6 +73,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(STATIC_PAGE_DATES.blog),
       changeFrequency: "weekly",
       priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/careers`,
+      lastModified: new Date(STATIC_PAGE_DATES.careers),
+      changeFrequency: "weekly",
+      priority: 0.88,
     },
     {
       url: `${baseUrl}/estimator`,

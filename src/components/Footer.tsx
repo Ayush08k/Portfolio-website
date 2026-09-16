@@ -10,6 +10,7 @@ export default function Footer() {
           <Link href="/projects" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "13px", transition: "color 0.2s" }}>Projects</Link>
           <Link href="/estimator" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "13px", transition: "color 0.2s" }}>Cost Estimator</Link>
           <Link href="/blog" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "13px", transition: "color 0.2s" }}>Blog</Link>
+          <Link href="/careers" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "13px", transition: "color 0.2s" }}>Careers</Link>
           <Link href="/about" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "13px", transition: "color 0.2s" }}>About</Link>
           <Link href="/#contact" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "13px", transition: "color 0.2s" }}>Contact</Link>
         </div>

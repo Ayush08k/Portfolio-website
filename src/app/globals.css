@@ -1905,58 +1905,15 @@ body.has-announcement .hero {
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Cards Rotating Glow */
+/* Cards Glow - Rotating border removed per user request (kept only for buttons) */
 .card-glow {
   position: relative !important;
   z-index: 1 !important;
-  overflow: hidden !important;
-  border-color: transparent !important;
 }
 
-.card-glow::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150%;
-  height: 150%;
-  background: conic-gradient(
-    from 0deg,
-    transparent 45%,
-    var(--accent-cyan) 65%,
-    var(--violet) 85%,
-    transparent 100%
-  );
-  transform: translate(-50%, -50%) rotate(0deg);
-  animation: spin-glow 5s linear infinite;
-  z-index: -2;
-  opacity: 0.45;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
+.card-glow::before,
 .card-glow::after {
-  content: '';
-  position: absolute;
-  inset: 1px;
-  background: #09090b; /* Solid opaque near-black background to block glow bleed */
-  border-radius: inherit;
-  z-index: -1;
-  transition: background 0.4s ease;
-  pointer-events: none;
-}
-
-@media (hover: hover) {
-  /* Ensure any existing border is hidden on hover */
-  .card-glow:hover {
-    border-color: transparent !important;
-  }
-  .card-glow:hover::before {
-    opacity: 1;
-  }
-  .card-glow:hover::after {
-    background: #040405;
-  }
+  display: none !important;
 }
 
 /* Button Rotating Glow */
