@@ -731,7 +731,7 @@ export default function CareersClient() {
         .modal-backdrop-overlay {
           position: fixed;
           inset: 0;
-          z-index: 9999;
+          z-index: 99999;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -741,8 +741,9 @@ export default function CareersClient() {
         .modal-backdrop {
           position: absolute;
           inset: 0;
-          background: rgba(0, 0, 0, 0.82);
-          backdrop-filter: blur(12px);
+          background: rgba(0, 0, 0, 0.92);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
         }
 
         .career-modal-container {
@@ -750,13 +751,13 @@ export default function CareersClient() {
           z-index: 10;
           width: 100%;
           max-width: 720px;
-          max-height: 90vh;
+          max-height: 88vh;
           overflow-y: auto;
-          background: #0a0a0f;
-          border: 1px solid rgba(0, 242, 254, 0.2);
+          background: #09090d !important;
+          border: 1px solid rgba(0, 242, 254, 0.3);
           border-radius: 24px;
           padding: clamp(24px, 4vw, 40px);
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+          box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 242, 254, 0.15);
         }
 
         .modal-close-btn {
@@ -837,8 +838,8 @@ export default function CareersClient() {
           width: 100%;
           padding: 12px 14px;
           border-radius: 10px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(18, 18, 24, 0.95) !important;
+          border: 1px solid rgba(255, 255, 255, 0.12);
           color: #fff;
           font-size: 14px;
           outline: none;
