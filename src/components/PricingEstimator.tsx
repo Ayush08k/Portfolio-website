@@ -145,6 +145,15 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
   const [selectedType, setSelectedType] = useState<ProjectType>(PROJECT_TYPES[1]); // SaaS app by default
   const [screens, setScreens] = useState<number>(6);
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+  const [isINR, setIsINR] = useState<boolean>(false);
+
+  const conversionRate = isINR ? 83 : 1;
+  const currencySymbol = isINR ? "₹" : "$";
+  const currencyCode = isINR ? "INR" : "USD";
+
+  const formatPrice = (price: number) => {
+    return (price * conversionRate).toLocaleString();
+  };
   
   // Update screens range when project type changes
   useEffect(() => {
@@ -229,12 +238,12 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
       projectType: selectedType.name,
       screens: screens,
       addOns: activeAddOnNames || "None",
-      budget: `$${minPrice.toLocaleString()} - $${maxPrice.toLocaleString()} USD`,
+      budget: `${currencySymbol}${formatPrice(minPrice)} - ${currencySymbol}${formatPrice(maxPrice)} ${currencyCode}`,
       timeline: timelineString,
-      projectActualPrice: `$${basePrice.toLocaleString()} USD`,
-      discount: `-$${discount.toLocaleString()} USD (50% Off)`,
-      screensPrice: extraScreens > 0 ? `+$${screensCost.toLocaleString()} USD` : "$0 USD (Base included)",
-      addOnsPrice: `+$${addOnsCost.toLocaleString()} USD`,
+      projectActualPrice: `${currencySymbol}${formatPrice(basePrice)} ${currencyCode}`,
+      discount: `-${currencySymbol}${formatPrice(discount)} ${currencyCode} (50% Off)`,
+      screensPrice: extraScreens > 0 ? `+${currencySymbol}${formatPrice(screensCost)} ${currencyCode}` : `${currencySymbol}0 ${currencyCode} (Base included)`,
+      addOnsPrice: `+${currencySymbol}${formatPrice(addOnsCost)} ${currencyCode}`,
     });
   };
 
@@ -249,6 +258,38 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
           <p className="section-sub" style={{ margin: "16px auto 0" }}>
             Design your project scope below in real-time. Transparent estimation with zero surprises.
           </p>
+          
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "12px", marginTop: "24px" }}>
+            <span style={{ fontSize: "14px", fontWeight: !isINR ? 600 : 400, color: !isINR ? "var(--text-white)" : "var(--text-secondary)" }}>USD</span>
+            <div 
+              onClick={() => setIsINR(!isINR)}
+              style={{
+                width: "50px",
+                height: "26px",
+                borderRadius: "30px",
+                background: "var(--accent-purple)",
+                position: "relative",
+                cursor: "pointer",
+                transition: "background 0.3s ease",
+              }}
+            >
+              <motion.div 
+                layout
+                initial={false}
+                animate={{ x: isINR ? 26 : 2 }}
+                style={{
+                  width: "22px",
+                  height: "22px",
+                  borderRadius: "50%",
+                  background: "white",
+                  position: "absolute",
+                  top: "2px",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.2)"
+                }}
+              />
+            </div>
+            <span style={{ fontSize: "14px", fontWeight: isINR ? 600 : 400, color: isINR ? "var(--text-white)" : "var(--text-secondary)" }}>INR</span>
+          </div>
         </div>
 
         <div className="estimator-grid">
@@ -302,7 +343,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                       </div>
                       <div style={{ textAlign: "left" }}>
                         <div className="type-name">{type.name}</div>
-                        <div className="type-cost">Starts at ${type.basePrice.toLocaleString()}</div>
+                        <div className="type-cost">Starts at {currencySymbol}{formatPrice(type.basePrice)}</div>
                         <p className="type-info">{type.description}</p>
                       </div>
                     </button>
@@ -340,7 +381,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                   <span>Base includes {selectedType.baseScreens} screens</span>
                   {extraScreens > 0 && (
                     <span style={{ color: "var(--emerald)" }}>
-                      +{extraScreens} extra screens (+${screensCost})
+                      +{extraScreens} extra screens (+{currencySymbol}{formatPrice(screensCost)})
                     </span>
                   )}
                 </div>
@@ -377,7 +418,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                       <div style={{ textAlign: "left", flexGrow: 1 }}>
                         <div className="addon-meta">
                           <span className="addon-name">{addon.name}</span>
-                          <span className="addon-price">+${addon.price}</span>
+                          <span className="addon-price">+{currencySymbol}{formatPrice(addon.price)}</span>
                         </div>
                         <p className="addon-desc">{addon.description}</p>
                       </div>
@@ -402,13 +443,13 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                 {/* 1. Project actual price */}
                 <div className="summary-line">
                   <span>Project Base Price ({selectedType.name})</span>
-                  <span className="font-mono">${basePrice.toLocaleString()}</span>
+                  <span className="font-mono">{currencySymbol}{formatPrice(basePrice)}</span>
                 </div>
 
                 {/* 2. Discount on that (50% off) */}
                 <div className="summary-line text-emerald">
                   <span>50% Special Discount</span>
-                  <span className="font-mono">-${discount.toLocaleString()}</span>
+                  <span className="font-mono">-{currencySymbol}{formatPrice(discount)}</span>
                 </div>
                 
                 {/* 3. Screens count and screens price */}
@@ -419,7 +460,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                 {extraScreens > 0 && (
                   <div className="summary-line sub-line font-mono">
                     <span>↳ Additional Screen Price</span>
-                    <span>+${screensCost.toLocaleString()}</span>
+                    <span>+{currencySymbol}{formatPrice(screensCost)}</span>
                   </div>
                 )}
 
@@ -435,14 +476,14 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                   return (
                     <div key={id} className="summary-line sub-line font-mono">
                       <span>↳ {addOn.name}</span>
-                      <span>+${addOn.price.toLocaleString()}</span>
+                      <span>+{currencySymbol}{formatPrice(addOn.price)}</span>
                     </div>
                   );
                 })}
                 {selectedAddOns.length > 0 && (
                   <div className="summary-line sub-line font-mono" style={{ fontWeight: 600 }}>
                     <span>↳ Add-Ons Total Cost</span>
-                    <span>+${addOnsCost.toLocaleString()}</span>
+                    <span>+{currencySymbol}{formatPrice(addOnsCost)}</span>
                   </div>
                 )}
               </div>
@@ -453,9 +494,12 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
               <div className="result-price-box">
                 <div className="result-label">Total Estimated Price (50% Off Applied)</div>
                 <div className="result-value gradient-text">
-                  ${minPrice.toLocaleString()} – ${maxPrice.toLocaleString()}
+                  {currencySymbol}{formatPrice(minPrice)} – {currencySymbol}{formatPrice(maxPrice)}
                 </div>
-                <div className="result-currency">USD (Project Rate)</div>
+                <div className="result-currency">{currencyCode} (Project Rate)</div>
+                <div style={{ color: "var(--accent-cyan)", fontSize: "13px", marginTop: "4px", fontWeight: 500 }}>
+                  * Price will be negotiable
+                </div>
                 <p style={{ fontSize: "10.5px", color: "var(--muted)", marginTop: "8px", lineHeight: "1.4" }}>
                   *Note: 50% discount is applied only to the base project price. Extra screens and custom add-ons are regular price.
                 </p>
