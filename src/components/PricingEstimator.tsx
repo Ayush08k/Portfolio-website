@@ -34,7 +34,8 @@ export interface EstimatorData {
 interface ProjectType {
   id: string;
   name: string;
-  basePrice: number;
+  basePriceUSD: number;
+  basePriceINR: number;
   description: string;
   baseScreens: number;
   baseWeeks: number;
@@ -45,7 +46,8 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "landing",
     name: "Landing Page",
-    basePrice: 150,
+    basePriceUSD: 100,
+    basePriceINR: 10000,
     description: "High-conversion single-page marketing or campaign website.",
     baseScreens: 1,
     baseWeeks: 1,
@@ -54,7 +56,8 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "webapp",
     name: "SaaS / Full Stack App",
-    basePrice: 600,
+    basePriceUSD: 500,
+    basePriceINR: 40000,
     description: "Scalable, end-to-end full stack web application with user dashboard.",
     baseScreens: 6,
     baseWeeks: 4,
@@ -63,7 +66,8 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "mobile",
     name: "Mobile App (iOS/Android)",
-    basePrice: 750,
+    basePriceUSD: 500,
+    basePriceINR: 50000,
     description: "Cross-platform mobile application built with React Native & Expo.",
     baseScreens: 8,
     baseWeeks: 7,
@@ -71,8 +75,9 @@ const PROJECT_TYPES: ProjectType[] = [
   },
   {
     id: "ecommerce",
-    name: "E-Commerce Store",
-    basePrice: 400,
+    name: "Shopify/ E-commerce Web Application",
+    basePriceUSD: 400,
+    basePriceINR: 35000,
     description: "Shopify Custom Liquid or Next.js store with checkout integration.",
     baseScreens: 5,
     baseWeeks: 5,
@@ -81,7 +86,8 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "ai",
     name: "AI Integration & Agents",
-    basePrice: 400,
+    basePriceUSD: 400,
+    basePriceINR: 20000,
     description: "Intelligent web agents, LLM automation flows, or AI chatbot helpers.",
     baseScreens: 4,
     baseWeeks: 5,
@@ -90,7 +96,8 @@ const PROJECT_TYPES: ProjectType[] = [
   {
     id: "threed",
     name: "3D Site",
-    basePrice: 250,
+    basePriceUSD: 250,
+    basePriceINR: 35000,
     description: "Immersive 3D interactive web experiences using WebGL/Three.js/Spline.",
     baseScreens: 3,
     baseWeeks: 3,
@@ -101,7 +108,8 @@ const PROJECT_TYPES: ProjectType[] = [
 interface AddOn {
   id: string;
   name: string;
-  price: number;
+  priceUSD: number;
+  priceINR: number;
   description: string;
   icon: React.ComponentType<{ className?: string; size?: number }>;
 }
@@ -110,28 +118,32 @@ const ADD_ONS: AddOn[] = [
   {
     id: "ai",
     name: "AI Personalization Engine",
-    price: 150,
+    priceUSD: 150,
+    priceINR: 12000,
     description: "Add user recommendations, semantic search, or advanced NLP filters.",
     icon: Cpu,
   },
   {
     id: "payments",
     name: "Payment Integration",
-    price: 100,
+    priceUSD: 100,
+    priceINR: 8000,
     description: "Add subscription billing, shopping carts, and Stripe checkout.",
     icon: CreditCard,
   },
   {
     id: "cms",
     name: "CMS Content Manager",
-    price: 150,
+    priceUSD: 150,
+    priceINR: 12000,
     description: "WordPress/Shopify admin backend or custom dashboard integration.",
     icon: Layers,
   },
   {
     id: "rush",
     name: "Priority Rush Delivery",
-    price: 100,
+    priceUSD: 100,
+    priceINR: 8000,
     description: "Accelerate your project schedule by 35% - 50% priority support.",
     icon: Zap,
   },
@@ -147,12 +159,12 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [isINR, setIsINR] = useState<boolean>(false);
 
-  const conversionRate = isINR ? 83 : 1;
+  const conversionRate = 1;
   const currencySymbol = isINR ? "₹" : "$";
   const currencyCode = isINR ? "INR" : "USD";
 
   const formatPrice = (price: number) => {
-    return (price * conversionRate).toLocaleString();
+    return price.toLocaleString();
   };
   
   // Update screens range when project type changes
@@ -169,15 +181,16 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
   };
 
   // Calculations
-  const basePrice = selectedType.basePrice;
+  const basePrice = isINR ? selectedType.basePriceINR : selectedType.basePriceUSD;
   const discount = basePrice * 0.5;
   const discountedBasePrice = basePrice - discount;
   const extraScreens = Math.max(0, screens - selectedType.baseScreens);
-  const screensCost = extraScreens * 50;
+  const perPageCost = isINR ? 1000 : 50;
+  const screensCost = extraScreens * perPageCost;
   
   const addOnsCost = selectedAddOns.reduce((total, addOnId) => {
     const addOn = ADD_ONS.find((a) => a.id === addOnId);
-    return total + (addOn ? addOn.price : 0);
+    return total + (addOn ? (isINR ? addOn.priceINR : addOn.priceUSD) : 0);
   }, 0);
 
   const minPrice = discountedBasePrice + screensCost + addOnsCost;
@@ -343,7 +356,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                       </div>
                       <div style={{ textAlign: "left" }}>
                         <div className="type-name">{type.name}</div>
-                        <div className="type-cost">Starts at {currencySymbol}{formatPrice(type.basePrice)}</div>
+                        <div className="type-cost">Starts at {currencySymbol}{formatPrice(isINR ? type.basePriceINR : type.basePriceUSD)}</div>
                         <p className="type-info">{type.description}</p>
                       </div>
                     </button>
@@ -418,7 +431,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                       <div style={{ textAlign: "left", flexGrow: 1 }}>
                         <div className="addon-meta">
                           <span className="addon-name">{addon.name}</span>
-                          <span className="addon-price">+{currencySymbol}{formatPrice(addon.price)}</span>
+                          <span className="addon-price">+{currencySymbol}{formatPrice(isINR ? addon.priceINR : addon.priceUSD)}</span>
                         </div>
                         <p className="addon-desc">{addon.description}</p>
                       </div>
@@ -476,7 +489,7 @@ export default function PricingEstimator({ onProceed }: PricingEstimatorProps) {
                   return (
                     <div key={id} className="summary-line sub-line font-mono">
                       <span>↳ {addOn.name}</span>
-                      <span>+{currencySymbol}{formatPrice(addOn.price)}</span>
+                      <span>+{currencySymbol}{formatPrice(isINR ? addOn.priceINR : addOn.priceUSD)}</span>
                     </div>
                   );
                 })}
