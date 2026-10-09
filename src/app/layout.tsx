@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     site: "@Ayush08k",
   },
   verification: {
-    google: "ie5C0Pvhl5RFbLloNTI7fXPBaxOEwiQBB5rfFBw_qlM",
+    google: ["ie5C0Pvhl5RFbLloNTI7fXPBaxOEwiQBB5rfFBw_qlM", "NsiHbX_cyxieqiX7-NQ7A6BkJhO6zKW2FPGcaHkqb1k"],
   },
 };
 
