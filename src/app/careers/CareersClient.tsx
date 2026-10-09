@@ -27,6 +27,7 @@ interface JobOpening {
   responsibilities: string[];
   requirements: string[];
   skills: string[];
+  seoTags?: string[];
   featured?: boolean;
 }
 
@@ -53,7 +54,43 @@ const JOB_OPENINGS: JobOpening[] = [
       "Demonstrated experience building production-grade LLM applications, RAG pipelines, or autonomous agent frameworks.",
       "Strong understanding of prompt engineering, function calling, structured output schemas, and token budget management."
     ],
-    skills: ["Python", "PyTorch", "LLMs", "LangChain", "Vector DBs", "Next.js", "OpenAI / Gemini", "RAG"]
+    skills: ["Python", "PyTorch", "LLMs", "LangChain", "Vector DBs", "Next.js", "OpenAI / Gemini", "RAG"],
+    seoTags: [
+      "AI Engineer", "ML Developer", "Machine Learning Jobs", "LLM Engineer", "RAG Pipeline Developer",
+      "Python AI Developer", "Next.js AI Jobs", "Generative AI Roles", "Remote AI Engineer", "OpenAI API Developer",
+      "LangChain Developer", "LlamaIndex Expert", "Vector Database Engineer", "Remote Machine Learning Job", "AI Freelance Hiring",
+      "PyTorch Engineer", "NLP Developer", "AI Microservices", "Full Time AI Role", "Artificial Intelligence Careers"
+    ]
+  },
+  {
+    id: "full-stack-developer",
+    title: "Full Stack Developer",
+    department: "Engineering",
+    location: "Remote (Global / India)",
+    type: "Full-Time",
+    experience: "2+ Years",
+    ctcRange: "",
+    featured: true,
+    description: "We are looking for a highly skilled Full Stack Developer to build, maintain, and scale robust web applications and APIs. You will work across the entire stack, delivering seamless user experiences and scalable back-end architectures.",
+    responsibilities: [
+      "Develop responsive and dynamic user interfaces using React, Next.js, and modern CSS frameworks.",
+      "Design and implement secure, scalable REST and GraphQL APIs using Node.js, Express, or NestJS.",
+      "Architect and manage relational and NoSQL databases (PostgreSQL, MongoDB) for optimized performance.",
+      "Collaborate with design and product teams to translate requirements into technical solutions and maintain high code quality."
+    ],
+    requirements: [
+      "2+ years of professional experience in full-stack web development.",
+      "Strong proficiency in JavaScript/TypeScript, React/Next.js, and Node.js.",
+      "Experience with database design, ORMs (Prisma, TypeORM), and state management (Redux, Zustand).",
+      "Familiarity with cloud platforms (AWS, Vercel), CI/CD pipelines, and modern DevOps practices."
+    ],
+    skills: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL", "MongoDB", "REST/GraphQL", "AWS"],
+    seoTags: [
+      "Full Stack Developer", "Next.js Engineer", "React Developer Jobs", "Node.js Developer", "Remote Full Stack Job",
+      "TypeScript Engineer", "Web Developer Careers", "MERN Stack Developer", "PostgreSQL Developer", "AWS Web Engineer",
+      "Frontend Backend Job", "GraphQL API Developer", "NestJS Developer", "Full Time Web Developer", "Remote Software Engineer",
+      "Full Stack React Jobs", "Cloud Infrastructure Developer", "Prisma ORM Expert", "Web App Architect", "SaaS Developer Job"
+    ]
   }
 ];
 
@@ -208,6 +245,12 @@ export default function CareersClient() {
               transition={{ duration: 0.3 }}
               className={`job-card glass-card ${job.featured ? "featured-job" : ""}`}
             >
+              {/* Visually hidden SEO tags */}
+              {job.seoTags && (
+                <div style={{ display: "none" }} aria-hidden="true">
+                  {job.seoTags.join(", ")}
+                </div>
+              )}
               {job.featured && (
                 <div className="featured-tag">
                   <Sparkles size={13} /> Featured Opening
