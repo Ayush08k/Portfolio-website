@@ -8,8 +8,8 @@ import ClickEffect from "@/components/ClickEffect";
 import HiringAgentSandbox from "@/components/HiringAgentSandbox";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
-const siteName = "Freelancer Ayush";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelanceayush.com";
+const siteName = "Freelance Ayush";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   title: {
-    default: "Best Freelance Web & Mobile Developer — 50% OFF | Shipped in 7 Days",
-    template: "%s | Best Freelance Web & Mobile Developer — 50% OFF",
+    default: "Ayush Kumar | Freelance Web Developer",
+    template: "%s | Ayush Kumar | Freelance Web Developer",
   },
   description:
-    "Need a web or mobile app built? Save 50% today! Get agency-quality Next.js, React, and React Native apps delivered in 7 days with a 100% money-back guarantee. 50+ projects shipped, 5★ client reviews.",
+    "Portfolio and freelance web development services by Ayush Kumar.",
   keywords: [
     "hire freelance developer",
     "freelance full stack developer",
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Best Freelance Web & Mobile Developer — 50% OFF | Shipped in 7 Days",
+    title: "Ayush Kumar | Freelance Web Developer",
     description:
-      "Need a web or mobile app built? Save 50% today! Get agency-quality Next.js, React, and React Native apps delivered in 7 days with a 100% money-back guarantee. 50+ projects shipped, 5★ client reviews.",
+      "Portfolio and freelance web development services by Ayush Kumar.",
     url: siteUrl,
     siteName,
     images: [
@@ -81,9 +81,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Freelance Web & Mobile Developer — 50% OFF | Shipped in 7 Days",
+    title: "Ayush Kumar | Freelance Web Developer",
     description:
-      "Need a web or mobile app built? Save 50% today! Get agency-quality Next.js, React, and React Native apps delivered in 7 days with a 100% money-back guarantee. 50+ projects shipped, 5★ client reviews.",
+      "Portfolio and freelance web development services by Ayush Kumar.",
     images: [`${siteUrl}/myprofile.png`],
     creator: "@Ayush08k",
     site: "@Ayush08k",
@@ -320,24 +320,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${siteUrl}/#website`,
-    url: siteUrl,
-    name: "Freelancer Ayush",
-    alternateName: ["Freelancer Ayush", "Ayush Kumar — Portfolio"],
-    description:
-      "Ayush Kumar — Top Freelance Full Stack & Mobile App Developer. Specializing in high-performance web applications, React Native mobile apps, and AI integrations. Hire me today for custom, scalable software.",
-    author: { "@id": `${siteUrl}/#person` },
-    inLanguage: "en-US",
-    copyrightYear: new Date().getFullYear(),
-    copyrightHolder: { "@id": `${siteUrl}/#person` },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${siteUrl}/?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
+    name: "Freelance Ayush",
+    alternateName: ["Ayush Kumar Portfolio"],
+    url: "https://freelanceayush.com"
   };
 
   // ─── Schema: BreadcrumbList ───────────────────────────────────────────

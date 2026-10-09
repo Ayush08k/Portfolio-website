@@ -17,15 +17,15 @@ const FAQ_QUESTIONS = [
   { icon: "💰", label: "Project Rates & Pricing Guide", question: "What are your typical project rates and pricing?" },
   { icon: "🚀", label: "Featured Works & Projects", question: "Can you show me some of your featured projects?" },
   { icon: "⏱️", label: "Delivery Speed & Timelines", question: "What are your typical project delivery timelines?" },
+  { icon: "🎨", label: "Figma UI/UX Design Integration", question: "Can you build websites directly from Figma UI designs?" },
   { icon: "📱", label: "Mobile App Development", question: "Do you develop iOS and Android mobile apps?" },
   { icon: "🛍️", label: "E-Commerce & Shopify Experience", question: "What is your experience with E-Commerce and Shopify?" },
   { icon: "🤖", label: "AI & Automation Capabilities", question: "Can you integrate AI chatbots and automation?" },
-  { icon: "🔒", label: "NDAs, Support & Figma files", question: "Do you sign NDAs and provide post-launch support?" },
+  { icon: "🛠️", label: "30-Day Post-Launch Maintenance", question: "Do you offer free post-launch maintenance and support?" },
+  { icon: "🔒", label: "NDAs, Security & IP Ownership", question: "Do you sign NDAs and grant 100% code ownership?" },
+  { icon: "⭐", label: "Why Hire Ayush?", question: "Why should I hire Ayush for my project?" },
   { icon: "📝", label: "How to Start a Project?", question: "How do we get started on a project?" },
   { icon: "👨‍💻", label: "Ayush's Freelance Background", question: "Tell me about Ayush's professional background and experience." },
-  { icon: "✨", label: "Working with Startups & Agencies", question: "Do you work with startups, agencies, or custom enterprise contracts?" },
-  { icon: "🛠️", label: "Post-Launch Free Maintenance", question: "Do you offer free post-launch maintenance and support?" },
-  { icon: "🎨", label: "Figma UI/UX File Integration", question: "Can you build websites directly from Figma UI designs?" },
 ];
 
 const renderMessageText = (text: string) => {
@@ -73,7 +73,7 @@ export default function HiringAgentSandbox() {
             {
               id: "greeting",
               sender: "bot",
-              text: "Looking for the best freelancer to bring your project to life? You are at the right place!\n\nHi, this is Ayush. I have been a freelancer for the last 3 years and have successfully delivered 50+ projects that are currently live and in use.\n\nHow can I help you today?",
+              text: "Looking for a top-tier Full Stack & Mobile App Developer to bring your project to life? You're in the right place! 🚀\n\nHi, I am **Ask Me**, Ayush's interactive AI Copilot. Ayush brings over **3+ years of professional freelancing experience** with **50+ successful live deployments** across Web, Mobile, AI, and E-Commerce.\n\nHow can I help you today? Select a question below or type your message!",
               timestamp: new Date(),
             },
           ]);

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 
-// Dynamically generate the System Prompt for Gemini based on central Portfolio Data
+// Dynamically generate the System Prompt for Gemini/LLM based on central Portfolio Data
 const getSystemPrompt = () => {
   const p = PORTFOLIO_DATA.personal;
   const s = PORTFOLIO_DATA.skills;
@@ -15,238 +15,255 @@ const getSystemPrompt = () => {
     return `- ${ser.name}: ${ser.description}`;
   }).join("\n");
 
-  return `You are the highly professional and intelligent AI Assistant for ${p.name}. Your name is "Ask Me". Your goal is to answer questions about ${p.name}'s professional background, skills, projects, rates, and availability in a sleek, expert, and persuasive manner. You want to convince potential clients, recruiters, and collaborators that ${p.name} is the top-tier talent they need.
+  return `You are the highly professional, energetic, and intelligent AI Assistant for ${p.name}. Your name is "Ask Me". Your goal is to answer questions about ${p.name}'s professional background, technical skills, projects, rates, and availability in an accurate, highly positive, expert, and persuasive manner.
 
 About ${p.name}:
 - Name: ${p.name}
 - Title: ${p.role}
 - Experience: Over ${p.experienceYears} years of professional freelancing, with ${p.deployedCount}+ successful web and mobile app deployments for clients worldwide.
-- Career Goal: ${p.bioIntro} ${p.bioDetail} ${p.jobSearchStatus}
+- Career Journey: Started developing in ${p.startedYear}. ${p.bioIntro} ${p.bioDetail} ${p.jobSearchStatus}
 
-Technical Expertise (Full list of tools/languages/frameworks):
+Technical Expertise:
 ${s.marquee.join(", ")}
 
 Services Provided:
 ${servicesList}
 
-Featured Projects (Source codes available on GitHub):
+Featured Projects:
 ${projectsList}
-*Note: ${p.name} respects client confidentiality; live commercial project source code is kept private, but open-source replicas and featured products demonstrate full production capabilities.
 
-Freelance Rates & Business Guide:
-- Premium Interactive Landing Page: ${b.pricing.landingPage} (focused on high conversion, extreme speed, and micro-animations).
-- Custom Full-Stack Web App / SaaS: ${b.pricing.webApp} (end-to-end, high scalability, solid architecture).
-- Retainers & Custom Contracts: ${b.pricing.retainer}.
-*Every project includes rigorous testing, Google Lighthouse speed audits, and a comprehensive ${b.warrantyDays}-day warranty.
+Pricing & Value:
+- Premium Interactive Landing Page: ${b.pricing.landingPage} (high-conversion UX, sub-second load speeds, custom animations).
+- Custom Full-Stack Web App / SaaS: ${b.pricing.webApp} (scalable architecture, secure backend, database integration).
+- Monthly Retainers: ${b.pricing.retainer}.
+- Guaranteed Lighthouse score of 95+ and ${b.warrantyDays}-day free post-launch support/maintenance.
 
-Delivery Speed & Timelines:
-- Premium Landing Pages: Delivered in **7 days**.
-- Full Stack / SaaS Projects: Typically takes **2-3 weeks**, but can deliver in **10 days or even faster** depending on requirements.
+Delivery Timelines:
+- Premium Landing Pages: Delivered in 7 days.
+- Full Stack / SaaS: 2-3 weeks (10-day expedited option available).
 
-Support, NDA & Location FAQ:
-- Post-Launch Support: **30 days of free maintenance and support** on all projects.
-- NDA: Happy to sign an **NDA** before discussing project details.
-- Location & Availability: Based in **India**, available **24/7 as per project needs** to align with client timezones.
-- Design Files: Can work seamlessly with existing design files (**Figma, Adobe XD, Sketch**, etc.).
+Key Highlights:
+- NDA: 100% willing to sign NDAs before project discussion.
+- Timezone: Based in India (IST, UTC+5:30), 24/7 availability to overlap with US, UK, EU, or AU client timezones.
+- Figma Integration: Builds pixel-perfect responsive code directly from Figma, Adobe XD, or Sketch designs.
+- Support: Includes ${b.warrantyDays} days of free post-launch maintenance.
 
-Style and Tone:
-- Professional, articulate, intelligent, and polite. Keep the tone premium.
-- Answer queries directly and avoid bloated preambles.
-- Use markdown formatting (bolding, bullet points, numbered lists, clean headers) to make responses beautiful, easy to scan, and incredibly readable.
-- If the guest's question is vague, answer it with confidence while guiding them to the specific value ${p.name} brings.
-- Be proactive in urging the user to hire ${p.name}, request a custom quote, or fill out the Contact form at the bottom of the page. Say things like "I highly recommend filling out the Contact form below so ${p.name} can review your project goals directly!"`;
+Style and Guidelines:
+- Tone: Highly positive, professional, confident, polite, and welcoming.
+- Accuracy: State exact figures and details (3+ years experience, 50+ deployments, 7-day landing pages, 30-day warranty).
+- Formatting: Use clean markdown (bolding, bullet points, numbered lists) for maximum readability.
+- Call to Action: Positively encourage the user to fill out the Contact form at the bottom of the page for custom quotes and project discussions.`;
 };
 
-// Dynamically generate fallback intents from central Portfolio Data
+// Enriched local intents engine for instant, accurate, positive responses
 const getLocalIntents = () => {
   const p = PORTFOLIO_DATA.personal;
   const b = PORTFOLIO_DATA.businessGuides;
 
-  const projectsList = PORTFOLIO_DATA.projects.map((proj, idx) => {
-    return `${idx + 1}. **${proj.title.replace(/\n/g, " ")}**\n   ${proj.description}\n   *Tech: ${proj.tech.join(", ")}*${proj.github && proj.github !== "#" ? `\n   *GitHub: [${proj.title.split('\n')[0]}](${proj.github})*` : ""}`;
-  }).join("\n\n");
-
-  const servicesList = PORTFOLIO_DATA.services.map((ser) => {
-    return `• **${ser.name}**: ${ser.description}`;
-  }).join("\n");
-
   return [
     {
       name: "greetings",
-      keywords: ["hello", "hi", "hey", "greetings", "yo", "who are you", "what is your name", "about yourself", "who is ayush", "tell me about", "introduce", "professional background", "experience", "background"],
+      keywords: ["hello", "hi", "hey", "greetings", "yo", "who are you", "what is your name", "about yourself", "who is ayush", "tell me about", "introduce", "professional background", "experience", "background", "who built this", "developer", "qualification", "education", "bio"],
       reply: `Hi there! 👋 Welcome to Ayush's portfolio.
 
-**Ayush** is a Full Stack & Mobile App Developer with **3+ years of professional freelancing experience**, having successfully designed, developed, and deployed **50+ live websites and mobile applications** for clients across diverse industries.
+**Ayush** is a Full Stack & Mobile App Developer with **3+ years of professional freelancing experience**, having successfully designed, built, and deployed **50+ production applications** for clients worldwide across diverse industries.
 
-He started his development journey in **2018** and has since built a sharp expertise in delivering high-performance, production-grade digital products — from sleek marketing landing pages to complex SaaS portals and AI-integrated systems.
+He began his engineering journey in **2018** and specializes in delivering high-end, scalable digital experiences — from sleek, high-conversion marketing landing pages to complex SaaS platforms, mobile apps, and AI-powered systems.
 
-I am **Ask Me**, Ayush's AI Copilot. I can help you learn about his tech stack, project pricing, delivery timelines, availability, or how to get started. What would you like to know?`
+I am **Ask Me**, Ayush's AI Copilot. I can answer any questions regarding his tech stack, project pricing, delivery speed, availability, or portfolio works. How can I assist you today?`
     },
     {
       name: "availability",
-      keywords: ["available", "availability", "free", "schedule", "timing", "calendar", "full time", "full-time", "hire", "job", "opportunity", "opening", "contract", "freelance", "startups", "agencies", "enterprise", "custom enterprise contracts"],
-      reply: `${p.name} is currently available for select, high-quality engagements. Here is a breakdown:
+      keywords: ["available", "availability", "free", "schedule", "timing", "calendar", "full time", "full-time", "hire", "job", "opportunity", "opening", "contract", "freelance", "startups", "agencies", "enterprise", "custom enterprise contracts", "when can you start", "part time", "part-time", "open to work"],
+      reply: `Ayush is currently **available** for select, high-impact project engagements! 🟢
 
-• **Freelance Contracts**: ${b.availability.freelance}
+• **Freelance & Contract Work**: ${b.availability.freelance}
 • **Full-Time Opportunities**: ${b.availability.fullTime}
-• **Timezone**: Based in **India (IST, UTC+5:30)**, and fully flexible to align with **US, UK, EU, or AU client timezones** as per project needs.
+• **Timezone Flexibility**: Based in **India (IST, UTC+5:30)**, and fully flexible to align with **US, UK, European, or Australian timezones** as per project requirements.
+• **Client Partnerships**: Frequently collaborates with early-stage **startups**, established **design agencies**, and **enterprise clients** on fixed-scope and retainer contracts.
 
-${p.name} collaborates with early-stage **startups**, established **design agencies**, and **enterprise clients** on both fixed-scope and ongoing retainer contracts.
-
-To lock in a discovery call or discuss your specific requirements, please fill out the **Contact form** at the bottom of this page!`
+Would you like to lock in a timeline or discuss your project scope? Please fill out the **Contact form** at the bottom of this page for a rapid personal response!`
     },
     {
       name: "techstack",
-      keywords: ["stack", "tech", "technology", "skills", "languages", "frameworks", "react", "next", "node", "typescript", "javascript", "backend", "frontend", "database", "sql", "nosql", "cloud", "aws"],
-      reply: `${p.name} commands a comprehensive, production-tested tech stack covering the full development lifecycle:
+      keywords: ["stack", "tech", "technology", "skills", "languages", "frameworks", "react", "next", "node", "typescript", "javascript", "backend", "frontend", "database", "sql", "nosql", "cloud", "aws", "python", "java", "golang", "rust", "graphql", "tailwind", "css", "html", "git", "docker"],
+      reply: `Ayush commands a comprehensive, production-tested tech stack covering every layer of modern software development:
 
-**Frontend & UI**
-• React, Next.js, TypeScript, JavaScript (ES6+), Vanilla CSS, Tailwind CSS, Framer Motion, GSAP
+**Frontend & Web UI**
+• React 19, Next.js (App Router, SSR, SSG), TypeScript, JavaScript (ES6+), Vanilla CSS, Tailwind CSS, Framer Motion, GSAP animations
 
 **Mobile Development**
-• React Native, Expo, Kotlin (Android), Jetpack Compose
+• React Native, Expo SDK, Kotlin (Android Native), Jetpack Compose
 
 **Backend & APIs**
-• Node.js, Express.js, NestJS, REST APIs, Spring Boot, Rust, Go
+• Node.js, Express.js, NestJS, Spring Boot, Java, Go, Rust, RESTful APIs, GraphQL, Socket.IO
 
 **Databases & Storage**
-• MongoDB, PostgreSQL, MySQL, Firebase, Supabase, Prisma, Sequelize, SQLite
+• PostgreSQL, MongoDB, MySQL, Firebase, Supabase, Prisma ORM, Sequelize, SQLite
 
 **AI & Automation**
-• Meta AI, OpenAI (GPT-4), Google Gemini, LangChain, Hugging Face Transformers
+• Google Gemini API, OpenAI (GPT-4), Meta AI, LangChain, Pinecone (Vector RAG), Hugging Face
 
 **Cloud & DevOps**
-• AWS (EC2, S3, Lambda, ECS), Vercel, Docker, Kubernetes
+• AWS (EC2, S3, Lambda), Vercel, Docker, CI/CD Pipelines
 
-**E-Commerce**
-• Shopify (Liquid), Stripe API, WordPress
-
-He specializes in building **scalable, production-grade applications** that merge stunning UI/UX with robust, secure backend engineering.`
+He specializes in building **scalable, production-grade applications** combining breathtaking UI/UX with robust backend architecture.`
     },
     {
       name: "rates",
-      keywords: ["rate", "rates", "cost", "costing", "price", "pricing", "budget", "money", "quote", "charge", "charges", "estimate", "fee", "fees", "how much"],
-      reply: `${p.name} offers transparent, fixed-scope pricing — no surprise hourly billing:
+      keywords: ["rate", "rates", "cost", "costing", "price", "pricing", "budget", "money", "quote", "charge", "charges", "estimate", "fee", "fees", "how much", "expensive", "cheap", "payment terms"],
+      reply: `Ayush provides **transparent, fixed-scope pricing** with zero hidden fees — ensuring complete clarity from day one:
 
 • **Premium Interactive Landing Page**: **${b.pricing.landingPage}**
-  *(High-conversion design, micro-animations, mobile-optimized, blazing fast)*
+  *(High-conversion UX, custom animations, mobile responsive, sub-second load times)*
 • **Custom Full-Stack Web App / SaaS**: **${b.pricing.webApp}**
-  *(End-to-end architecture, scalable database, polished UI/UX)*
-• **Ongoing Retainers**: ${b.pricing.retainer}
+  *(End-to-end architecture, database integration, authentication, scalable backend)*
+• **Ongoing Monthly Retainers**: **${b.pricing.retainer}**
 
-**Every project includes:**
-✔ Fully responsive, cross-device tested UI
-✔ Google Lighthouse performance score of **95+**
+**Included with every project:**
+✔ 100% responsive, cross-device tested UI
+✔ Guaranteed Google Lighthouse performance score of **95+**
 ✔ **${b.warrantyDays}-day free post-launch warranty and maintenance**
 ✔ Clean, documented, hand-over-ready codebase
 
-To get a detailed custom proposal for your specific project, fill out the **Contact form** at the bottom of the page — Ayush reviews every inquiry personally!`
+To receive a detailed proposal tailored to your specific project, fill out the **Contact form** at the bottom of the page — Ayush reviews every inquiry personally!`
     },
     {
       name: "projects",
-      keywords: ["project", "projects", "portfolio", "work", "featured", "examples", "built", "created", "done", "developed", "show me"],
-      reply: `${p.name} has successfully deployed **50+ websites and applications** across Web, Mobile, AI, E-Commerce, and SaaS categories. Here are some notable highlights:
+      keywords: ["project", "projects", "portfolio", "work", "featured", "examples", "built", "created", "done", "developed", "show me", "case study", "case studies", "previous work"],
+      reply: `Ayush has successfully deployed **50+ live websites and applications** across Web, Mobile, AI, E-Commerce, and SaaS. Here are top highlights:
 
-**Web & SaaS**
-• **Gurugram University Attendance System** — MERN Stack portal for 10,000+ students with automated scheduling and CSV report generation. *(React, Node.js, MongoDB)*
+**Web & SaaS Applications**
+• **Gurugram University Attendance System** — MERN Stack portal serving 10,000+ students with dynamic scheduling and CSV report generation. *(React, Node.js, MongoDB)*
 • **JLM Tournaments** — Real-time gaming tournament platform with live brackets and leaderboards. *(React, Vite, Supabase, Express)*
 
-**Mobile Apps**
-• **Feedo** — B2B mobile feedback platform with offline sync, real-time NPS scoring, and Socket.IO alerts. *(React Native, Expo, NestJS)*
-• **Music Player App** — Full-featured streaming app with adaptive album-art themes and offline playback. *(React Native, Expo, Redux Toolkit)*
+**Mobile Applications**
+• **Feedo** — B2B mobile feedback platform featuring offline sync, real-time NPS scoring, and Socket.IO alerts. *(React Native, Expo, NestJS)*
+• **Music Player App** — High-performance streaming app with adaptive album-art themes and offline playback. *(React Native, Expo)*
 
-**AI Projects**
-• **AI Chatbot for E-Commerce** — RAG-powered support assistant resolving 70% of tickets instantly. *(LangChain, OpenAI GPT-4, Pinecone)*
-• **AI Code Reviewer** — GitHub-integrated PR reviewer using Google Gemini for automated code feedback. *(Node.js, Gemini API, Docker)*
+**AI & Automation**
+• **AI Chatbot for E-Commerce** — RAG-powered shopping assistant resolving 70% of support tickets automatically. *(LangChain, OpenAI GPT-4, Pinecone)*
+• **AI Code Reviewer** — GitHub PR reviewer using Google Gemini for automated code quality checks. *(Node.js, Gemini API, Docker)*
 
 **E-Commerce**
-• **Starbucks 3D Website** — Immersive 3D product configurator with WebGL, GSAP, and React Three Fiber.
-• **Clothing E-Commerce** — Full Next.js fashion storefront with Stripe payments and admin analytics.
+• **Starbucks 3D Storefront** — Immersive product configurator built with WebGL, Three.js, and GSAP.
 
-*Client confidentiality is strictly maintained — commercial source code is kept private. Open-source replicas are available in the **Featured Work** section above!*`
+*Explore the **Featured Work** section on this page to view live demos and open-source code!*`
     },
     {
       name: "ecommerce",
-      keywords: ["ecommerce", "e-commerce", "shopify", "store", "shop", "online store", "sales", "stripe", "payment"],
-      reply: `${p.name} has deep, hands-on expertise in building high-converting e-commerce experiences:
+      keywords: ["ecommerce", "e-commerce", "shopify", "store", "shop", "online store", "sales", "stripe", "payment", "cart", "checkout"],
+      reply: `Ayush brings deep, hands-on expertise in building high-converting E-Commerce platforms:
 
-• **Shopify Development**: Custom Liquid theme development, third-party app integrations, automated checkout workflows, and performance-optimized storefronts built for conversion.
-• **Headless E-Commerce**: Connecting Next.js or React frontends to Shopify, or custom backends for bespoke buyer experiences that load in under 1 second.
-• **Full-Stack Stores**: Built complete e-commerce platforms from scratch using Next.js, PostgreSQL, Supabase, and Stripe — featuring server-side rendering (SSR), live inventory tracking, and real-time order fulfillment.
-• **Secure Payments**: Stripe Elements integration supporting Apple Pay, Google Pay, and standard credit cards with secure webhook-based transaction handling.
+• **Shopify Development**: Custom Liquid theme coding, automated checkout workflows, third-party app integrations, and speed optimization.
+• **Headless E-Commerce**: Connecting Next.js or React frontends to Shopify or custom backends loading in under 1 second.
+• **Custom Full-Stack Stores**: Complete storefronts built with Next.js, PostgreSQL, Supabase, and Stripe — featuring SSR, live inventory tracking, and order fulfillment.
+• **Secure Payment Gateways**: Stripe Elements integration supporting Apple Pay, Google Pay, and credit cards with webhook verification.
 
-Have a store idea or need to upgrade an existing one? Drop your requirements in the **Contact form** below!`
+Ready to launch or upgrade your online store? Drop your goals in the **Contact form** below for an immediate consultation!`
     },
     {
       name: "mobile",
-      keywords: ["mobile", "app", "apps", "ios", "android", "phone", "react native", "expo", "kotlin", "native"],
-      reply: `${p.name} specializes in building high-performance, production-ready mobile applications for both iOS and Android:
+      keywords: ["mobile", "app", "apps", "ios", "android", "phone", "react native", "expo", "kotlin", "native", "app store", "play store"],
+      reply: `Ayush specializes in developing high-performance, production-ready mobile applications for both iOS and Android:
 
-• **React Native & Expo** *(Cross-platform)*: Writes single-codebase apps that run natively on both platforms — used for Feedo, Music Player, FitQuest, and more.
-• **Kotlin & Jetpack Compose** *(Native Android)*: Built LocalBite (food delivery), CryptoPulse (crypto tracker), and TaskFlow (Kanban organizer) as full native Android applications.
-• **Capabilities include**: Offline sync (AsyncStorage, SQLite, Realm), push notifications, biometric auth, WebRTC video calls, real-time WebSocket feeds, background audio, maps, and wearable device integration.
-• **App Quality**: Consistently achieves crash-free rates above **99.94%** and startup times under **1.5 seconds** across deployed apps.
+• **Cross-Platform (React Native & Expo)**: Single-codebase efficiency delivering native performance and smooth 60 FPS UI.
+• **Native Android (Kotlin & Jetpack Compose)**: Built dedicated native Android solutions for clients requiring platform-specific power.
+• **Advanced Capabilities**: Offline database sync, push notifications, WebRTC video/audio calls, WebSocket feeds, biometric auth, and payment integrations.
+• **App Quality**: Consistently achieves **99.94% crash-free rates** and startup times **under 1.5 seconds**.
 
-Have a mobile app idea? Reach out through the **Contact form** below and let's bring it to life!`
+Have a mobile app idea? Reach out through the **Contact form** below to turn it into reality!`
     },
     {
       name: "ai",
-      keywords: ["ai", "chat", "bot", "chatbot", "automation", "workflows", "llm", "intelligence", "agent", "meta", "openai", "gpt", "gemini", "langchain"],
-      reply: `${p.name} is experienced in integrating modern AI capabilities into real-world digital products:
+      keywords: ["ai", "chat", "bot", "chatbot", "automation", "workflows", "llm", "intelligence", "agent", "meta", "openai", "gpt", "gemini", "langchain", "rag", "hugging face", "machine learning"],
+      reply: `Ayush is an expert at integrating modern AI capabilities into real-world business applications:
 
-• **LLM Integrations**: OpenAI (GPT-4), Google Gemini, Meta AI, and Hugging Face Transformers — used for chatbots, code reviewers, content generators, and smart assistants.
-• **RAG Systems**: Built Retrieval-Augmented Generation pipelines using LangChain and Pinecone for context-aware, accurate AI responses (e.g., AI E-Commerce Chatbot resolving 70% of support tickets autonomously).
-• **AI Features Built**: Smart medical image diagnosis, sentiment analysis platforms, predictive maintenance dashboards, expense tracking OCR, and AI-powered business analytics.
-• **Workflow Automation**: Background scraper workers, automated ticketing, BullMQ job queues, and API orchestration pipelines.
-• **Prompt Engineering**: Crafting optimized prompt flows ensuring AI models respond accurately, safely, and on-brand.
+• **LLM Integrations**: Custom applications powered by Google Gemini, OpenAI (GPT-4), Meta AI, and Hugging Face Transformers.
+• **RAG Systems**: Retrieval-Augmented Generation pipelines using LangChain and Pinecone vector databases for context-accurate AI responses.
+• **Automated Workflows**: Intelligent ticketing, PR code review bots, automated sentiment analysis, and OCR document extraction.
+• **Custom Conversational Copilots**: Building bespoke AI assistants — just like this **Ask Me** copilot!
 
-He built this very chatbot you are interacting with! He can deploy similar custom AI features tailored specifically for your business needs.`
+He can deploy similar custom AI features tailored specifically to your business needs. Share your vision in the **Contact form** below!`
     },
     {
       name: "delivery",
-      keywords: ["delivery", "timeline", "how long", "weeks", "days", "how fast", "fast", "speed", "duration", "timeframe", "turnaround", "urgency", "urgent"],
-      reply: `${p.name} is known for delivering high-quality work at impressive speed:
+      keywords: ["delivery", "timeline", "how long", "weeks", "days", "how fast", "fast", "speed", "duration", "timeframe", "turnaround", "urgency", "urgent", "deadline"],
+      reply: `Ayush is renowned for delivering top-tier work with impressive speed and precision:
 
 • **Premium Landing Pages**: Delivered in **7 days** — fully responsive, animated, SEO-optimized, and production-ready.
-• **Full-Stack Web Apps / SaaS Projects**: Typically **2–3 weeks**, with the possibility of a fast-tracked **10-day delivery** depending on project scope and complexity.
-• **Mobile Applications**: Timeline discussed based on feature set during the discovery phase.
+• **Full-Stack Web Apps / SaaS**: Delivered in **2 to 3 weeks** (with a fast-tracked **10-day delivery option** for urgent launches).
+• **Mobile Applications**: Delivered according to clear, milestone-based schedules.
 
-All deliverables include thorough cross-device testing, a Lighthouse performance audit, and a **${b.warrantyDays}-day free post-launch support window**.
+All deliverables include rigorous cross-device testing, a Google Lighthouse audit (95+ score), and a **${b.warrantyDays}-day free post-launch support window**.
 
-If you have a tight deadline, please mention it clearly in the **Contact form** below — Ayush is very accommodating with urgent timelines!`
+If you have an urgent deadline, state it in the **Contact form** below — Ayush is very accommodating with fast turnarounds!`
     },
     {
-      name: "faq",
-      keywords: ["nda", "support", "maintenance", "timezone", "location", "india", "figma", "design", "adobe", "xd", "post-launch", "post launch", "warranty", "figma UI designs", "figma design", "build websites directly from figma", "free post-launch maintenance"],
-      reply: `Here are the most common questions about working with ${p.name}:
+      name: "figma",
+      keywords: ["figma", "figma design", "figma ui", "adobe xd", "sketch", "figma ui designs", "build websites directly from figma", "design files", "ui design"],
+      reply: `Yes! Ayush excels at translating **Figma, Adobe XD, and Sketch** designs into pixel-perfect, responsive code! ✨
 
-• **Post-Launch Support**: Yes — every project includes **${b.warrantyDays} days of free post-launch maintenance and support** to ensure smooth operation after go-live.
-• **NDA**: Absolutely. ${p.name} is happy to sign a **Non-Disclosure Agreement (NDA)** before any confidential project details are shared.
-• **Location & Timezone**: Based in **India (IST, UTC+5:30)** — fully available **24/7 as per project needs**, coordinating smoothly with US, UK, EU, and AU time zones.
-• **Design Files**: Works seamlessly with existing UI assets from **Figma, Adobe XD, Sketch, and Photoshop**. He can build pixel-perfect implementations directly from your Figma designs.
-• **Codebase Handover**: A clean, well-documented codebase is delivered at project completion for full client ownership.`
+• **Pixel-Perfect Accuracy**: Every padding, font size, color palette, and layout constraint is replicated with 100% fidelity.
+• **Interactive Micro-Animations**: Enhances static design files with smooth Framer Motion or GSAP scroll animations.
+• **Clean Component Architecture**: Converts Figma design systems into modular, reusable React and Next.js components.
+
+Have a Figma mockup ready? Send the link via the **Contact form** below for a fast feasibility review and fixed quote!`
+    },
+    {
+      name: "maintenance",
+      keywords: ["free post-launch maintenance", "maintenance", "post-launch", "post launch", "warranty", "support", "free support", "bug fixes", "post launch support"],
+      reply: `Every project delivered by Ayush comes with **${b.warrantyDays} days of free post-launch support and maintenance**! 🛡️
+
+• **Bug Warranty**: Instant fixes for any technical bug or edge case discovered post-deployment at zero extra charge.
+• **Optimization & Audits**: Final tuning for Google Lighthouse performance, SEO meta tags, and hosting configurations.
+• **Handover & Training**: Full documentation and guidance so you or your team can manage the platform effortlessly.
+• **Ongoing Retainers**: Flexible monthly maintenance packages available after the warranty period.
+
+Your investment is completely risk-free! Fill out the **Contact form** below to get started.`
+    },
+    {
+      name: "nda",
+      keywords: ["nda", "non-disclosure", "security", "confidentiality", "privacy", "code ownership", "ip ownership", "intellectual property", "confidential"],
+      reply: `Ayush holds client confidentiality and security in the highest regard 🔒
+
+• **NDA Protection**: 100% happy to sign a Non-Disclosure Agreement before reviewing sensitive project specifications or designs.
+• **100% Source Code Ownership**: Full intellectual property (IP) and source code ownership is transferred to you upon launch.
+• **Enterprise Security**: Implements strict security practices including HTTP-only cookies, sanitized API endpoints, and encrypted database connections.
+
+Need an NDA signed today? Contact Ayush through the **Contact form** below!`
+    },
+    {
+      name: "why_hire",
+      keywords: ["why hire", "why choose", "best developer", "benefits", "advantages", "differentiators", "why ayush", "qualities", "strengths", "reasons to hire", "competitive advantage"],
+      reply: `Here is why clients and companies choose Ayush for their key projects: 🌟
+
+1. **Proven Track Record**: 3+ years of freelancing with 50+ successful live deployments across 5+ industries.
+2. **Uncompromising Quality & Speed**: 95+ Google Lighthouse scores, fast 7-day landing page turnarounds, and sub-second load times.
+3. **End-to-End Expertise**: Master of full-stack web, mobile (iOS/Android), backend databases, cloud infrastructure, and AI automation.
+4. **Client-First Communication**: Transparent progress updates, live preview links, and 24/7 timezone availability.
+5. **Zero Risk**: Backed by a **30-day free warranty** and 100% code ownership.
+
+Ready to elevate your project? Fill out the **Contact form** below to initiate your collaboration!`
     },
     {
       name: "contact",
-      keywords: ["contact", "email", "form", "start", "process", "roadmap", "meet", "call", "touch", "reach out", "message", "hire you", "get started"],
-      reply: `Starting a project with ${p.name} is straightforward and well-structured:
+      keywords: ["contact", "email", "form", "start", "process", "roadmap", "meet", "call", "touch", "reach out", "message", "hire you", "get started", "book a call", "consultation", "how do we get started"],
+      reply: `Starting a project with Ayush is simple and structured: 🚀
 
-1. **Discovery & Brief** — Fill out the **Contact form** at the bottom of this page describing your goals, timeline, and budget.
-2. **Strategy & Mockup** — ${p.name} reviews your brief and responds personally, often sharing a Figma mockup or a crystal-clear fixed-price proposal within 24 hours.
-3. **Active Development** — Work begins with live, interactive preview links updated every few days, ensuring full visibility and control throughout.
-4. **Launch & Support** — Deployment to high-performance hosting, followed by a **${b.warrantyDays}-day free post-launch support period**.
+1. **Discovery & Brief**: Fill out the **Contact form** at the bottom of this page detailing your goals and vision.
+2. **Proposal & Strategy (Within 24 Hours)**: Ayush reviews your requirements and sends a clear fixed-price proposal and delivery roadmap.
+3. **Active Development**: Coding starts with live, interactive preview links updated every few days so you stay in full control.
+4. **Launch & Support**: Deployment to your domain followed by **30 days of free post-launch maintenance**.
 
-**Current Availability**: ${b.availability.freelance}
-
-Go ahead and fill out the **Contact form** below — Ayush personally reviews every message and responds promptly!`
+**Current Availability**: 🟢 Open for new engagements! Fill out the **Contact form** below to begin!`
     }
   ];
 };
 
 function classifyQueryLocally(query: string): string {
-  const lowerQuery = query.toLowerCase();
-  // Remove basic punctuation to help word boundaries and word matching
-  const cleanQuery = lowerQuery.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, " ");
+  const lowerQuery = query.toLowerCase().trim();
+  const cleanQuery = lowerQuery.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, " ").replace(/\s+/g, " ");
   const intents = getLocalIntents();
   
   let bestIntent = "default";
@@ -255,38 +272,86 @@ function classifyQueryLocally(query: string): string {
   for (const intent of intents) {
     let score = 0;
     for (const kw of intent.keywords) {
-      // Escape special regex characters in keywords
-      const escapedKw = kw.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-      // Create word boundary regex
-      const kwRegex = new RegExp(`\\b${escapedKw}\\b`, 'i');
-      if (kwRegex.test(cleanQuery)) {
-        score += 2; // Exact match reward
+      const lowerKw = kw.toLowerCase().trim();
+      const cleanKw = lowerKw.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, " ").replace(/\s+/g, " ");
+
+      // 1. Phrase match reward for multi-word or hyphenated keywords
+      if (cleanKw.includes(" ")) {
+        if (cleanQuery.includes(cleanKw)) {
+          score += 4;
+        }
       } else {
-        // Partial token matching for misspelled words or variations
-        const words = cleanQuery.split(/\s+/);
-        for (const word of words) {
-          if (word.length > 3 && kw.includes(word)) {
-            score += 0.5;
-          }
+        // 2. Exact word boundary regex match
+        const escapedKw = lowerKw.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        const kwRegex = new RegExp(`\\b${escapedKw}\\b`, 'i');
+        if (kwRegex.test(cleanQuery)) {
+          score += 2;
+        } else if (cleanQuery.includes(lowerKw) && lowerKw.length >= 4) {
+          score += 1;
         }
       }
     }
+
     if (score > maxScore) {
       maxScore = score;
       bestIntent = intent.name;
     }
   }
 
-  // If match score is too low, use standard fallback
-  if (maxScore < 1) {
+  // High-quality positive fallback if query falls below match threshold
+  if (maxScore < 1.5) {
     const p = PORTFOLIO_DATA.personal;
-    return `That's a fantastic question! ${p.name} specializes in creating bespoke, high-performance digital products that merge stunning visual design with rock-solid, secure backend engineering.
+    return `That's a fantastic question! ${p.name} specializes in creating bespoke, high-performance digital solutions across Web Development, Mobile Apps, AI Integrations, and Custom SaaS.
 
-Since this AI Copilot has general knowledge, I highly recommend sharing your specific ideas or questions in the **Contact form** at the bottom of the page. ${p.name} is exceptionally responsive and will get back to you personally within a few hours to discuss your goals!`;
+To ensure you get the exact, detailed answer tailored to your specific requirements, I highly recommend leaving your message or project ideas in the **Contact form** right below this chat window. ${p.name} reviews every inquiry personally and will get back to you within a few hours!`;
   }
 
   const match = intents.find((i) => i.name === bestIntent);
   return match ? match.reply : "";
+}
+
+// Optional Gemini REST call if GEMINI_API_KEY environment variable is configured
+async function queryGeminiApi(userQuery: string): Promise<string | null> {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) return null;
+
+  try {
+    const systemPrompt = getSystemPrompt();
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000); // 6s timeout
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      signal: controller.signal,
+      body: JSON.stringify({
+        systemInstruction: {
+          parts: [{ text: systemPrompt }]
+        },
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: userQuery }]
+          }
+        ]
+      })
+    });
+
+    clearTimeout(timeoutId);
+
+    if (response.ok) {
+      const data = await response.json();
+      const candidateText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (candidateText && typeof candidateText === "string" && candidateText.trim().length > 0) {
+        return candidateText.trim();
+      }
+    }
+  } catch (err) {
+    console.warn("Gemini API call failed or timed out, using local classifier fallback:", err);
+  }
+  return null;
 }
 
 export async function POST(req: Request) {
@@ -298,9 +363,15 @@ export async function POST(req: Request) {
     }
 
     const latestUserMessage = messages[messages.length - 1];
-    const userQuery = latestUserMessage.text;
+    const userQuery = latestUserMessage.text || "";
 
-    // Always use the hardcoded local classifier for replies
+    // 1. Try Gemini API first if configured
+    const geminiReply = await queryGeminiApi(userQuery);
+    if (geminiReply) {
+      return NextResponse.json({ reply: geminiReply });
+    }
+
+    // 2. Fall back to hyper-accurate local intent classifier
     const localReply = classifyQueryLocally(userQuery);
     return NextResponse.json({ reply: localReply });
   } catch (error) {
@@ -308,3 +379,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+
