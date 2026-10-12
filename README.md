@@ -1,73 +1,125 @@
-# Ayush Kumar - Portfolio Website 💻
+# Ayush Kumar — Developer Portfolio & Digital Hub 🚀
 
-I'm a **Full Stack & Mobile App Developer** with over **3 years of freelancing experience**. I've shipped **50+ websites and mobile apps** for clients across different industries — from small businesses to larger platforms. I started doing this back in 2018 just because I loved building things, and it turned into a full-on career.
+[![Live Website](https://img.shields.io/badge/Live%20Website-freelanceayush.com-7C3AED?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.freelanceayush.com)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2.6%20(Turbopack)-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge)](LICENSE)
 
----
-
-## What This Is
-
-This is my **personal portfolio website** — the place where I show who I am, what I've built, and what I can do for you. Think of it as my digital business card, but way better.
-
----
-
-## What I Do
-
-Here's a simple breakdown of what I can help you with:
-
-- 🌐 **Websites** — Fast, good-looking websites that work on all devices
-- 📱 **Mobile Apps** — Apps that run on both iPhone and Android
-- 🛒 **Online Stores** — Shopify stores that are built to convert visitors into customers
-- ⚙️ **Full Web Apps** — Bigger platforms with login systems, dashboards, databases — the whole thing
-- 🤖 **AI Features** — Adding smart, AI-powered features into your product
-- 📝 **WordPress Sites** — Custom WordPress websites that are easy for you to manage yourself
+> A modern, high-performance portfolio, blog, interactive pricing estimator, and client onboarding platform for **Ayush Kumar** — Full Stack & Mobile App Developer with 3+ years of freelancing experience and 50+ delivered projects.
 
 ---
 
-## Some Projects I've Built
+## 🌟 Highlights & Key Features
 
-| Project | What It Does |
-|---|---|
-| **Gurugram University Attendance System** | A full system where teachers mark attendance, students track their progress, and admins manage everything |
-| **Feedo** | A feedback & survey platform with real-time results and sentiment analysis |
-| **JLM Tournaments** | An online gaming tournament platform with live brackets, leaderboards, and profiles |
-| **Music Player App** | A cross-platform music app with playlists, lyrics, and offline playback |
-| **E-Commerce Platform** | A full shopping platform with payments, inventory, and a customer dashboard |
-
----
-
-## 💰 Service Rates & Promo (50% Off Active!)
-
-Currently running a **50% Off Promotion** for select development projects:
-
-| Service Type | Regular Price | ⚡ Promo Price (50% Off) |
-|---|---|---|
-| **Landing Page** | ~~$300~~ | **$75** |
-| **3D Interactive Site** | ~~$500~~ | **$125** |
-| **E-Commerce Store** | ~~$800~~ | **$200** |
-| **AI Integration & Agents** | ~~$800~~ | **$200** |
-| **SaaS / Full Stack App** | ~~$1,200~~ | **$300** |
-| **Mobile App (iOS/Android)** | ~~$1,500~~ | **$375** |
-
-> 🇮🇳 **For Indian Clients & Startups:** Special localized rates are available to fit your budget. Let's discuss!
-
-Every project includes **30 days of free post-delivery support** and warranty. No ghosting, guaranteed.
+- ⚡ **Ultra-Fast Next.js 16 (Turbopack)**: Hybrid Static Site Generation (SSG) with 111+ pre-rendered routes, optimized for sub-second page loads.
+- 🧮 **Interactive Scope & Pricing Estimator**:
+  - Live cost & delivery timeline calculation for Landing Pages, Web Apps, Mobile Apps, 3D Sites, E-Commerce, and AI Integrations.
+  - Multi-currency support (USD / INR toggle).
+  - Seamless handover: selecting services and clicking "Proceed" saves configuration in `sessionStorage` and redirects to the pre-filled contact form on the home page.
+- 📝 **Full-Featured Tech Blog**:
+  - 40+ in-depth tech and hardware comparison articles with rich SEO metadata and OpenGraph support.
+- 💼 **Case Studies & Projects Showcase**:
+  - Dynamic showcase featuring client projects, architectural breakdowns, live demos, and tech stacks.
+- 🎨 **Modern Cyber-Themed UI/UX**:
+  - Dynamic aurora glow effects, custom 3D rotating earth, GSAP scroll-triggered animations, interactive bento grids, and glassmorphic micro-interactions.
+- 🔍 **Search Engine Optimization (SEO)**:
+  - Canonical URL management, automated dynamic `sitemap.xml`, fine-tuned `robots.txt`, and structured metadata schemas for Google Search Console indexing.
+- 📬 **Interactive Lead Generation**:
+  - Real-time contact messaging and job applicant forms with transactional email integrations powered by Resend.
 
 ---
 
-## Currently Available For
+## 🛠️ Tech Stack & Architecture
 
-✅ **Freelance Projects** — I have bandwidth for **1 large-scale app** and **1 landing page** right now. If you have something in mind, let's talk soon before my slots fill up.
-
-✅ **Full-Time Roles** — I'm also open to joining a team full-time if the work is interesting and the team is good.
-
----
-
-## Let's Work Together
-
-If you have a project idea, a business problem you want solved with software, or just want to chat — reach out. I'm pretty easy to talk to.
-
-> 📬 You can contact me directly through the **Contact section** on my portfolio website.
+- **Framework**: [Next.js](https://nextjs.org/) 16 (App Router, Turbopack)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: Vanilla CSS Design System with CSS Custom Properties, Glassmorphism, and Responsive Grids
+- **Animations**: [GSAP](https://greensock.com/gsap/) (ScrollTrigger) & [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Email Service**: [Resend](https://resend.com/) API
+- **Deployment**: [Vercel](https://vercel.com/) with Custom Domain (`freelanceayush.com`)
 
 ---
 
-*Built and maintained by Ayush — because I genuinely love this stuff.*
+## 📂 Project Structure
+
+```text
+├── public/                 # Static assets (images, icons, logos, fonts)
+├── src/
+│   ├── app/                # Next.js App Router
+│   │   ├── about/          # About story & background
+│   │   ├── api/            # Serverless endpoints (contact, chat, apply)
+│   │   ├── blog/           # Blog listing & dynamic [slug] articles
+│   │   ├── careers/        # Career openings & application pipeline
+│   │   ├── estimator/      # Dedicated Project Cost & Timeline Estimator
+│   │   ├── projects/       # Projects listing & dynamic [slug] case studies
+│   │   ├── services/       # Core service offerings
+│   │   ├── speed/          # Performance benchmarks & site speed metrics
+│   │   ├── layout.tsx      # Root layout, metadataBase, canonicals & navbar
+│   │   ├── page.tsx        # Homepage (Hero, About, Skills, Projects, Contact)
+│   │   ├── robots.ts       # Dynamic robots.txt generator
+│   │   └── sitemap.ts      # Dynamic sitemap.xml generator
+│   ├── components/         # Modular UI components (Navbar, PricingEstimator, etc.)
+│   └── data/               # Structured data stores (portfolio, blog, reviews)
+└── next.config.mjs         # Next.js build and caching configuration
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18.17+ or newer
+- npm / yarn / pnpm
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Ayush08k/Portfolio-website.git
+   cd Portfolio-website
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Setup environment variables:
+   Create a `.env.local` file in the root directory:
+   ```env
+   NEXT_PUBLIC_SITE_URL=https://www.freelanceayush.com
+   NEXT_PUBLIC_APP_NAME="Ayush Kumar Portfolio"
+   RESEND_API_KEY=your_resend_api_key_here
+   CONTACT_RECEIVER_EMAIL=your_email@example.com
+   ```
+
+4. Run the local development server:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+5. Build for production:
+   ```bash
+   npm run build
+   npm run start
+   ```
+
+---
+
+## 🤝 Services & Booking
+
+Available for select freelance contracts, MVP builds, full-stack consulting, and full-time opportunities.
+
+- 🌐 **Live Website**: [freelanceayush.com](https://www.freelanceayush.com)
+- 💼 **LinkedIn**: [linkedin.com/in/ayush08k](https://www.linkedin.com/in/ayush08k/)
+- 💻 **GitHub**: [github.com/Ayush08k](https://github.com/Ayush08k)
+- 🐦 **X (Twitter)**: [@aayush08k](https://x.com/aayush08k)
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
