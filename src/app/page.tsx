@@ -1251,6 +1251,27 @@ export default function Home() {
     timeline: "",
   });
 
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem("saved_estimator_data");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.hasEstimate) {
+          setEstimatorData(parsed);
+          sessionStorage.removeItem("saved_estimator_data");
+          setTimeout(() => {
+            const contactSection = document.getElementById("contact");
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 300);
+        }
+      }
+    } catch (e) {
+      console.error("Error reading saved estimator data", e);
+    }
+  }, []);
+
   const handleProceedEstimate = (data: EstimatorData) => {
     setEstimatorData(data);
     const contactSection = document.getElementById("contact");

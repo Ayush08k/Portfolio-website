@@ -6,9 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import PricingEstimator, { EstimatorData } from "@/components/PricingEstimator";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { useRouter } from "next/navigation";
 import { Calculator, Sparkles, HelpCircle } from "lucide-react";
 
 export default function EstimatorPage() {
+  const router = useRouter();
   const [estimatorData, setEstimatorData] = useState<EstimatorData>({
     hasEstimate: false,
     projectType: "",
@@ -20,14 +22,13 @@ export default function EstimatorPage() {
 
   const handleProceedEstimate = (data: EstimatorData) => {
     setEstimatorData(data);
-    
-    // Smooth scroll down to contact form
-    setTimeout(() => {
-      const contactSection = document.getElementById("contact");
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 100);
+    try {
+      sessionStorage.setItem("saved_estimator_data", JSON.stringify(data));
+    } catch (e) {
+      console.error("Failed to save estimator data to sessionStorage", e);
+    }
+    // Navigate to homepage #contact section with query and hash
+    router.push("/?estimate=true#contact");
   };
 
   return (
