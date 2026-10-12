@@ -14,7 +14,7 @@ import { MetadataRoute } from "next";
  */
 export default function robots(): MetadataRoute.Robots {
   const rawBase =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
   const baseUrl = rawBase.replace(/\/+$/, "");
 
   return {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
 
 export const metadata: Metadata = {
   title: "50+ Real Projects & Case Studies — 50% OFF Web & Mobile Development",

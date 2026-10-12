@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
 
 export const metadata: Metadata = {
   title: "Developer Blog — React, Next.js, React Native Tutorials & Tips",

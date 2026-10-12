@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import SpeedClient from "./SpeedClient";
 import Script from "next/script";
 
-const BASE_URL = "https://ayushkumar.dev";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
 
 export const metadata: Metadata = {
   title: "Core Web Vitals & Speed Optimization Expert | 50% Off | Ayush Kumar",

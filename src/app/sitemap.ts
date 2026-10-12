@@ -15,7 +15,7 @@ import { BLOG_POSTS } from "@/data/blog";
 
 function getBaseUrl(): string {
   const raw =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
   return raw.replace(/\/+$/, "");
 }
 

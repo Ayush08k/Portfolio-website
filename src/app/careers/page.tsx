@@ -3,7 +3,7 @@ export const dynamic = "force-static";
 import type { Metadata } from "next";
 import CareersClient from "./CareersClient";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
 
 export const metadata: Metadata = {
   title: "Careers & Open Roles — Join Our AI & Web Engineering Team",

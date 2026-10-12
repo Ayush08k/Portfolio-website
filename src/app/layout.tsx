@@ -8,7 +8,7 @@ import ClickEffect from "@/components/ClickEffect";
 import HiringAgentSandbox from "@/components/HiringAgentSandbox";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://freelanceayush.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
 const siteName = "Freelance Ayush";
 
 export const metadata: Metadata = {
@@ -322,7 +322,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "WebSite",
     name: "Freelance Ayush",
     alternateName: ["Ayush Kumar Portfolio"],
-    url: "https://freelanceayush.com"
+    url: siteUrl
   };
 
   // ─── Schema: BreadcrumbList ───────────────────────────────────────────

@@ -219,7 +219,7 @@ The **iPhone 18 Pro Max** cements Apple's dominance in mobile silicon and comput
 
 When potential clients land on a developer portfolio, they have very specific questions: *What is your tech stack? How fast do you deliver? What are your rates?* A traditional static FAQ page buries these answers. An intelligent chatbot surfaces them instantly, in a conversational format that feels human and professional.
 
-This is a complete technical breakdown of how I designed, built, and deployed the **"Ask Me"** AI assistant embedded in my own freelance portfolio at [freelance-ayush.vercel.app](https://freelance-ayush.vercel.app).
+This is a complete technical breakdown of how I designed, built, and deployed the **"Ask Me"** AI assistant embedded in my own freelance portfolio at [freelanceayush.com](https://www.freelanceayush.com).
 
 ---
 
@@ -425,7 +425,7 @@ The final "Ask Me" bot handles **100% of common visitor questions** instantly wi
 - FAQ Schema JSON-LD is the most effective way to make chatbot content SEO-indexable without a separate crawlable page.
 - A 14-question FAQ chip selector dramatically improves conversions vs. an open text field alone.
 
-You can interact with the live chatbot at [freelance-ayush.vercel.app](https://freelance-ayush.vercel.app). The source code architecture follows the patterns described in this article.
+You can interact with the live chatbot at [freelanceayush.com](https://www.freelanceayush.com). The source code architecture follows the patterns described in this article.
     `,
     seoTags: [
       "AI chatbot for portfolio website",

@@ -10,7 +10,7 @@ import { PORTFOLIO_DATA } from "@/data/portfolio";
 import ProjectCaseStudyClient from "./ProjectCaseStudyClient";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
 
 // ── Static Path Generation ──────────────────────────────────────────────────
 export async function generateStaticParams() {

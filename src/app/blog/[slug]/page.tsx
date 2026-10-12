@@ -9,7 +9,7 @@ import { BLOG_POSTS } from "@/data/blog";
 import BlogDetailClient from "./BlogDetailClient";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://freelance-ayush.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
 
 // ── Static Path Generation ──────────────────────────────────────────────────
 export async function generateStaticParams() {
