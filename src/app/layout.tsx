@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   title: {
     default: "Ayush Kumar | Cheapest Freelance Web & App Developer — 50% OFF",
-    template: "%s | Ayush Kumar — Cheapest Freelance Developer with 5★ rateing",
+    template: "%s | Ayush Kumar — Cheapest Freelance Developer | 5★ Rating",
   },
   description:
     "⭐ Cheapest freelance web & app developer. 50% OFF all projects — websites from $75, iOS/Android apps from $300. 3+ yrs · 50+ shipped · 5★ rated. Free quote!",
