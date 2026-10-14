@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
 
 export const metadata: Metadata = {
-  title: "50+ Real Projects & Case Studies — 50% OFF Web & Mobile Development",
+  title: "50+ Projects — India's Cheapest Freelance Developer Portfolio | Case Studies 2025",
   description:
-    "Explore 50+ real-world web apps, SaaS dashboards, and mobile apps built with React, Next.js, and React Native. Professional development at 50% off. View case studies →",
+    "⭐ Browse 50+ real projects by India's cheapest freelance developer. Web apps, iOS & Android apps, SaaS dashboards — all 50% OFF for new projects. See case studies → hire for yours!",
   keywords: [
     // ── Core Portfolio Keywords ────────────────────────────────────────────
     "freelance developer portfolio projects",
@@ -247,11 +247,27 @@ export const metadata: Metadata = {
     "react three fiber performance monitoring",
     "mobile friendly 3d interactive websites",
     "3d web product designer portfolio",
+    // ── Cheapest Developer Portfolio Keywords ─────────────────────────────
+    "cheapest developer portfolio india",
+    "cheapest web app portfolio",
+    "cheapest ios app portfolio",
+    "cheapest android app portfolio",
+    "affordable developer case studies",
+    "low cost web development examples",
+    "budget developer project showcase",
+    "cheap app development samples",
+    "discount web developer work",
+    "50% off developer portfolio",
+    "best cheap developer projects india",
+    "affordable saas development examples",
+    "cheap ecommerce development portfolio",
+    "low cost mobile app examples",
+    "budget developer work samples",
   ],
   openGraph: {
-    title: "50+ Real Projects & Case Studies — Web Apps, Mobile Apps, AI & E-Commerce",
+    title: "50+ Projects — India's Cheapest Freelance Developer Portfolio | Case Studies 2025",
     description:
-      "See 50+ live projects: SaaS dashboards, React Native apps, AI integrations, e-commerce stores & 3D web experiences. View case studies →",
+      "⭐ 50+ live projects by India's cheapest developer. Web apps, iOS & Android apps, SaaS dashboards — all 50% OFF for new projects. View case studies →",
     url: `${siteUrl}/projects`,
     siteName: "Freelancer Ayush",
     images: [
@@ -259,7 +275,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/myprofile.png`,
         width: 1200,
         height: 630,
-        alt: "Ayush Kumar — 50+ Web & Mobile App Projects Portfolio",
+        alt: "Ayush Kumar — Cheapest Freelance Developer | 50+ Projects | 50% OFF",
         type: "image/png",
       },
     ],
@@ -268,9 +284,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "50+ Real Projects & Case Studies — Web Apps, Mobile Apps, AI & E-Commerce",
+    title: "50+ Projects — India's Cheapest Freelance Developer | 50% OFF",
     description:
-      "See 50+ live projects: SaaS dashboards, React Native apps, AI integrations, e-commerce stores & 3D web experiences. View case studies →",
+      "⭐ 50+ real web & app projects by India's cheapest developer. SaaS, React Native, AI integrations — 50% OFF new projects. View case studies →",
     images: [`${siteUrl}/myprofile.png`],
     creator: "@Ayush08k",
   },

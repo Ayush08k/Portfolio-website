@@ -32,15 +32,15 @@ function toISODate(dateString: string): string {
 }
 
 const STATIC_PAGE_DATES = {
-  home: "2026-09-16",
-  services: "2026-09-16",
-  projects: "2026-09-16",
-  blog: "2026-09-16",
-  careers: "2026-09-16",
-  about: "2026-09-16",
-  estimator: "2026-09-16",
-  speed: "2026-09-16",
-  chatbot: "2026-09-16",
+  home: "2026-10-14",
+  services: "2026-10-14",
+  projects: "2026-10-14",
+  blog: "2026-10-14",
+  careers: "2026-10-14",
+  about: "2026-10-14",
+  estimator: "2026-10-14",
+  speed: "2026-10-14",
+  chatbot: "2026-10-14",
 } as const;
 
 // ── Sitemap Generator ──────────────────────────────────────────────────────────
@@ -59,8 +59,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/services`,
       lastModified: new Date(STATIC_PAGE_DATES.services),
-      changeFrequency: "monthly",
-      priority: 0.9,
+      changeFrequency: "weekly",
+      priority: 1.0,
     },
     {
       url: `${baseUrl}/projects`,
@@ -83,8 +83,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/estimator`,
       lastModified: new Date(STATIC_PAGE_DATES.estimator),
-      changeFrequency: "monthly",
-      priority: 0.9,
+      changeFrequency: "weekly",
+      priority: 1.0,
     },
     {
       url: `${baseUrl}/about`,

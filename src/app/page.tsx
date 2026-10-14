@@ -106,7 +106,7 @@ function useTilt(selector: string) {
 
 /* ─── HERO ──────────────────────────────────────────────── */
 function Hero() {
-  const typed = useTypewriter(["Full Stack Developer", "Mobile App Developer", "UI/UX Enthusiast", "Open to Full-Time Roles"]);
+  const typed = useTypewriter(["Cheapest Web Developer", "iOS & Android App Developer", "Full Stack Developer", "50% OFF — Limited Slots"]);
 
   return (
     <section className="hero" id="home">
@@ -143,16 +143,16 @@ function Hero() {
             </div>
 
             <p className="hero-desc">
-              I build high-performance, visually stunning digital products — from responsive web apps to cross-platform mobile experiences. {PORTFOLIO_DATA.personal.experienceYears}+ years freelancing, {PORTFOLIO_DATA.personal.deployedCount}+ products shipped.
+              🔥 <strong>50% OFF</strong> this month — India&apos;s cheapest web &amp; app developer. Websites from <strong>$75</strong> &middot; iOS/Android apps from <strong>$300</strong> &middot; Full Stack SaaS from <strong>$500</strong>. {PORTFOLIO_DATA.personal.experienceYears}+ yrs &middot; {PORTFOLIO_DATA.personal.deployedCount}+ shipped &middot; 5★ rated.
             </p>
 
             <div className="hero-actions">
-              <a href="#projects" className="btn-primary btn-glow" data-hover>
-                <span>View My Work</span>
+              <a href="/services" className="btn-primary btn-glow" data-hover>
+                <span>View Services — 50% OFF Active</span>
                 <ArrowRight size={16} />
               </a>
-              <a href="#contact" className="btn-outline btn-glow" data-hover>
-                Get in Touch
+              <a href="/#contact" className="btn-outline btn-glow" data-hover>
+                Get Free Quote Now →
               </a>
             </div>
           </div>

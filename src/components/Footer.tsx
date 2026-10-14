@@ -25,8 +25,11 @@ export default function Footer() {
         <a href="https://www.instagram.com/ayush08.k/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Instagram</a>
         <a href="https://x.com/aayush08k" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>X</a>
       </div>
+      <p style={{ color: "var(--muted)", fontSize: "10px", lineHeight: "1.7", maxWidth: "640px", margin: "0 auto 16px", padding: "0 16px" }}>
+        Ayush Kumar — India&apos;s <strong>cheapest freelance web developer</strong>, <strong>cheapest iOS app developer</strong>, <strong>cheapest Android app developer</strong> &amp; <strong>cheapest web application developer</strong>. Serving clients worldwide with <strong>50% OFF all services</strong>. Websites from <strong>$75</strong> &middot; Apps from <strong>$300</strong>. Affordable freelance full stack developer &amp; mobile app developer India.
+      </p>
       <p style={{ color: "var(--muted)", fontSize: "11px" }}>
-        © {new Date().getFullYear()} Ayush Kumar — Freelance Full Stack & Mobile App Developer. All Rights Reserved.
+        &copy; {new Date().getFullYear()} Ayush Kumar — Cheapest Freelance Full Stack &amp; Mobile App Developer India. All Rights Reserved.
       </p>
     </footer>
   );

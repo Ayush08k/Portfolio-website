@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
 
 export const metadata: Metadata = {
-  title: "Developer Blog — React, Next.js, React Native Tutorials & Tips",
+  title: "Dev Blog — How to Hire Cheapest Web & App Developer + React & Next.js Tutorials",
   description:
-    "Practical tutorials on React Native, Next.js, Node.js, and modern web development. Written by a developer who has shipped 50+ real-world projects. No fluff — real code.",
+    "📖 Tips on hiring the cheapest freelance developer + React, Next.js, React Native tutorials by a developer with 50+ shipped projects. Real code, real experience. No fluff.",
   keywords: [
     "react native tutorial",
     "next.js tutorial",
@@ -254,11 +254,28 @@ export const metadata: Metadata = {
     "draco decoder static path vercel deployment",
     "how to animate gltf actions threejs",
     "react three fiber shadows soft shadow map",
+    // ── Cheapest Developer Hiring Keywords ─────────────────────────────────
+    "how to hire cheapest web developer",
+    "cheapest freelance developer tips",
+    "how to find affordable app developer",
+    "cheap web developer hiring guide",
+    "affordable developer red flags",
+    "low cost developer vs quality",
+    "best cheap developer india blog",
+    "hire budget developer safely",
+    "discount developer tips blog",
+    "freelance developer pricing guide india",
+    "web development cost india 2025",
+    "app development cost india 2025",
+    "cheapest way to build an app",
+    "cheapest way to build a website",
+    "how to get cheap web development",
+    "affordable developer india 2025",
   ],
   openGraph: {
-    title: "Developer Blog — React, Next.js, React Native Tutorials & Tips",
+    title: "Dev Blog — How to Hire Cheapest Web & App Developer + React & Next.js Tutorials",
     description:
-      "Practical tutorials on React Native, Next.js, Node.js, and modern web development. Written by a developer who has shipped 50+ real-world projects.",
+      "📖 Tips on hiring the cheapest freelance developer + React, Next.js, React Native tutorials by a developer with 50+ shipped projects. Real code, no fluff.",
     url: `${siteUrl}/blog`,
     siteName: "Freelancer Ayush",
     images: [
@@ -266,7 +283,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/myprofile.png`,
         width: 1200,
         height: 630,
-        alt: "Ayush Kumar Developer Blog — Tutorials & Tips",
+        alt: "Ayush Kumar Developer Blog — Cheapest Developer Tips & Tutorials",
         type: "image/png",
       },
     ],
@@ -275,9 +292,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Developer Blog — React, Next.js, React Native Tutorials & Tips",
+    title: "Dev Blog — How to Hire Cheapest Developer + React & Next.js Tutorials",
     description:
-      "Practical tutorials on React Native, Next.js, Node.js, and modern web development. No fluff — real code from 50+ shipped projects.",
+      "📖 Hiring tips for cheapest freelance developer + React, Next.js, React Native tutorials. Real code from 50+ shipped projects.",
     images: [`${siteUrl}/myprofile.png`],
     creator: "@Ayush08k",
   },
