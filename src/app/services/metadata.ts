@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     description:
       "⭐ World's cheapest freelance developer — 50% OFF. Websites from $75, iOS apps from $300, Android apps from $300. Free consultation. Hire now!",
     url: `${siteUrl}/services`,
-    siteName: "Freelancer Ayush",
+    siteName: "Best Freelancer",
     images: [
       {
         url: `${siteUrl}/myprofile.png`,

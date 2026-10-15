@@ -58,7 +58,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.description,
       url: canonicalUrl,
-      siteName: "Freelancer Ayush",
+      siteName: "Best Freelancer",
       publishedTime: new Date(post.date).toISOString(),
       authors: ["Ayush Kumar"],
       tags: post.tags,

@@ -75,7 +75,7 @@ export async function generateMetadata({
       title: `${project.title} | Ayush Kumar Case Study`,
       description: project.description,
       url: canonicalUrl,
-      siteName: "Freelancer Ayush",
+      siteName: "Best Freelancer",
       locale: "en_US",
       images: [
         {

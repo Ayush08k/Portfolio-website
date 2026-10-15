@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     description:
       "💰 How cheap can your website or app be? Find out instantly! Websites from $75 · iOS apps $300 · Android $300. 50% OFF. Get FREE quote now →",
     url: `${siteUrl}/estimator`,
-    siteName: "Freelancer Ayush",
+    siteName: "Best Freelancer",
     images: [
       {
         url: `${siteUrl}/myprofile.png`,

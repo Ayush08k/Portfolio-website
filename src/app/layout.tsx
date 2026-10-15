@@ -9,7 +9,7 @@ import HiringAgentSandbox from "@/components/HiringAgentSandbox";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
-const siteName = "Freelance Ayush";
+const siteName = "Best Freelancer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   title: {
-    default: "Ayush Kumar | Cheapest Freelance Web & App Developer — 50% OFF",
-    template: "%s | Ayush Kumar — Cheapest Freelance Developer | 5★ Rating",
+    default: "Cheapest Freelancer in Web, Android & iOS App Developer with 5★ Reviews | Ayush Kumar",
+    template: "%s | Best Freelancer — Ayush Kumar",
   },
   description:
-    "⭐ Cheapest freelance web & app developer. 50% OFF all projects — websites from $75, iOS/Android apps from $300. 3+ yrs · 50+ shipped · 5★ rated. Free quote!",
+    "The cheapest and best freelancer for web and mobile app development with discount currently. 50+ delivered projects with 5★ reviews. Free quote today!",
   keywords: [
     // ── Core "Cheapest" Keywords ────────────────────────────────────────
     "cheapest freelancer",
@@ -81,8 +81,30 @@ export const metadata: Metadata = {
     "freelance web application developer",
     "custom web app development",
     "custom mobile app development",
-    "freelance developer India",
-    "freelance developer worldwide",
+    // ── Best & Regional Keywords ─────────────────────────────────────────
+    "world best web developer",
+    "world best app developer",
+    "world best android and ios app developer",
+    "world best full stack developer",
+    "world best react developer",
+    "world best next.js developer",
+    "world best react native developer",
+    "world best freelance developer",
+    "india best freelancer",
+    "india best web developer",
+    "india best app developer",
+    "india cheapest web developer",
+    "india cheapest app developer",
+    "india cheapest full stack developer",
+    "india cheapest react developer",
+    "india cheapest next.js developer",
+    "india cheapest react native developer",
+    "india cheapest frontend developer",
+    "india cheapest backend developer",
+    "india cheapest mobile app developer",
+    "india cheapest web development company",
+    "india cheapest app development company",
+    "india cheapest software company",
   ],
   alternates: {
     canonical: "/",
@@ -106,9 +128,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Ayush Kumar | Cheapest Freelance Web & App Developer — 50% OFF",
+    title: "Cheapest Freelancer in Web, Android & iOS App Developer with 5★ Reviews | Ayush Kumar",
     description:
-      "⭐ India's cheapest freelance developer — 50% OFF. Websites from $75, full apps from $300. 3+ yrs · 50+ shipped · 5★ rated. Get a free quote now!",
+      "The cheapest and best freelancer for web and mobile app development with discount currently. 50+ delivered projects with 5★ reviews. Free quote today!",
     url: siteUrl,
     siteName,
     images: [
@@ -116,7 +138,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/myprofile.png`,
         width: 1200,
         height: 630,
-        alt: "Ayush Kumar — Cheapest Freelance Web & App Developer | 50% OFF | Websites from $75 | iOS/Android Apps from $300",
+        alt: "Ayush Kumar — Cheapest Freelancer in Web, Android & iOS App Developer | 5★ Reviews",
         type: "image/png",
       },
     ],
@@ -129,9 +151,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ayush Kumar | Cheapest Freelance Web & App Developer — 50% OFF",
+    title: "Cheapest Freelancer in Web, Android & iOS App Developer with 5★ Reviews | Ayush Kumar",
     description:
-      "⭐ India's cheapest freelance developer — 50% OFF. Websites from $75, iOS/Android apps from $300. 3+ yrs · 50+ shipped · 5★ rated. Free quote!",
+      "The cheapest and best freelancer for web and mobile app development with discount currently. 50+ delivered projects with 5★ reviews. Free quote today!",
     images: [`${siteUrl}/myprofile.png`],
     creator: "@Ayush08k",
     site: "@Ayush08k",
@@ -368,9 +390,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Freelance Ayush",
-    alternateName: ["Ayush Kumar Portfolio"],
-    url: siteUrl
+    "@id": `${siteUrl}/#website`,
+    name: "Best Freelancer",
+    alternateName: [
+      "Freelance Ayush",
+      "Ayush Kumar",
+      "Freelancer Ayush",
+      "Cheapest Freelancer",
+      "Best Freelancer Ayush",
+    ],
+    url: `${siteUrl}/`,
   };
 
   // ─── Schema: BreadcrumbList ───────────────────────────────────────────

@@ -269,7 +269,7 @@ export const metadata: Metadata = {
     description:
       "⭐ 50+ live projects by India's cheapest developer. Web apps, iOS & Android apps, SaaS dashboards — all 50% OFF for new projects. View case studies →",
     url: `${siteUrl}/projects`,
-    siteName: "Freelancer Ayush",
+    siteName: "Best Freelancer",
     images: [
       {
         url: `${siteUrl}/myprofile.png`,

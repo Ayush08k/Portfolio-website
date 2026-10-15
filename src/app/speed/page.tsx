@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "Verified 99+ Lighthouse scores. Sub-1.5s load times guaranteed. 50% off new projects. Zero upfront. 100% money-back.",
     url: `${BASE_URL}/speed`,
-    siteName: "Ayush Kumar — Freelance Developer",
+    siteName: "Best Freelancer",
     type: "website",
     images: [
       {

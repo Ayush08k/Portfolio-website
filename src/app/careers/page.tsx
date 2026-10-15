@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     title: "Careers — Work With India's Cheapest & Best Dev Studio | Remote Jobs 2026",
     description: "Hiring AI/ML Developers, Full Stack Next.js Engineers & Mobile Developers. India's most affordable dev studio — remote-friendly, competitive pay. Apply today!",
     url: `${siteUrl}/careers`,
-    siteName: "Freelancer Ayush",
+    siteName: "Best Freelancer",
     locale: "en_US",
     images: [
       {

@@ -277,7 +277,7 @@ export const metadata: Metadata = {
     description:
       "📖 Tips on hiring the cheapest freelance developer + React, Next.js, React Native tutorials by a developer with 50+ shipped projects. Real code, no fluff.",
     url: `${siteUrl}/blog`,
-    siteName: "Freelancer Ayush",
+    siteName: "Best Freelancer",
     images: [
       {
         url: `${siteUrl}/myprofile.png`,

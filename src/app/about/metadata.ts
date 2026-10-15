@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     description:
       "Meet Ayush Kumar — cheapest freelance web & app developer in India. 3+ years experience, 50+ shipped projects, 5★ reviews. Websites from $75, apps from $300. 50% OFF!",
     url: `${siteUrl}/about`,
-    siteName: "Freelance Ayush",
+    siteName: "Best Freelancer",
     images: [
       {
         url: `${siteUrl}/myprofile.png`,
