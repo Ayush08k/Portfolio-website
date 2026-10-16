@@ -8,11 +8,13 @@ import ClickEffect from "@/components/ClickEffect";
 import HiringAgentSandbox from "@/components/HiringAgentSandbox";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
+import { CANONICAL_DOMAIN, getCanonicalImageUrl } from "@/lib/siteConfig";
+
+const siteUrl = CANONICAL_DOMAIN;
 const siteName = "Best Freelancer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(CANONICAL_DOMAIN),
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",
@@ -107,7 +109,7 @@ export const metadata: Metadata = {
     "india cheapest software company",
   ],
   alternates: {
-    canonical: "/",
+    canonical: CANONICAL_DOMAIN,
   },
   authors: [{ name: "Ayush Kumar", url: siteUrl }],
   creator: "Ayush Kumar",

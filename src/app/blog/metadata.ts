@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { CANONICAL_DOMAIN, getCanonicalUrl } from "@/lib/siteConfig";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
+const siteUrl = CANONICAL_DOMAIN;
 
 export const metadata: Metadata = {
   title: "Dev Blog — How to Hire Cheapest Web & App Developer + React & Next.js Tutorials",
@@ -276,7 +277,7 @@ export const metadata: Metadata = {
     title: "Dev Blog — How to Hire Cheapest Web & App Developer + React & Next.js Tutorials",
     description:
       "📖 Tips on hiring the cheapest freelance developer + React, Next.js, React Native tutorials by a developer with 50+ shipped projects. Real code, no fluff.",
-    url: `${siteUrl}/blog`,
+    url: getCanonicalUrl("/blog"),
     siteName: "Best Freelancer",
     images: [
       {
@@ -299,6 +300,6 @@ export const metadata: Metadata = {
     creator: "@Ayush08k",
   },
   alternates: {
-    canonical: "/blog",
+    canonical: getCanonicalUrl("/blog"),
   },
 };

@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import SpeedClient from "./SpeedClient";
 import Script from "next/script";
+import { CANONICAL_DOMAIN, getCanonicalUrl } from "@/lib/siteConfig";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
+const BASE_URL = CANONICAL_DOMAIN;
 
 export const metadata: Metadata = {
   title: "Core Web Vitals & Speed Optimization Expert | 50% Off | Ayush Kumar",
@@ -24,13 +25,13 @@ export const metadata: Metadata = {
     "Ayush Kumar speed optimization",
   ],
   alternates: {
-    canonical: `${BASE_URL}/speed`,
+    canonical: getCanonicalUrl("/speed"),
   },
   openGraph: {
     title: "Core Web Vitals & Speed Expert | 50% Off | Ayush Kumar",
     description:
       "Verified 99+ Lighthouse scores. Sub-1.5s load times guaranteed. 50% off new projects. Zero upfront. 100% money-back.",
-    url: `${BASE_URL}/speed`,
+    url: getCanonicalUrl("/speed"),
     siteName: "Best Freelancer",
     type: "website",
     images: [

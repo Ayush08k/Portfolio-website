@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { CANONICAL_DOMAIN, getCanonicalUrl } from "@/lib/siteConfig";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
+const siteUrl = CANONICAL_DOMAIN;
 
 export const metadata: Metadata = {
   title: "50+ Projects — India's Cheapest Freelance Developer Portfolio | Case Studies 2025",
@@ -268,7 +269,7 @@ export const metadata: Metadata = {
     title: "50+ Projects — India's Cheapest Freelance Developer Portfolio | Case Studies 2025",
     description:
       "⭐ 50+ live projects by India's cheapest developer. Web apps, iOS & Android apps, SaaS dashboards — all 50% OFF for new projects. View case studies →",
-    url: `${siteUrl}/projects`,
+    url: getCanonicalUrl("/projects"),
     siteName: "Best Freelancer",
     images: [
       {
@@ -291,6 +292,6 @@ export const metadata: Metadata = {
     creator: "@Ayush08k",
   },
   alternates: {
-    canonical: "/projects",
+    canonical: getCanonicalUrl("/projects"),
   },
 };

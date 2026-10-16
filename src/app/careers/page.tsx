@@ -2,8 +2,9 @@ export const dynamic = "force-static";
 
 import type { Metadata } from "next";
 import CareersClient from "./CareersClient";
+import { CANONICAL_DOMAIN, getCanonicalUrl } from "@/lib/siteConfig";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
+const siteUrl = CANONICAL_DOMAIN;
 
 export const metadata: Metadata = {
   title: "Careers — Work With India's Cheapest & Best Dev Studio | Remote Jobs 2026",
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
   creator: "Ayush Kumar",
   publisher: "Ayush Kumar",
   alternates: {
-    canonical: `${siteUrl}/careers`,
+    canonical: getCanonicalUrl("/careers"),
   },
   robots: {
     index: true,
@@ -70,7 +71,7 @@ export const metadata: Metadata = {
     type: "website",
     title: "Careers — Work With India's Cheapest & Best Dev Studio | Remote Jobs 2026",
     description: "Hiring AI/ML Developers, Full Stack Next.js Engineers & Mobile Developers. India's most affordable dev studio — remote-friendly, competitive pay. Apply today!",
-    url: `${siteUrl}/careers`,
+    url: getCanonicalUrl("/careers"),
     siteName: "Best Freelancer",
     locale: "en_US",
     images: [

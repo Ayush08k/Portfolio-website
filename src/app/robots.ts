@@ -1,38 +1,42 @@
 import { MetadataRoute } from "next";
+import { CANONICAL_DOMAIN } from "@/lib/siteConfig";
 
 /**
  * robots.txt Generator
  * ────────────────────────────────────────────────────────
  * Follows: https://developers.google.com/search/docs/crawling-indexing/robots/intro
  *
- * Key rules:
- *  1. Allow all crawlers to access all public content
- *  2. Block internal API routes and Next.js internals
- *  3. Explicitly allow Googlebot-Image to crawl project/blog images
- *  4. Reference the XML sitemap for discovery
- *  5. Declare canonical host
+ * Ensures all crawlers access public content on https://www.freelanceayush.com
+ * and references the canonical XML sitemap.
  */
 export default function robots(): MetadataRoute.Robots {
-  const rawBase =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
-  const baseUrl = rawBase.replace(/\/+$/, "");
-
   return {
     rules: [
       {
-        // Default rule: allow all bots to crawl all public content
+        // Default rule: allow all crawlers to access public pages
         userAgent: "*",
         allow: "/",
         disallow: ["/api/", "/_next/"],
       },
       {
-        // Googlebot: explicitly allow blog and project pages for indexing
+        // Googlebot: explicitly prioritize all indexable sections
         userAgent: "Googlebot",
-        allow: ["/", "/projects/", "/blog/", "/services", "/about"],
+        allow: [
+          "/",
+          "/projects",
+          "/projects/",
+          "/blog",
+          "/blog/",
+          "/services",
+          "/about",
+          "/estimator",
+          "/careers",
+          "/speed",
+        ],
         disallow: ["/api/"],
       },
       {
-        // Googlebot-Image: allow crawling project screenshots and blog images
+        // Googlebot-Image: allow crawling project screenshots and assets
         userAgent: "Googlebot-Image",
         allow: ["/project images/", "/public/", "/"],
         disallow: [],
@@ -43,7 +47,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: `${CANONICAL_DOMAIN}/sitemap.xml`,
+    host: CANONICAL_DOMAIN,
   };
 }

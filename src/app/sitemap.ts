@@ -1,106 +1,95 @@
 import { MetadataRoute } from "next";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { BLOG_POSTS } from "@/data/blog";
+import { CANONICAL_DOMAIN, getCanonicalUrl, getCanonicalImageUrl } from "@/lib/siteConfig";
 
 /**
  * Professional XML Sitemap for Google Search Console
  * ──────────────────────────────────────────────────────
  * Follows: https://www.sitemaps.org/protocol.html
  *
- * Updated: 2026-08-18 — refreshed lastModified dates to trigger re-crawl
- * and added image metadata for improved Google Image Search discoverability.
+ * All URLs are strictly forced to the canonical production domain:
+ * https://www.freelanceayush.com
  */
-
-// ── Helpers ────────────────────────────────────────────────────────────────────
-
-function getBaseUrl(): string {
-  const raw =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
-  return raw.replace(/\/+$/, "");
-}
 
 function toISODate(dateString: string): string {
   try {
     const parsed = new Date(dateString);
     if (isNaN(parsed.getTime())) {
-      return "2026-08-18";
+      return "2026-10-16";
     }
     return parsed.toISOString().split("T")[0];
   } catch {
-    return "2026-08-18";
+    return "2026-10-16";
   }
 }
 
 const STATIC_PAGE_DATES = {
-  home: "2026-10-14",
-  services: "2026-10-14",
-  projects: "2026-10-14",
-  blog: "2026-10-14",
-  careers: "2026-10-14",
-  about: "2026-10-14",
-  estimator: "2026-10-14",
-  speed: "2026-10-14",
-  chatbot: "2026-10-14",
+  home: "2026-10-16",
+  services: "2026-10-16",
+  projects: "2026-10-16",
+  blog: "2026-10-16",
+  careers: "2026-10-16",
+  about: "2026-10-16",
+  estimator: "2026-10-16",
+  speed: "2026-10-16",
+  chatbot: "2026-10-16",
 } as const;
 
-// ── Sitemap Generator ──────────────────────────────────────────────────────────
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = getBaseUrl();
-
   // ── 1. Static Core Routes ──────────────────────────────────────────────────
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      url: CANONICAL_DOMAIN,
       lastModified: new Date(STATIC_PAGE_DATES.home),
-      changeFrequency: "weekly",
+      changeFrequency: "daily",
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/services`,
+      url: getCanonicalUrl("/services"),
       lastModified: new Date(STATIC_PAGE_DATES.services),
       changeFrequency: "weekly",
-      priority: 1.0,
+      priority: 0.95,
     },
     {
-      url: `${baseUrl}/projects`,
+      url: getCanonicalUrl("/projects"),
       lastModified: new Date(STATIC_PAGE_DATES.projects),
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: getCanonicalUrl("/blog"),
+      lastModified: new Date(STATIC_PAGE_DATES.blog),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(STATIC_PAGE_DATES.blog),
-      changeFrequency: "weekly",
-      priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/careers`,
+      url: getCanonicalUrl("/careers"),
       lastModified: new Date(STATIC_PAGE_DATES.careers),
       changeFrequency: "weekly",
       priority: 0.88,
     },
     {
-      url: `${baseUrl}/estimator`,
+      url: getCanonicalUrl("/estimator"),
       lastModified: new Date(STATIC_PAGE_DATES.estimator),
       changeFrequency: "weekly",
-      priority: 1.0,
+      priority: 0.95,
     },
     {
-      url: `${baseUrl}/about`,
+      url: getCanonicalUrl("/about"),
       lastModified: new Date(STATIC_PAGE_DATES.about),
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.85,
     },
     {
-      url: `${baseUrl}/speed`,
+      url: getCanonicalUrl("/speed"),
       lastModified: new Date(STATIC_PAGE_DATES.speed),
       changeFrequency: "weekly",
       priority: 0.85,
     },
     {
       // Dedicated SEO landing for the "Ask Me" AI chatbot
-      url: `${baseUrl}/blog/building-ai-chatbot-portfolio-nextjs-gemini`,
+      url: getCanonicalUrl("/blog/building-ai-chatbot-portfolio-nextjs-gemini"),
       lastModified: new Date(STATIC_PAGE_DATES.chatbot),
       changeFrequency: "monthly",
       priority: 0.88,
@@ -110,34 +99,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // ── 2. Individual Project Case Study Pages ─────────────────────────────────
   const projectRoutes: MetadataRoute.Sitemap = PORTFOLIO_DATA.projects.map(
     (project) => ({
-      url: `${baseUrl}/projects/${project.slug}`,
+      url: getCanonicalUrl(`/projects/${project.slug}`),
       lastModified: new Date(STATIC_PAGE_DATES.projects),
       changeFrequency: "monthly" as const,
       priority: 0.8,
-      // Next.js MetadataRoute.Sitemap images field requires string[] (URL only)
       ...(project.image && {
-        images: [
-          project.image.startsWith("http")
-            ? project.image
-            : `${baseUrl}${project.image}`,
-        ],
+        images: [getCanonicalImageUrl(project.image)],
       }),
     })
   );
 
   // ── 3. Individual Blog Post Pages ──────────────────────────────────────────
   const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: getCanonicalUrl(`/blog/${post.slug}`),
     lastModified: new Date(toISODate(post.date)),
-    changeFrequency: "yearly" as const,
-    priority: 0.75,
-    // Next.js MetadataRoute.Sitemap images field requires string[] (URL only)
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
     ...(post.image && {
-      images: [
-        post.image.startsWith("http")
-          ? post.image
-          : `${baseUrl}${post.image}`,
-      ],
+      images: [getCanonicalImageUrl(post.image)],
     }),
   }));
 

@@ -8,9 +8,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import ProjectCaseStudyClient from "./ProjectCaseStudyClient";
+import { CANONICAL_DOMAIN, getCanonicalUrl, getCanonicalImageUrl } from "@/lib/siteConfig";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
+const siteUrl = CANONICAL_DOMAIN;
 
 // ── Static Path Generation ──────────────────────────────────────────────────
 export async function generateStaticParams() {
@@ -35,10 +35,8 @@ export async function generateMetadata({
     };
   }
 
-  const canonicalUrl = `${siteUrl}/projects/${project.slug}`;
-  const ogImage = project.image?.startsWith("http")
-    ? project.image
-    : `${siteUrl}${project.image}`;
+  const canonicalUrl = getCanonicalUrl(`/projects/${project.slug}`);
+  const ogImage = getCanonicalImageUrl(project.image);
 
   const baseKeywords = [
     "ayush kumar portfolio",
@@ -101,10 +99,8 @@ function ProjectSchema({ slug }: { slug: string }) {
   const project = PORTFOLIO_DATA.projects.find((p) => p.slug === slug);
   if (!project) return null;
 
-  const canonicalUrl = `${siteUrl}/projects/${project.slug}`;
-  const imageUrl = project.image?.startsWith("http")
-    ? project.image
-    : `${siteUrl}${project.image}`;
+  const canonicalUrl = getCanonicalUrl(`/projects/${project.slug}`);
+  const imageUrl = getCanonicalImageUrl(project.image);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -118,7 +114,7 @@ function ProjectSchema({ slug }: { slug: string }) {
     author: {
       "@type": "Person",
       name: "Ayush Kumar",
-      url: siteUrl,
+      url: CANONICAL_DOMAIN,
       jobTitle: "Full Stack & Mobile App Developer",
       sameAs: [
         "https://github.com/ayush08k",
@@ -129,7 +125,7 @@ function ProjectSchema({ slug }: { slug: string }) {
     creator: {
       "@type": "Person",
       name: "Ayush Kumar",
-      url: siteUrl,
+      url: CANONICAL_DOMAIN,
     },
     keywords: (project.seoTags ?? []).join(", "),
     inLanguage: "en-US",
@@ -153,19 +149,19 @@ function BreadcrumbSchema({ slug, title }: { slug: string; title: string }) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: siteUrl,
+        item: CANONICAL_DOMAIN,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Projects",
-        item: `${siteUrl}/projects`,
+        item: getCanonicalUrl("/projects"),
       },
       {
         "@type": "ListItem",
         position: 3,
         name: title,
-        item: `${siteUrl}/projects/${slug}`,
+        item: getCanonicalUrl(`/projects/${slug}`),
       },
     ],
   };

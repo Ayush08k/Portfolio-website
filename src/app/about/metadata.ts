@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { CANONICAL_DOMAIN, getCanonicalUrl, getCanonicalImageUrl } from "@/lib/siteConfig";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
+const siteUrl = CANONICAL_DOMAIN;
 
 export const metadata: Metadata = {
   title: "About Ayush Kumar — India's Cheapest Freelance Web & App Developer | 50% OFF",
@@ -53,13 +54,13 @@ export const metadata: Metadata = {
     "ayush kumar freelanceayush",
   ],
   alternates: {
-    canonical: "/about",
+    canonical: getCanonicalUrl("/about"),
   },
   openGraph: {
     title: "About Ayush Kumar — India's Cheapest Freelance Web & App Developer | 50% OFF",
     description:
       "Meet Ayush Kumar — cheapest freelance web & app developer in India. 3+ years experience, 50+ shipped projects, 5★ reviews. Websites from $75, apps from $300. 50% OFF!",
-    url: `${siteUrl}/about`,
+    url: getCanonicalUrl("/about"),
     siteName: "Best Freelancer",
     images: [
       {

@@ -7,9 +7,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BLOG_POSTS } from "@/data/blog";
 import BlogDetailClient from "./BlogDetailClient";
+import { CANONICAL_DOMAIN, getCanonicalUrl, getCanonicalImageUrl } from "@/lib/siteConfig";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.freelanceayush.com";
+const siteUrl = CANONICAL_DOMAIN;
 
 // ── Static Path Generation ──────────────────────────────────────────────────
 export async function generateStaticParams() {
@@ -32,10 +32,8 @@ export async function generateMetadata({
     };
   }
 
-  const canonicalUrl = `${siteUrl}/blog/${post.slug}`;
-  const ogImage = post.image?.startsWith("http")
-    ? post.image
-    : `${siteUrl}${post.image}`;
+  const canonicalUrl = getCanonicalUrl(`/blog/${post.slug}`);
+  const ogImage = getCanonicalImageUrl(post.image);
 
   return {
     title: `${post.title} | Ayush Kumar Developer Blog`,
@@ -86,10 +84,8 @@ function ArticleSchema({ slug }: { slug: string }) {
   const post = BLOG_POSTS.find((p) => p.slug === slug);
   if (!post) return null;
 
-  const canonicalUrl = `${siteUrl}/blog/${post.slug}`;
-  const imageUrl = post.image?.startsWith("http")
-    ? post.image
-    : `${siteUrl}${post.image}`;
+  const canonicalUrl = getCanonicalUrl(`/blog/${post.slug}`);
+  const imageUrl = getCanonicalImageUrl(post.image);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -103,7 +99,7 @@ function ArticleSchema({ slug }: { slug: string }) {
     author: {
       "@type": "Person",
       name: "Ayush Kumar",
-      url: siteUrl,
+      url: CANONICAL_DOMAIN,
       jobTitle: "Full Stack & Mobile App Developer",
       sameAs: [
         "https://github.com/ayush08k",
@@ -114,7 +110,7 @@ function ArticleSchema({ slug }: { slug: string }) {
     publisher: {
       "@type": "Person",
       name: "Ayush Kumar",
-      url: siteUrl,
+      url: CANONICAL_DOMAIN,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -143,19 +139,19 @@ function BreadcrumbSchema({ slug, title }: { slug: string; title: string }) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: siteUrl,
+        item: CANONICAL_DOMAIN,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: `${siteUrl}/blog`,
+        item: getCanonicalUrl("/blog"),
       },
       {
         "@type": "ListItem",
         position: 3,
         name: title,
-        item: `${siteUrl}/blog/${slug}`,
+        item: getCanonicalUrl(`/blog/${slug}`),
       },
     ],
   };

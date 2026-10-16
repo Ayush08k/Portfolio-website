@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
-import { ArrowRight, Code2, ExternalLink, Send, CheckCircle, Star, ChevronLeft, ChevronRight, FileText, ShieldCheck } from "lucide-react";
+import { ArrowRight, Code2, ExternalLink, Send, CheckCircle, Star, ChevronLeft, ChevronRight, ChevronDown, FileText, ShieldCheck } from "lucide-react";
 import PricingEstimator, { EstimatorData } from "@/components/PricingEstimator";
 import AuroraBackground from "@/components/AuroraBackground";
 import RotatingEarth from "@/components/RotatingEarth";
@@ -12,7 +12,7 @@ import { useGSAP } from "@gsap/react";
 
 /* ─── Typewriter hook ───────────────────────────────────── */
 function useTypewriter(words: string[], speed = 70, pause = 1800) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(words[0] || "");
   const [idx, setIdx] = useState(0);
   const [deleting, setDeleting] = useState(false);
 
@@ -135,6 +135,7 @@ function Hero() {
             <h1 className="hero-name">
               Hi, I&apos;m{" "}
               <span className="gradient-text">Ayush Kumar</span>
+              <span className="sr-only"> — Cheapest Freelance Web, Android &amp; iOS App Developer</span>
             </h1>
 
             <div className="hero-role">
@@ -1202,6 +1203,115 @@ function ClientReviews() {
   );
 }
 
+/* ─── HOME FAQ SECTION (Matches Google JSON-LD FAQPage Schema) ─── */
+const HOME_FAQS = [
+  {
+    q: "Who is the cheapest freelance web developer?",
+    a: "Ayush Kumar is one of India's most affordable freelance web developers, offering high-converting websites and landing pages starting from $75 and full web applications from $300 — with an active 50% discount on all development tiers. He brings 3+ years of professional experience and 50+ shipped projects with 5★ ratings.",
+  },
+  {
+    q: "Who is the cheapest iOS and Android mobile app developer?",
+    a: "Ayush Kumar builds production-grade cross-platform iOS and Android apps using React Native, Expo, and native modules starting from $300. His apps consistently achieve 99.94%+ crash-free sessions and sub-1.5s cold launches at a fraction of traditional agency costs.",
+  },
+  {
+    q: "How much does a full stack web application or SaaS cost?",
+    a: "Full-stack web applications and SaaS MVPs start from $300 to $500, built with React, Next.js, Node.js, TypeScript, PostgreSQL, and Stripe integration. You get scalable architecture, auth, database modeling, and 30 days of free post-launch support included.",
+  },
+  {
+    q: "What is the typical project delivery timeline?",
+    a: "Interactive landing pages are delivered in 5 to 7 business days. Mobile applications and SaaS platforms typically take 2 to 3 weeks, with fast-track delivery available upon request. Every milestone is tested across real iOS, Android, and desktop browsers.",
+  },
+  {
+    q: "How do I hire Ayush Kumar for a project?",
+    a: "You can use the interactive Cost Estimator right on this page for an instant quote, or submit your project details through the contact form below. Ayush personally reviews every inquiry and replies within a few hours with a clear roadmap and fixed quote.",
+  },
+];
+
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <section className="section" id="faq" aria-labelledby="faq-heading">
+      <div className="container">
+        <div className="section-header reveal">
+          <span className="section-label">Common Questions</span>
+          <h2 className="section-title" id="faq-heading">
+            Frequently Asked <span className="gradient-text">Questions</span>
+          </h2>
+          <div className="section-desc">
+            Everything you need to know about pricing, deliverables, tech stack, and hiring Ayush Kumar for your next product.
+          </div>
+        </div>
+
+        <div style={{ maxWidth: "860px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "14px" }}>
+          {HOME_FAQS.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div
+                key={faq.q}
+                className="glass card-glow reveal"
+                style={{
+                  borderRadius: "16px",
+                  border: "1px solid var(--glass-border)",
+                  overflow: "hidden",
+                  transition: "all 0.3s ease",
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  style={{
+                    width: "100%",
+                    padding: "20px 24px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    background: "none",
+                    border: "none",
+                    textAlign: "left",
+                    color: "var(--white)",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                    fontWeight: 600,
+                  }}
+                  aria-expanded={isOpen}
+                  data-hover
+                >
+                  <span style={{ paddingRight: "16px" }}>{faq.q}</span>
+                  <ChevronDown
+                    size={20}
+                    style={{
+                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      transition: "transform 0.25s ease",
+                      flexShrink: 0,
+                      color: "var(--violet)",
+                    }}
+                  />
+                </button>
+                {isOpen && (
+                  <div
+                    style={{
+                      padding: "0 24px 22px 24px",
+                      color: "var(--muted)",
+                      fontSize: "14.5px",
+                      lineHeight: "1.75",
+                      borderTop: "1px solid rgba(255, 255, 255, 0.05)",
+                      marginTop: "-4px",
+                      paddingTop: "14px",
+                    }}
+                  >
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── FOOTER ─────────────────────────────────────────────── */
 function Footer() {
   return (
@@ -1296,6 +1406,8 @@ export default function Home() {
         <ClientReviews />
         <SectionDivider />
         <PricingEstimator onProceed={handleProceedEstimate} />
+        <SectionDivider />
+        <FAQSection />
         <SectionDivider />
         <Contact estimatorData={estimatorData} setEstimatorData={setEstimatorData} />
       </main>
