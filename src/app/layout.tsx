@@ -485,7 +485,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         name: "How much does it cost to hire Ayush Kumar as a freelancer?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Ayush Kumar's project-based pricing starts from $75 for premium landing pages, $300 for iOS/Android apps, and $500 for full SaaS web applications. Currently 50% OFF all services — limited slots available. Use the free cost estimator at freelanceayush.com/estimator for an instant quote.",
+          text: "Ayush Kumar's project-based pricing starts from $75 for premium landing pages, $300 for iOS/Android apps, and $500 for full SaaS web applications. Currently 50% OFF all services — limited slots available. Use the free cost estimator at www.freelanceayush.com/estimator for an instant quote.",
         },
       },
       {

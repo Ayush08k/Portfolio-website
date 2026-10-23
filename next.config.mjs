@@ -2,9 +2,26 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  // ── Prevent trailing-slash variants from causing redirect chains ───────
+  trailingSlash: false,
+
   // ── Compiler: strip console.log in production for smaller bundles ─────
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
+  },
+
+  // ── Redirects: Enforce canonical www domain ──────────────────────────────────
+  // Catches non-www → www at the Next.js routing level (backup for middleware).
+  // Google Search Console was reporting "Redirect error" on non-www URLs.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "freelanceayush.com" }],
+        destination: "https://www.freelanceayush.com/:path*",
+        permanent: true, // 308 Permanent Redirect
+      },
+    ];
   },
 
   // ── Custom Headers for SEO & Sitemap Caching ────────────────────────────────
