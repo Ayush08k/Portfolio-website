@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
+import { BLOG_POSTS } from "@/data/blog";
 import { ArrowRight, Code2, ExternalLink, Send, CheckCircle, Star, ChevronLeft, ChevronRight, ChevronDown, FileText, ShieldCheck } from "lucide-react";
 import PricingEstimator, { EstimatorData } from "@/components/PricingEstimator";
 import AuroraBackground from "@/components/AuroraBackground";
 import RotatingEarth from "@/components/RotatingEarth";
+import Footer from "@/components/Footer";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -1312,28 +1314,138 @@ function FAQSection() {
   );
 }
 
-/* ─── FOOTER ─────────────────────────────────────────────── */
-function Footer() {
+/* ─── BLOG SHOWCASE ─────────────────────────────────────── */
+function BlogShowcase() {
+  const featuredPosts = [
+    "building-ai-chatbot-portfolio-nextjs-gemini",
+    "ai-chatbot-ecommerce-rag-gpt4",
+    "how-to-build-sub-second-website-nextjs-performance-blueprint",
+    "offline-syncing-react-native-expo",
+  ]
+    .map((slug) => BLOG_POSTS.find((p) => p.slug === slug))
+    .filter((p): p is typeof BLOG_POSTS[0] => p !== undefined);
+
   return (
-    <footer aria-label="Site footer">
+    <section className="section scroll-mt-24" id="blog-insights">
       <div className="container">
-        <div className="footer-links">
-          {[
-            { label: "GitHub", href: "https://github.com/Ayush08k", rel: "noopener noreferrer me" },
-            { label: "LinkedIn", href: "https://www.linkedin.com/in/ayush08k/", rel: "noopener noreferrer me" },
-            { label: "Instagram", href: "https://www.instagram.com/ayush08.k/", rel: "noopener noreferrer" },
-            { label: "X", href: "https://x.com/aayush08k", rel: "noopener noreferrer" },
-          ].map(l => (
-            <a key={l.label} href={l.href} target="_blank" rel={l.rel} className="footer-link" data-hover aria-label={`Ayush Kumar on ${l.label}`}>
-              {l.label}
-            </a>
+        <div style={{ textAlign: "center", marginBottom: "56px" }} className="reveal">
+          <p className="section-label">Technical Thought Leadership</p>
+          <h2 className="section-title">
+            Engineering <span className="gradient-text">Insights &amp; Guides</span>
+          </h2>
+          <p className="section-sub" style={{ margin: "16px auto 0" }}>
+            Production playbooks on AI RAG architectures, sub-second web performance, offline-first mobile sync, and high-conversion SaaS engineering.
+          </p>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "24px",
+            marginBottom: "48px",
+          }}
+        >
+          {featuredPosts.map((post) => (
+            <article
+              key={post.slug}
+              className="card-glow reveal"
+              style={{
+                background: "rgba(15, 23, 42, 0.4)",
+                backdropFilter: "blur(12px)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                borderRadius: "16px",
+                padding: "24px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                transition: "transform 0.3s ease, border-color 0.3s ease",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "14px",
+                    fontSize: "12px",
+                    color: "var(--text-secondary)",
+                  }}
+                >
+                  <span
+                    style={{
+                      background: "rgba(6, 182, 212, 0.12)",
+                      color: "var(--accent-cyan)",
+                      padding: "4px 10px",
+                      borderRadius: "6px",
+                      fontWeight: 600,
+                      fontSize: "11px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    {post.category}
+                  </span>
+                  <span>{post.readTime}</span>
+                </div>
+
+                <h3
+                  style={{
+                    fontSize: "17px",
+                    fontWeight: 700,
+                    lineHeight: 1.4,
+                    marginBottom: "10px",
+                    color: "#f8fafc",
+                  }}
+                >
+                  <Link href={`/blog/${post.slug}`} style={{ color: "inherit", textDecoration: "none" }}>
+                    {post.title}
+                  </Link>
+                </h3>
+
+                <p style={{ fontSize: "13px", color: "#94a3b8", lineHeight: 1.6, marginBottom: "18px" }}>
+                  {post.description.slice(0, 130)}...
+                </p>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  borderTop: "1px solid rgba(255,255,255,0.06)",
+                  paddingTop: "14px",
+                }}
+              >
+                <span style={{ fontSize: "11px", color: "#64748b" }}>{post.date}</span>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  style={{
+                    color: "var(--accent-cyan)",
+                    fontSize: "12.5px",
+                    fontWeight: 600,
+                    textDecoration: "none",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                  }}
+                >
+                  Read Guide <ArrowRight size={13} />
+                </Link>
+              </div>
+            </article>
           ))}
         </div>
-        <p className="footer-copy">
-          © {new Date().getFullYear()} Ayush Kumar — Freelance Full Stack & Mobile App Developer. Designed & Built with ♥ and TypeScript.
-        </p>
+
+        <div style={{ textAlign: "center" }} className="reveal">
+          <Link href="/blog" className="btn-primary btn-glow" data-hover>
+            <span>Explore All 40+ Technical Articles</span>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
       </div>
-    </footer>
+    </section>
   );
 }
 
@@ -1404,6 +1516,8 @@ export default function Home() {
         <Projects />
         <SectionDivider />
         <ClientReviews />
+        <SectionDivider />
+        <BlogShowcase />
         <SectionDivider />
         <PricingEstimator onProceed={handleProceedEstimate} />
         <SectionDivider />

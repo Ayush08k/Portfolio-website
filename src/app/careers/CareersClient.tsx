@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 interface JobOpening {
   id: string;
@@ -1016,6 +1017,7 @@ export default function CareersClient() {
           margin: 0 auto;
         }
       ` }} />
+      <Footer />
     </div>
   );
 }

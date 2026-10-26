@@ -87,13 +87,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.85,
     },
-    {
-      // Dedicated SEO landing for the "Ask Me" AI chatbot
-      url: getCanonicalUrl("/blog/building-ai-chatbot-portfolio-nextjs-gemini"),
-      lastModified: new Date(STATIC_PAGE_DATES.chatbot),
-      changeFrequency: "monthly",
-      priority: 0.88,
-    },
   ];
 
   // ── 2. Individual Project Case Study Pages ─────────────────────────────────

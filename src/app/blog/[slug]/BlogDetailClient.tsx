@@ -2,14 +2,16 @@
 
 import React from "react";
 import { BlogPost } from "@/data/blog";
-import { ArrowLeft, Calendar, Clock, Sparkles, MessageSquare, Tag } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, Sparkles, MessageSquare, Tag } from "lucide-react";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 interface BlogDetailClientProps {
   post: BlogPost;
+  relatedPosts?: BlogPost[];
 }
 
-export default function BlogDetailClient({ post }: BlogDetailClientProps) {
+export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClientProps) {
   // Simple custom parser to render seed blog markdown content beautifully
   const renderMarkdown = (markdown: string) => {
     const lines = markdown.split("\n");
@@ -213,6 +215,113 @@ export default function BlogDetailClient({ post }: BlogDetailClientProps) {
             </div>
           </aside>
         </div>
+
+        {/* Related Articles Section for Googlebot Crawl Depth & User Engagement */}
+        {relatedPosts && relatedPosts.length > 0 && (
+          <section
+            className="related-articles-section"
+            style={{
+              marginTop: "80px",
+              borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+              paddingTop: "50px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+                marginBottom: "32px",
+                flexWrap: "wrap",
+                gap: "16px",
+              }}
+            >
+              <div>
+                <span className="section-label" style={{ display: "block", marginBottom: "6px" }}>
+                  Keep Reading
+                </span>
+                <h2 style={{ fontSize: "24px", fontWeight: 700, color: "#f8fafc" }}>
+                  Related <span className="gradient-text">Engineering Guides</span>
+                </h2>
+              </div>
+              <Link
+                href="/blog"
+                style={{
+                  color: "var(--accent-cyan)",
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  textDecoration: "none",
+                }}
+              >
+                View All Guides <ArrowRight size={15} />
+              </Link>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                gap: "24px",
+              }}
+            >
+              {relatedPosts.map((rel) => (
+                <article
+                  key={rel.slug}
+                  className="glass-card"
+                  style={{
+                    padding: "24px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    borderRadius: "16px",
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        marginBottom: "12px",
+                        fontSize: "12px",
+                        color: "var(--text-secondary)",
+                      }}
+                    >
+                      <span className="blog-detail-category" style={{ fontSize: "11px" }}>
+                        {rel.category}
+                      </span>
+                      <span>{rel.readTime}</span>
+                    </div>
+                    <h3 style={{ fontSize: "16px", fontWeight: 700, lineHeight: 1.4, marginBottom: "10px" }}>
+                      <Link href={`/blog/${rel.slug}`} style={{ color: "#f8fafc", textDecoration: "none" }}>
+                        {rel.title}
+                      </Link>
+                    </h3>
+                    <p style={{ fontSize: "13px", color: "#94a3b8", lineHeight: 1.6, marginBottom: "16px" }}>
+                      {rel.description.slice(0, 110)}...
+                    </p>
+                  </div>
+                  <Link
+                    href={`/blog/${rel.slug}`}
+                    style={{
+                      color: "var(--accent-cyan)",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Read Full Article <ArrowRight size={14} />
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       <style>{`
@@ -773,6 +882,7 @@ export default function BlogDetailClient({ post }: BlogDetailClientProps) {
           }
         }
       `}</style>
+      <Footer />
     </div>
   );
 }

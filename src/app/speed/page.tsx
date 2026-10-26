@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import SpeedClient from "./SpeedClient";
+import Footer from "@/components/Footer";
 import Script from "next/script";
 import { CANONICAL_DOMAIN, getCanonicalUrl } from "@/lib/siteConfig";
 
@@ -83,6 +84,7 @@ export default function SpeedPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <SpeedClient />
+      <Footer />
     </>
   );
 }

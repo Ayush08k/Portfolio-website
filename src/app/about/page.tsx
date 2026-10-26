@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, BookOpen, Briefcase, Cpu, Terminal, Laptop, ShieldCheck, Heart, Layers, MessageSquare, Code2, Sparkles, Send } from "lucide-react";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function AboutPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -562,6 +563,7 @@ export default function AboutPage() {
           -webkit-text-fill-color: transparent;
         }
       `}</style>
+      <Footer />
     </div>
   );
 }

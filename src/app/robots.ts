@@ -13,33 +13,22 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        // Default rule: allow all crawlers to access public pages
+        // Default rule: allow all crawlers to access public pages and static rendering assets
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
-      },
-      {
-        // Googlebot: explicitly prioritize all indexable sections
-        userAgent: "Googlebot",
-        allow: [
-          "/",
-          "/projects",
-          "/projects/",
-          "/blog",
-          "/blog/",
-          "/services",
-          "/about",
-          "/estimator",
-          "/careers",
-          "/speed",
-        ],
         disallow: ["/api/"],
       },
       {
-        // Googlebot-Image: allow crawling project screenshots and assets
+        // Googlebot: fully allowed across all pages and rendering assets
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: ["/api/"],
+      },
+      {
+        // Googlebot-Image: allow crawling project screenshots and public assets
         userAgent: "Googlebot-Image",
-        allow: ["/project images/", "/public/", "/"],
-        disallow: [],
+        allow: ["/", "/project images/", "/public/"],
+        disallow: ["/api/"],
       },
       {
         userAgent: "Bingbot",

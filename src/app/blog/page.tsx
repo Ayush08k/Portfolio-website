@@ -5,6 +5,7 @@ import { BLOG_POSTS, BlogPost } from "@/data/blog";
 import { Search, BookOpen, Clock, Calendar, ArrowRight, Sparkles, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import Footer from "@/components/Footer";
 
 export default function BlogIndex() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -753,6 +754,7 @@ export default function BlogIndex() {
           }
         }
       `}</style>
+      <Footer />
     </div>
   );
 }

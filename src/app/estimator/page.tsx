@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
 import PricingEstimator, { EstimatorData } from "@/components/PricingEstimator";
 import Contact from "@/components/Contact";

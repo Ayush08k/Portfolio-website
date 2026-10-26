@@ -177,14 +177,27 @@ export default async function BlogDetailPage({
     notFound();
   }
 
+  // Find related articles by matching category or common tags
+  const relatedPosts = BLOG_POSTS
+    .filter((p) => p.slug !== slug && (p.category === post.category || p.tags.some((t) => post.tags.includes(t))))
+    .slice(0, 3);
+
+  // Fill up to 3 posts if category/tags didn't yield enough
+  if (relatedPosts.length < 3) {
+    const fillers = BLOG_POSTS.filter(
+      (p) => p.slug !== slug && !relatedPosts.some((r) => r.slug === p.slug)
+    ).slice(0, 3 - relatedPosts.length);
+    relatedPosts.push(...fillers);
+  }
+
   return (
     <>
       {/* Structured Data injected server-side — fully crawlable */}
       <ArticleSchema slug={slug} />
       <BreadcrumbSchema slug={slug} title={post.title} />
 
-      {/* Client component handles all the interactive markdown rendering */}
-      <BlogDetailClient post={post} />
+      {/* Client component handles markdown rendering, cross-links, and footer */}
+      <BlogDetailClient post={post} relatedPosts={relatedPosts} />
     </>
   );
 }

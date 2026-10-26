@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ArrowLeft, Cpu, CheckCircle2, ShieldCheck, Zap, Database, Server, Smartphone, BarChart3, AlertTriangle, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 import type { Project } from "@/data/portfolio";
 
 interface Props {
@@ -818,6 +819,7 @@ export default function ProjectCaseStudyClient({ project }: Props) {
           color: var(--white) !important;
         }
       `}</style>
+      <Footer />
     </div>
   );
 }

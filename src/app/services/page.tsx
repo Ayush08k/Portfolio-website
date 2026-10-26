@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Globe, Smartphone, Cpu, Sparkles, ShoppingBag, HelpCircle, Layers, Settings, ShieldCheck, Zap, FileText } from "lucide-react";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function ServicesPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -907,6 +908,7 @@ export default function ServicesPage() {
          }
         }
       `}</style>
+      <Footer />
     </div>
   );
 }

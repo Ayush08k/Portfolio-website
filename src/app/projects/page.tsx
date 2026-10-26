@@ -5,6 +5,7 @@ import { PORTFOLIO_DATA, Project } from "@/data/portfolio";
 import { ArrowLeft, Search, ExternalLink, Code2, Cpu, Smartphone, Globe, ShoppingBag, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function ProjectsArchive() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -571,6 +572,7 @@ export default function ProjectsArchive() {
           margin-bottom: 8px;
         }
       `}</style>
+      <Footer />
     </div>
   );
 }
