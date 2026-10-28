@@ -4,7 +4,6 @@ import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { BLOG_POSTS } from "@/data/blog";
 import { ArrowRight, Code2, ExternalLink, Send, CheckCircle, Star, ChevronLeft, ChevronRight, ChevronDown, FileText, ShieldCheck } from "lucide-react";
 import PricingEstimator, { EstimatorData } from "@/components/PricingEstimator";
-import AuroraBackground from "@/components/AuroraBackground";
 import RotatingEarth from "@/components/RotatingEarth";
 import Footer from "@/components/Footer";
 import Link from "next/link";
@@ -112,9 +111,6 @@ function Hero() {
 
   return (
     <section className="hero" id="home">
-      {/* Three.js Aurora background */}
-      <AuroraBackground />
-
       {/* Floating orbs */}
       <div className="orb orb-1" />
       <div className="orb orb-2" />
